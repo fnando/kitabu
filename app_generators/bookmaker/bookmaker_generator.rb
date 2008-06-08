@@ -61,7 +61,6 @@ EOS
     end
 
     BASEDIRS = %w(
-      lib
       templates
       text
       output

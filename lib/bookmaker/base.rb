@@ -80,7 +80,7 @@ module Bookmaker
           chapter << (file_contents + "\n\n")
         end
         
-        contents = '<div class="chapter">%s</div>' % chapter
+        contents << '<div class="chapter">%s</div>' % chapter
       end
 
       # save html file

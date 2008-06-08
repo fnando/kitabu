@@ -1,6 +1,0 @@
-title: [Your Book Title]
-copyright: Copyright (c) 2008 [Your Name], All Rights Reserved
-authors:
-  - [Your Name]
-  - [Other Name]
-theme: <%= theme %>

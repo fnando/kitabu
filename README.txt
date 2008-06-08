@@ -14,6 +14,10 @@ free version available at http://www.princexml.com/download/ generates
 a PDF with a small logo on the first page, which is removed when sent
 to a printer.
 
+This was strongly based on the Rails 2.1 book created by Carlos Brando and
+Marcos Tapajós. 
+Check it out: http://github.com/carlosbrando/rails21-book/tree/master/
+
 == FEATURES/PROBLEMS:
 
 * Write PDF using Markdown text markup

@@ -1,0 +1,3 @@
+BOOKMAKER_ROOT = File.dirname(__FILE__)
+ENV['BOOKMAKER_NAME'] ||= File.basename(BOOKMAKER_ROOT)
+require "bookmaker/tasks"

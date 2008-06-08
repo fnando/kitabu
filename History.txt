@@ -1,0 +1,4 @@
+== 0.0.1 2008-06-06
+
+* 1 major enhancement:
+  * Initial release

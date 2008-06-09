@@ -121,7 +121,7 @@ MAINTAINERS
  
 * Carlos Brando (<http://www.nomedojogo.com>)
 * Marcos Tapajós (<http://www.improveit.com.br/empresa/tapajos>)
-* Nando Vieira(<http://simplesideias.com.br>)
+* Nando Vieira (<http://simplesideias.com.br>)
 
 COLLABORATORS:
 --------------

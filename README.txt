@@ -78,6 +78,9 @@ a sequential numbering as the name. Here's a sample:
 		- 03_Convention_Over_Configuration.markdown
 	+ 03_Installing_Ruby_on_Rails
 		- 01_Installing.textile
+		- 02_Mac_OS_X_instructions.textile
+		- 03_Windows_instructions.markdown
+		- 04_Ubuntu_Linux_instructions.markdown
 
 Note that you can use Textile or Markdown at the same time. Just use the .markdown 
 or .textile file extension.
@@ -106,6 +109,7 @@ Then, you need to install the Ultraviolet gem.
 sudo gem install ultraviolet
 
 == REFERENCES:
+
 Textile: http://hobix.com/textile/
 Markdown: http://daringfireball.net/projects/markdown/syntax
 

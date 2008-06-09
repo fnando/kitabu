@@ -96,7 +96,6 @@ You need to install some gems before you go any further.
 sudo gem install rubigen
 sudo gem install discount
 sudo gem install redcloth
-sudo gem install hpricot
 
 If you're a Mac user and have Textmate installed, you can
 generate HTML from your source code with syntax highlight,

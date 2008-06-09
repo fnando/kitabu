@@ -3,4 +3,6 @@ copyright: Copyright (c) 2008 [Your Name], All Rights Reserved
 authors:
   - [Your Name]
   - [Other Name]
+subject: [Write down what your book is about]
+keywords: [The keywords related to your book]
 theme: <%= theme %>

@@ -463,7 +463,7 @@ code, pre, span.css, span.value, span.declaration {
 @media screen, handheld {
   html { margin: 1em; font: 14px "Gill Sans", sans-serif; }
   h1 { margin-bottom: 0.5em }
-  div.frontcover, div.halftitlepage, div.titlepage, div.imprint, 
+  div.frontcover, div.backcover, div.halftitlepage, div.titlepage, div.imprint, 
   div.dedication, div.foreword, div.toc, div.index { display: none }
 }
 

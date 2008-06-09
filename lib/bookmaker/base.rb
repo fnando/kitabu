@@ -57,27 +57,52 @@ module Bookmaker
         # chapter element
         chapter = ""
         
-        Dir["#{text_dir}/#{dirname}/*.markdown"].sort.each do |markdown_file|
-          file_contents = Discount.new(File.new(markdown_file).read).to_html
+        # merge all markdown and textile files into a single list
+        markup_files = Dir["#{text_dir}/#{dirname}/*.markdown"] + Dir["#{text_dir}/#{dirname}/*.textile"]
+        
+        markup_files.sort.each do |markup_file|
+          # get the file contents
+          markup_contents = File.new(markup_file).read
+          
+          # instantiate a markup object
+          begin
+            if markup_file =~ /\.textile$/
+              markup = RedCloth.new(markup_contents)
+            else
+              markup = Discount.new(markup_contents)
+            end
+          rescue
+            puts "Skipping #{markup_file}"
+            next
+          end
+          
+          # convert the markup into html
+          parsed_contents = markup.to_html
 
           # if Ultraviolet is installed, apply syntax highlight
           if Object.const_defined?('Uv')
-            file_contents.gsub! /<pre><code>(.*?)<\/code><\/pre>/m do |match|
-              full_code = $1
+            parsed_contents.gsub! /<pre(?: lang="(.*?)")?><code>(.*?)<\/code><\/pre>/m do |match|
+              syntax = $1
+              full_code = $2
               full_code.gsub! /&lt;/, '<'
               full_code.gsub! /&gt;/, '>'
               full_code.gsub! /&amp;/, '&'
-              matches, syntax, code = *full_code.match(/<div lang="(.*?)">(.*?)<\/div>/sim)
+              
+              if syntax
+                code = full_code.dup
+              else
+                 matches, syntax, code = *full_code.match(/<pre lang="(.*?)">(.*?)<\/pre>/sim) 
+                 code ||= full_code
+              end
 
-              code ||= full_code
               syntax = Bookmaker::Base.default_syntax unless Bookmaker::Base.syntax?(syntax)
               theme = Bookmaker::Base.default_theme unless Bookmaker::Base.theme?(theme)
 
               Uv.parse(code, "xhtml", syntax, false, theme)
             end
           end
-
-          chapter << (file_contents + "\n\n")
+          
+          chapter << (parsed_contents + "\n\n")
         end
         
         contents << '<div class="chapter">%s</div>' % chapter

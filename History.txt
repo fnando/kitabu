@@ -2,3 +2,9 @@
 
 * 1 major enhancement:
   * Initial release
+
+== 0.0.2 2008-06-09
+* 1 major enhancement
+	* Added textile support
+* Bug fix
+	* Wrong require was throwing an error

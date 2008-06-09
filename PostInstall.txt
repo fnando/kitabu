@@ -1,3 +1,0 @@
-
-For more information on bookmaker, see http://rbookmaker.rubyforge.org
-

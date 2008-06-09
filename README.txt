@@ -1,6 +1,6 @@
 = bookmaker
 
-* http://rbookmaker.rubyforge.org
+* http://github.com/fnando/bookmaker
 
 == DESCRIPTION:
 
@@ -20,7 +20,7 @@ Check it out: http://github.com/carlosbrando/rails21-book/tree/master/
 
 == FEATURES/PROBLEMS:
 
-* Write PDF using Markdown text markup
+* Write PDF using Markdown or Textile text markup
 * Support book layout
 * Support syntax highlight theme 
 * Generate a PDF with a single rake task
@@ -76,8 +76,11 @@ a sequential numbering as the name. Here's a sample:
 		- 01_MVC.markdown
 		- 02_DRY.markdown
 		- 03_Convention_Over_Configuration.markdown
+	+ 03_Installing_Ruby_on_Rails
+		- 01_Installing.textile
 
-For now, Bookmaker accepts only Markdown, but I'm working on Textile support.
+Note that you can use Textile or Markdown at the same time. Just use the .markdown 
+or .textile file extension.
 
 You'll want to see your progress eventually; it's time for your to generate
 the book PDF. Just run the command `rake pdf` and your book will be created on
@@ -87,7 +90,9 @@ the output directory.
 
 You need to install some gems before you go any further.
 
+sudo gem install rubigen
 sudo gem install discount
+sudo gem install redcloth
 
 If you're a Mac user and have Textmate installed, you can
 generate HTML from your source code with syntax highlight,
@@ -99,6 +104,10 @@ http://www.geocities.jp/kosako3/oniguruma/
 Then, you need to install the Ultraviolet gem.
 
 sudo gem install ultraviolet
+
+== REFERENCES:
+Textile: http://hobix.com/textile/
+Markdown: http://daringfireball.net/projects/markdown/syntax
 
 == LICENSE:
 

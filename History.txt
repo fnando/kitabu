@@ -8,3 +8,7 @@
 	* Added textile support
 * Bug fix
 	* Wrong require was throwing an error
+	
+== 0.0.3 2008-06-09
+* Cleaning up the house
+	* README converted to Markdown

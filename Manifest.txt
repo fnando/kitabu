@@ -30,6 +30,7 @@ lib/bookmaker.rb
 lib/bookmaker/version.rb
 lib/bookmaker/base.rb
 lib/bookmaker/tasks.rb
+lib/bookmaker/blackcloth.rb
 script/console
 script/destroy
 script/generate

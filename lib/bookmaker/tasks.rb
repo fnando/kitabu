@@ -16,6 +16,7 @@ end
 
 begin
   require "redcloth"
+  require File.dirname(__FILE__) + "/blackcloth"
 rescue LoadError => e
   puts  "\nRedCloth gem not found. NO TEXTILE for you.\n" +
         "Install using `sudo gem install redcloth`.\n"

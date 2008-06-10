@@ -1,4 +1,54 @@
 module Bookmaker
+  module Markup
+    def self.syntax(options)
+      source_file = File.join(BOOKMAKER_ROOT, 'code', options[:source_file].to_s)
+      code = options[:code]
+
+      if options[:source_file] && File.exists?(source_file)
+        file = File.new(source_file)
+        
+        if options[:from_line] && options[:to_line]
+          from_line = options[:from_line].to_i - 1
+          to_line = options[:to_line].to_i
+          offset = to_line - from_line
+          code = file.readlines.slice(from_line, offset).join
+        elsif block_name = options[:block_name]
+          re = %r(# ?begin: ?#{block_name} ?(?:[^\r\n]+)?\r?\n(.*?)\r?\n([^\r\n]+)?# ?end: #{block_name})sim
+          file.read.gsub(re) { |block| code = $1 }
+        else
+          code = file.read
+          code = code.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&amp;/, '&')
+        end
+      end
+      
+      # no code? set to default
+      code ||= options[:code]
+      
+      # normalize indentation
+      line = StringIO.new(code).readlines[0]
+
+      if line =~ /^(\t+)/
+        char = "\t"
+        size = $1.length
+      elsif line =~ /^( +)/
+        char = " "
+        size = $1.length
+      end
+
+      code.gsub! %r(^#{char}{#{size}}), "" if size.to_i > 0
+      
+      # get chosen theme
+      theme = Bookmaker::Base.config['theme']
+      theme = Bookmaker::Base.default_theme unless Bookmaker::Base.theme?(theme)
+      
+      # get syntax
+      syntax = options[:syntax]
+      syntax = Bookmaker::Base.default_syntax unless Bookmaker::Base.syntax?(syntax)
+      
+      Uv.parse(code, "xhtml", syntax, false, theme)
+    end
+  end
+  
   module Base
     DEFAULT_LAYOUT = 'boom'
     DEFAULT_THEME = 'eiffel'
@@ -42,9 +92,6 @@ module Bookmaker
     end
     
     def self.generate_html
-      # get chosen theme
-      theme = config['theme']
-      
       # all parsed markdown file holder
       contents = ""
       
@@ -67,12 +114,12 @@ module Bookmaker
           # instantiate a markup object
           begin
             if markup_file =~ /\.textile$/
-              markup = RedCloth.new(markup_contents)
+              markup = BlackCloth.new(markup_contents)
             else
               markup = Discount.new(markup_contents)
             end
-          rescue
-            puts "Skipping #{markup_file}"
+          rescue Exception => e
+            puts "Skipping #{markup_file} (#{e.message})"
             next
           end
           
@@ -81,24 +128,42 @@ module Bookmaker
 
           # if Ultraviolet is installed, apply syntax highlight
           if Object.const_defined?('Uv')
-            parsed_contents.gsub! /<pre(?: lang="(.*?)")?><code>(.*?)<\/code><\/pre>/m do |match|
-              syntax = $1
-              full_code = $2
-              full_code.gsub! /&lt;/, '<'
-              full_code.gsub! /&gt;/, '>'
-              full_code.gsub! /&amp;/, '&'
+            parsed_contents.gsub! /<pre><code>(.*?)<\/code><\/pre>/m do |block|
+              code = $1.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&amp;/, '&')
               
-              if syntax
-                code = full_code.dup
+              code_lines = code.split(/\r?\n/)
+              syntax_settings = code_lines.first
+              
+              if syntax_settings =~ /syntax\(.*?\)\./
+                code = code_lines.slice(1, code_lines.size).join
+                
+                # syntax
+                m, syntax = *syntax_settings.match(/syntax\(([^ #]+).*?\)./)
+                
+                # file name
+                m, source_file = *syntax_settings.match(/syntax\(.*?\)\. +(.*?)$/)
+                
+                # get line interval
+                m, from_line, to_line = *syntax_settings.match(/syntax\(.*? ([0-9]+),([0-9]+)\)/)
+                
+                # get block name
+                m, block_name = *syntax_settings.match(/syntax\(.*?#([0-9a-z_]+)\)/)
+                
+                code = Bookmaker::Markup.syntax({
+                  :code => code,
+                  :from_line => from_line,
+                  :to_line => to_line,
+                  :block_name => block_name,
+                  :source_file => source_file,
+                  :syntax => syntax
+                })
               else
-                 matches, syntax, code = *full_code.match(/<pre lang="(.*?)">(.*?)<\/pre>/sim) 
-                 code ||= full_code
+                code = Bookmaker::Markup.syntax({
+                  :code => code
+                })
               end
-
-              syntax = Bookmaker::Base.default_syntax unless Bookmaker::Base.syntax?(syntax)
-              theme = Bookmaker::Base.default_theme unless Bookmaker::Base.theme?(theme)
-
-              Uv.parse(code, "xhtml", syntax, false, theme)
+              
+              code
             end
           end
           

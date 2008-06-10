@@ -5,3 +5,9 @@ require "bookmaker/base"
 require "yaml"
 require "erb"
 require "ostruct"
+
+begin
+  require "ruby-debug"
+rescue LoadError => e
+  nil
+end

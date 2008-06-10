@@ -65,5 +65,6 @@ EOS
       text
       output
       images
+      code
     )
 end

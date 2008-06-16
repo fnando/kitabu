@@ -14,3 +14,9 @@
 	* README converted to Markdown
 * 1 major enhancement
 	* Added syntax callback for Textile and Markdown
+
+== 0.0.4 2008-06-12
+* 1 major enhancement
+	* Added some textile helpers
+* 1 bug fix
+	* Textile was escaping code inside <pre> blocks

@@ -1,15 +1,39 @@
 class BlackCloth < RedCloth
-  attr_accessor :escape_html
-  alias htmlesc_original htmlesc
+  @@syntax_blocks = []
   
-  def initialize(*args)
-    @escape_html = false
-    super
+  FN_RE = /
+    (\s+)?    # getting spaces
+    %\{       # opening
+    (.*?)     # footnote
+    \}#       # closing
+  /x
+  
+  # Usage: Writing some text with a footnote %{this is a footnote}
+  def inline_textile_fn(text)
+    text.gsub!( FN_RE )  do |m|
+      %(<span class="footnote">#{$2}</span>)
+    end
+    
+    text
   end
   
+  # Usage:
+  # syntax(ruby). Some code
+  #
+  # getting from line 100 to 200 of file.rb
+  # syntax(ruby 100,200). file.rb
+  #
+  # getting block 'sample' from file.rb
+  # syntax(ruby#sample). file.rb
+  #
+  # to create a block:
+  # #begin: sample
+  #   some code
+  # #end: sample
   def textile_syntax(tag, attrs, cite, content)
     # get syntax
     m, syntax = *attrs.match(/class="(.*?)([# ].*?)?"/)
+    syntax = 'plain_text' if tag == "pre"
     
     # set source
     source_file = content
@@ -19,8 +43,17 @@ class BlackCloth < RedCloth
     
     # get line interval
     m, from_line, to_line = *attrs.match(/class=".*? ([0-9]+),([0-9]+)"/)
-
-    code = Bookmaker::Markup.syntax({
+    
+    # code = Bookmaker::Markup.syntax({
+    #   :code => content,
+    #   :syntax => syntax,
+    #   :source_file => source_file,
+    #   :block_name => block_name,
+    #   :from_line => from_line,
+    #   :to_line => to_line
+    # })
+    
+    content = Bookmaker::Markup.content_for({
       :code => content,
       :syntax => syntax,
       :source_file => source_file,
@@ -28,19 +61,92 @@ class BlackCloth < RedCloth
       :from_line => from_line,
       :to_line => to_line
     })
-    
-    code
+    @@syntax_blocks << [syntax, content]
+    position = @@syntax_blocks.size - 1
+    %(@syntax:#{position})
   end
   
-  def textile_pre(tag, attrs, cite, content)
-    %(<pre class="#{Bookmaker::Base.default_theme}">#{content}</pre>)
+  def syntax_blocks
+    @@syntax_blocks
   end
   
-  def htmlesc(str, mode)
-    if @escape_html
-      htmlesc_original(str, mode)
-    else
-      str
-    end
+  # Usage: pre. Some code
+  def textile_pre(*args)
+    # Should I add the default theme as a class?
+    send(:textile_syntax, *args)
+  end
+  
+  # Usage: note. Some text
+  def textile_note(tag, attrs, cite, content)
+    %(<p class="note">#{content}</p>)
+  end
+  
+  # Usage: figure(This is the caption). some_image.jpg
+  def textile_figure(tag, attrs, cite, content)
+    m, title = *attrs.match(/class="(.*?)"/)
+    width, height = image_size(content)
+    %(<p class="figure"><img style="width: #{width}px; height: #{height}px" src="../images/#{content}" alt="#{title}" /><br/><span class="caption">#{title}</span></p>)
+  end
+  
+  def image_size(img)
+    io = IO.popen("php -r '$info = getimagesize(\"images/#{img}\");echo $info[0].'x'.$info[1];'")
+    io.read.split('x').map{|n| n.to_i}
+  end
+  
+  # overriding inline method
+  def inline( text ) 
+    @rules << :inline_textile_fn
+    super
+  end
+  
+  # overriding to_html method
+  def to_html( *rules )
+      rules = DEFAULT_RULES if rules.empty?
+      # make our working copy
+      text = self.dup
+      
+      @urlrefs = {}
+      @shelf = []
+      textile_rules = [:refs_textile, :block_textile_table, :block_textile_lists,
+                       :block_textile_prefix, :inline_textile_image, :inline_textile_link,
+                       :inline_textile_code, :inline_textile_span, :glyphs_textile]
+      markdown_rules = [:refs_markdown, :block_markdown_setext, :block_markdown_atx, :block_markdown_rule,
+                        :block_markdown_bq, :block_markdown_lists, 
+                        :inline_markdown_reflink, :inline_markdown_link]
+      @rules = rules.collect do |rule|
+          case rule
+          when :markdown
+              markdown_rules
+          when :textile
+              textile_rules
+          else
+              rule
+          end
+      end.flatten
+
+      # standard clean up
+      incoming_entities text 
+      clean_white_space text 
+
+      # start processor
+      @pre_list = []
+      rip_offtags text
+      no_textile text
+      hard_break text 
+      unless @lite_mode
+          refs text
+          blocks text
+      end
+      inline text
+      smooth_offtags text
+
+      retrieve text
+
+      text.gsub!( /<\/?notextile>/, '' )
+      text.gsub!( /x%x%/, '&#38;' )
+      clean_html text if filter_html
+      text.strip!
+      text
+
   end
 end

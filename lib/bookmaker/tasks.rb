@@ -45,3 +45,8 @@ desc "List all available syntaxes"
 task :syntaxes do
   puts Bookmaker::Base.syntaxes.sort.join("\n")
 end
+
+desc "List all available themes"
+task :themes do
+  puts Bookmaker::Base.themes.sort.join("\n")
+end

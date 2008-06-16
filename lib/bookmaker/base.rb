@@ -1,9 +1,9 @@
 module Bookmaker
   module Markup
-    def self.syntax(options)
+    def self.content_for(options)
       source_file = File.join(BOOKMAKER_ROOT, 'code', options[:source_file].to_s)
       code = options[:code]
-
+      
       if options[:source_file] && File.exists?(source_file)
         file = File.new(source_file)
         
@@ -37,12 +37,19 @@ module Bookmaker
 
       code.gsub! %r(^#{char}{#{size}}), "" if size.to_i > 0
       
+      # remove all line stubs
+      code.gsub! %r(^__$), ""
+      
+      # return
+      code
+    end
+    
+    def self.syntax(code, syntax='plain_text')
       # get chosen theme
       theme = Bookmaker::Base.config['theme']
       theme = Bookmaker::Base.default_theme unless Bookmaker::Base.theme?(theme)
       
       # get syntax
-      syntax = options[:syntax]
       syntax = Bookmaker::Base.default_syntax unless Bookmaker::Base.syntax?(syntax)
       
       Uv.parse(code, "xhtml", syntax, false, theme)
@@ -88,7 +95,7 @@ module Bookmaker
     end
     
     def self.generate_pdf
-      IO.popen('prince --silent -i html %s -o %s' % [html_path, pdf_path])
+      IO.popen('prince %s -o %s' % [html_path, pdf_path])
     end
     
     def self.generate_html
@@ -106,6 +113,9 @@ module Bookmaker
         
         # merge all markdown and textile files into a single list
         markup_files = Dir["#{text_dir}/#{dirname}/*.markdown"] + Dir["#{text_dir}/#{dirname}/*.textile"]
+        
+        # no files, so skip it!
+        next if markup_files.empty?
         
         markup_files.sort.each do |markup_file|
           # get the file contents
@@ -125,45 +135,49 @@ module Bookmaker
           
           # convert the markup into html
           parsed_contents = markup.to_html
-
-          # if Ultraviolet is installed, apply syntax highlight
+          
           if Object.const_defined?('Uv')
-            parsed_contents.gsub! /<pre><code>(.*?)<\/code><\/pre>/m do |block|
-              code = $1.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&amp;/, '&')
-              
-              code_lines = code.split(/\r?\n/)
-              syntax_settings = code_lines.first
-              
-              if syntax_settings =~ /syntax\(.*?\)\./
-                code = code_lines.slice(1, code_lines.size).join
-                
-                # syntax
-                m, syntax = *syntax_settings.match(/syntax\(([^ #]+).*?\)./)
-                
-                # file name
-                m, source_file = *syntax_settings.match(/syntax\(.*?\)\. +(.*?)$/)
-                
-                # get line interval
-                m, from_line, to_line = *syntax_settings.match(/syntax\(.*? ([0-9]+),([0-9]+)\)/)
-                
-                # get block name
-                m, block_name = *syntax_settings.match(/syntax\(.*?#([0-9a-z_]+)\)/)
-                
-                code = Bookmaker::Markup.syntax({
-                  :code => code,
-                  :from_line => from_line,
-                  :to_line => to_line,
-                  :block_name => block_name,
-                  :source_file => source_file,
-                  :syntax => syntax
-                })
-              else
-                code = Bookmaker::Markup.syntax({
-                  :code => code
-                })
+            if markup.respond_to?(:syntax_blocks)
+              # textile
+              parsed_contents.gsub!(/@syntax:([0-9]+)/m) do |m|
+                syntax, code = markup.syntax_blocks[$1.to_i]
+                Bookmaker::Markup.syntax(code, syntax)
               end
-              
-              code
+            else
+              # markdown
+              parsed_contents.gsub! /<pre><code>(.*?)<\/code><\/pre>/m do |block|
+                code = $1.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&amp;/, '&')
+                code_lines = StringIO.new(code).readlines
+                syntax_settings = code_lines.first
+                
+                syntax = 'plain_text'
+                
+                if syntax_settings =~ /syntax\(.*?\)\./
+                  code = code_lines.slice(1, code_lines.size).join
+                  
+                  # syntax
+                  m, syntax = *syntax_settings.match(/syntax\(([^ #]+).*?\)./)
+                  
+                  # file name
+                  m, source_file = *syntax_settings.match(/syntax\(.*?\)\. +(.*?)$/)
+                  
+                  # get line interval
+                  m, from_line, to_line = *syntax_settings.match(/syntax\(.*? ([0-9]+),([0-9]+)\)/)
+                  
+                  # get block name
+                  m, block_name = *syntax_settings.match(/syntax\(.*?#([0-9a-z_]+)\)/)
+                  
+                  code = Bookmaker::Markup.content_for({
+                    :code => code,
+                    :from_line => from_line,
+                    :to_line => to_line,
+                    :block_name => block_name,
+                    :source_file => source_file
+                  })
+                  
+                  Bookmaker::Markup.syntax(code, syntax)
+                end
+              end
             end
           end
           

@@ -20,3 +20,9 @@
 	* Added some textile helpers
 * 1 bug fix
 	* Textile was escaping code inside <pre> blocks
+	
+== 0.0.5 2008-06-17
+* 1 small changes
+	* Removed frontcover and backcover jpgs
+* 1 bug fix
+	* Line stub (__) now ignores spaces and tabs

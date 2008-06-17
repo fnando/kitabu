@@ -38,7 +38,7 @@ module Bookmaker
       code.gsub! %r(^#{char}{#{size}}), "" if size.to_i > 0
       
       # remove all line stubs
-      code.gsub! %r(^__$), ""
+      code.gsub! %r(^[\t ]*__$), ""
       
       # return
       code

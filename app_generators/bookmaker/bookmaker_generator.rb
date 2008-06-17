@@ -26,8 +26,6 @@ class BookmakerGenerator < RubiGen::Base
       m.template "user.css", "templates/user.css"
       m.template "layouts/#{@layout}/layout.css", "templates/layout.css"
       m.template "layouts/#{@layout}/layout.html", "templates/layout.html"
-      m.file "layouts/#{@layout}/frontcover.jpg", "images/frontcover.jpg"
-      m.file "layouts/#{@layout}/backcover.jpg", "images/backcover.jpg"
       m.template "css/#{@theme}.css", "templates/syntax.css"
       m.template "config.yml", "config.yml", :assigns => {:theme => @theme}
     end

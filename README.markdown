@@ -93,10 +93,10 @@ created on the output directory.
 
 There are other rake tasks you can use:
 
-* book:html - generate a html from your content
-* book:syntaxes - list all available syntaxes
-* book:themes - list all available themes
-* book:watch - watch `text` for any change and automatically generate html
+* `book:html` - generate a html from your content
+* `book:syntaxes` - list all available syntaxes
+* `book:themes` - list all available themes
+* `book:watch` - watch `text` for any change and automatically generate html
 
 INSTALL:
 --------

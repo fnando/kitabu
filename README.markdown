@@ -1,7 +1,7 @@
 Bookmaker
 =========
 
-* <http://github.com/carlosbrando/bookmaker>
+* <http://github.com/fnando/bookmaker>
 
 DESCRIPTION:
 ------------
@@ -67,9 +67,9 @@ the messages added by the `layout.css`. Examples on doing this coming soon.
 
 Now it's time to write your book. All your book content will be placed on the
 text directory. Bookmaker requires you to separate your book into chapters. 
-A chapter is nothing but a directory that holds lots of Markdown files. The book
-will be generated using every folder/file alphabetically. So be sure to use
-a sequential numbering as the name. Here's a sample:
+A chapter is nothing but a directory that holds lots of Markdown/Textile files.
+The book will be generated using every folder/file alphabetically. So be sure 
+to use a sequential numbering as the name. Here's a sample:
 
 - text
 	- 01_Introduction
@@ -84,12 +84,19 @@ a sequential numbering as the name. Here's a sample:
 		- 03\_Windows\_instructions.markdown
 		- 04\_Ubuntu\_Linux\_instructions.markdown
 
-Note that you can use Textile or Markdown at the same time. Just use the `.markdown` 
-or `.textile` file extension.
+Note that you can use Textile or Markdown at the same time. Just use the 
+`.markdown` or `.textile` file extension.
 
-You'll want to see your progress eventually; it's time for your to generate
-the book PDF. Just run the command `rake pdf` and your book will be created on
-the output directory.
+You'll want to see your progress eventually; it's time for you to generate
+the book PDF. Just run the command `rake book:pdf` and your book will be 
+created on the output directory.
+
+There are other rake tasks you can use:
+
+* book:html - generate a html from your content
+* book:syntaxes - list all available syntaxes
+* book:themes - list all available themes
+* book:watch - watch `text` for any change and automatically generate html
 
 INSTALL:
 --------
@@ -116,17 +123,10 @@ REFERENCES:
 - Textile: <http://hobix.com/textile/>
 - Markdown: <http://daringfireball.net/projects/markdown/syntax>
 
-MAINTAINERS
------------
+MAINTAINER
+----------
  
-* Carlos Brando (<http://www.nomedojogo.com>)
-* Marcos Tapajós (<http://www.improveit.com.br/empresa/tapajos>)
 * Nando Vieira (<http://simplesideias.com.br>)
-
-COLLABORATORS:
---------------
-
-* Júlio Santos Monteiro (<http://www.monteiro.eti.br>)
 
 LICENSE:
 --------

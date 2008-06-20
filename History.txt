@@ -26,3 +26,9 @@
 	* Removed frontcover and backcover jpgs
 * 1 bug fix
 	* Line stub (__) now ignores spaces and tabs
+
+== 0.0.6 2008-06-20
+* 1 major change
+	* All rake tasks moved to namespace 'book'
+* 1 major enhancement
+	* Added task book:watch

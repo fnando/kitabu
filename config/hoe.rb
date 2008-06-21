@@ -1,19 +1,22 @@
 require 'bookmaker/version'
 
-AUTHOR = 'FIXME full name'  # can also be an array of Authors
-EMAIL = "FIXME email"
-DESCRIPTION = "description of gem"
+AUTHOR = 'Nando Vieira'  # can also be an array of Authors
+EMAIL = "fnando.vieira@gmail.com"
+DESCRIPTION = "A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme."
 GEM_NAME = 'bookmaker' # what ppl will type to install your gem
 RUBYFORGE_PROJECT = 'bookmaker' # The unix name for your project
-HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
-DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
+HOMEPATH = "http://github.com/fnando/bookmaker"
+DOWNLOAD_PATH = "http://github.com/fnando/bookmaker"
 EXTRA_DEPENDENCIES = [
-#  ['activesupport', '>= 1.3.1']
+  ['unicode', '>= 0.1'],
+  ['RedCloth', '>= 3.0.4'],
+  ['rubigen', '>= 1.3.2'],
+  ['discount', '>= 1.2.6.1']
 ]    # An array of rubygem dependencies [name, version]
 
 @config_file = "~/.rubyforge/user-config.yml"
 @config = nil
-RUBYFORGE_USERNAME = "unknown"
+RUBYFORGE_USERNAME = "fnando"
 def rubyforge_username
   unless @config
     begin

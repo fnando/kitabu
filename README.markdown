@@ -20,9 +20,10 @@ FEATURES:
 ---------
 
 * Write PDF using Markdown or Textile text markup
-* Support book layout
-* Support syntax highlight theme 
+* Book layout support
+* Syntax highlight theme based on Textmate
 * Generate a PDF with a single rake task
+* Table of Contents automatically generated from chapter titles
 
 SYNOPSIS:
 ---------
@@ -96,10 +97,18 @@ There are other rake tasks you can use:
 * `book:html` - generate a html from your content
 * `book:syntaxes` - list all available syntaxes
 * `book:themes` - list all available themes
+* `book:titles` - list all titles and its permalinks
 * `book:watch` - watch `text` for any change and automatically generate html
 
 Bookmaker can generate a Table of Contents (TOC) based on your h2-h6 tags. The 
 h1 tag is discarded because it's meant to be the book title. 
+
+If you need to link to a specific chapter, you can use the `book:titles` rake
+task to know what's the permalink that you need. For example, a title 
+`Installing Mac OS X` will have a permalink `installing-mac-os-x` and you can
+link to this chapter by writing
+`"See more on Installing Mac OS X":#installing-mac-os-x` when using 
+Textile.
 
 To generate the TOC, you need to print a variable called `toc`, using the eRb
 tag `<%= toc %>`.

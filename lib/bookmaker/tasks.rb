@@ -58,6 +58,23 @@ namespace :book do
   task :themes do
     puts Bookmaker::Base.themes.sort.join("\n")
   end
+  
+  desc "List all titles and its permalinks"
+  task :titles => :html do
+    contents = File.new(Bookmaker::Base.html_path).read
+    doc = Hpricot(contents)
+
+    titles = (doc/"h2, h3, h4, h5, h6").collect do |node|
+      title = node.inner_text
+      [title, Bookmaker::Base.to_permalink(title)]
+    end
+    
+    titles.sort_by {|items| items.first }.each do |items|
+      puts items.first
+      puts %(##{items.last})
+      puts
+    end
+  end
 
   desc "Watch changes and automatically generate html"
   task :watch do

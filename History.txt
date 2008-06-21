@@ -36,5 +36,6 @@
 == 0.0.7 2008-06-21
 * 1 major enhancement
 	* Added Table of Contents based on h2-h6 tags
+	* Added `book:titles` rake task
 * 1 small enhancement
 	* Added new Textile link tag (similar to Markdown)

@@ -98,6 +98,12 @@ There are other rake tasks you can use:
 * `book:themes` - list all available themes
 * `book:watch` - watch `text` for any change and automatically generate html
 
+Bookmaker can generate a Table of Contents (TOC) based on your h2-h6 tags. The 
+h1 tag is discarded because it's meant to be the book title. 
+
+To generate the TOC, you need to print a variable called `toc`, using the eRb
+tag `<%= toc %>`.
+
 INSTALL:
 --------
 

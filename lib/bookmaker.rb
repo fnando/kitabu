@@ -1,10 +1,15 @@
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
-require "bookmaker/base"
+require "rubygems"
 require "yaml"
 require "erb"
 require "ostruct"
+require "rexml/streamlistener"
+require "rexml/document"
+require "hpricot"
+
+require "bookmaker/base"
 
 begin
   require "ruby-debug"

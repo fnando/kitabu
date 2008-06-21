@@ -17,6 +17,19 @@ class BlackCloth < RedCloth
     text
   end
   
+  FN_URL_LINK = /
+    <
+    ((?:https?|ftp):\/\/.*?)
+    >
+  /x
+  
+  # Usage: <http://google.com>
+  def inline_textile_url_link(text)
+    text.gsub!( FN_URL_LINK ) do |m|
+      %(<a href="#{$1}">#{$1}</a>)
+    end
+  end
+  
   # Usage:
   # syntax(ruby). Some code
   #
@@ -95,7 +108,7 @@ class BlackCloth < RedCloth
   
   # overriding inline method
   def inline( text ) 
-    @rules << :inline_textile_fn
+    @rules += [:inline_textile_fn, :inline_textile_url_link]
     super
   end
   

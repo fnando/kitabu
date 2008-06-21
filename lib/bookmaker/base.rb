@@ -88,10 +88,30 @@ module Bookmaker
     
     def self.parse_layout(contents)
       template = File.new(template_path).read
-      cfg = config.merge(:contents => contents)
+      contents, toc = self.table_of_contents(contents)
+      cfg = config.merge(:contents => contents, :toc => toc)
       env = OpenStruct.new(cfg)
 
       ERB.new(template).result env.instance_eval{binding}
+    end
+    
+    def self.table_of_contents(contents)
+      return [contents, nil] unless Object.const_defined?('Hpricot') && Object.const_defined?('Unicode')
+      
+      doc = Hpricot(contents)
+
+      (doc/"h2, h3, h4, h5, h6").each do |node|
+        title = node.inner_text
+        permalink = Bookmaker::Base.to_permalink(title)
+        node.set_attribute(:id, permalink)
+      end
+      
+      contents = doc.to_html
+      io = StringIO.new(contents)
+      toc = Toc.new
+      REXML::Document.parse_stream(io, toc)
+
+      [contents, toc.to_s]
     end
     
     def self.generate_pdf
@@ -233,6 +253,67 @@ module Bookmaker
         filter = File.join(GEM_ROOT, "app_generators/bookmaker/templates/css/*.css")
         Dir[filter].collect{|path| File.basename(path).gsub(/\.css$/, '') }.sort
       end
+    end
+    
+    def self.to_permalink(str)
+      str = Unicode.normalize_KD(str).gsub(/[^\x00-\x7F]/n,'') 
+      str = str.gsub(/[^-_\s\w]/, ' ').downcase.squeeze(' ').tr(' ', '-')
+      str = str.gsub(/-+/, '-').gsub(/^-+/, '').gsub(/-+$/, '')
+      str
+    end
+  end
+  
+  class Toc
+    include REXML::StreamListener
+
+    def initialize
+      @toc = ""
+      @previous_level = 0
+      @tag = nil
+      @stack = []
+    end
+
+    def header?(tag=nil)
+      tag ||= @tag_name
+      return false unless tag.to_s =~ /h[2-6]/
+      @tag_name = tag
+      return true
+    end
+
+    def in_header?
+      @in_header
+    end
+
+    def tag_start(name, attrs)
+      @tag_name = name
+      return unless header?(name)
+      @in_header = true
+      @current_level = name.gsub!(/[^2-6]/, '').to_i
+      @stack << @current_level
+      @id = attrs["id"]
+
+      @toc << %(<ul class="level#{@current_level}">) if @current_level > @previous_level
+      @toc << %(</li></ul>) * (@previous_level - @current_level) if @current_level < @previous_level
+      @toc << %(</li>) if @current_level <= @previous_level
+      @toc << %(<li>)
+    end
+
+    def tag_end(name)
+      return unless header?(name)
+      @in_header = false
+      @previous_level = @current_level
+    end
+
+    def text(str)
+      return unless in_header?
+      @toc << %(<a href="##{@id}"><span>#{str}</span></a>)
+    end
+
+    def method_missing(*args)
+    end
+
+    def to_s
+      @toc + (%(</li></ul>) * (@stack.last - 1))
     end
   end
 end

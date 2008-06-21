@@ -1,11 +1,4 @@
-require "rubygems"
 require "bookmaker"
-
-begin
-  require "ruby-debug"
-rescue LoadError => e
-  nil
-end
 
 begin
   require "discount"
@@ -27,6 +20,20 @@ begin
 rescue LoadError => e
   puts  "\nUltraviolet gem not found. NO SYNTAX HIGHLIGHT for you.\n" +
         "Install using `sudo gem install ultraviolet`.\n\n"
+end
+
+begin
+  require "hpricot"
+rescue LoadError => e
+  puts  "\nHpricot gem not found. NO TOC for you.\n" +
+        "Install using `sudo gem install hpricot`.\n\n"
+end
+
+begin
+  require "unicode"
+rescue LoadError => e
+  puts  "\nUnicode gem not found. NO TOC for you.\n" +
+        "Install using `sudo gem install unicode`.\n\n"
 end
 
 namespace :book do

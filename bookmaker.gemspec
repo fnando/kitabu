@@ -1,4 +1,3 @@
-(in /Users/fnando/Sites/gems/bookmaker)
 Gem::Specification.new do |s|
   s.name = %q{bookmaker}
   s.version = "0.0.7"

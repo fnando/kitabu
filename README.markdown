@@ -113,6 +113,50 @@ Textile.
 To generate the TOC, you need to print a variable called `toc`, using the eRb
 tag `<%= toc %>`.
 
+Syntax Highlighting (Mac OS X)
+==============================
+
+If you're using Textile, all you need to do is use the tag `syntax.`. For 
+example, to highlight a code added right into your text, just do something like
+
+	syntax(ruby_on_rails). class User < ActiveRecord::Base
+	  validates_presence_of :login, :password, :email
+	__
+	  validates_uniqueness_of :login, :email
+	end
+
+To keep multiple line breaks into a single code block, add a line `__`;
+Bookmaker will replace it when generating the HTML file.
+
+If you want to highlight a file, you need to place it into the `code` 
+directory and call it like this:
+
+	syntax(ruby_on_rails). some_file.rb
+
+You can specify the lines you want to highlight; the example below will 
+highlight lines 10-17 from some_file.rb.
+
+	syntax(ruby_on_rails 10,17). some_file.rb
+
+You can also specify named blocks to highlight. Named blocks are identified
+by `#begin` and `#end` marks. If some_file.rb has the following code
+
+	require "rubygems"
+	require "hpricot"
+	require "open"
+
+	# begin: get_all_h2_tags
+	doc = Hpricot(open('http://simplesideias.com.br'))
+	(doc/"h2").each {|h2| puts h2.inner_text }
+	# end: get_all_h2_tags
+
+you can get the code between `get_all_h2_tags` using
+
+	syntax(ruby#get_all_h2_tags). some_file.rb
+
+*Note:* Makdown uses the same syntax above. You just need to indent your code
+(as usual) and add the `syntax.` thing as the first line.
+
 INSTALL:
 --------
 
@@ -121,6 +165,8 @@ You need to install some gems before you go any further.
 	sudo gem install rubigen
 	sudo gem install discount
 	sudo gem install RedCloth
+	sudo gem install hpricot
+	sudo gem install unicode
 
 If you're a Mac user and have Textmate installed, you can
 generate HTML from your source code with syntax highlight,
@@ -131,6 +177,10 @@ Oniguruma regular expression library that can be found at
 Then, you need to install the Ultraviolet gem.
 
 	sudo gem install ultraviolet
+	
+After installing these dependencies, you can install Bookmaker:
+
+	sudo gem install fnando-bookmaker -s http://gems.github.com
 
 REFERENCES:
 -----------

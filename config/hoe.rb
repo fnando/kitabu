@@ -11,7 +11,8 @@ EXTRA_DEPENDENCIES = [
   ['unicode', '>= 0.1'],
   ['RedCloth', '>= 3.0.4'],
   ['rubigen', '>= 1.3.2'],
-  ['discount', '>= 1.2.6.1']
+  ['discount', '>= 1.2.6.1'],
+  ['hpricot', '>=0.6']
 ]    # An array of rubygem dependencies [name, version]
 
 @config_file = "~/.rubyforge/user-config.yml"

@@ -22,7 +22,7 @@
 	* Textile was escaping code inside <pre> blocks
 	
 == 0.0.5 2008-06-17
-* 1 small changes
+* 1 minor changes
 	* Removed frontcover and backcover jpgs
 * 1 bug fix
 	* Line stub (__) now ignores spaces and tabs
@@ -37,5 +37,10 @@
 * 1 major enhancement
 	* Added Table of Contents based on h2-h6 tags
 	* Added `book:titles` rake task
-* 1 small enhancement
+* 1 minor enhancement
 	* Added new Textile link tag (similar to Markdown)
+	
+== 0.0.8 2008-06-22
+* 1 minor change
+	* Added Hpricot as dependency
+	* README updated to document highlight syntax

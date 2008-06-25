@@ -44,3 +44,7 @@
 * 1 minor change
 	* Added Hpricot as dependency
 	* README updated to document highlight syntax
+	
+== 0.0.9 2008-07-25
+* 1 bug fix
+	* Toc#to_s raised an error if book had no h2-h6 tags (thanks @rferraz)

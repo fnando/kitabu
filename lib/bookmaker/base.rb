@@ -314,6 +314,8 @@ module Bookmaker
 
     def to_s
       @toc + (%(</li></ul>) * (@stack.last - 1))
+    rescue
+      ""
     end
   end
 end

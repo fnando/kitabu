@@ -1,12 +1,10 @@
 Gem::Specification.new do |s|
   s.name = %q{bookmaker}
-  s.version = "0.0.8"
-
-  s.specification_version = 2 if s.respond_to? :specification_version=
+  s.version = "0.0.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2008-06-22}
+  s.date = %q{2008-06-25}
   s.default_executable = %q{bookmaker}
   s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme.}
   s.email = ["fnando.vieira@gmail.com"]
@@ -19,7 +17,17 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{bookmaker}
-  s.rubygems_version = %q{1.1.1}
+  s.rubygems_version = %q{1.2.0}
   s.summary = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme.}
   s.test_files = ["test/test_bookmaker.rb", "test/test_bookmaker_generator.rb", "test/test_generator_helper.rb", "test/test_helper.rb"]
+
+  if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
+    s.specification_version = 2
+
+    if current_version >= 3 then
+    else
+    end
+  else
+  end
 end

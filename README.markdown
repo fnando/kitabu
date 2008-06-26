@@ -178,9 +178,10 @@ Then, you need to install the Ultraviolet gem.
 
 	sudo gem install ultraviolet
 	
-After installing these dependencies, you can install Bookmaker:
+After installing these dependencies, download the latest version:
 
-	sudo gem install fnando-bookmaker -s http://gems.github.com
+	curl -O http://f.simplesideias.com.br/bookmaker-latest.gem
+	sudo gem install bookmaker
 
 REFERENCES:
 -----------

@@ -63,13 +63,24 @@ namespace :book do
   task :titles => :html do
     contents = File.new(Bookmaker::Base.html_path).read
     doc = Hpricot(contents)
+    counter = {}
 
     titles = (doc/"h2, h3, h4, h5, h6").collect do |node|
       title = node.inner_text
-      [title, Bookmaker::Base.to_permalink(title)]
+      permalink = Bookmaker::Base.to_permalink(title)
+      
+      # initialize and increment counter
+      counter[permalink] ||= 0
+      counter[permalink] += 1
+      
+      # set a incremented permalink if more than one occurrence
+      # is found
+      permalink = "#{permalink}-#{counter[permalink]}" if counter[permalink] > 1
+      
+      [title, permalink]
     end
     
-    titles.sort_by {|items| items.first }.each do |items|
+    titles.sort_by {|items| items.last }.each do |items|
       puts items.first
       puts %(##{items.last})
       puts

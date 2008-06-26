@@ -99,10 +99,20 @@ module Bookmaker
       return [contents, nil] unless Object.const_defined?('Hpricot') && Object.const_defined?('Unicode')
       
       doc = Hpricot(contents)
+      counter = {}
 
       (doc/"h2, h3, h4, h5, h6").each do |node|
         title = node.inner_text
         permalink = Bookmaker::Base.to_permalink(title)
+        
+        # initialize and increment counter
+        counter[permalink] ||= 0
+        counter[permalink] += 1
+        
+        # set a incremented permalink if more than one occurrence
+        # is found
+        permalink = "#{permalink}-#{counter[permalink]}" if counter[permalink] > 1
+        
         node.set_attribute(:id, permalink)
       end
       
@@ -125,14 +135,15 @@ module Bookmaker
       # first, get all chapters; then, get all parsed markdown
       # files from this chapter and group them into a <div class="chapter"> tag
       Dir.entries(text_dir).sort.each do |dirname|
-        next if %w(. ..).include?(dirname) || File.file?(text_dir + "/#{dirname}")
+        # ignore files and some directories
+        next if %w(. .. .svn .git).include?(dirname) || File.file?(text_dir + "/#{dirname}")
         
         # gets all parsed markdown files to wrap in a 
         # chapter element
         chapter = ""
         
         # merge all markdown and textile files into a single list
-        markup_files = Dir["#{text_dir}/#{dirname}/*.markdown"] + Dir["#{text_dir}/#{dirname}/*.textile"]
+        markup_files = Dir["#{text_dir}/#{dirname}/**/*.markdown"] + Dir["#{text_dir}/#{dirname}/**/*.textile"]
         
         # no files, so skip it!
         next if markup_files.empty?

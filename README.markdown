@@ -164,7 +164,6 @@ You need to install some gems before you go any further.
 
 	sudo gem install rubigen
 	sudo gem install discount
-	sudo gem install RedCloth
 	sudo gem install hpricot
 	sudo gem install unicode
 

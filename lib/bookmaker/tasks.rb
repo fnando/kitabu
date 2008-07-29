@@ -7,13 +7,8 @@ rescue LoadError => e
         "Install using `sudo gem install discount`.\n"
 end
 
-begin
-  require "redcloth"
-  require File.dirname(__FILE__) + "/blackcloth"
-rescue LoadError => e
-  puts  "\nRedCloth gem not found. NO TEXTILE for you.\n" +
-        "Install using `sudo gem install redcloth`.\n"
-end
+require File.dirname(__FILE__) + "/redcloth"
+require File.dirname(__FILE__) + "/blackcloth"
 
 begin
   require "uv" if RUBY_PLATFORM =~ /darwin/

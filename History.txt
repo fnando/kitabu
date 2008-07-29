@@ -53,3 +53,7 @@
 * 2 bug fixes
 	* generator was ignoring directories inside chapter
 	* repeated titles are now numerated to keep id uniqueness 
+
+== 0.1.0
+* 1 bug fix
+	* RedCloth 3.04 now is bundled with bookmaker until version 4 is supported

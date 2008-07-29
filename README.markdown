@@ -12,7 +12,7 @@ Mac users that have [Textmate](http://macromates.com) installed can have source
 code highlighted with his/her favorite theme.
 
 While Prince is too expensive (495USD for a single user license), the 
-free version available at <http://www.princexml.com/download/> generates
+free version available at http://www.princexml.com/download/ generates
 a PDF with a small logo on the first page, which is removed when sent
 to a printer.
 
@@ -172,7 +172,7 @@ If you're a Mac user and have Textmate installed, you can
 generate HTML from your source code with syntax highlight,
 the same way you see in Textmate. First, you need to install
 Oniguruma regular expression library that can be found at 
-<http://www.geocities.jp/kosako3/oniguruma/>
+http://www.geocities.jp/kosako3/oniguruma/
 
 Then, you need to install the Ultraviolet gem.
 
@@ -186,13 +186,13 @@ After installing these dependencies, download the latest version:
 REFERENCES:
 -----------
 
-- Textile: <http://hobix.com/textile/>
-- Markdown: <http://daringfireball.net/projects/markdown/syntax>
+- Textile: http://hobix.com/textile/
+- Markdown: http://daringfireball.net/projects/markdown/syntax
 
 MAINTAINER
 ----------
  
-* Nando Vieira (<http://simplesideias.com.br>)
+* Nando Vieira (http://simplesideias.com.br)
 
 LICENSE:
 --------

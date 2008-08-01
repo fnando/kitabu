@@ -1,5 +1,8 @@
+# WARNING : RAKE AUTO-GENERATED FILE. DO NOT MANUALLY EDIT!
+# RUN : 'rake gem:update_gemspec'
+
 Gem::Specification.new do |s|
-  s.date = "Fri Aug 01 00:00:00 -0300 2008"
+  s.date = "Fri Aug 01 01:20:19 -0300 2008"
   s.executables = ["kitabu"]
   s.authors = ["Nando Vieira"]
   s.required_rubygems_version = ">= 0"

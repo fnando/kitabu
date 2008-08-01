@@ -32,11 +32,16 @@ namespace :gem do
     task :update_gemspec do
       skip_fields = %w(new_platform original_platform)
       integer_fields = %w(specification_version)
-
-      result = "Gem::Specification.new do |s|\n"
+      
+      result = "# WARNING : RAKE AUTO-GENERATED FILE. DO NOT MANUALLY EDIT!\n"
+      result << "# RUN : 'rake gem:update_gemspec'\n\n"
+      result << "Gem::Specification.new do |s|\n"
+      
       spec.instance_variables.each do |ivar|
         value = spec.instance_variable_get(ivar)
         name  = ivar.split("@").last
+        value = Time.now if name == "date"
+        
         next if skip_fields.include?(name) || value.nil? || value == "" || (value.respond_to?(:empty?) && value.empty?)
         if name == "dependencies"
           value.each do |d|
@@ -56,6 +61,7 @@ namespace :gem do
           result << "  s.#{name} = #{value}\n"
         end
       end
+      
       result << "end"
       File.open(File.join(File.dirname(__FILE__), "#{spec.name}.gemspec"), "w"){|f| f << result}
     end

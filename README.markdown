@@ -160,6 +160,10 @@ you can get the code between `get_all_h2_tags` using
 INSTALL:
 --------
 
+	sudo gem install fnando-kitabu --source http://gems.github.com
+
+or, if you have problem
+
 	git clone git://github.com/fnando/kitabu.git
 	cd kitabu
 	gem build kitabu.gemspec

@@ -9,7 +9,7 @@ require "rexml/streamlistener"
 require "rexml/document"
 require "hpricot"
 
-require "bookmaker/base"
+require "kitabu/base"
 
 begin
   require "ruby-debug"

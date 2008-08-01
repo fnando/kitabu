@@ -1,12 +1,12 @@
-require 'bookmaker/version'
+require 'kitabu/version'
 
 AUTHOR = 'Nando Vieira'  # can also be an array of Authors
 EMAIL = "fnando.vieira@gmail.com"
 DESCRIPTION = "A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme."
-GEM_NAME = 'bookmaker' # what ppl will type to install your gem
-RUBYFORGE_PROJECT = 'bookmaker' # The unix name for your project
-HOMEPATH = "http://github.com/fnando/bookmaker"
-DOWNLOAD_PATH = "http://github.com/fnando/bookmaker"
+GEM_NAME = 'kitabu' # what ppl will type to install your gem
+RUBYFORGE_PROJECT = 'kitabu' # The unix name for your project
+HOMEPATH = "http://github.com/fnando/kitabu"
+DOWNLOAD_PATH = "http://github.com/fnando/kitabu"
 EXTRA_DEPENDENCIES = [
   ['unicode', '>= 0.1'],
   ['RedCloth', '>= 3.0.4'],
@@ -38,8 +38,8 @@ end
 REV = nil
 # UNCOMMENT IF REQUIRED:
 # REV = YAML.load(`svn info`)['Revision']
-VERS = Bookmaker::VERSION::STRING + (REV ? ".#{REV}" : "")
-RDOC_OPTS = ['--quiet', '--title', 'bookmaker documentation',
+VERS = Kitabu::VERSION::STRING + (REV ? ".#{REV}" : "")
+RDOC_OPTS = ['--quiet', '--title', 'kitabu documentation',
     "--opname", "index.html",
     "--line-numbers",
     "--main", "README",

@@ -1,4 +1,4 @@
-require "bookmaker"
+require "kitabu"
 
 begin
   require "discount"
@@ -31,38 +31,38 @@ rescue LoadError => e
         "Install using `sudo gem install unicode`.\n\n"
 end
 
-namespace :book do
+namespace :kitabu do
   desc "Generate PDF from markup files"
   task :pdf => :html do
-    Bookmaker::Base.generate_pdf
+    Kitabu::Base.generate_pdf
     puts "Your PDF has been generated. Check it out the output directory!"
-    sleep(1) && system("open #{Bookmaker::Base.pdf_path}") if RUBY_PLATFORM =~ /darwin/
+    sleep(1) && system("open #{Kitabu::Base.pdf_path}") if RUBY_PLATFORM =~ /darwin/
   end
 
   desc "Generate HTML from markup files"
   task :html do
-    Bookmaker::Base.generate_html
+    Kitabu::Base.generate_html
   end
 
   desc "List all available syntaxes"
   task :syntaxes do
-    puts Bookmaker::Base.syntaxes.sort.join("\n")
+    puts Kitabu::Base.syntaxes.sort.join("\n")
   end
 
   desc "List all available themes"
   task :themes do
-    puts Bookmaker::Base.themes.sort.join("\n")
+    puts Kitabu::Base.themes.sort.join("\n")
   end
   
   desc "List all titles and its permalinks"
   task :titles => :html do
-    contents = File.new(Bookmaker::Base.html_path).read
+    contents = File.new(Kitabu::Base.html_path).read
     doc = Hpricot(contents)
     counter = {}
 
     titles = (doc/"h2, h3, h4, h5, h6").collect do |node|
       title = node.inner_text
-      permalink = Bookmaker::Base.to_permalink(title)
+      permalink = Kitabu::Base.to_permalink(title)
       
       # initialize and increment counter
       counter[permalink] ||= 0
@@ -106,7 +106,8 @@ namespace :book do
           puts "generating html - #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
           changes.each {|file| puts "  - #{file}" } unless latest_mtime == 0
           latest_mtime = mtime
-          Bookmaker::Base.generate_html
+          Kitabu::Base.generate_html
+          Kitabu::Base.generate_pdf
         end
 
         sleep 5

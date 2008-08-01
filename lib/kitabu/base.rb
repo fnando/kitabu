@@ -1,7 +1,7 @@
-module Bookmaker
+module Kitabu
   module Markup
     def self.content_for(options)
-      source_file = File.join(BOOKMAKER_ROOT, 'code', options[:source_file].to_s)
+      source_file = File.join(KITABU_ROOT, 'code', options[:source_file].to_s)
       code = options[:code]
       
       if options[:source_file] && File.exists?(source_file)
@@ -46,11 +46,11 @@ module Bookmaker
     
     def self.syntax(code, syntax='plain_text')
       # get chosen theme
-      theme = Bookmaker::Base.config['theme']
-      theme = Bookmaker::Base.default_theme unless Bookmaker::Base.theme?(theme)
+      theme = Kitabu::Base.config['theme']
+      theme = Kitabu::Base.default_theme unless Kitabu::Base.theme?(theme)
       
       # get syntax
-      syntax = Bookmaker::Base.default_syntax unless Bookmaker::Base.syntax?(syntax)
+      syntax = Kitabu::Base.default_syntax unless Kitabu::Base.syntax?(syntax)
       
       Uv.parse(code, "xhtml", syntax, false, theme)
     end
@@ -63,23 +63,23 @@ module Bookmaker
     GEM_ROOT = File.expand_path(File.dirname(__FILE__) + "/../../")
     
     def self.html_path
-      BOOKMAKER_ROOT + "/output/#{app_name}.html"
+      KITABU_ROOT + "/output/#{app_name}.html"
     end
     
     def self.pdf_path
-      BOOKMAKER_ROOT + "/output/#{app_name}.pdf"
+      KITABU_ROOT + "/output/#{app_name}.pdf"
     end
     
     def self.template_path
-      BOOKMAKER_ROOT + "/templates/layout.html"
+      KITABU_ROOT + "/templates/layout.html"
     end
     
     def self.config_path
-      BOOKMAKER_ROOT + "/config.yml"
+      KITABU_ROOT + "/config.yml"
     end
     
     def self.text_dir
-      BOOKMAKER_ROOT + "/text"
+      KITABU_ROOT + "/text"
     end
     
     def self.config
@@ -103,7 +103,7 @@ module Bookmaker
 
       (doc/"h2, h3, h4, h5, h6").each do |node|
         title = node.inner_text
-        permalink = Bookmaker::Base.to_permalink(title)
+        permalink = Kitabu::Base.to_permalink(title)
         
         # initialize and increment counter
         counter[permalink] ||= 0
@@ -172,7 +172,7 @@ module Bookmaker
               # textile
               parsed_contents.gsub!(/@syntax:([0-9]+)/m) do |m|
                 syntax, code = markup.syntax_blocks[$1.to_i]
-                Bookmaker::Markup.syntax(code, syntax)
+                Kitabu::Markup.syntax(code, syntax)
               end
             else
               # markdown
@@ -198,7 +198,7 @@ module Bookmaker
                   # get block name
                   m, block_name = *syntax_settings.match(/syntax\(.*?#([0-9a-z_]+)\)/)
                   
-                  code = Bookmaker::Markup.content_for({
+                  code = Kitabu::Markup.content_for({
                     :code => code,
                     :from_line => from_line,
                     :to_line => to_line,
@@ -206,7 +206,7 @@ module Bookmaker
                     :source_file => source_file
                   })
                   
-                  Bookmaker::Markup.syntax(code, syntax)
+                  Kitabu::Markup.syntax(code, syntax)
                 end
               end
             end
@@ -220,12 +220,12 @@ module Bookmaker
 
       # save html file
       File.open(html_path, 'w+') do |f|
-        f << Bookmaker::Base.parse_layout(contents)
+        f << Kitabu::Base.parse_layout(contents)
       end
     end
     
     def self.app_name
-      ENV['BOOKMAKER_NAME'] || 'bookmaker'
+      ENV['KITABU_NAME'] || 'kitabu'
     end
     
     def self.theme?(theme_name)
@@ -254,14 +254,14 @@ module Bookmaker
     
     def self.layouts
       @layouts ||= begin
-        filter = File.join(GEM_ROOT, "app_generators/bookmaker/templates/layouts/*.css")
+        filter = File.join(GEM_ROOT, "app_generators/kitabu/templates/layouts/*.css")
         Dir[filter].collect{|path| File.basename(path).gsub(/\.css$/, '') }.sort
       end
     end
     
     def self.themes
       @themes ||= begin
-        filter = File.join(GEM_ROOT, "app_generators/bookmaker/templates/css/*.css")
+        filter = File.join(GEM_ROOT, "app_generators/kitabu/templates/css/*.css")
         Dir[filter].collect{|path| File.basename(path).gsub(/\.css$/, '') }.sort
       end
     end

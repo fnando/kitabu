@@ -1,12 +1,12 @@
-require 'bookmaker'
+require 'kitabu'
 
-class BookmakerGenerator < RubiGen::Base
+class KitabuGenerator < RubiGen::Base
 
   DEFAULT_SHEBANG = File.join(Config::CONFIG['bindir'],
                               Config::CONFIG['ruby_install_name'])
 
-  default_options :theme => Bookmaker::Base.default_theme,
-    :layout => Bookmaker::Base.default_layout
+  default_options :theme => Kitabu::Base.default_theme,
+    :layout => Kitabu::Base.default_layout
   attr_reader :theme, :layout
 
   def initialize(runtime_args, runtime_options = {})
@@ -34,7 +34,7 @@ class BookmakerGenerator < RubiGen::Base
   protected
     def banner
       <<-EOS
-The 'bookmaker' command creates a new book with a default
+The 'kitabu' command creates a new book with a default
 directory structure at the path you specify.
 
 USAGE: #{spec.name} /path/to/your/book [options]
@@ -46,11 +46,11 @@ EOS
       opts.separator 'Options:'
       opts.on("-v", "--version", "Show the #{File.basename($0)} version number and quit.")
       opts.on("--layout=LAYOUT_NAME", String,
-        "Define the book layout (#{Bookmaker::Base.layouts.join('|')})",
-        "Default: #{Bookmaker::Base.default_layout}") { |x| options[:layout] = x }
+        "Define the book layout (#{Kitabu::Base.layouts.join('|')})",
+        "Default: #{Kitabu::Base.default_layout}") { |x| options[:layout] = x }
       opts.on("--theme=THEME_NAME", String,
-        "Define the syntax highlight theme (#{Bookmaker::Base.themes.join('|')})",
-        "Default: #{Bookmaker::Base.default_theme}") { |x| options[:theme] = x } if RUBY_PLATFORM =~ /darwin/
+        "Define the syntax highlight theme (#{Kitabu::Base.themes.join('|')})",
+        "Default: #{Kitabu::Base.default_theme}") { |x| options[:theme] = x } if RUBY_PLATFORM =~ /darwin/
     end
 
     def extract_options

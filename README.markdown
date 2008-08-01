@@ -1,7 +1,7 @@
-Bookmaker
-=========
+Kitabu
+======
 
-* [http://github.com/fnando/bookmaker](http://github.com/fnando/bookmaker)
+* [http://github.com/fnando/kitabu](http://github.com/fnando/kitabu)
 
 DESCRIPTION:
 ------------
@@ -28,15 +28,15 @@ FEATURES:
 SYNOPSIS:
 ---------
 
-Create a new book with `bookmaker mybook`. Bookmaker has support for book
+Create a new book with `kitabu mybook`. Kitabu has support for book
 layout and syntax highlight theme. You can specify other settings:
 
-	bookmaker mybook --theme=mac_classic
-	bookmaker mybook --layout=boom
+	kitabu mybook --theme=mac_classic
+	kitabu mybook --layout=boom
 
-You can check available layouts and themes with `bookmaker --help`
+You can check available layouts and themes with `kitabu --help`
 
-The `bookmaker` command creates a directory "mybook" with the 
+The `kitabu` command creates a directory "mybook" with the 
 following structure:
 
 - book
@@ -67,7 +67,7 @@ If you're writing on a different language, the `user.css` file can override all
 the messages added by the `layout.css`. Examples on doing this coming soon.
 
 Now it's time to write your book. All your book content will be placed on the
-text directory. Bookmaker requires you to separate your book into chapters. 
+text directory. Kitabu requires you to separate your book into chapters. 
 A chapter is nothing but a directory that holds lots of Markdown/Textile files.
 The book will be generated using every folder/file alphabetically. So be sure 
 to use a sequential numbering as the name. Here's a sample:
@@ -100,7 +100,7 @@ There are other rake tasks you can use:
 * `book:titles` - list all titles and its permalinks
 * `book:watch` - watch `text` for any change and automatically generate html
 
-Bookmaker can generate a Table of Contents (TOC) based on your h2-h6 tags. The 
+Kitabu can generate a Table of Contents (TOC) based on your h2-h6 tags. The 
 h1 tag is discarded because it's meant to be the book title. 
 
 If you need to link to a specific chapter, you can use the `book:titles` rake
@@ -126,7 +126,7 @@ example, to highlight a code added right into your text, just do something like
 	end
 
 To keep multiple line breaks into a single code block, add a line `__`;
-Bookmaker will replace it when generating the HTML file.
+Kitabu will replace it when generating the HTML file.
 
 If you want to highlight a file, you need to place it into the `code` 
 directory and call it like this:
@@ -178,9 +178,14 @@ Then, you need to install the Ultraviolet gem.
 	sudo gem install ultraviolet
 	
 After installing these dependencies, download the latest version:
+	
+	git clone git://github.com/fnando/kitabu.git
+	rake
 
-	curl -O http://f.simplesideias.com.br/bookmaker-latest.gem
-	sudo gem install bookmaker
+or
+
+	curl -O http://f.simplesideias.com.br/kitabu-latest.gem
+	sudo gem install kitabu
 
 REFERENCES:
 -----------

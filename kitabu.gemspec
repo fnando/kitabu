@@ -2,7 +2,7 @@
 # RUN : 'rake gem:update_gemspec'
 
 Gem::Specification.new do |s|
-  s.date = "Fri Aug 01 02:00:46 -0300 2008"
+  s.date = "Fri Aug 01 05:56:29 -0300 2008"
   s.executables = ["kitabu"]
   s.authors = ["Nando Vieira"]
   s.required_rubygems_version = ">= 0"

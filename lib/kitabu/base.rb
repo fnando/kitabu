@@ -254,8 +254,8 @@ module Kitabu
     
     def self.layouts
       @layouts ||= begin
-        filter = File.join(GEM_ROOT, "app_generators/kitabu/templates/layouts/*.css")
-        Dir[filter].collect{|path| File.basename(path).gsub(/\.css$/, '') }.sort
+        dir = File.join(GEM_ROOT, "app_generators/kitabu/templates/layouts/")
+        Dir.entries(dir).reject{|p| p =~ /^\.+$/ }.sort
       end
     end
     

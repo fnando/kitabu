@@ -160,12 +160,10 @@ you can get the code between `get_all_h2_tags` using
 INSTALL:
 --------
 
-You need to install some gems before you go any further.
-
-	sudo gem install rubigen
-	sudo gem install discount
-	sudo gem install hpricot
-	sudo gem install unicode
+	git clone git://github.com/fnando/kitabu.git
+	cd kitabu
+	gem build kitabu.gemspec
+	sudo gem install kitabu
 
 If you're a Mac user and have Textmate installed, you can
 generate HTML from your source code with syntax highlight,
@@ -176,18 +174,6 @@ Oniguruma regular expression library that can be found at
 Then, you need to install the Ultraviolet gem.
 
 	sudo gem install ultraviolet
-	
-After installing these dependencies, download the latest version:
-	
-	git clone git://github.com/fnando/kitabu.git
-	sudo gem install newgem
-	cd kitabu
-	rake install_gem
-
-or
-
-	curl -O http://f.simplesideias.com.br/kitabu-latest.gem
-	sudo gem install kitabu
 
 REFERENCES:
 -----------
@@ -199,6 +185,11 @@ MAINTAINER
 ----------
  
 * Nando Vieira ([http://simplesideias.com.br](http://simplesideias.com.br))
+
+CONTRIBUTORS
+------------
+ 
+* Arthur Zapparoli ([http://arthurgeek.net](http://arthurgeek.net))
 
 LICENSE:
 --------

@@ -65,14 +65,14 @@ Gem::Specification.new do |s|
   s.specification_version = "2"
   s.loaded = "false"
   s.requirements = ["Install the Oniguruma RE library and ultraviolet gem to get Syntax Highlighting (only for TextMate users)"]
-  s.email = "fnando.vieira@gmail.com"
+  s.email = ["fnando.vieira@gmail.com"]
   s.name = "kitabu"
   s.required_ruby_version = ">= 1.8.4"
   s.bindir = "bin"
   s.rubygems_version = "1.2.0"
   s.homepage = "http://github.com/fnando/kitabu"
   s.platform = "ruby"
-  s.summary = "Framework for creating e-books using Ruby."
+  s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
   s.description = "A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme."
   s.add_dependency "rubigen", ">= 0"
   s.add_dependency "discount", ">= 0"

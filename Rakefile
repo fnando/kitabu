@@ -1,15 +1,14 @@
 require 'rake'
 require 'lib/kitabu/version'
 
-# The full file list used for rdocs, tarballs, gems, and for generating the xmpp4r.gemspec.
 PKG_FILES = %w( Rakefile kitabu.gemspec History.txt License.txt README.markdown TODO.txt ) + Dir["{app_generators,bin,lib,themes}/**/*"]
 
 spec = Gem::Specification.new do |s|
   s.name = "kitabu"
   s.version = Kitabu::VERSION::STRING
-  s.summary = "Framework for creating e-books using Ruby."
+  s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
   s.authors = ["Nando Vieira"]
-  s.email = "fnando.vieira@gmail.com"
+  s.email = ["fnando.vieira@gmail.com"]
   s.homepage = "http://github.com/fnando/kitabu"
   s.description = "A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme."
   s.has_rdoc = false
@@ -28,7 +27,6 @@ spec = Gem::Specification.new do |s|
 end
 
 namespace :gem do
-
   # Thanks to the Merb project for this code.
   desc "Update Github Gemspec"
     task :update_gemspec do

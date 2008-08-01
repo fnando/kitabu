@@ -22,15 +22,13 @@ spec = Gem::Specification.new do |s|
   s.add_dependency "unicode"
   # Requirements
   s.requirements << "Install the Oniguruma RE library and ultraviolet gem to get Syntax Highlighting (only for TextMate users)"
-  s.required_ruby_version = ">= 1.8.4"
 end
 
 namespace :gem do
   # Thanks to the Merb project for this code.
   desc "Update Github Gemspec"
     task :update_gemspec do
-      skip_fields = %w(new_platform original_platform)
-      integer_fields = %w(specification_version)
+      skip_fields = %w(new_platform original_platform specification_version loaded required_ruby_version rubygems_version platform )
       
       result = "# WARNING : RAKE AUTO-GENERATED FILE. DO NOT MANUALLY EDIT!\n"
       result << "# RUN : 'rake gem:update_gemspec'\n\n"
@@ -54,9 +52,7 @@ namespace :gem do
           when FalseClass
           when TrueClass
           when Fixnum
-            value =  value.inspect
           when String
-            value = value.to_i if integer_fields.include?(name)
             value = value.inspect
           else
             value = value.to_s.inspect

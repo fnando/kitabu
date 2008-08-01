@@ -1,5 +1,4 @@
 require 'rake'
-require 'lib/kitabu/version'
 
 PKG_FILES = %w( Rakefile kitabu.gemspec History.txt License.txt README.markdown TODO.txt ) + Dir["{app_generators,bin,lib,themes}/**/*"]
 
@@ -52,6 +51,10 @@ namespace :gem do
           case value
           when Array
             value =  name != "files" ? value.inspect : value.inspect.split(",").join(",\n")
+          when FalseClass
+          when TrueClass
+          when Fixnum
+            value =  value.inspect
           when String
             value = value.to_i if integer_fields.include?(name)
             value = value.inspect

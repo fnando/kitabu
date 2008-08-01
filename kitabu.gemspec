@@ -2,7 +2,7 @@
 # RUN : 'rake gem:update_gemspec'
 
 Gem::Specification.new do |s|
-  s.date = "Fri Aug 01 01:33:05 -0300 2008"
+  s.date = "Fri Aug 01 01:50:45 -0300 2008"
   s.executables = ["kitabu"]
   s.authors = ["Nando Vieira"]
   s.required_rubygems_version = ">= 0"
@@ -41,7 +41,6 @@ Gem::Specification.new do |s|
  "lib/kitabu/blackcloth.rb",
  "lib/kitabu/redcloth.rb",
  "lib/kitabu/tasks.rb",
- "lib/kitabu/version.rb",
  "lib/kitabu.rb",
  "themes/active4d.css",
  "themes/all_hallows_eve.css",
@@ -64,9 +63,9 @@ Gem::Specification.new do |s|
  "themes/sunburst.css",
  "themes/twilight.css",
  "themes/zenburnesque.css"]
-  s.has_rdoc = "false"
-  s.specification_version = "2"
-  s.loaded = "false"
+  s.has_rdoc = false
+  s.specification_version = 2
+  s.loaded = false
   s.requirements = ["Install the Oniguruma RE library and ultraviolet gem to get Syntax Highlighting (only for TextMate users)"]
   s.email = ["fnando.vieira@gmail.com"]
   s.name = "kitabu"

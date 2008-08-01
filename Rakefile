@@ -5,7 +5,7 @@ PKG_FILES = %w( Rakefile kitabu.gemspec History.txt License.txt README.markdown 
 
 spec = Gem::Specification.new do |s|
   s.name = "kitabu"
-  s.version = Kitabu::VERSION::STRING
+  s.version = "0.2.0"
   s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
   s.authors = ["Nando Vieira"]
   s.email = ["fnando.vieira@gmail.com"]

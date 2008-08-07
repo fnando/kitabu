@@ -82,7 +82,7 @@ namespace :kitabu do
     end
   end
 
-  desc "Watch changes and automatically generate html"
+  desc "Watch changes and automatically generate html & pdf"
   task :watch do
     thread = Thread.new do
       latest_mtime = 0
@@ -103,11 +103,13 @@ namespace :kitabu do
         end.max
 
         if latest_mtime < mtime
-          puts "generating html - #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
+          puts "creating html & pdf - #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
           changes.each {|file| puts "  - #{file}" } unless latest_mtime == 0
           latest_mtime = mtime
           Kitabu::Base.generate_html
           Kitabu::Base.generate_pdf
+          puts "done!"
+          puts
         end
 
         sleep 5

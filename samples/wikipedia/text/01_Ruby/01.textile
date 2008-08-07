@@ -1,0 +1,31 @@
+h2. Ruby
+
+Ruby is a dynamic, reflective, general purpose object-oriented programming language that combines syntax inspired by Perl with Smalltalk-like features. Ruby originated in Japan during the mid-1990s and was initially developed and designed by Yukihiro "Matz" Matsumoto.
+
+Ruby supports multiple programming paradigms, including functional, object oriented, imperative and reflection. It also has a dynamic type system and automatic memory management; it is therefore similar in varying respects to Python, Perl, Lisp, Dylan, and CLU.
+
+In its current, official implementation, written in C, Ruby is a single-pass interpreted language. There is currently no specification of the Ruby language, so the original implementation is considered to be the de facto reference. As of 2008, there are a number of complete or upcoming alternative implementations of the Ruby language, including YARV, JRuby, Rubinius, IronRuby, and MacRuby, each of which takes a different approach, with JRuby and IronRuby providing just-in-time compilation functionality.
+
+h3. History
+
+!http://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Yukihiro_Matsumoto.JPG/100px-Yukihiro_Matsumoto.JPG!
+
+The language was created by Yukihiro Matsumoto, who started working on Ruby on February 24, 1993, and released it to the public in 1995. "Ruby" was named as a gemstone because of a joke within Matsumoto's circle of friends alluding to the name of the Perl programming language.[1]
+
+As of June 2008, the latest stable version of the reference implementation is 1.8.7. Apart from the reference, several other virtual machines are being developed for Ruby. These include JRuby, a port of Ruby to the Java platform, IronRuby, an implementation for the .NET Framework produced by Microsoft, and Rubinius, an interpreter modeled after self-hosting Smalltalk virtual machines.
+
+h3. Examples
+
+The following examples can be run in a Ruby shell such as Interactive Ruby Shell or saved in a file and run from the command line by typing @ruby [filename]@.
+
+Classic Hello world example:
+
+	syntax(ruby). puts "Hello World!"
+	
+Some basic Ruby code:
+
+	syntax(ruby). # Everything, including a literal, is an object, so this works:
+	-199.abs                                                # 199
+	"ruby is cool".length                                   # 12
+	"Rick Astley".index("c")                                # 2
+	"Nice Day Isn't It?".downcase.split(//).sort.uniq.join  # " '?acdeinsty"

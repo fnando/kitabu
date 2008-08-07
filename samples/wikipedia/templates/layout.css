@@ -1,0 +1,358 @@
+/* page settings */
+@page {
+	margin: 15mm 16mm 17mm 16mm;
+	size: 9.25in 7in;
+
+	@footnotes {
+		border-top: thin solid black;
+		padding-top: 0.3em;
+		margin-top: 0.6em;
+		margin-left: 10%;
+	}
+	
+	@bottom-left {
+		font: 8pt Helvetica, serif;
+		vertical-align: bottom;
+		padding: 0 3em 3em 0em;
+		content: string(owner, first);
+	}
+	
+	@bottom-right {
+		font: 8pt Helvetica, serif;
+		content: counter(page);
+		text-align: right;
+		vertical-align: top;
+		padding-top: 2em;
+	}
+}
+
+@page cover { margin: 0; }
+
+@page blank { 
+	margin: 0; 
+	
+	@bottom-left {
+		content: "";
+	}
+	
+	@bottom-right {
+		content: "";
+	}
+}
+
+@page additional { 
+	padding: 27mm 16mm 27mm 16mm;
+}
+
+/* general */
+html { 
+	margin: 0;
+	padding: 0;
+	font: 10pt/1.26 "Gill Sans", sans-serif;
+}
+
+body { 
+	margin: 0;
+	padding: 0;
+}
+
+h3, h4, h5, h6 { 
+	font-family: Helvetica, sans-serif;
+	padding: 0;
+	margin: 0;
+} 
+
+h3 { 
+	font-size: 2.2em;
+	font-weight: bold;
+	margin-top: 1em;
+}
+
+h4 {
+	font-size: 2em;
+	margin-top: 1em;
+}
+
+q::before {
+	content: "\201C";
+}
+
+q::after {
+	content: "\201D";
+}
+
+a {
+	color: #03c;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+img {
+	float: right;
+}
+
+p code { 
+	color: #060;
+}
+
+acronym { 
+	text-decoration: none;
+}
+
+acronym:after { 
+	content: " (" attr(title) ")"; 
+}
+
+pre { 
+	background: none !important;
+}
+
+pre.pre { 
+	color: #060;
+}
+
+ul ul {
+	list-style: disc;
+	margin: 0 1em;
+}
+
+/* footnotes */
+.footnote {
+  display: none;                   /* default rule */
+  display: prince-footnote;        /* prince-specific rules */
+  position: footnote;
+  footnote-style-position: inside;
+  counter-increment: footnote;
+  margin-left: 1.4em;
+  font-size: 90%;
+  line-height: 1.4;
+}
+
+.footnote::footnote-call {
+  vertical-align: super;
+  font-size: 80%;
+}
+
+.footnote::footnote-marker {
+  vertical-align: super;
+  color: green;
+  padding-right: 0.4em;
+}
+
+/* chapter */
+div#chapters {
+	margin-left: 0;
+}
+
+div.chapter { 
+	page-break-after: always;
+}
+
+div.chapter h2 { 
+	counter-increment: chapter; 
+	margin: 0;
+	font-family: Helvetica, sans-serif;
+	string-set: header "Chapter " counter(chapter) ": " content();
+	font-size: 3.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+div.chapter h2::before { 
+	content: "Chapter " counter(chapter) " \A"; 
+	white-space: pre;
+	font-size: 50%;
+}
+
+/* pre */
+pre, code { 
+	font-size: 8pt; 
+	font-family: Monaco, "Lucida Console", "Lucida Sans Typewriter", monospace;
+}
+
+pre { 
+	padding: .7em 1em .7em 2em;
+}
+
+/* frontcover */
+#frontcover {
+	padding: 0;
+	margin: 0;
+	string-set: header "";
+	page-break-after: always;
+	page: cover;
+	background: #0c0f21;
+	height: 7in;
+}
+
+#frontcover * {
+	font-family: Helvetica, sans-serif;
+}
+
+#frontcover * { 
+	margin: 0 !important; 
+	padding: 0 !important;
+}
+
+#frontcover .main-title { 
+	color: #fff; 
+	text-transform: uppercase;
+}
+
+#frontcover .secondary-title { 
+	color: #f90; 
+	margin-left: -.25cm !important; 
+	text-transform: uppercase;
+}
+
+#frontcover h1 { 
+	font-size: 56pt; 
+	margin-bottom: -.2em !important;
+}
+
+#frontcover .tagline { 
+	color: #fff; 
+	font-size: 12pt;
+}
+
+#frontcover div { 
+	bottom: 2em;
+	position: absolute;  
+	right: 2em; 
+	text-align: right; 
+}
+
+#frontcover .price { 
+	color: #fff; 
+	font-size: 11pt;
+}
+
+#frontcover p { 
+	padding-right: .4em !important;
+}
+
+/* imprint */
+#imprint {
+	string-set: header "";
+	page-break-after: always;
+	page: cover;
+	color: #555;
+	background: #E2E7E2;
+	height: 7in;
+}
+
+#imprint div {
+	position: absolute;
+	left: 16mm;
+	bottom: 16mm;
+}
+
+#imprint p {
+	margin: 0;
+	font-size: 10pt;
+	font-family: Helvetica;
+}
+
+/* table_of_contents */
+div#table_of_contents {
+	page-break-after: always;
+}
+
+div#table_of_contents h2 { 
+	font-family: Helvetica, sans-serif;
+	font-size: 3.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+div#table_of_contents ul {
+	margin: 0;
+	padding: 0;
+}
+
+div#table_of_contents ul li {
+	list-style-type: none;
+	margin: .2cm 0; 
+	padding: 0;
+}
+
+div#table_of_contents a {
+	color: #000;
+	font-size: 12pt;
+	font-family: Helvetica, sans-serif;
+}
+
+div#table_of_contents ul.level2 {
+	column-count: 2;
+	column-width: 40%;
+	column-gap: 5%;
+	column-rule: none;
+}
+
+div#table_of_contents ul.level3 {
+	margin-left: 1.5em;
+}
+
+div#table_of_contents ul ul a {
+	font-size: 10pt;
+	font-family: "Gill Sans";
+	font-weight: normal;
+}
+
+div#table_of_contents > ul a::before {
+	content: target-counter(attr(href), page) " ";
+	color: #888;
+	font-style: bold;
+	float: left;
+}
+
+div#table_of_contents ul.level2 > li > a::before {
+	width: 1.25cm;
+}
+
+div#table_of_contents ul.level3 > li > a::before {
+	width: .7cm;
+}
+
+div#table_of_contents ul.level4,
+div#table_of_contents ul.level5,
+div#table_of_contents ul.level6 {
+	display: none;
+}
+
+
+/* white page */
+div.white_page {
+	page: blank;
+}
+
+@media screen {
+	#frontcover, #imprint {
+		position: relative;
+	}
+	
+	div#chapters,
+	div#table_of_contents {
+		padding: 3em;
+	}
+	
+	div.chapter {
+		margin-bottom: 3em;
+	}
+}
+
+/* figure */
+p.figure { 
+	counter-increment: figure; 
+	font-size: 0.9em; 
+	text-align: center;
+}
+
+p.figure img { 
+	string-set: caption attr(alt);
+}
+
+p.figure span.caption:before { 
+	content: "Figure " counter(figure) ": "; 
+	font-weight: bold;
+}

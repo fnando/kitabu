@@ -13,7 +13,7 @@ module Kitabu
           offset = to_line - from_line
           code = file.readlines.slice(from_line, offset).join
         elsif block_name = options[:block_name]
-          re = %r(# ?begin: ?#{block_name} ?(?:[^\r\n]+)?\r?\n(.*?)\r?\n([^\r\n]+)?# ?end: #{block_name})sim
+          re = %r(# ?begin: ?\b#{block_name}\b ?(?:[^\r\n]+)?\r?\n(.*?)\r?\n([^\r\n]+)?# ?end: \b#{block_name}\b)sim
           file.read.gsub(re) { |block| code = $1 }
         else
           code = file.read

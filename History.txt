@@ -57,3 +57,11 @@
 == 0.1.0
 * 1 bug fix
 	* RedCloth 3.04 now is bundled with bookmaker until version 4 is supported
+
+== 0.2.0
+* 1 major change
+	* Gem refactored (dropped newgem structure)
+
+== 0.2.1
+* 1 minor change
+	* Fixed syntax block name regular expression

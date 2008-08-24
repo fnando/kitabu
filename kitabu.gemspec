@@ -2,11 +2,11 @@
 # RUN : 'rake gem:update_gemspec'
 
 Gem::Specification.new do |s|
-  s.date = "Fri Aug 01 05:56:29 -0300 2008"
+  s.date = "Sun Aug 24 17:34:59 -0300 2008"
   s.executables = ["kitabu"]
   s.authors = ["Nando Vieira"]
   s.required_rubygems_version = ">= 0"
-  s.version = "0.2.0"
+  s.version = "0.2.1"
   s.files = ["Rakefile",
  "kitabu.gemspec",
  "History.txt",

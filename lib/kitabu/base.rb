@@ -1,4 +1,6 @@
 module Kitabu
+  VERSION = "0.3.0"
+  
   module Markup
     def self.content_for(options)
       source_file = File.join(KITABU_ROOT, 'code', options[:source_file].to_s)
@@ -217,7 +219,10 @@ module Kitabu
         
         contents << '<div class="chapter">%s</div>' % chapter
       end
-
+      
+      # create output directory if is missing
+      FileUtils.mkdir(File.dirname(html_path))
+      
       # save html file
       File.open(html_path, 'w+') do |f|
         f << Kitabu::Base.parse_layout(contents)
@@ -234,6 +239,10 @@ module Kitabu
     
     def self.syntax?(syntax_name)
       syntaxes.include?(syntax_name)
+    end
+    
+    def self.layout?(layout_name)
+      layouts.include?(layout_name)
     end
     
     def self.default_theme
@@ -254,14 +263,14 @@ module Kitabu
     
     def self.layouts
       @layouts ||= begin
-        dir = File.join(GEM_ROOT, "app_generators/kitabu/templates/layouts/")
+        dir = File.join(GEM_ROOT, "templates/layouts")
         Dir.entries(dir).reject{|p| p =~ /^\.+$/ }.sort
       end
     end
     
     def self.themes
       @themes ||= begin
-        filter = File.join(GEM_ROOT, "app_generators/kitabu/templates/css/*.css")
+        filter = File.join(GEM_ROOT, "templates/themes/*.css")
         Dir[filter].collect{|path| File.basename(path).gsub(/\.css$/, '') }.sort
       end
     end

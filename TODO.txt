@@ -1,2 +1,0 @@
-- Create additional layouts
-- Support Linux and Windows (Linux is probably already supported, but need testing to be sure)

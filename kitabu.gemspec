@@ -2,7 +2,6 @@
 # RUN : 'rake gem:update_gemspec'
 
 Gem::Specification.new do |s|
-  s.date = "Thu Dec 25 12:29:24 -0200 2008"
   s.authors = ["Nando Vieira"]
   s.require_paths = ["lib"]
   s.required_rubygems_version = ">= 0"
@@ -24,6 +23,7 @@ Gem::Specification.new do |s|
  "templates/layouts/boom/layout.css",
  "templates/layouts/boom/layout.html",
  "templates/Rakefile",
+ "templates/syntax.css",
  "templates/themes",
  "templates/themes/active4d.css",
  "templates/themes/blackboard.css",

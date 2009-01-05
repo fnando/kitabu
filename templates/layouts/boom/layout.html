@@ -7,27 +7,27 @@
 	<link rel="stylesheet" type="text/css" href="../templates/syntax.css"/>
 	<link rel="stylesheet" type="text/css" href="../templates/user.css"/>
 	
-	<meta name="author" content="<%%= authors.join(', ') %>" />
-	<meta name="subject" content="<%%= subject %>" />
-	<meta name="keywords" content="<%%= keywords %>" />
+	<meta name="author" content="<%= authors.join(', ') %>" />
+	<meta name="subject" content="<%= subject %>" />
+	<meta name="keywords" content="<%= keywords %>" />
 </head>
 <body>
 	<div class="frontcover"></div>
 	<div class="halftitlepage">
-		<h1 class="no-toc"><%%= title %></h1>
+		<h1 class="no-toc"><%= title %></h1>
 	</div>
 
 	<div class="titlepage">
-		<h1 class="no-toc"><%%= title %></h1>
-		<p class="no-toc"><%%= authors.join('<br/>') %></p>
+		<h1 class="no-toc"><%= title %></h1>
+		<p class="no-toc"><%= authors.join('<br/>') %></p>
 	</div>
 	
 	<div class="imprint">
-		<p><%%= copyright %></p>
+		<p><%= copyright %></p>
 	</div>
 	
 	<div class="chapters">
-		<%%= contents %>
+		<%= contents %>
 	</div>
 
 	<div class="white_page"></div>

@@ -1,0 +1,1065 @@
+pre.active4d .DiffHeader {
+   background-color: #656565;
+   color: #FFFFFF;
+}
+pre.active4d .Operator {
+}
+pre.active4d .InheritedClass {
+}
+pre.active4d .TypeName {
+   color: #21439C;
+}
+pre.active4d .Number {
+   color: #A8017E;
+}
+pre.active4d .EmbeddedSource {
+   background-color: #ECF1FF;
+}
+pre.active4d {
+   background-color: #FFFFFF;
+   color: #000000;
+}
+pre.active4d .DiffInsertedLine {
+   background-color: #98FF9A;
+   color: #000000;
+}
+pre.active4d .LibraryVariable {
+   color: #A535AE;
+}
+pre.active4d .Storage {
+   color: #FF5600;
+}
+pre.active4d .InterpolatedEntity {
+   font-weight: bold;
+   color: #66CCFF;
+}
+pre.active4d .line-numbers {
+   background-color: #BAD6FD;
+   color: #000000;
+}
+pre.active4d .LocalVariable {
+   font-weight: bold;
+   color: #6392FF;
+}
+pre.active4d .DiffLineRange {
+   background-color: #1B63FF;
+   color: #FFFFFF;
+}
+pre.active4d .BlockComment {
+   color: #D33435;
+}
+pre.active4d .TagName {
+   color: #016CFF;
+}
+pre.active4d .FunctionArgument {
+}
+pre.active4d .BuiltInConstant {
+   color: #A535AE;
+}
+pre.active4d .LineComment {
+   color: #D33535;
+}
+pre.active4d .DiffDeletedLine {
+   background-color: #FF7880;
+   color: #000000;
+}
+pre.active4d .NamedConstant {
+   color: #B7734C;
+}
+pre.active4d .CommandMethod {
+   font-weight: bold;
+   color: #45AE34;
+}
+pre.active4d .TableField {
+   color: #0BB600;
+}
+pre.active4d .PlainXmlText {
+   color: #000000;
+}
+pre.active4d .Invalid {
+   background-color: #990000;
+   color: #FFFFFF;
+}
+pre.active4d .LibraryClassType {
+   color: #A535AE;
+}
+pre.active4d .TagAttribute {
+   color: #963DFF;
+}
+pre.active4d .Keyword {
+   font-weight: bold;
+   color: #006699;
+}
+pre.active4d .UserDefinedConstant {
+}
+pre.active4d .String {
+   color: #666666;
+}
+pre.active4d .DiffUnchangedLine {
+   color: #5E5E5E;
+}
+pre.active4d .TagContainer {
+   color: #7A7A7A;
+}
+pre.active4d .FunctionName {
+   color: #21439C;
+}
+pre.active4d .Variable {
+   font-weight: bold;
+   color: #0053FF;
+}
+pre.active4d .DateTimeLiteral {
+   font-weight: bold;
+   color: #66CCFF;
+}
+
+
+pre.blackboard .LatexSupport {
+   color: #FBDE2D;
+}
+pre.blackboard .OcamlInfixOperator {
+   color: #8DA6CE;
+}
+pre.blackboard .MetaFunctionCallPy {
+   color: #BECDE6;
+}
+pre.blackboard .Superclass {
+   color: #FF6400;
+   font-style: italic;
+}
+pre.blackboard .Constant {
+   color: #D8FA3C;
+}
+pre.blackboard {
+   background-color: #0C1021;
+   color: #F8F8F8;
+}
+pre.blackboard .OcamlFPConstant {
+   text-decoration: underline;
+}
+pre.blackboard .OcamlFPInfixOperator {
+   text-decoration: underline;
+}
+pre.blackboard .Support {
+   color: #8DA6CE;
+}
+pre.blackboard .OcamlOperator {
+   color: #F8F8F8;
+}
+pre.blackboard .Storage {
+   color: #FBDE2D;
+}
+pre.blackboard .line-numbers {
+   background-color: #253B76;
+   color: #FFFFFF;
+}
+pre.blackboard .StringInterpolation {
+   color: #FF6400;
+}
+pre.blackboard .InvalidIllegal {
+   background-color: #9D1E15;
+   color: #F8F8F8;
+}
+pre.blackboard .PlistUnquotedString {
+   color: #FFFFFF;
+}
+pre.blackboard .OcamlVariant {
+   color: #D5E0F3;
+}
+pre.blackboard .MetaTag {
+   color: #7F90AA;
+}
+pre.blackboard .LatexEnvironment {
+   background-color: #F7F7F8;
+}
+pre.blackboard .OcamlFPPrefixOperator {
+   text-decoration: underline;
+}
+pre.blackboard .OcamlPrefixOperator {
+   color: #8DA6CE;
+}
+pre.blackboard .EntityNameSection {
+   color: #FFFFFF;
+}
+pre.blackboard .String {
+   color: #61CE3C;
+}
+pre.blackboard .Keyword {
+   color: #FBDE2D;
+}
+pre.blackboard .LatexEnvironmentNested {
+   background-color: #7691F3;
+}
+pre.blackboard .InvalidDeprecated {
+   color: #AB2A1D;
+   font-style: italic;
+}
+pre.blackboard .Variable {
+}
+pre.blackboard .Entity {
+   color: #FF6400;
+}
+pre.blackboard .Comment {
+   color: #AEAEAE;
+}
+
+
+pre.dawn .MetaSeparator {
+   font-weight: bold;
+   background-color: #DCDCDC;
+   color: #19356D;
+}
+pre.dawn .SupportVariable {
+   color: #234A97;
+}
+pre.dawn .Constant {
+   font-weight: bold;
+   color: #811F24;
+}
+pre.dawn .EmbeddedSource {
+   background-color: #829AC2;
+}
+pre.dawn .StringRegexpConstantCharacterEscape {
+   font-weight: bold;
+   color: #811F24;
+}
+pre.dawn .Support {
+   color: #691C97;
+}
+pre.dawn .MarkupList {
+   color: #693A17;
+}
+pre.dawn .Storage {
+   color: #A71D5D;
+   font-style: italic;
+}
+pre.dawn .line-numbers {
+   background-color: #7496CF;
+   color: #000000;
+}
+pre.dawn .StringConstant {
+   font-weight: bold;
+   color: #696969;
+}
+pre.dawn .MarkupUnderline {
+   text-decoration: underline;
+   color: #080808;
+}
+pre.dawn .MarkupHeading {
+   font-weight: bold;
+   color: #19356D;
+}
+pre.dawn .SupportConstant {
+   color: #B4371F;
+}
+pre.dawn .MarkupQuote {
+   background-color: #C5C5C5;
+   color: #0B6125;
+   font-style: italic;
+}
+pre.dawn .StringRegexpSpecial {
+   font-weight: bold;
+   color: #CF5628;
+}
+pre.dawn .InvalidIllegal {
+   background-color: #B52A1D;
+   color: #F8F8F8;
+   font-style: italic;
+}
+pre.dawn .MarkupDeleted {
+   color: #B52A1D;
+}
+pre.dawn .MarkupRaw {
+   background-color: #C5C5C5;
+   color: #234A97;
+}
+pre.dawn .SupportFunction {
+   color: #693A17;
+}
+pre.dawn .PunctuationSeparator {
+   color: #794938;
+}
+pre.dawn .StringRegexp {
+   color: #CF5628;
+}
+pre.dawn .StringEmbeddedSource {
+   background-color: #829AC2;
+   color: #080808;
+}
+pre.dawn .MarkupLink {
+   color: #234A97;
+   font-style: italic;
+}
+pre.dawn .MarkupBold {
+   font-weight: bold;
+   color: #080808;
+}
+pre.dawn .StringVariable {
+   color: #234A97;
+}
+pre.dawn .String {
+   color: #0B6125;
+}
+pre.dawn .Keyword {
+   color: #794938;
+}
+pre.dawn {
+   background-color: #F5F5F5;
+   color: #080808;
+}
+pre.dawn .MarkupItalic {
+   color: #080808;
+   font-style: italic;
+}
+pre.dawn .InvalidDeprecated {
+   font-weight: bold;
+   color: #B52A1D;
+}
+pre.dawn .Variable {
+   color: #234A97;
+}
+pre.dawn .Entity {
+   color: #BF4F24;
+}
+pre.dawn .Comment {
+   color: #5A525F;
+   font-style: italic;
+}
+
+
+pre.eiffel .EmbeddedSource {
+   background-color: #6597F6;
+}
+pre.eiffel .LibraryObject {
+   font-weight: bold;
+   color: #6D79DE;
+}
+pre.eiffel .Section {
+   font-style: italic;
+}
+pre.eiffel .FunctionArgumentAndResultTypes {
+   color: #70727E;
+}
+pre.eiffel .TypeName {
+   font-style: italic;
+}
+pre.eiffel .Number {
+   color: #CD0000;
+   font-style: italic;
+}
+pre.eiffel .MarkupList {
+   color: #B90690;
+}
+pre.eiffel .MarkupTagAttribute {
+   font-style: italic;
+}
+pre.eiffel .LibraryVariable {
+   font-weight: bold;
+   color: #21439C;
+}
+pre.eiffel .line-numbers {
+   background-color: #C3DCFF;
+   color: #000000;
+}
+pre.eiffel .FunctionParameter {
+   font-style: italic;
+}
+pre.eiffel .MarkupTag {
+   color: #1C02FF;
+}
+pre.eiffel {
+   background-color: #FFFFFF;
+   color: #000000;
+}
+pre.eiffel .MarkupHeading {
+   font-weight: bold;
+   color: #0C07FF;
+}
+pre.eiffel .JsOperator {
+   color: #687687;
+}
+pre.eiffel .InheritedClassName {
+   font-style: italic;
+}
+pre.eiffel .StringInterpolation {
+   color: #26B31A;
+}
+pre.eiffel .MarkupQuote {
+   color: #000000;
+   font-style: italic;
+}
+pre.eiffel .MarkupNameOfTag {
+   font-weight: bold;
+}
+pre.eiffel .InvalidTrailingWhitespace {
+   background-color: #FFD0D0;
+}
+pre.eiffel .LibraryConstant {
+   font-weight: bold;
+   color: #06960E;
+}
+pre.eiffel .MarkupXmlDeclaration {
+   color: #68685B;
+}
+pre.eiffel .PreprocessorDirective {
+   font-weight: bold;
+   color: #0C450D;
+}
+pre.eiffel .BuiltInConstant {
+   color: #585CF6;
+   font-style: italic;
+}
+pre.eiffel .MarkupDtd {
+   font-style: italic;
+}
+pre.eiffel .Invalid {
+   background-color: #990000;
+   color: #FFFFFF;
+}
+pre.eiffel .LibraryFunction {
+   font-weight: bold;
+   color: #3C4C72;
+}
+pre.eiffel .String {
+   color: #D80800;
+}
+pre.eiffel .UserDefinedConstant {
+   color: #C5060B;
+   font-style: italic;
+}
+pre.eiffel .Keyword {
+   font-weight: bold;
+   color: #0100B6;
+}
+pre.eiffel .MarkupDoctype {
+   color: #888888;
+}
+pre.eiffel .FunctionName {
+   font-weight: bold;
+   color: #0000A2;
+}
+pre.eiffel .PreprocessorLine {
+   color: #1A921C;
+}
+pre.eiffel .Variable {
+   color: #0206FF;
+   font-style: italic;
+}
+pre.eiffel .Comment {
+   color: #00B418;
+}
+
+
+pre.idle .InheritedClass {
+}
+pre.idle .TypeName {
+   color: #21439C;
+}
+pre.idle .Number {
+}
+pre.idle .LibraryVariable {
+   color: #A535AE;
+}
+pre.idle .Storage {
+   color: #FF5600;
+}
+pre.idle .line-numbers {
+   background-color: #BAD6FD;
+   color: #000000;
+}
+pre.idle {
+   background-color: #FFFFFF;
+   color: #000000;
+}
+pre.idle .StringInterpolation {
+   color: #990000;
+}
+pre.idle .TagName {
+}
+pre.idle .LibraryConstant {
+   color: #A535AE;
+}
+pre.idle .FunctionArgument {
+}
+pre.idle .BuiltInConstant {
+   color: #A535AE;
+}
+pre.idle .Invalid {
+   background-color: #990000;
+   color: #FFFFFF;
+}
+pre.idle .LibraryClassType {
+   color: #A535AE;
+}
+pre.idle .LibraryFunction {
+   color: #A535AE;
+}
+pre.idle .TagAttribute {
+}
+pre.idle .Keyword {
+   color: #FF5600;
+}
+pre.idle .UserDefinedConstant {
+}
+pre.idle .String {
+   color: #00A33F;
+}
+pre.idle .FunctionName {
+   color: #21439C;
+}
+pre.idle .Variable {
+}
+pre.idle .Comment {
+   color: #919191;
+}
+
+
+pre.iplastic .Constant {
+   color: #6782D3;
+}
+pre.iplastic .Support {
+   font-weight: bold;
+   color: #3333FF;
+}
+pre.iplastic .EmbeddedSource {
+   background-color: #F9F9F9;
+   color: #000000;
+}
+pre.iplastic .Arguments {
+   font-style: italic;
+}
+pre.iplastic .TypeName {
+   font-weight: bold;
+}
+pre.iplastic .Identifier {
+   color: #9700CC;
+}
+pre.iplastic .Number {
+   color: #0066FF;
+}
+pre.iplastic .SectionName {
+   font-weight: bold;
+}
+pre.iplastic .Storage {
+   font-weight: bold;
+}
+pre.iplastic .line-numbers {
+   background-color: #BAD6FD;
+   color: #000000;
+}
+pre.iplastic {
+   background-color: #EEEEEE;
+   color: #000000;
+}
+pre.iplastic .FrameTitle {
+   font-weight: bold;
+   color: #000000;
+}
+pre.iplastic .TagName {
+   font-weight: bold;
+}
+pre.iplastic .Tag {
+   color: #0033CC;
+}
+pre.iplastic .Exception {
+   color: #990000;
+}
+pre.iplastic .XmlDeclaration {
+   color: #333333;
+}
+pre.iplastic .TrailingWhitespace {
+   background-color: #EEEEEE;
+}
+pre.iplastic .TagAttribute {
+   color: #3366CC;
+   font-style: italic;
+}
+pre.iplastic .Invalid {
+   background-color: #E7342D;
+   color: #FF0000;
+}
+pre.iplastic .Keyword {
+   color: #0000FF;
+}
+pre.iplastic .String {
+   color: #009933;
+}
+pre.iplastic .Comment {
+   color: #0066FF;
+   font-style: italic;
+}
+pre.iplastic .FunctionName {
+   color: #FF8000;
+}
+pre.iplastic .RegularExpression {
+   color: #FF0080;
+}
+
+
+pre.lazy .OcamlInfixFPOperator {
+   text-decoration: underline;
+}
+pre.lazy .OcamlInfixOperator {
+   color: #3B5BB5;
+}
+pre.lazy .MetaFunctionCallPy {
+   color: #3E4558;
+}
+pre.lazy .Superclass {
+   color: #3B5BB5;
+   font-style: italic;
+}
+pre.lazy .LatexEntity {
+   color: #D62A28;
+}
+pre.lazy .Constant {
+   color: #3B5BB5;
+}
+pre.lazy .OcamlFPConstant {
+   text-decoration: underline;
+}
+pre.lazy .Support {
+   color: #3B5BB5;
+}
+pre.lazy .OcamlOperator {
+   color: #000000;
+}
+pre.lazy .line-numbers {
+   background-color: #E3FC8D;
+   color: #000000;
+}
+pre.lazy .StringInterpolation {
+   color: #671EBB;
+}
+pre.lazy .InvalidIllegal {
+   background-color: #9D1E15;
+   color: #F8F8F8;
+}
+pre.lazy .OcamlVariant {
+   color: #7F90AA;
+}
+pre.lazy .MetaTag {
+   color: #3A4A64;
+}
+pre.lazy .OcamlPrefixFPOperator {
+   text-decoration: underline;
+}
+pre.lazy .OcamlPrefixOperator {
+   color: #3B5BB5;
+}
+pre.lazy .String {
+   color: #409B1C;
+}
+pre.lazy .Keyword {
+   color: #FF7800;
+}
+pre.lazy {
+   background-color: #FFFFFF;
+   color: #000000;
+}
+pre.lazy .InvalidDeprecated {
+   color: #990000;
+   font-style: italic;
+}
+pre.lazy .Variable {
+}
+pre.lazy .Entity {
+   color: #3B5BB5;
+}
+pre.lazy .Comment {
+   color: #8C868F;
+}
+
+
+pre.mac_classic .EmbeddedSource {
+   background-color: #0C0C0C;
+}
+pre.mac_classic .LibraryObject {
+   font-weight: bold;
+   color: #6D79DE;
+}
+pre.mac_classic .Section {
+   font-style: italic;
+}
+pre.mac_classic .FunctionArgumentAndResultTypes {
+   color: #70727E;
+}
+pre.mac_classic .TypeName {
+   text-decoration: underline;
+}
+pre.mac_classic .Number {
+   color: #0000CD;
+}
+pre.mac_classic {
+   background-color: #FFFFFF;
+   color: #000000;
+}
+pre.mac_classic .MarkupList {
+   color: #B90690;
+}
+pre.mac_classic .MarkupTagAttribute {
+   font-style: italic;
+}
+pre.mac_classic .LibraryVariable {
+   font-weight: bold;
+   color: #21439C;
+}
+pre.mac_classic .line-numbers {
+   background-color: #4D97FF;
+   color: #000000;
+}
+pre.mac_classic .FunctionParameter {
+   font-style: italic;
+}
+pre.mac_classic .MarkupTag {
+   color: #1C02FF;
+}
+pre.mac_classic .MarkupHeading {
+   font-weight: bold;
+   color: #0C07FF;
+}
+pre.mac_classic .JsOperator {
+   color: #687687;
+}
+pre.mac_classic .InheritedClassName {
+   font-style: italic;
+}
+pre.mac_classic .StringInterpolation {
+   color: #26B31A;
+}
+pre.mac_classic .MarkupQuote {
+   color: #000000;
+   font-style: italic;
+}
+pre.mac_classic .MarkupNameOfTag {
+   font-weight: bold;
+}
+pre.mac_classic .InvalidTrailingWhitespace {
+   background-color: #FFD0D0;
+}
+pre.mac_classic .LibraryConstant {
+   font-weight: bold;
+   color: #06960E;
+}
+pre.mac_classic .MarkupXmlDeclaration {
+   color: #68685B;
+}
+pre.mac_classic .EmbeddedEmbeddedSource {
+   background-color: #0E0E0E;
+}
+pre.mac_classic .PreprocessorDirective {
+   font-weight: bold;
+   color: #0C450D;
+}
+pre.mac_classic .BuiltInConstant {
+   font-weight: bold;
+   color: #585CF6;
+}
+pre.mac_classic .MarkupDtd {
+   font-style: italic;
+}
+pre.mac_classic .Invalid {
+   background-color: #990000;
+   color: #FFFFFF;
+}
+pre.mac_classic .LibraryFunction {
+   font-weight: bold;
+   color: #3C4C72;
+}
+pre.mac_classic .String {
+   color: #036A07;
+}
+pre.mac_classic .UserDefinedConstant {
+   font-weight: bold;
+   color: #C5060B;
+}
+pre.mac_classic .Keyword {
+   font-weight: bold;
+   color: #0000FF;
+}
+pre.mac_classic .MarkupDoctype {
+   color: #888888;
+}
+pre.mac_classic .FunctionName {
+   font-weight: bold;
+   color: #0000A2;
+}
+pre.mac_classic .PreprocessorLine {
+   color: #1A921C;
+}
+pre.mac_classic .Variable {
+   color: #318495;
+}
+pre.mac_classic .Comment {
+   color: #0066FF;
+   font-style: italic;
+}
+
+
+pre.slush_poppies .Directives {
+   font-weight: bold;
+}
+pre.slush_poppies .TypeName {
+   color: #800080;
+}
+pre.slush_poppies .InheritedClass {
+}
+pre.slush_poppies .OcamlInfixFPOperators {
+   text-decoration: underline;
+}
+pre.slush_poppies .Number {
+   color: #0080A0;
+}
+pre.slush_poppies .LibraryVariable {
+}
+pre.slush_poppies .Storage {
+   color: #008080;
+}
+pre.slush_poppies .line-numbers {
+   background-color: #B0B0FF;
+   color: #000000;
+}
+pre.slush_poppies .OcamlPrefixFPOperators {
+   text-decoration: underline;
+}
+pre.slush_poppies .OcamlFloatingPointConstants {
+   text-decoration: underline;
+}
+pre.slush_poppies .LineNumberDirectives {
+}
+pre.slush_poppies .TagName {
+}
+pre.slush_poppies .StorageTypes {
+   color: #A08000;
+}
+pre.slush_poppies .Operators {
+   color: #2060A0;
+}
+pre.slush_poppies .LibraryConstant {
+}
+pre.slush_poppies .VariantTypes {
+   color: #C08060;
+}
+pre.slush_poppies .FunctionArgument {
+}
+pre.slush_poppies .BuiltInConstant {
+}
+pre.slush_poppies .ClassTypeName {
+   color: #8000C0;
+}
+pre.slush_poppies .ModuleKeyword {
+   color: #0080FF;
+}
+pre.slush_poppies .Invalid {
+}
+pre.slush_poppies .LibraryClassType {
+}
+pre.slush_poppies .LibraryFunction {
+}
+pre.slush_poppies .TagAttribute {
+}
+pre.slush_poppies .Keyword {
+   color: #2060A0;
+}
+pre.slush_poppies .UserDefinedConstant {
+}
+pre.slush_poppies .CharacterConstants {
+   color: #800000;
+}
+pre.slush_poppies .String {
+   color: #C03030;
+}
+pre.slush_poppies {
+   background-color: #F1F1F1;
+   color: #000000;
+}
+pre.slush_poppies .FunctionName {
+   color: #800000;
+}
+pre.slush_poppies .Variable {
+}
+pre.slush_poppies .Comment {
+   color: #406040;
+}
+
+
+pre.sunburst .DiffInserted {
+   background-color: #253B22;
+   color: #F8F8F8;
+}
+pre.sunburst .DiffHeader {
+   background-color: #0E2231;
+   color: #F8F8F8;
+   font-style: italic;
+}
+pre.sunburst .CssPropertyValue {
+   color: #F9EE98;
+}
+pre.sunburst .CCCPreprocessorDirective {
+   color: #AFC4DB;
+}
+pre.sunburst .Constant {
+   color: #3387CC;
+}
+pre.sunburst .DiffChanged {
+   background-color: #4A410D;
+   color: #F8F8F8;
+}
+pre.sunburst .Support {
+   color: #9B859D;
+}
+pre.sunburst .MarkupList {
+   color: #E1D4B9;
+}
+pre.sunburst .CssConstructorArgument {
+   color: #8F9D6A;
+}
+pre.sunburst .Storage {
+   color: #99CF50;
+}
+pre.sunburst .line-numbers {
+   background-color: #DDF0FF;
+   color: #000000;
+}
+pre.sunburst .CssClass {
+   color: #9B703F;
+}
+pre.sunburst .StringConstant {
+   color: #DDF2A4;
+}
+pre.sunburst .MarkupSeparator {
+   background-color: #242424;
+   color: #60A633;
+}
+pre.sunburst .MarkupUnderline {
+   text-decoration: underline;
+   color: #E18964;
+}
+pre.sunburst .CssAtRule {
+   color: #8693A5;
+}
+pre.sunburst .MetaTagInline {
+   color: #E0C589;
+}
+pre.sunburst .JEntityNameType {
+   text-decoration: underline;
+}
+pre.sunburst .LogEntryError {
+   background-color: #751012;
+}
+pre.sunburst .MarkupHeading {
+   background-color: #632D04;
+   color: #FEDCC5;
+}
+pre.sunburst .CssTagName {
+   color: #CDA869;
+}
+pre.sunburst .SupportConstant {
+   color: #CF6A4C;
+}
+pre.sunburst .MarkupQuote {
+   background-color: #ECD091;
+   color: #E1D4B9;
+   font-style: italic;
+}
+pre.sunburst .DiffDeleted {
+   background-color: #420E09;
+   color: #F8F8F8;
+}
+pre.sunburst .CCCPreprocessorLine {
+   color: #8996A8;
+}
+pre.sunburst .StringRegexpSpecial {
+   color: #CF7D34;
+}
+pre.sunburst .EmbeddedSourceBright {
+   background-color: #ABADB4;
+}
+pre.sunburst .InvalidIllegal {
+   background-color: #150B15;
+   color: #FD5FF1;
+}
+pre.sunburst .MarkupRaw {
+   background-color: #ABADB4;
+   color: #578BB3;
+}
+pre.sunburst .SupportFunction {
+   color: #DAD085;
+}
+pre.sunburst .CssAdditionalConstants {
+   color: #DD7B3B;
+}
+pre.sunburst .MetaTagAll {
+   color: #89BDFF;
+}
+pre.sunburst .StringRegexp {
+   color: #E9C062;
+}
+pre.sunburst .StringEmbeddedSource {
+   color: #DAEFA3;
+}
+pre.sunburst .EntityInheritedClass {
+   color: #9B5C2E;
+   font-style: italic;
+}
+pre.sunburst .MarkupComment {
+   color: #F67B37;
+   font-style: italic;
+}
+pre.sunburst .MarkupBold {
+   font-weight: bold;
+   color: #E9C062;
+}
+pre.sunburst .CssId {
+   color: #8B98AB;
+}
+pre.sunburst .CssPseudoClass {
+   color: #8F9D6A;
+}
+pre.sunburst .JCast {
+   color: #676767;
+   font-style: italic;
+}
+pre.sunburst .StringVariable {
+   color: #8A9A95;
+}
+pre.sunburst .String {
+   color: #65B042;
+}
+pre.sunburst .Keyword {
+   color: #E28964;
+}
+pre.sunburst {
+   background-color: #000000;
+   color: #F8F8F8;
+}
+pre.sunburst .LogEntry {
+   background-color: #C7C7C7;
+}
+pre.sunburst .MarkupItalic {
+   color: #E9C062;
+   font-style: italic;
+}
+pre.sunburst .CssPropertyName {
+   color: #C5AF75;
+}
+pre.sunburst .Namespaces {
+   color: #E18964;
+}
+pre.sunburst .DoctypeXmlProcessing {
+   color: #494949;
+}
+pre.sunburst .InvalidDeprecated {
+   color: #FD5FF1;
+   font-style: italic;
+}
+pre.sunburst .Variable {
+   color: #3E87E3;
+}
+pre.sunburst .Entity {
+   color: #89BDFF;
+}
+pre.sunburst .Comment {
+   color: #AEAEAE;
+   font-style: italic;
+}

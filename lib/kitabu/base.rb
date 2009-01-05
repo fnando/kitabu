@@ -54,7 +54,11 @@ module Kitabu
       # get syntax
       syntax = Kitabu::Base.default_syntax unless Kitabu::Base.syntax?(syntax)
       
-      Uv.parse(code, "xhtml", syntax, false, theme)
+      code = Uv.parse(code, "xhtml", syntax, false, theme)
+      code.gsub!(/<pre class="(.*?)"/sim, %(<pre class="\\1 #{syntax}"))
+      code.gsub!(/<pre>/sim, %(<pre class="#{syntax} #{theme}"))
+      
+      code
     end
   end
   
@@ -131,28 +135,39 @@ module Kitabu
     end
     
     def self.generate_html
-      # all parsed markdown file holder
+      # parsed file holder
       contents = ""
+      
+      entries = Dir.entries(text_dir).sort.reject do |entry| 
+        %w(. .. .svn .git).include?(entry) || (File.file?(entry) && entry !~ /\.(markdown|textile)$/)
+      end
+      
+      raise "No markup files found! Stopping PDF generation" if entries.empty?
       
       # first, get all chapters; then, get all parsed markdown
       # files from this chapter and group them into a <div class="chapter"> tag
-      Dir.entries(text_dir).sort.each do |dirname|
-        # ignore files and some directories
-        next if %w(. .. .svn .git).include?(dirname) || File.file?(text_dir + "/#{dirname}")
-        
+      entries.each do |entry|
         # gets all parsed markdown files to wrap in a 
         # chapter element
         chapter = ""
         
-        # merge all markdown and textile files into a single list
-        markup_files = Dir["#{text_dir}/#{dirname}/**/*.markdown"] + Dir["#{text_dir}/#{dirname}/**/*.textile"]
+        # entry can be a file outside chapter folder
+        file = "#{text_dir}/#{entry}"
+        
+        if File.file?(file)
+          markup_files = [file]
+        else
+          # merge all markdown and textile files into a single list
+          markup_files =  Dir["#{text_dir}/#{entry}/**/*.markdown"] + 
+                          Dir["#{text_dir}/#{entry}/**/*.textile"]
+        end
         
         # no files, so skip it!
         next if markup_files.empty?
         
         markup_files.sort.each do |markup_file|
           # get the file contents
-          markup_contents = File.new(markup_file).read
+          markup_contents = File.read(markup_file)
           
           # instantiate a markup object
           begin
@@ -207,9 +222,9 @@ module Kitabu
                     :block_name => block_name,
                     :source_file => source_file
                   })
-                  
-                  Kitabu::Markup.syntax(code, syntax)
                 end
+                
+                Kitabu::Markup.syntax(code, syntax)
               end
             end
           end
@@ -221,7 +236,7 @@ module Kitabu
       end
       
       # create output directory if is missing
-      FileUtils.mkdir(File.dirname(html_path))
+      FileUtils.mkdir(File.dirname(html_path)) unless File.exists?(File.dirname(html_path))
       
       # save html file
       File.open(html_path, 'w+') do |f|

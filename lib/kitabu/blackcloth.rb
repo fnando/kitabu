@@ -6,7 +6,7 @@ class BlackCloth < RedCloth
     %\{       # opening
     (.*?)     # footnote
     \}#       # closing
-  /x
+  /xms
   
   # Usage: Writing some text with a footnote %{this is a footnote}
   def inline_textile_fn(text)
@@ -56,15 +56,6 @@ class BlackCloth < RedCloth
     
     # get line interval
     m, from_line, to_line = *attrs.match(/class=".*? ([0-9]+),([0-9]+)"/)
-    
-    # code = Kitabu::Markup.syntax({
-    #   :code => content,
-    #   :syntax => syntax,
-    #   :source_file => source_file,
-    #   :block_name => block_name,
-    #   :from_line => from_line,
-    #   :to_line => to_line
-    # })
     
     content = Kitabu::Markup.content_for({
       :code => content,

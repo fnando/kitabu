@@ -5,6 +5,7 @@ module Kitabu
     
     def self.process!(options)
       directories!(options)
+      bundle_css!(options)
       files!(options)
       config!(options)
     end
@@ -18,7 +19,7 @@ module Kitabu
     end
     
     def self.files!(options)
-      copy_file "css/#{options[:theme]}.css", "#{options[:path]}/templates/syntax.css"
+      copy_file "Rakefile", "#{options[:path]}/Rakefile"
       copy_file "layouts/#{options[:layout]}/layout.css", "#{options[:path]}/templates/layout.css"
       copy_file "layouts/#{options[:layout]}/layout.html", "#{options[:path]}/templates/layout.html"
       copy_file "user.css", "#{options[:path]}/templates/user.css"
@@ -30,6 +31,14 @@ module Kitabu
       contents = ERB.new(template).result env.instance_eval{binding}
 
       File.open(File.join(options[:path], 'config.yml'), 'w+') << contents
+    end
+    
+    def self.bundle_css!(options)
+      contents = Dir["#{TEMPLATES_ROOT}/themes/*.css"].collect do |file|
+        File.read(file)
+      end
+
+      File.open("#{options[:path]}/templates/syntax.css", "w+") << contents.join("\n\n")
     end
     
     private

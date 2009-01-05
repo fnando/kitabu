@@ -85,6 +85,13 @@ to use a sequential numbering as the name. Here's a sample:
 		- 03\_Windows\_instructions.markdown
 		- 04\_Ubuntu\_Linux\_instructions.markdown
 
+If you prefer, you can add a chapter per file:
+
+- text
+	- 01\_Introduction.markdown
+	- 02\_What\_is\_Ruby\_on\_Rails.markdown
+	- 03\_Installing\_Ruby\_on\_Rails.markdown
+
 Note that you can use Textile or Markdown at the same time. Just use the 
 `.markdown` or `.textile` file extension.
 

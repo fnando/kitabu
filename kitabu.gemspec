@@ -2,10 +2,22 @@
 # RUN : 'rake gem:update_gemspec'
 
 Gem::Specification.new do |s|
-  s.authors = ["Nando Vieira"]
-  s.require_paths = ["lib"]
   s.required_rubygems_version = ">= 0"
-  s.has_rdoc = false
+  s.has_rdoc = true
+  s.email = ["fnando.vieira@gmail.com"]
+  s.name = "kitabu"
+  s.homepage = "http://github.com/fnando/kitabu"
+  s.bindir = "bin"
+  s.executables = ["kitabu"]
+  s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
+  s.requirements = ["Install the Oniguruma RE library and ultraviolet gem to get Syntax Highlighting (only for TextMate users)"]
+  s.description = "A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme."
+  s.add_dependency "discount", ">= 0"
+  s.add_dependency "hpricot", ">= 0"
+  s.add_dependency "unicode", ">= 0"
+  s.add_dependency "main", ">= 0"
+  s.version = "0.3.1"
+  s.require_paths = ["lib"]
   s.files = ["Rakefile",
  "kitabu.gemspec",
  "README.markdown",
@@ -36,17 +48,5 @@ Gem::Specification.new do |s|
  "templates/themes/slush_poppies.css",
  "templates/themes/sunburst.css",
  "templates/user.css"]
-  s.email = ["fnando.vieira@gmail.com"]
-  s.version = "0.3.0"
-  s.homepage = "http://github.com/fnando/kitabu"
-  s.requirements = ["Install the Oniguruma RE library and ultraviolet gem to get Syntax Highlighting (only for TextMate users)"]
-  s.name = "kitabu"
-  s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
-  s.executables = ["kitabu"]
-  s.description = "A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme."
-  s.add_dependency "discount", ">= 0"
-  s.add_dependency "hpricot", ">= 0"
-  s.add_dependency "unicode", ">= 0"
-  s.add_dependency "main", ">= 0"
-  s.bindir = "bin"
+  s.authors = ["Nando Vieira"]
 end

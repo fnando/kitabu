@@ -1,0 +1,13 @@
+p.file {
+    font-size: 9pt;
+    margin: 1em 0 -.4em 1.8em;
+}
+
+p.file * {
+    font-weight: normal;
+}
+
+p.file span {
+    background: #eee;
+    padding: 2px;
+}

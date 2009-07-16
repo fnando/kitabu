@@ -1,5 +1,5 @@
 module Kitabu
-  VERSION = "0.3.0"
+  VERSION = "0.3.1"
   
   module Markup
     def self.content_for(options)

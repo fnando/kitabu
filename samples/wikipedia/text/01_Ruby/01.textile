@@ -29,3 +29,9 @@ Some basic Ruby code:
 	"ruby is cool".length                                   # 12
 	"Rick Astley".index("c")                                # 2
 	"Nice Day Isn't It?".downcase.split(//).sort.uniq.join  # " '?acdeinsty"
+
+Some more Ruby code:
+
+file. hello_world.rb
+
+    syntax(ruby). puts "Linking to an external file"

@@ -11,7 +11,7 @@ require File.dirname(__FILE__) + "/redcloth"
 require File.dirname(__FILE__) + "/blackcloth"
 
 begin
-  require "uv" if RUBY_PLATFORM =~ /darwin/
+  require "uv"
 rescue LoadError => e
   puts  "\nUltraviolet gem not found. NO SYNTAX HIGHLIGHT for you.\n" +
         "Install using `sudo gem install ultraviolet`.\n\n"

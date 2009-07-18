@@ -10,13 +10,14 @@ Gem::Specification.new do |s|
   s.bindir = "bin"
   s.executables = ["kitabu"]
   s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
-  s.requirements = ["Install the Oniguruma RE library and ultraviolet gem to get Syntax Highlighting (only for TextMate users)"]
+  s.requirements = ["Install the Oniguruma RE library"]
   s.description = "A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme."
   s.add_dependency "discount", ">= 0"
   s.add_dependency "hpricot", ">= 0"
   s.add_dependency "unicode", ">= 0"
   s.add_dependency "main", ">= 0"
-  s.version = "0.3.1"
+  s.add_dependency "ultraviolet", ">= 0"
+  s.version = "0.3.2"
   s.require_paths = ["lib"]
   s.files = ["Rakefile",
  "kitabu.gemspec",
@@ -25,9 +26,11 @@ Gem::Specification.new do |s|
  "lib/kitabu",
  "lib/kitabu/base.rb",
  "lib/kitabu/blackcloth.rb",
+ "lib/kitabu/markup.rb",
  "lib/kitabu/redcloth.rb",
  "lib/kitabu/tasks.rb",
  "lib/kitabu/templates.rb",
+ "lib/kitabu/toc.rb",
  "lib/kitabu.rb",
  "templates/config.yml",
  "templates/layouts",

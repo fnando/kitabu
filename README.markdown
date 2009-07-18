@@ -120,8 +120,8 @@ Textile.
 To generate the TOC, you need to print a variable called `toc`, using the eRb
 tag `<%= toc %>`.
 
-Syntax Highlighting (Mac OS X)
-==============================
+Syntax Highlighting
+===================
 
 If you're using Textile, all you need to do is use the tag `syntax.`. For 
 example, to highlight a code added right into your text, just do something like
@@ -176,15 +176,31 @@ or, if you have problem
 	gem build kitabu.gemspec
 	sudo gem install kitabu
 
-If you're a Mac user and have Textmate installed, you can
-generate HTML from your source code with syntax highlight,
-the same way you see in Textmate. First, you need to install
+To have syntax highlighting support, you need to install
 Oniguruma regular expression library that can be found at 
 [http://www.geocities.jp/kosako3/oniguruma/](http://www.geocities.jp/kosako3/oniguruma/)
 
 Then, you need to install the Ultraviolet gem.
 
 	sudo gem install ultraviolet
+
+TROUBLESHOOTING
+---------------
+
+You might get this error (specially on Linux):
+
+    require 'uv'
+    LoadError: libonig.so.2: cannot open shared object file: No such file or directory - /usr/lib/ruby/gems/1.8/gems/oniguruma-1.1.0/lib/oregexp.so
+
+It means Ruby can’t find `libonig.so.2`. Add the path to the directory where the file is located to `/etc/ld.so.conf`:
+
+    include /etc/ld.so.conf.d/*.conf
+    include /usr/local/lib
+
+Then run:
+
+    ldconfig
+
 
 REFERENCES:
 -----------

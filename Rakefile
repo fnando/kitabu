@@ -4,7 +4,7 @@ PKG_FILES = %w(Rakefile kitabu.gemspec README.markdown) + Dir["{bin,lib,template
 
 spec = Gem::Specification.new do |s|
   s.name = "kitabu"
-  s.version = "0.3.1"
+  s.version = "0.3.2"
   s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
   s.authors = ["Nando Vieira"]
   s.email = ["fnando.vieira@gmail.com"]
@@ -20,9 +20,10 @@ spec = Gem::Specification.new do |s|
   s.add_dependency "hpricot"
   s.add_dependency "unicode"
   s.add_dependency "main"
+  s.add_dependency "ultraviolet"
   
   # Requirements
-  s.requirements << "Install the Oniguruma RE library and ultraviolet gem to get Syntax Highlighting (only for TextMate users)"
+  s.requirements << "Install the Oniguruma RE library"
 end
 
 namespace :gem do

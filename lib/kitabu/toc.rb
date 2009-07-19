@@ -27,11 +27,6 @@ module Kitabu
       @current_level = name.gsub!(/[^2-6]/, '').to_i
       @stack << @current_level
       @id = attrs["id"]
-
-      @toc << %(<ul class="level#{@current_level}">) if @current_level > @previous_level
-      @toc << %(</li></ul>) * (@previous_level - @current_level) if @current_level < @previous_level
-      @toc << %(</li>) if @current_level <= @previous_level
-      @toc << %(<li>)
     end
 
     def tag_end(name)
@@ -42,16 +37,14 @@ module Kitabu
 
     def text(str)
       return unless in_header?
-      @toc << %(<a href="##{@id}"><span>#{str}</span></a>)
+      @toc << %(<div class="level#{@current_level} #{@id}"><a href="##{@id}"><span>#{str}</span></a></div>)
     end
 
     def method_missing(*args)
     end
 
     def to_s
-      @toc + (%(</li></ul>) * (@stack.last - 1))
-    rescue
-      ""
+      @toc
     end
   end
 end

@@ -1,7 +1,7 @@
 Kitabu
 ======
 
-* [http://github.com/fnando/kitabu](http://github.com/fnando/kitabu)
+* <http://github.com/fnando/kitabu>
 
 DESCRIPTION:
 ------------
@@ -173,12 +173,11 @@ or, if you have problem
 
 	git clone git://github.com/fnando/kitabu.git
 	cd kitabu
-	gem build kitabu.gemspec
-	sudo gem install kitabu
+	rake gem:install
 
 To have syntax highlighting support, you need to install
 Oniguruma regular expression library that can be found at 
-[http://www.geocities.jp/kosako3/oniguruma/](http://www.geocities.jp/kosako3/oniguruma/)
+<http://www.geocities.jp/kosako3/oniguruma/>
 
 Then, you need to install the Ultraviolet gem.
 
@@ -205,18 +204,18 @@ Then run:
 REFERENCES:
 -----------
 
-- Textile: [http://hobix.com/textile/](http://hobix.com/textile/)
-- Markdown: [http://daringfireball.net/projects/markdown/syntax](http://daringfireball.net/projects/markdown/syntax)
+- Textile: <http://hobix.com/textile/>
+- Markdown: <http://daringfireball.net/projects/markdown/syntax>
 
 MAINTAINER
 ----------
  
-* Nando Vieira ([http://simplesideias.com.br](http://simplesideias.com.br))
+* Nando Vieira (<http://simplesideias.com.br>)
 
 CONTRIBUTORS
 ------------
  
-* Arthur Zapparoli ([http://arthurgeek.net](http://arthurgeek.net))
+* Arthur Zapparoli (<http://arthurgeek.net>)
 
 LICENSE:
 --------

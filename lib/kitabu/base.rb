@@ -7,31 +7,33 @@ module Kitabu
     DEFAULT_SYNTAX = 'plain_text'
     GEM_ROOT = File.expand_path(File.dirname(__FILE__) + "/../../")
     
-    def self.html_path
+    extend self
+    
+    def html_path
       KITABU_ROOT + "/output/#{app_name}.html"
     end
     
-    def self.pdf_path
+    def pdf_path
       KITABU_ROOT + "/output/#{app_name}.pdf"
     end
     
-    def self.template_path
+    def template_path
       KITABU_ROOT + "/templates/layout.html"
     end
     
-    def self.config_path
+    def config_path
       KITABU_ROOT + "/config.yml"
     end
     
-    def self.text_dir
+    def text_dir
       KITABU_ROOT + "/text"
     end
     
-    def self.config
+    def config
       @config ||= YAML::load_file(config_path)
     end
     
-    def self.parse_layout(contents)
+    def parse_layout(contents)
       template = File.new(template_path).read
       contents, toc = self.table_of_contents(contents)
       cfg = config.merge(:contents => contents, :toc => toc)
@@ -40,8 +42,8 @@ module Kitabu
       ERB.new(template).result env.instance_eval{ binding }
     end
     
-    def self.table_of_contents(contents)
-      return [contents, nil] unless Object.const_defined?('Hpricot') && Object.const_defined?('Unicode')
+    def table_of_contents(contents)
+      return [contents, nil] unless defined?('Hpricot') && defined?('Unicode')
       
       doc = Hpricot(contents)
       counter = {}
@@ -64,16 +66,16 @@ module Kitabu
       contents = doc.to_html
       io = StringIO.new(contents)
       toc = Toc.new
-      REXML::Document.parse_stream(io, toc)
+      REXML::Document.parse_stream(io, toc) rescue nil
 
       [contents, toc.to_s]
     end
     
-    def self.generate_pdf
+    def generate_pdf
       IO.popen('prince %s -o %s' % [html_path, pdf_path])
     end
     
-    def self.generate_html
+    def generate_html
       # parsed file holder
       contents = ""
       
@@ -81,7 +83,7 @@ module Kitabu
         %w(. .. .svn .git).include?(entry) || (File.file?(entry) && entry !~ /\.(markdown|textile)$/)
       end
       
-      raise "No markup files found! Stopping PDF generation" if entries.empty?
+      $stdout << "\nNo markup files found!\n" if entries.empty?
       
       # first, get all chapters; then, get all parsed markdown
       # files from this chapter and group them into a <div class="chapter"> tag
@@ -116,14 +118,14 @@ module Kitabu
               markup = Discount.new(markup_contents)
             end
           rescue Exception => e
-            puts "Skipping #{markup_file} (#{e.message})"
+            $stdout << "\nSkipping #{markup_file} (#{e.message})"
             next
           end
           
           # convert the markup into html
           parsed_contents = markup.to_html
           
-          if Object.const_defined?('Uv')
+          if defined?(Uv)
             if markup.respond_to?(:syntax_blocks)
               # textile
               parsed_contents.gsub!(/@syntax:([0-9]+)/m) do |m|
@@ -136,24 +138,24 @@ module Kitabu
                 code = $1.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&amp;/, '&')
                 code_lines = StringIO.new(code).readlines
                 syntax_settings = code_lines.first
-                
+              
                 syntax = 'plain_text'
-                
+              
                 if syntax_settings =~ /syntax\(.*?\)\./
                   code = code_lines.slice(1, code_lines.size).join
-                  
+                
                   # syntax
                   m, syntax = *syntax_settings.match(/syntax\(([^ #]+).*?\)./)
-                  
+                
                   # file name
                   m, source_file = *syntax_settings.match(/syntax\(.*?\)\. +(.*?)$/)
-                  
+                
                   # get line interval
                   m, from_line, to_line = *syntax_settings.match(/syntax\(.*? ([0-9]+),([0-9]+)\)/)
-                  
+                
                   # get block name
                   m, block_name = *syntax_settings.match(/syntax\(.*?#([0-9a-z_]+)\)/)
-                  
+                
                   code = Kitabu::Markup.content_for({
                     :code => code,
                     :from_line => from_line,
@@ -162,7 +164,7 @@ module Kitabu
                     :source_file => source_file
                   })
                 end
-                
+              
                 Kitabu::Markup.syntax(code, syntax)
               end
             end
@@ -183,53 +185,53 @@ module Kitabu
       end
     end
     
-    def self.app_name
+    def app_name
       ENV['KITABU_NAME'] || 'kitabu'
     end
     
-    def self.theme?(theme_name)
+    def theme?(theme_name)
       themes.include?(theme_name)
     end
     
-    def self.syntax?(syntax_name)
+    def syntax?(syntax_name)
       syntaxes.include?(syntax_name)
     end
     
-    def self.layout?(layout_name)
+    def layout?(layout_name)
       layouts.include?(layout_name)
     end
     
-    def self.default_theme
+    def default_theme
       DEFAULT_THEME
     end
     
-    def self.default_syntax
+    def default_syntax
       DEFAULT_SYNTAX
     end
     
-    def self.default_layout
+    def default_layout
       DEFAULT_LAYOUT
     end
     
-    def self.syntaxes
+    def syntaxes
       Uv.syntaxes
     end
     
-    def self.layouts
+    def layouts
       @layouts ||= begin
         dir = File.join(GEM_ROOT, "templates/layouts")
         Dir.entries(dir).reject{|p| p =~ /^\.+$/ }.sort
       end
     end
     
-    def self.themes
+    def themes
       @themes ||= begin
         filter = File.join(GEM_ROOT, "templates/themes/*.css")
         Dir[filter].collect{|path| File.basename(path).gsub(/\.css$/, '') }.sort
       end
     end
     
-    def self.to_permalink(str)
+    def to_permalink(str)
       str = Unicode.normalize_KD(str).gsub(/[^\x00-\x7F]/n,'') 
       str = str.gsub(/[^-_\s\w]/, ' ').downcase.squeeze(' ').tr(' ', '-')
       str = str.gsub(/-+/, '-').gsub(/^-+/, '').gsub(/-+$/, '')

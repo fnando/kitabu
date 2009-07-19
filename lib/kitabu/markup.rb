@@ -1,6 +1,8 @@
 module Kitabu
   module Markup
-    def self.content_for(options)
+    extend self
+    
+    def content_for(options)
       source_file = File.join(KITABU_ROOT, 'code', options[:source_file].to_s)
       code = options[:code]
       
@@ -44,7 +46,7 @@ module Kitabu
       code
     end
     
-    def self.syntax(code, syntax='plain_text')
+    def syntax(code, syntax='plain_text')
       # get chosen theme
       theme = Kitabu::Base.config['theme']
       theme = Kitabu::Base.default_theme unless Kitabu::Base.theme?(theme)

@@ -36,7 +36,7 @@ namespace :kitabu do
   task :pdf => :html do
     Kitabu::Base.generate_pdf
     puts "Your PDF has been generated. Check it out the output directory!"
-    sleep(1) && system("open #{Kitabu::Base.pdf_path}") if RUBY_PLATFORM =~ /darwin/
+    sleep(1) && system("open #{Kitabu::Base.pdf_path}") if RUBY_PLATFORM =~ /darwin/ && ENV["AUTO_OPEN"] == "1"
   end
 
   desc "Generate HTML from markup files"

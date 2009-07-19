@@ -41,7 +41,7 @@ class BlackCloth < RedCloth
       url = File.join(base_url, content)
     else
       url = content
-      puts "\nYou're using `file. #{content}` but didn't set base_url in your configuration file.\n"
+      $stdout << "\nYou're using `file. #{content}` but didn't set base_url in your configuration file.\n"
     end
     
     %(<p class="file"><span><strong>Download</strong> <a href="#{url}">#{content}</a></span></p>)

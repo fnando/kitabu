@@ -105,7 +105,18 @@ class BlackCloth < RedCloth
   # Usage: figure(This is the caption). some_image.jpg
   def textile_figure(tag, attrs, cite, content)
     m, title = *attrs.match(/class="(.*?)"/)
-    %(<p class="figure"><img src="../images/#{content}" alt="#{title}" /><br/><span class="caption">#{title}</span></p>)
+    
+    width, height = image_size(content)
+    
+    %(<p class="figure"><img style="width: #{width}px; height: #{height}px" src="../images/#{content}" alt="#{title}" /><br/><span class="caption">#{title}</span></p>)
+  end
+  
+  def image_size(img)
+    puts File.expand_path(img)
+    output = IO.popen("file images/#{img}").read
+    m, width, height = *output.match(/([0-9]+) x ([0-9]+)/)
+    
+    [width.to_i, height.to_i]
   end
   
   # overriding inline method

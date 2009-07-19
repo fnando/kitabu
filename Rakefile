@@ -4,7 +4,7 @@ PKG_FILES = %w(Rakefile kitabu.gemspec README.markdown) + Dir["{bin,lib,template
 
 spec = Gem::Specification.new do |s|
   s.name = "kitabu"
-  s.version = "0.3.3"
+  s.version = "0.3.4"
   s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
   s.authors = ["Nando Vieira"]
   s.email = ["fnando.vieira@gmail.com"]

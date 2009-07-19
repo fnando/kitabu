@@ -200,6 +200,32 @@ Then run:
 
     ldconfig
 
+TEXTILE SPECIAL TAGS
+--------------------
+
+Kitabu extends Textile with some interesting tags:
+
+### Footnote
+
+    Ruby on Rails %{"Rails" and "Ruby on Rails" are trademarks of David Heinemeier Hansson}
+
+### Figure
+
+    figure(This is the caption). some_image.jpg
+    
+### Note
+
+    note. Remember to do something!
+
+### Auto URL
+
+    <http://simplesideias.com.br>
+
+### Link to File
+
+    file. app/models/users.rb
+    
+You need to set `base_url` in your `config.yml` file.
 
 REFERENCES:
 -----------

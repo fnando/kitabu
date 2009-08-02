@@ -1,89 +1,40 @@
-require 'rake'
+require "rake"
+require "jeweler"
+require File.dirname(__FILE__) + "/lib/kitabu"
 
-PKG_FILES = %w(Rakefile kitabu.gemspec README.markdown) + Dir["{bin,lib,templates}/**/*"]
-
-spec = Gem::Specification.new do |s|
-  s.name = "kitabu"
-  s.version = "0.3.4"
-  s.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
-  s.authors = ["Nando Vieira"]
-  s.email = ["fnando.vieira@gmail.com"]
-  s.homepage = "http://github.com/fnando/kitabu"
-  s.description = "A framework for creating e-books from Markdown/Textile text markup using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Mac users that have Textmate installed can have source code highlighted with his favorite theme."
-  s.has_rdoc = false
-  s.files = PKG_FILES
-	s.bindir = "bin"
-	s.executables = "kitabu"
-	
-	# Dependencies
-  s.add_dependency "discount"
-  s.add_dependency "hpricot"
-  s.add_dependency "unicode"
-  s.add_dependency "main"
-  s.add_dependency "ultraviolet"
+JEWEL = Jeweler::Tasks.new do |gem|
+  gem.name = "kitabu"
+  gem.version = Kitabu::VERSION
+  gem.summary = "A framework for creating e-books from Markdown/Textile text markup using Ruby."
+  gem.description = <<-TXT
+A framework for creating e-books from Markdown/Textile text markup using Ruby. 
+Using the Prince PDF generator, you'll be able to get high quality PDFs.
+TXT
   
-  # Requirements
-  s.requirements << "Install the Oniguruma RE library"
+  gem.authors = ["Nando Vieira"]
+  gem.email = "fnando.vieira@gmail.com"
+  gem.homepage = "http://fnando.github.com/kitabu.html"
+  
+  gem.has_rdoc = false
+  gem.files = %w(Rakefile kitabu.gemspec VERSION README.markdown) + Dir["{bin,lib,templates}/**/*"]
+	gem.bindir = "bin"
+	gem.executables = "kitabu"
+	
+	gem.add_dependency "discount"
+  gem.add_dependency "hpricot"
+  gem.add_dependency "unicode"
+  gem.add_dependency "main"
+  gem.add_dependency "ultraviolet"
+  
+  gem.requirements << "Install the Oniguruma RE library"
 end
 
-namespace :gem do
-  # Thanks to the Merb project for this code.
-  desc "Update Github Gemspec"
-  task :update_gemspec do
-    skip_fields = %w(new_platform original_platform specification_version loaded required_ruby_version rubygems_version platform )
-    
-    result = "# WARNING : RAKE AUTO-GENERATED FILE. DO NOT MANUALLY EDIT!\n"
-    result << "# RUN : 'rake gem:update_gemspec'\n\n"
-    result << "Gem::Specification.new do |s|\n"
-    
-    spec.instance_variables.each do |ivar|
-      value = spec.instance_variable_get(ivar)
-      name  = ivar.split("@").last
-      next if name == "date"
-      
-      if name == 'version'
-        base_file = File.join(File.dirname(__FILE__), 'lib/kitabu/base.rb')
-        contents = File.read(base_file)
-        contents.gsub!(/VERSION = "[\d\.]+"/sim, %(VERSION = "#{value}"))
-        File.open(base_file, 'w+') do |f|
-          f << contents
-        end
-      end
-      
-      next if skip_fields.include?(name) || value.nil? || value == "" || (value.respond_to?(:empty?) && value.empty?)
-      if name == "dependencies"
-        value.each do |d|
-          dep, *ver = d.to_s.split(" ")
-          result <<  "  s.add_dependency #{dep.inspect}, #{ver.join(" ").inspect.gsub(/[()]/, "").gsub(", runtime", "")}\n"
-        end
-      else
-        case value
-        when Array
-          value =  name != "files" ? value.inspect : value.inspect.split(",").join(",\n")
-        when FalseClass
-        when TrueClass
-        when Fixnum
-        when String
-          value = value.inspect
-        else
-          value = value.to_s.inspect
-        end
-        result << "  s.#{name} = #{value}\n"
-      end
-    end
-    
-    result << "end"
-    File.open(File.join(File.dirname(__FILE__), "#{spec.name}.gemspec"), "w"){|f| f << result}
-  end
+desc "Generate gemspec, build and install the gem"
+task :package do
+  File.open("VERSION", "w+") {|f| f << Kitabu::VERSION.to_s }
+  FileUtils.cp "VERSION", File.expand_path("~/Sites/github/glue-pages/views/version/_#{JEWEL.gemspec.name}.haml")
   
-  desc "Build gem"
-  task :build => :update_gemspec do
-    system "rm *.gem"
-    system "gem build #{spec.instance_variable_get('@name')}.gemspec"
-  end
-  
-  desc "Install gem"
-  task :install => :build do
-    system "sudo gem install #{spec.instance_variable_get('@name')}"
-  end
+  Rake::Task["gemspec"].invoke
+  Rake::Task["build"].invoke
+  Rake::Task["install"].invoke
 end

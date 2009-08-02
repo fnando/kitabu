@@ -1,6 +1,4 @@
 module Kitabu
-  VERSION = "0.3.3"
-  
   module Base
     DEFAULT_LAYOUT = 'boom'
     DEFAULT_THEME = 'eiffel'

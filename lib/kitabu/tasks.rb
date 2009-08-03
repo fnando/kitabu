@@ -31,6 +31,13 @@ rescue LoadError => e
         "Install using `sudo gem install unicode`.\n\n"
 end
 
+begin
+  require "colorize"
+rescue LoadError => e
+  puts  "\nColorize gem not found.\n" +
+        "Install using `sudo gem install fnando-colorize -s http://gems.github.com`.\n\n"
+end
+
 namespace :kitabu do
   desc "Generate PDF from markup files"
   task :pdf => :html do
@@ -81,9 +88,11 @@ namespace :kitabu do
       puts
     end
   end
+  
+  task :watch => :auto
 
   desc "Watch changes and automatically generate html & pdf"
-  task :watch do
+  task :auto do
     thread = Thread.new do
       latest_mtime = 0
 
@@ -93,7 +102,7 @@ namespace :kitabu do
       end
 
       loop do
-        files = Dir["text/**/*.textile"] + Dir["text/**/*.markdown"]
+        files = Dir["./**/*"].reject {|p| p =~ /\.\/output/ }
         changes = []
         
         mtime = files.collect do |file| 
@@ -103,16 +112,19 @@ namespace :kitabu do
         end.max
 
         if latest_mtime < mtime
-          puts "creating html & pdf - #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
-          changes.each {|file| puts "  - #{file}" } unless latest_mtime == 0
+          if changes.size > 0
+            puts Colorize.yellow("\n\n#{changes.size} file(s) changed") + " - #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
+            changes.each do |file| 
+              puts "  - #{Colorize.blue(file, :options => :highlight)}"
+            end unless latest_mtime == 0
+          end
           latest_mtime = mtime
           Kitabu::Base.generate_html
           Kitabu::Base.generate_pdf
-          puts "done!"
           puts
         end
 
-        sleep 5
+        sleep ENV["WAIT"] || 1
       end
     end
 

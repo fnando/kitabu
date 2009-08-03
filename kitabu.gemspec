@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kitabu}
-  s.version = "0.3.4"
+  s.version = "0.3.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2009-08-02}
+  s.date = %q{2009-08-03}
   s.default_executable = %q{kitabu}
   s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby. 
 Using the Prince PDF generator, you'll be able to get high quality PDFs.
@@ -50,7 +50,7 @@ Using the Prince PDF generator, you'll be able to get high quality PDFs.
   s.homepage = %q{http://fnando.github.com/kitabu.html}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.requirements = ["Install the Oniguruma RE library"]
+  s.requirements = ["Install the Oniguruma RE library", "Install colorize using gem install fnando-colorize -s http://gems.github.com"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby.}
 
@@ -64,12 +64,14 @@ Using the Prince PDF generator, you'll be able to get high quality PDFs.
       s.add_runtime_dependency(%q<unicode>, [">= 0"])
       s.add_runtime_dependency(%q<main>, [">= 0"])
       s.add_runtime_dependency(%q<ultraviolet>, [">= 0"])
+      s.add_runtime_dependency(%q<colorize>, [">= 0"])
     else
       s.add_dependency(%q<discount>, [">= 0"])
       s.add_dependency(%q<hpricot>, [">= 0"])
       s.add_dependency(%q<unicode>, [">= 0"])
       s.add_dependency(%q<main>, [">= 0"])
       s.add_dependency(%q<ultraviolet>, [">= 0"])
+      s.add_dependency(%q<colorize>, [">= 0"])
     end
   else
     s.add_dependency(%q<discount>, [">= 0"])
@@ -77,5 +79,6 @@ Using the Prince PDF generator, you'll be able to get high quality PDFs.
     s.add_dependency(%q<unicode>, [">= 0"])
     s.add_dependency(%q<main>, [">= 0"])
     s.add_dependency(%q<ultraviolet>, [">= 0"])
+    s.add_dependency(%q<colorize>, [">= 0"])
   end
 end

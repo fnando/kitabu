@@ -28,7 +28,7 @@ module Kitabu
     end
     
     def config
-      @config ||= YAML::load_file(config_path)
+      @config = YAML::load_file(config_path)
     end
     
     def parse_layout(contents)

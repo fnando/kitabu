@@ -119,8 +119,11 @@ namespace :kitabu do
             end unless latest_mtime == 0
           end
           latest_mtime = mtime
+          
           Kitabu::Base.generate_html
           Kitabu::Base.generate_pdf
+          puts Colorize.green("== PDF exported!")
+          
           puts
         end
 

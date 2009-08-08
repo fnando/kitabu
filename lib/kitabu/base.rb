@@ -3,6 +3,7 @@ module Kitabu
     DEFAULT_LAYOUT = 'boom'
     DEFAULT_THEME = 'eiffel'
     DEFAULT_SYNTAX = 'plain_text'
+    DEFAULT_MARKDOWN_PROCESSOR = 'discount'
     GEM_ROOT = File.expand_path(File.dirname(__FILE__) + "/../../")
     
     extend self
@@ -113,7 +114,7 @@ module Kitabu
             if markup_file =~ /\.textile$/
               markup = BlackCloth.new(markup_contents)
             else
-              markup = Discount.new(markup_contents)
+              markup = markdown_processor_class.new(markup_contents)
             end
           rescue Exception => e
             $stdout << "\nSkipping #{markup_file} (#{e.message})"
@@ -209,6 +210,18 @@ module Kitabu
     
     def default_layout
       DEFAULT_LAYOUT
+    end
+    
+    def default_markdown_processor
+      DEFAULT_MARKDOWN_PROCESSOR
+    end
+    
+    def markdown_processor
+      (config['markdown'] || default_markdown_processor).capitalize
+    end
+    
+    def markdown_processor_class
+      ::Kernel.const_get(markdown_processor)
     end
     
     def syntaxes

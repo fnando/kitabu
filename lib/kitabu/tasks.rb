@@ -1,10 +1,10 @@
 require "kitabu"
 
 begin
-  require "discount"
+  require Kitabu::Base.markdown_processor.downcase
 rescue LoadError => e
-  puts  "\nDiscount gem not found. NO MARKDOWN for you.\n" +
-        "Install using `sudo gem install discount`.\n"
+  puts  "\n#{Kitabu::Base.markdown_processor} gem not found. NO MARKDOWN for you.\n" +
+        "Install using `sudo gem install #{Kitabu::Base.markdown_processor}`.\n"
 end
 
 require File.dirname(__FILE__) + "/redcloth"

@@ -3,7 +3,7 @@ module Kitabu
     DEFAULT_LAYOUT = 'boom'
     DEFAULT_THEME = 'eiffel'
     DEFAULT_SYNTAX = 'plain_text'
-    DEFAULT_MARKDOWN_PROCESSOR = 'discount'
+    DEFAULT_MARKDOWN_PROCESSOR = 'rdiscount'
     GEM_ROOT = File.expand_path(File.dirname(__FILE__) + "/../../")
     
     extend self
@@ -217,11 +217,16 @@ module Kitabu
     end
     
     def markdown_processor
-      (config['markdown'] || default_markdown_processor).capitalize
+      config['markdown'] || default_markdown_processor
     end
     
     def markdown_processor_class
-      ::Kernel.const_get(markdown_processor)
+      case markdown_processor
+      when 'maruku' then Maruku
+      when 'bluecloth' then BlueCloth
+      when 'peg_markdown' then PEGMarkdown
+      else RDiscount
+      end
     end
     
     def syntaxes

@@ -20,7 +20,7 @@ TXT
 	gem.bindir = "bin"
 	gem.executables = "kitabu"
 	
-	gem.add_dependency "discount"
+	gem.add_dependency "rdiscount"
   gem.add_dependency "hpricot"
   gem.add_dependency "unicode"
   gem.add_dependency "main"

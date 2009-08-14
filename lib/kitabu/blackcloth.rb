@@ -82,6 +82,7 @@ class BlackCloth < RedCloth
       :from_line => from_line,
       :to_line => to_line
     })
+    
     @@syntax_blocks << [syntax, content]
     position = @@syntax_blocks.size - 1
     %(@syntax:#{position})
@@ -169,7 +170,7 @@ class BlackCloth < RedCloth
       retrieve text
 
       text.gsub!( /<\/?notextile>/, '' )
-      text.gsub!( /x%x%/, '&#38;' )
+      text.gsub!( /x%x%/sm, '&#38;' )
       clean_html text if filter_html
       text.strip!
       text

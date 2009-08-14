@@ -113,6 +113,7 @@ module Kitabu
           begin
             if markup_file =~ /\.textile$/
               markup = BlackCloth.new(markup_contents)
+              markup.no_span_caps = true
             else
               markup = markdown_processor_class.new(markup_contents)
             end
@@ -129,7 +130,7 @@ module Kitabu
               # textile
               parsed_contents.gsub!(/@syntax:([0-9]+)/m) do |m|
                 syntax, code = markup.syntax_blocks[$1.to_i]
-                Kitabu::Markup.syntax(code, syntax)
+                Kitabu::Markup.syntax(code, syntax, :textile)
               end
             else
               # markdown
@@ -164,7 +165,7 @@ module Kitabu
                   })
                 end
               
-                Kitabu::Markup.syntax(code, syntax)
+                Kitabu::Markup.syntax(code, syntax, :markdown)
               end
             end
           end

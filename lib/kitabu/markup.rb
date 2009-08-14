@@ -46,13 +46,17 @@ module Kitabu
       code
     end
     
-    def syntax(code, syntax='plain_text')
+    def syntax(code, syntax, processor)
       # get chosen theme
       theme = Kitabu::Base.config['theme']
       theme = Kitabu::Base.default_theme unless Kitabu::Base.theme?(theme)
       
+      syntax = "plain_text" if syntax.to_s =~ /^\s*$/
+      
       # get syntax
       syntax = Kitabu::Base.default_syntax unless Kitabu::Base.syntax?(syntax)
+      
+      code.gsub!(/x%x%/sm, "&") if processor == :textile
       
       code = Uv.parse(code, "xhtml", syntax, false, theme)
       code.gsub!(/<pre class="(.*?)"/sim, %(<pre class="\\1 #{syntax}"))

@@ -64,7 +64,7 @@ class BlackCloth < RedCloth
     # get syntax
     m, syntax = *attrs.match(/class="(.*?)([# ].*?)?"/)
     syntax = 'plain_text' if tag == "pre"
-    
+
     # set source
     source_file = content
     

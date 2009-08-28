@@ -25,7 +25,6 @@ TXT
   gem.add_dependency "unicode"
   gem.add_dependency "main"
   gem.add_dependency "ultraviolet"
-  gem.add_dependency "colorize"
   
   gem.requirements << "Install the Oniguruma RE library"
   gem.requirements << "Install colorize using gem install fnando-colorize -s http://gems.github.com"

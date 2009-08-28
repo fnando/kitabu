@@ -5,6 +5,7 @@ require "ostruct"
 require "rexml/streamlistener"
 require "rexml/document"
 require "hpricot"
+require "activesupport"
 
 $LOAD_PATH.unshift File.dirname(__FILE__)
 
@@ -19,5 +20,5 @@ rescue LoadError => e
 end
 
 module Kitabu
-  VERSION = "0.3.8"
+  VERSION = "0.3.9"
 end

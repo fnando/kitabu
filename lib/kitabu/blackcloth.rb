@@ -113,11 +113,10 @@ class BlackCloth < RedCloth
   end
   
   def image_size(img)
-    puts File.expand_path(img)
-    output = IO.popen("file images/#{img}").read
-    m, width, height = *output.match(/([0-9]+) x ([0-9]+)/)
-    
-    [width.to_i, height.to_i]
+    IO.popen("file images/#{img}") do |io|
+      m, width, height = *output.match(/([0-9]+) x ([0-9]+)/)
+      return [width.to_i, height.to_i]
+    end
   end
   
   # overriding inline method

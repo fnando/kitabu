@@ -71,7 +71,7 @@ module Kitabu
     end
     
     def generate_pdf
-      IO.popen('prince %s -o %s' % [html_path, pdf_path])
+      IO.popen('prince %s -o %s' % [html_path, pdf_path]).close
     end
     
     def generate_html

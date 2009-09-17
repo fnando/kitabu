@@ -1,46 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
-require 'kitabu'
-require 'kitabu/templates'
-require 'main'
+require "rubygems"
+require "kitabu"
+require "kitabu/templates"
+require "kitabu/command"
+require "optparse"
 
-Main {
-  description <<-TXT
-    The 'kitabu' command creates a new book with a default
-    directory structure at the path you specify.
-    
-    VERSION: #{Kitabu::VERSION}
-    
-    USAGE: kitabu path [parameters]
-  TXT
-  
-  argument(:path) {
-    description "The output path."
-    required
-    validate {|path| !File.exists?(path) }
-    attr
-  }
-  
-  option(:l, :layout){
-    description "Specify which layout to use.  Available: #{Kitabu::Base.layouts.join(', ')}"
-    cast :string
-    defaults "boom"
-    argument :optional
-    validate {|layout| Kitabu::Base.layout?(layout) }
-    attr
-  }
-  
-  option(:t, :theme){
-    description "Specify which syntax highlight theme to use. Available: #{Kitabu::Base.themes.join(', ')}"
-    cast :string
-    defaults "eiffel"
-    argument :optional
-    validate {|theme| Kitabu::Base.theme?(theme) }
-    attr
-  }
-  
-  def run
-    Kitabu::Templates.process!(:layout => layout, :theme => theme, :path => path)
-  end
-}
+Kitabu::Command.run!

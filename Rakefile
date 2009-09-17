@@ -19,15 +19,6 @@ TXT
   gem.files = %w(Rakefile kitabu.gemspec VERSION README.markdown) + Dir["{bin,lib,templates}/**/*"]
 	gem.bindir = "bin"
 	gem.executables = "kitabu"
-	
-	gem.add_dependency "rdiscount"
-  gem.add_dependency "hpricot"
-  gem.add_dependency "unicode"
-  gem.add_dependency "main"
-  gem.add_dependency "ultraviolet"
-  
-  gem.requirements << "Install the Oniguruma RE library"
-  gem.requirements << "Install colorize using gem install fnando-colorize -s http://gems.github.com"
 end
 
 desc "Generate gemspec, build and install the gem"

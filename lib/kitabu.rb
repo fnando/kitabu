@@ -7,8 +7,6 @@ require "rexml/document"
 require "hpricot"
 require "activesupport"
 
-$LOAD_PATH.unshift File.dirname(__FILE__)
-
 require "kitabu/base"
 require "kitabu/toc"
 require "kitabu/markup"
@@ -20,5 +18,5 @@ rescue LoadError => e
 end
 
 module Kitabu
-  VERSION = "0.3.10"
+  VERSION = "0.4.0"
 end

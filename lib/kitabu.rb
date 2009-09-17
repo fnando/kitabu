@@ -4,12 +4,13 @@ require "erb"
 require "ostruct"
 require "rexml/streamlistener"
 require "rexml/document"
+
 require "hpricot"
 require "activesupport"
 
 require "kitabu/base"
 require "kitabu/toc"
-require "kitabu/markup"
+require "kitabu/syntax"
 require "rdiscount"
 
 begin

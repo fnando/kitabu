@@ -81,6 +81,7 @@ module Kitabu
       # parsed file holder
       contents = ""
       
+      # skip some patterns
       entries = Dir.entries(text_dir).sort.reject do |entry| 
         %w(. .. .svn .git).include?(entry) || (File.file?(entry) && entry !~ /\.(markdown|textile)$/)
       end
@@ -128,62 +129,22 @@ module Kitabu
           # convert the markup into html
           parsed_contents = markup.to_html
           
-          if defined?(Uv)
-            if markup.respond_to?(:syntax_blocks)
-              # textile
-              parsed_contents.gsub!(/@syntax:([0-9]+)/m) do |m|
-                syntax, code = markup.syntax_blocks[$1.to_i]
-                Kitabu::Markup.syntax(code, syntax, :textile)
-              end
-            else
-              # markdown
-              parsed_contents.gsub! /<pre><code>(.*?)<\/code><\/pre>/m do |block|
-                code = $1.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&amp;/, '&')
-                code_lines = StringIO.new(code).readlines
-                syntax_settings = code_lines.first
-              
-                syntax = "plain_text"
-              
-                if syntax_settings =~ /syntax\(.*?\)\./
-                  code = code_lines.slice(1, code_lines.size).join
-                
-                  # syntax
-                  m, syntax = *syntax_settings.match(/syntax\(([^ #]+).*?\)./)
-                
-                  # file name
-                  m, source_file = *syntax_settings.match(/syntax\(.*?\)\. +(.*?)$/)
-                
-                  # get line interval
-                  m, from_line, to_line = *syntax_settings.match(/syntax\(.*? ([0-9]+),([0-9]+)\)/)
-                
-                  # get block name
-                  m, block_name = *syntax_settings.match(/syntax\(.*?#([0-9a-z_]+)\)/)
-                
-                  code = Kitabu::Markup.content_for({
-                    :code => code,
-                    :from_line => from_line,
-                    :to_line => to_line,
-                    :block_name => block_name,
-                    :source_file => source_file
-                  })
-                end
-              
-                Kitabu::Markup.syntax(code, syntax, :markdown)
-              end
-            end
-          end
+          # process syntax highlight
+          parsed_contents = Kitabu::Syntax.process(parsed_contents, markup)
           
+          # add final content to the chapter buffer
           chapter << (parsed_contents + "\n\n")
         end
         
-        contents << '<div class="chapter">%s</div>' % chapter
+        # wrap chapter in div, so i can be styled accordingly
+        contents << %[<div class="chapter">%s</div>] % chapter
       end
       
       # create output directory if is missing
       FileUtils.mkdir(File.dirname(html_path)) unless File.exists?(File.dirname(html_path))
       
       # save html file
-      File.open(html_path, 'w+') do |f|
+      File.open(html_path, "w+") do |f|
         f << Kitabu::Base.parse_layout(contents)
       end
     end

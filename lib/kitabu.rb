@@ -10,6 +10,7 @@ require "activesupport"
 require "kitabu/base"
 require "kitabu/toc"
 require "kitabu/markup"
+require "rdiscount"
 
 begin
   require "ruby-debug"

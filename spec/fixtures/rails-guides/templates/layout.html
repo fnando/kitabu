@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="<%= authors.join(', ') %>" />
+	<meta name="subject" content="<%= subject %>" />
+	<meta name="keywords" content="<%= keywords %>" />
+</head>
+<body>
+	<div id="cover">
+		<h1><%= title %></h1>
+	</div>
+
+	<div id="imprint">
+		<p><strong><%= title %></strong>, <%= copyright %></p>
+		<p><%= authors.join(', ') %></p>
+	</div>
+	
+	<div id="table-of-contents">
+		<%= toc %>
+	</div>
+	
+	<div class="chapters">
+		<%= contents %>
+	</div>
+</body>
+</html>

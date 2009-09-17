@@ -41,8 +41,6 @@ module Kitabu
       
       # remove all line stubs
       code.gsub! %r(^[\t ]*__$), ""
-      
-      # return
       code
     end
     

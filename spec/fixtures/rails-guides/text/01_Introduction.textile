@@ -1,0 +1,6 @@
+h2. Introduction
+
+These guides are designed to make you immediately productive with Rails, and to help you understand how all of the pieces fit together. There are two different versions of the Guides site, and you should be sure to use the one that applies to your situation:
+
+* Current Release version – based on Rails 2.3
+* Edge version – based on the current Rails master branch

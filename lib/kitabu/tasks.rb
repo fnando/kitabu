@@ -1,4 +1,5 @@
 require "kitabu"
+require "kitabu/vendor/colorize/lib/colorize"
 
 begin
   require Kitabu::Base.markdown_processor.downcase
@@ -15,20 +16,6 @@ begin
 rescue LoadError => e
   puts  "\nUltraviolet gem not found. NO SYNTAX HIGHLIGHT for you.\n" +
         "Install using `sudo gem install ultraviolet`.\n\n"
-end
-
-begin
-  require "unicode"
-rescue LoadError => e
-  puts  "\nUnicode gem not found. NO TOC for you.\n" +
-        "Install using `sudo gem install unicode`.\n\n"
-end
-
-begin
-  require "colorize"
-rescue LoadError => e
-  puts  "\nColorize gem not found.\n" +
-        "Install using `sudo gem install fnando-colorize -s http://gems.github.com`.\n\n"
 end
 
 # extend BlackCloth if module Helpers is defined

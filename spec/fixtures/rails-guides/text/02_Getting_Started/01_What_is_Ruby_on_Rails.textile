@@ -1,0 +1,6 @@
+h2. Getting Started
+
+h3. What is Ruby on Rails?
+
+Rails is a web development framework written in the Ruby language. It is designed to make programming web applications easier by making several assumptions about what every developer needs to get started. It allows you to write less code while accomplishing more than many other languages and frameworks. Longtime Rails developers also report that it makes web application development more fun.
+

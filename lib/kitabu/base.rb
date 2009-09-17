@@ -1,9 +1,9 @@
 module Kitabu
   module Base
-    DEFAULT_LAYOUT = 'boom'
-    DEFAULT_THEME = 'eiffel'
-    DEFAULT_SYNTAX = 'plain_text'
-    DEFAULT_MARKDOWN_PROCESSOR = 'rdiscount'
+    DEFAULT_LAYOUT = "boom"
+    DEFAULT_THEME = "eiffel"
+    DEFAULT_SYNTAX = "plain_text"
+    DEFAULT_MARKDOWN_PROCESSOR = "rdiscount"
     GEM_ROOT = File.expand_path(File.dirname(__FILE__) + "/../../")
     
     extend self
@@ -28,10 +28,13 @@ module Kitabu
       KITABU_ROOT + "/text"
     end
     
+    # Load the configuration file
     def config
       @config = YAML::load_file(config_path)
     end
     
+    # Parse erb template propagating the configuration file
+    # and adding more variables
     def parse_layout(contents)
       template = File.new(template_path).read
       contents, toc = self.table_of_contents(contents)
@@ -42,7 +45,7 @@ module Kitabu
     end
     
     def table_of_contents(contents)
-      return [contents, nil] unless defined?('Hpricot') && defined?('Unicode')
+      return [contents, nil] unless defined?("Hpricot")
       
       doc = Hpricot(contents)
       counter = {}
@@ -71,7 +74,7 @@ module Kitabu
     end
     
     def generate_pdf
-      IO.popen('prince %s -o %s' % [html_path, pdf_path]).close
+      IO.popen("prince %s -o %s" % [html_path, pdf_path]).close
     end
     
     def generate_html
@@ -139,7 +142,7 @@ module Kitabu
                 code_lines = StringIO.new(code).readlines
                 syntax_settings = code_lines.first
               
-                syntax = 'plain_text'
+                syntax = "plain_text"
               
                 if syntax_settings =~ /syntax\(.*?\)\./
                   code = code_lines.slice(1, code_lines.size).join
@@ -186,54 +189,65 @@ module Kitabu
     end
     
     def app_name
-      ENV['KITABU_NAME'] || 'kitabu'
+      ENV["KITABU_NAME"] || "kitabu"
     end
     
+    # Check if the specified theme is available
     def theme?(theme_name)
       themes.include?(theme_name)
     end
     
+    # Check if the specified syntax is available
     def syntax?(syntax_name)
       syntaxes.include?(syntax_name)
     end
     
+    # Check if the specified layout is available
     def layout?(layout_name)
       layouts.include?(layout_name)
     end
     
+    # Wrap the default theme constant in a method
     def default_theme
       DEFAULT_THEME
     end
     
+    # Wrap the default syntax constant in a method
     def default_syntax
       DEFAULT_SYNTAX
     end
     
+    # Wrap the default layout constant in a method
     def default_layout
       DEFAULT_LAYOUT
     end
     
+    # Wrap the default Markdown constant in a method
     def default_markdown_processor
       DEFAULT_MARKDOWN_PROCESSOR
     end
     
+    # Return the current Markdown class
     def markdown_processor
-      config['markdown'] || default_markdown_processor
+      config["markdown"] || default_markdown_processor
     end
     
+    # Select Markdown processor based on string
     def markdown_processor_class
       case markdown_processor
-      when 'maruku' then Maruku
-      when 'bluecloth' then BlueCloth
-      when 'peg_markdown' then PEGMarkdown
-      else RDiscount
+        when "maruku" then Maruku
+        when "bluecloth" then BlueCloth
+        when "peg_markdown" then PEGMarkdown
+        else RDiscount
       end
     end
     
+    # Return a list will all available syntaxes
     def syntaxes
       Uv.syntaxes
     end
     
+    # Return a list with all available layouts
     def layouts
       @layouts ||= begin
         dir = File.join(GEM_ROOT, "templates/layouts")
@@ -241,6 +255,7 @@ module Kitabu
       end
     end
     
+    # Return a list with all available themes
     def themes
       @themes ||= begin
         filter = File.join(GEM_ROOT, "templates/themes/*.css")
@@ -248,10 +263,15 @@ module Kitabu
       end
     end
     
+    # Normalize string by replacing accented characters
+    # for its equivalent.
     def to_permalink(str)
-      str = Unicode.normalize_KD(str).gsub(/[^\x00-\x7F]/n,'') 
-      str = str.gsub(/[^-_\s\w]/, ' ').downcase.squeeze(' ').tr(' ', '-')
-      str = str.gsub(/-+/, '-').gsub(/^-+/, '').gsub(/-+$/, '')
+      str = ActiveSupport::Multibyte::Chars.new(str)
+      str = str.normalize(:kd).gsub(/[^\x00-\x7F]/,'').to_s
+      str.gsub!(/[^-\w\d]+/sim, "-")
+      str.gsub!(/-+/sm, "-")
+      str.gsub!(/^-?(.*?)-?$/, '\1')
+      str.downcase!
       str
     end
   end

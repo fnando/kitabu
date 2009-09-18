@@ -1,5 +1,4 @@
 require "kitabu"
-require "kitabu/vendor/colorize/lib/colorize"
 
 begin
   require Kitabu::Base.markdown_processor.downcase
@@ -11,11 +10,9 @@ end
 require File.dirname(__FILE__) + "/redcloth"
 require File.dirname(__FILE__) + "/blackcloth"
 
-begin
-  require "uv"
-rescue LoadError => e
-  puts  "\nUltraviolet gem not found. NO SYNTAX HIGHLIGHT for you.\n" +
-        "Install using `sudo gem install ultraviolet`.\n\n"
+if defined?(NO_SYNTAX_HIGHLIGHT)
+  puts  "\nCannot load syntax highlight libraries.\n" +
+        "Check it out the documentation to know how to proceed.\n\n"
 end
 
 # extend BlackCloth if module Helpers is defined

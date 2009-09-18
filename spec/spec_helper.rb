@@ -10,7 +10,6 @@ require "kitabu"
 require "kitabu/redcloth"
 require "kitabu/blackcloth"
 require "rdiscount"
-require "uv"
 
 KITABU_ROOT = File.dirname(__FILE__) + "/fixtures/rails-guides"
 ENV["KITABU_NAME"] = File.basename(KITABU_ROOT)

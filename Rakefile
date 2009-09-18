@@ -16,9 +16,7 @@ TXT
   gem.homepage = "http://fnando.github.com/kitabu.html"
   
   gem.has_rdoc = false
-  gem.files = %w(Rakefile kitabu.gemspec VERSION README.markdown) + 
-              Dir["{bin,templates}/**/*"] +
-              Dir["lib/**/*.rb"]
+  gem.files = %w(Rakefile kitabu.gemspec VERSION README.markdown) + Dir["{bin,templates,lib}/**/*"]
 	gem.bindir = "bin"
 	gem.executables = "kitabu"
 end

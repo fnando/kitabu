@@ -74,7 +74,7 @@ class BlackCloth < RedCloth
     # get line interval
     m, from_line, to_line = *attrs.match(/class=".*? ([0-9]+),([0-9]+)"/)
     
-    content = Kitabu::Markup.content_for({
+    content = Kitabu::Syntax.content_for({
       :code => content,
       :syntax => syntax,
       :source_file => source_file,

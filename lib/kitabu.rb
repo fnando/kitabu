@@ -18,8 +18,6 @@ require "kitabu/templates"
 
 vendor = File.dirname(__FILE__) + "/kitabu/vendor/"
 
-$LOAD_PATH.unshift File.join(vendor, "colorize")
-
 dir = RUBY_VERSION =~ /^1.9/ ? "ruby1.9" : "ruby1.8"
 
 $:.unshift File.join(vendor, dir, "plist")

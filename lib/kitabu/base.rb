@@ -34,6 +34,16 @@ module Kitabu
       @config = YAML::load_file(config_path)
     end
     
+    # Check if nokogiri is available
+    def nokogiri?
+      defined?(Nokogiri)
+    end
+    
+    # Check if hpricot is available
+    def hpricot?
+      defined?(Hpricot)
+    end
+    
     # Parse erb template propagating the configuration file
     # and adding more variables
     def parse_layout(contents)
@@ -46,12 +56,17 @@ module Kitabu
     end
     
     def table_of_contents(contents)
-      return [contents, nil] unless defined?("Hpricot")
+      return [contents, nil] unless nokogiri? || hpricot?
       
-      doc = Hpricot(contents)
+      if nokogiri?
+        doc = Nokogiri::HTML.parse(contents)
+      else
+        doc = Hpricot(contents)
+      end
+      
       counter = {}
 
-      (doc/"h2, h3, h4, h5, h6").each do |node|
+      doc.search("h2, h3, h4, h5, h6").each do |node|
         title = node.inner_text
         permalink = Kitabu::Base.to_permalink(title)
         
@@ -62,15 +77,18 @@ module Kitabu
         # set a incremented permalink if more than one occurrence
         # is found
         permalink = "#{permalink}-#{counter[permalink]}" if counter[permalink] > 1
-        
-        node.set_attribute(:id, permalink)
+        node.set_attribute("id", permalink)
       end
       
       contents = doc.to_html
       io = StringIO.new(contents)
       toc = Toc.new
       REXML::Document.parse_stream(io, toc) rescue nil
-
+      
+      # Nokogiri wraps any content in a valid HTML structure;
+      # so we should use only the body content
+      contents = doc.search("body").inner_html if nokogiri?
+      
       [contents, toc.to_s]
     end
     

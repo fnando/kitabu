@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kitabu}
-  s.version = "0.4.0"
+  s.version = "0.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
@@ -24,6 +24,7 @@ With Prince PDF generator, you'll be able to get high quality PDFs.
      "Rakefile",
      "VERSION",
      "bin/kitabu",
+     "kitabu.gemspec",
      "lib/kitabu.rb",
      "lib/kitabu/base.rb",
      "lib/kitabu/blackcloth.rb",
@@ -470,11 +471,13 @@ With Prince PDF generator, you'll be able to get high quality PDFs.
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby.}
   s.test_files = [
-    "spec/base_spec.rb",
-     "spec/command_spec.rb",
+    "spec/exit_matcher.rb",
      "spec/fixtures/rails-guides/code/sample.rb",
-     "spec/spec_helper.rb",
-     "spec/syntax_spec.rb"
+     "spec/kitabu/base_spec.rb",
+     "spec/kitabu/command_spec.rb",
+     "spec/kitabu/syntax_spec.rb",
+     "spec/kitabu/toc_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then

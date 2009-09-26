@@ -5,8 +5,6 @@ require "erb"
 require "ostruct"
 require "rexml/streamlistener"
 require "rexml/document"
-
-require "hpricot"
 require "activesupport"
 
 $:.unshift File.dirname(__FILE__)
@@ -25,6 +23,18 @@ $:.unshift File.join(vendor, dir, "textpow")
 $:.unshift File.join(vendor, dir, "uv")
 $:.unshift File.join(vendor, "colorize")
 
+begin
+  require "nokogiri"
+rescue LoadError
+  nil
+end
+
+begin
+  require "hpricot"
+rescue LoadError
+  nil
+end unless defined?(Nokogiri)
+
 require "colorize"
 
 begin
@@ -35,12 +45,6 @@ rescue LoadError => e
   NO_SYNTAX_HIGHLIGHT = true
 end
 
-begin
-  require "ruby-debug"
-rescue LoadError => e
-  nil
-end
-
 module Kitabu
-  VERSION = "0.4.0"
+  VERSION = "0.4.1"
 end

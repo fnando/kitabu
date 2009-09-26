@@ -25,8 +25,7 @@ end
 
 desc "Build and install the gem"
 task :package => :build_gem do
-  FileUtils.cp "VERSION", File.expand_path("~/Sites/github/glue-pages/views/version/_#{JEWEL.gemspec.name}.haml")
-  Rake::Task["install"].invoke
+  FileUtils.cp "VERSION", File.expand_path("~/Sites/github/fnando.github.com/views/version/_#{JEWEL.gemspec.name}.haml")
 end
 
 desc "Generate gemspec and build gem"

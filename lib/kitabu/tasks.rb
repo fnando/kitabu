@@ -11,9 +11,10 @@ end
 require File.dirname(__FILE__) + "/redcloth"
 require File.dirname(__FILE__) + "/blackcloth"
 
-if defined?(NO_SYNTAX_HIGHLIGHT)
-  puts  "\nCannot load syntax highlight libraries.\n" +
-        "Check it out the documentation to know how to proceed.\n\n"
+if !ENV["NO_SYNTAX_HIGHLIGHT"] && defined?(NO_SYNTAX_HIGHLIGHT)
+  puts  "\nCannot load syntax highlight libraries.",
+        "Check it out the documentation to know how to proceed.",
+        "You can skip this warning by running `export NO_SYNTAX_HIGHLIGHT=1`\n\n"
 end
 
 # extend BlackCloth if module Helpers is defined

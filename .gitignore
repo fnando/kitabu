@@ -1,3 +1,4 @@
 *.gem
 spec/tmp/*
 spec/fixtures/rails-guides/output
+*.log

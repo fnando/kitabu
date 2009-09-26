@@ -1,5 +1,5 @@
 # encoding: utf-8
-require File.dirname(__FILE__) + "/spec_helper"
+require File.dirname(__FILE__) + "/../spec_helper"
 
 describe "Kitabu::Base" do
   describe "Defaults" do

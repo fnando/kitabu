@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Kitabu
   module Templates
     TEMPLATES_ROOT = File.join(Kitabu::Base::GEM_ROOT, 'templates')
@@ -6,6 +7,8 @@ module Kitabu
     extend self
     
     def process!(options)
+      options[:layout] ||= Kitabu::Base.default_layout
+      
       directories!(options)
       bundle_css!(options)
       files!(options)

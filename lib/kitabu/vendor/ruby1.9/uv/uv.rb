@@ -1,4 +1,4 @@
-#encoding: ascii-8bit
+# encoding: utf-8
 require 'fileutils'
 require 'uv/render_processor.rb'
 

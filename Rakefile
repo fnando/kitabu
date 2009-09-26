@@ -19,16 +19,18 @@ TXT
   gem.files = %w(Rakefile kitabu.gemspec VERSION README.markdown) + Dir["{bin,templates,lib}/**/*"]
 	gem.bindir = "bin"
 	gem.executables = "kitabu"
+	
+	gem.add_dependency "activesupport", ">=2.3"
 end
 
 desc "Build and install the gem"
-task :package => :build do
+task :package => :build_gem do
   FileUtils.cp "VERSION", File.expand_path("~/Sites/github/glue-pages/views/version/_#{JEWEL.gemspec.name}.haml")
   Rake::Task["install"].invoke
 end
 
 desc "Generate gemspec and build gem"
-task :build do
+task :build_gem do
   File.open("VERSION", "w+") {|f| f << Kitabu::VERSION.to_s }
   
   Rake::Task["gemspec"].invoke

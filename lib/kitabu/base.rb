@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Kitabu
   module Base
     DEFAULT_LAYOUT = "boom"
@@ -229,8 +230,8 @@ module Kitabu
     def to_permalink(str)
       str = ActiveSupport::Multibyte::Chars.new(str)
       str = str.normalize(:kd).gsub(/[^\x00-\x7F]/,'').to_s
-      str.gsub!(/[^-\w\d]+/sim, "-")
-      str.gsub!(/-+/sm, "-")
+      str.gsub!(/[^-\w\d]+/xim, "-")
+      str.gsub!(/-+/xm, "-")
       str.gsub!(/^-?(.*?)-?$/, '\1')
       str.downcase!
       str

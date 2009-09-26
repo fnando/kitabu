@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Textpow
 
    class SyntaxProxy
@@ -85,7 +86,7 @@ module Textpow
             case key
             when "firstLineMatch", "foldingStartMarker", "foldingStopMarker", "match", "begin"
                begin
-                    value.force_encoding("ASCII-8BIT")
+                    value.force_encoding("UTF-8")
                   instance_variable_set( "@#{key}", Regexp.new( value ) )
                rescue ArgumentError => e
                   raise ParsingError, "Parsing error in #{value}: #{e.to_s}"

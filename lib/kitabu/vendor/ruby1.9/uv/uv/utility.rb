@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Uv
    def Uv.foreground bg
       fg = "#FFFFFF"

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Textpow
    class ScoreManager
       POINT_DEPTH    = 4

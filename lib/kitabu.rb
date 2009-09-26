@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "rubygems"
 require "yaml"
 require "erb"
@@ -13,10 +14,12 @@ $:.unshift File.dirname(__FILE__)
 require "kitabu/base"
 require "kitabu/toc"
 require "kitabu/syntax"
+require "kitabu/templates"
 
 vendor = File.dirname(__FILE__) + "/kitabu/vendor/"
 
 $LOAD_PATH.unshift File.join(vendor, "colorize")
+
 dir = RUBY_VERSION =~ /^1.9/ ? "ruby1.9" : "ruby1.8"
 
 $:.unshift File.join(vendor, dir, "plist")

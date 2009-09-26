@@ -1,3 +1,4 @@
+# encoding: utf-8
 KITABU_HELP = <<-TXT
 The 'kitabu' command creates a new book with a default
 directory structure at the path you specify.
@@ -11,7 +12,6 @@ directory structure at the path you specify.
   -h, --help          Displays help message
   -v, --version       Display the version, then exit
   -l, --layout        Specify which layout to use
-  -t, --theme         Specify which theme to use
 
 == Examples
   Using defaults.
@@ -20,10 +20,6 @@ directory structure at the path you specify.
   Specify layout.
     kitabu -l boom mybook
     kitabu --layout boom mybook
-
-  Specify theme.
-    kitabu -t eiffel mybook
-    kitabu --theme eiffel mybook
 
 == Author
   Nando Vieira
@@ -49,30 +45,21 @@ module Kitabu
         
         opts.on("-l", "--layout LAYOUT", "Specify which layout to use.", "Available: #{Kitabu::Base.layouts.join(', ')}") do |layout|
           if layout && !Kitabu::Base.layout?(layout)
-            puts "Invalid layout"
-            exit(1)
+            output "Invalid layout"
+            exit 1
           end
           
           options[:layout] = layout
         end
         
-        opts.on("-t", "--theme THEME", "Specify which syntax highlight theme to use.", "Available: #{Kitabu::Base.themes.join(', ')}") do |theme|
-          if theme && !Kitabu::Base.theme?(theme)
-            puts "Invalid theme"
-            exit(1)
-          end
-          
-          options[:theme] = theme
-        end
-        
         opts.on("-h", "--help", "Show help") do
-          puts KITABU_HELP
-          exit
+          output KITABU_HELP
+          exit 0
         end
         
         opts.on_tail("-v", "--version", "Show version") do
-          puts Kitabu::VERSION
-          exit
+          output Kitabu::VERSION
+          exit 0
         end
       end
       
@@ -80,15 +67,15 @@ module Kitabu
       other_args = opts.permute!
       
       unless other_args.any?
-        puts KITABU_HELP
-        exit
+        output KITABU_HELP
+        exit 0
       end
       
       path = File.expand_path(other_args.first)
       
       if File.exists?(path)
-        puts "Output path already exists"
-        exit(1)
+        output "Output path already exists"
+        exit 1
       end
       
       opts.parse!(args)
@@ -98,6 +85,10 @@ module Kitabu
         :theme => options[:theme], 
         :path => path
       })
+    end
+    
+    def output(*args)
+      puts *args
     end
   end
 end

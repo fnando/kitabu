@@ -2,7 +2,6 @@
 
 require "rubygems"
 require "kitabu"
-require "kitabu/templates"
 require "kitabu/command"
 require "optparse"
 

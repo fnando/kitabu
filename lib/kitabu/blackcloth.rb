@@ -1,3 +1,4 @@
+# encoding: utf-8
 class BlackCloth < RedCloth
   @@syntax_blocks = []
   
@@ -6,7 +7,7 @@ class BlackCloth < RedCloth
     %\{       # opening
     (.*?)     # footnote
     \}#       # closing
-  /xms
+  /xm
   
   # Usage: Writing some text with a footnote %{this is a footnote}
   def inline_textile_fn(text)

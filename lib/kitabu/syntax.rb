@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Kitabu
   module Syntax
     extend self

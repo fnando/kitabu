@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Kitabu
   class Toc
     include REXML::StreamListener

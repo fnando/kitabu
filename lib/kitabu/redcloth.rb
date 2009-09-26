@@ -1,3 +1,4 @@
+# encoding: utf-8
 class RedCloth < String
 
     VERSION = '3.0.4'

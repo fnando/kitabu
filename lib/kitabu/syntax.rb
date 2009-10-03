@@ -67,7 +67,9 @@ module Kitabu
       code.gsub!(/x%x%/sm, "&") if processor == :textile
       
       # do replace PRE tags using the syntax and added classes
-      code = Uv.parse(code, "xhtml", syntax, false, theme)
+      silence_warnings do
+        code = Uv.parse(code, "xhtml", syntax, false, theme)
+      end
       code.gsub!(/<pre class="(.*?)"/sim, %(<pre class="\\1 #{syntax}"))
       code.gsub!(/<pre>/sim, %(<pre class="#{syntax} #{theme}"))
       

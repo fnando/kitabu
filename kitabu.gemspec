@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2009-09-26}
+  s.date = %q{2009-10-02}
   s.default_executable = %q{kitabu}
   s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby. 
 With Prince PDF generator, you'll be able to get high quality PDFs.

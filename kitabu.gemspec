@@ -11,9 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["Nando Vieira"]
   s.date = %q{2009-10-02}
   s.default_executable = %q{kitabu}
-  s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby. 
-With Prince PDF generator, you'll be able to get high quality PDFs.
-}
+  s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby.  With Prince PDF generator, you'll be able to get high quality PDFs.}
   s.email = %q{fnando.vieira@gmail.com}
   s.executables = ["kitabu"]
   s.extra_rdoc_files = [
@@ -468,7 +466,7 @@ With Prince PDF generator, you'll be able to get high quality PDFs.
   s.homepage = %q{http://fnando.github.com/kitabu.html}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.1}
   s.summary = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby.}
   s.test_files = [
     "spec/exit_matcher.rb",
@@ -482,7 +480,7 @@ With Prince PDF generator, you'll be able to get high quality PDFs.
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 3
+    s.specification_version = 2
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activesupport>, [">= 2.3"])

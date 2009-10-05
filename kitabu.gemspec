@@ -5,13 +5,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kitabu}
-  s.version = "0.4.2"
+  s.version = "0.4.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2009-10-02}
+  s.date = %q{2009-10-05}
   s.default_executable = %q{kitabu}
-  s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby.  With Prince PDF generator, you'll be able to get high quality PDFs.}
+  s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby. 
+With Prince PDF generator, you'll be able to get high quality PDFs.
+}
   s.email = %q{fnando.vieira@gmail.com}
   s.executables = ["kitabu"]
   s.extra_rdoc_files = [
@@ -466,12 +468,13 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://fnando.github.com/kitabu.html}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.1}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby.}
   s.test_files = [
     "spec/exit_matcher.rb",
      "spec/fixtures/rails-guides/code/sample.rb",
      "spec/kitabu/base_spec.rb",
+     "spec/kitabu/blackcloth_spec.rb",
      "spec/kitabu/command_spec.rb",
      "spec/kitabu/syntax_spec.rb",
      "spec/kitabu/toc_spec.rb",
@@ -480,7 +483,7 @@ Gem::Specification.new do |s|
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 2
+    s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activesupport>, [">= 2.3"])

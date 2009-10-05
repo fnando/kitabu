@@ -70,5 +70,10 @@ describe "Kitabu::Base" do
     end
     
     it_should_behave_like "Table of contents"
+    
+    it "should output XHTML tags" do
+      @contents, @toc = Kitabu::Base.table_of_contents("<br/>")
+      @contents.should match(/<br *\/>/)
+    end
   end
 end

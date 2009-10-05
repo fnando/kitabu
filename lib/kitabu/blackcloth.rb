@@ -114,8 +114,8 @@ class BlackCloth < RedCloth
   end
   
   def image_size(img)
-    IO.popen("file images/#{img}") do |io|
-      m, width, height = *output.match(/([0-9]+) x ([0-9]+)/)
+    IO.popen("file #{KITABU_ROOT}/images/#{img}") do |io|
+      m, width, height = *io.read.match(/([0-9]+) x ([0-9]+)/)
       return [width.to_i, height.to_i]
     end
   end

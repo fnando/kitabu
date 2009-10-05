@@ -80,14 +80,23 @@ module Kitabu
         node.set_attribute("id", permalink)
       end
       
-      contents = doc.to_html
+      if nokogiri?
+        contents = doc.to_xhtml
+      else
+        contents = doc.to_html
+      end
+      
       io = StringIO.new(contents)
       toc = Toc.new
       REXML::Document.parse_stream(io, toc) rescue nil
       
       # Nokogiri wraps any content in a valid HTML structure;
-      # so we should use only the body content
-      contents = doc.search("body").inner_html if nokogiri?
+      # so we should use only the body content. Additionally,
+      # Nokogiri also converts XHTML to HTML. #nokogirisuckhard
+      if nokogiri?
+        doc.to_xhtml.match(/<body>(.*?)<\/body>/xm)
+        contents = $1
+      end
       
       [contents, toc.to_s]
     end

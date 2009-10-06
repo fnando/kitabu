@@ -5,7 +5,7 @@ module Kitabu
     
     def content_for(options)
       # retrieve the file source
-      source_file = File.join(KITABU_ROOT, "code", options[:source_file].to_s)
+      source_file = File.join(Kitabu::Base.root_path, "code", options[:source_file].to_s)
       
       # shortcut to the code
       code = options[:code]
@@ -77,48 +77,48 @@ module Kitabu
     end
     
     def process(content, markup)
-      if defined?(Uv)
-        if markup.respond_to?(:syntax_blocks)
-          # textile
-          content = content.gsub(/@syntax:([0-9]+)/m) do |m|
-            syntax, code = markup.syntax_blocks[$1.to_i]
-            Kitabu::Syntax.apply(code, syntax, :textile)
+      return content if ENV["NO_SYNTAX_HIGHLIGHT"] || defined?(NO_SYNTAX_HIGHLIGHT)
+      
+      if markup.respond_to?(:syntax_blocks)
+        # textile
+        content = content.gsub(/@syntax:([0-9]+)/m) do |m|
+          syntax, code = markup.syntax_blocks[$1.to_i]
+          Kitabu::Syntax.apply(code, syntax, :textile)
+        end
+      else
+        # markdown
+        content = content.gsub /<pre><code>(.*?)<\/code><\/pre>/m do |block|
+          code = $1.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&amp;/, '&')
+          code_lines = StringIO.new(code).readlines
+          syntax_settings = code_lines.first
+
+          syntax = "plain_text"
+
+          if syntax_settings =~ /syntax\(.*?\)\./
+            code = code_lines.slice(1, code_lines.size).join
+
+            # syntax
+            m, syntax = *syntax_settings.match(/syntax\(([^ #]+).*?\)./)
+
+            # file name
+            m, source_file = *syntax_settings.match(/syntax\(.*?\)\. +(.*?)$/)
+
+            # get line interval
+            m, from_line, to_line = *syntax_settings.match(/syntax\(.*? ([0-9]+),([0-9]+)\)/)
+
+            # get block name
+            m, block_name = *syntax_settings.match(/syntax\(.*?#([0-9a-z_]+)\)/)
+
+            code = Kitabu::Syntax.content_for({
+              :code => code,
+              :from_line => from_line,
+              :to_line => to_line,
+              :block_name => block_name,
+              :source_file => source_file
+            })
           end
-        else
-          # markdown
-          content = content.gsub /<pre><code>(.*?)<\/code><\/pre>/m do |block|
-            code = $1.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&amp;/, '&')
-            code_lines = StringIO.new(code).readlines
-            syntax_settings = code_lines.first
 
-            syntax = "plain_text"
-
-            if syntax_settings =~ /syntax\(.*?\)\./
-              code = code_lines.slice(1, code_lines.size).join
-
-              # syntax
-              m, syntax = *syntax_settings.match(/syntax\(([^ #]+).*?\)./)
-
-              # file name
-              m, source_file = *syntax_settings.match(/syntax\(.*?\)\. +(.*?)$/)
-
-              # get line interval
-              m, from_line, to_line = *syntax_settings.match(/syntax\(.*? ([0-9]+),([0-9]+)\)/)
-
-              # get block name
-              m, block_name = *syntax_settings.match(/syntax\(.*?#([0-9a-z_]+)\)/)
-
-              code = Kitabu::Syntax.content_for({
-                :code => code,
-                :from_line => from_line,
-                :to_line => to_line,
-                :block_name => block_name,
-                :source_file => source_file
-              })
-            end
-
-            Kitabu::Syntax.apply(code, syntax, :markdown)
-          end
+          Kitabu::Syntax.apply(code, syntax, :markdown)
         end
       end
     end

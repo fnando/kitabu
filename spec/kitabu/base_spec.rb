@@ -2,6 +2,10 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
 describe "Kitabu::Base" do
+  before(:each) do
+    reset_env!
+  end
+  
   describe "Defaults" do
     it "should be a valid theme" do
       Kitabu::Base.should be_theme(Kitabu::Base::DEFAULT_THEME)
@@ -14,23 +18,23 @@ describe "Kitabu::Base" do
   
   describe "Paths" do
     it "should return PDF path" do
-      Kitabu::Base.pdf_path.should == File.join(KITABU_ROOT, "output", "rails-guides.pdf")
+      Kitabu::Base.pdf_path.should == File.join(Kitabu::Base.root_path, "output", "rails-guides.pdf")
     end
     
     it "should return HTML path" do
-      Kitabu::Base.html_path.should == File.join(KITABU_ROOT, "output", "rails-guides.html")
+      Kitabu::Base.html_path.should == File.join(Kitabu::Base.root_path, "output", "rails-guides.html")
     end
     
     it "should return layout template path" do
-      Kitabu::Base.template_path.should == File.join(KITABU_ROOT, "templates", "layout.html")
+      Kitabu::Base.template_path.should == File.join(Kitabu::Base.root_path, "templates", "layout.html")
     end
     
     it "should return config path" do
-      Kitabu::Base.config_path.should == File.join(KITABU_ROOT, "config.yml")
+      Kitabu::Base.config_path.should == File.join(Kitabu::Base.root_path, "config.yml")
     end
     
     it "should return text directory" do
-      Kitabu::Base.text_dir.should == File.join(KITABU_ROOT, "text")
+      Kitabu::Base.text_dir.should == File.join(Kitabu::Base.root_path, "text")
     end
   end
   
@@ -107,8 +111,8 @@ describe "Kitabu::Base" do
   
   describe "HTML generation" do
     before(:each) do
-      FileUtils.rm_rf(KITABU_ROOT + "/output")
-      ENV["KITABU_NAME"] = File.basename(KITABU_ROOT)
+      FileUtils.rm_rf(Kitabu::Base.root_path + "/output")
+      ENV["KITABU_NAME"] = File.basename(Kitabu::Base.root_path)
       
       Kitabu::Base.generate_html
       @html = File.read(Kitabu::Base.html_path)

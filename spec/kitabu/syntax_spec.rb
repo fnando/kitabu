@@ -10,6 +10,10 @@ INLINE = '
 '
 
 describe "Kitabu::Syntax" do
+  before(:each) do
+    reset_env!
+  end
+  
   describe "Inline" do
     it "should return code for textile" do
       markup = BlackCloth.new(INLINE)

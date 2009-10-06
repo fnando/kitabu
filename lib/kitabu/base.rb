@@ -9,24 +9,28 @@ module Kitabu
     
     extend self
     
+    def root_path
+      defined?(KITABU_ROOT) ? KITABU_ROOT : ENV["KITABU_ROOT"]
+    end
+    
     def html_path
-      KITABU_ROOT + "/output/#{app_name}.html"
+      root_path + "/output/#{app_name}.html"
     end
     
     def pdf_path
-      KITABU_ROOT + "/output/#{app_name}.pdf"
+      root_path + "/output/#{app_name}.pdf"
     end
     
     def template_path
-      KITABU_ROOT + "/templates/layout.html"
+      root_path + "/templates/layout.html"
     end
     
     def config_path
-      KITABU_ROOT + "/config.yml"
+      root_path + "/config.yml"
     end
     
     def text_dir
-      KITABU_ROOT + "/text"
+      root_path + "/text"
     end
     
     # Load the configuration file

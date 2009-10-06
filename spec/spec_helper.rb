@@ -5,9 +5,6 @@ require "rspec-hpricot-matchers"
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + "/../lib")
 
-KITABU_ROOT = File.dirname(__FILE__) + "/fixtures/rails-guides"
-ENV["KITABU_NAME"] = File.basename(KITABU_ROOT)
-
 require "kitabu"
 
 # Do require libs that are used by the tasks.rb file
@@ -22,6 +19,12 @@ require File.dirname(__FILE__) + "/exit_matcher"
 Spec::Runner.configure do |config|
   config.include(HpricotSpec::Matchers)
   config.include(ExitMatcher)
+end
+
+def reset_env!
+  ENV["KITABU_ROOT"] = File.dirname(__FILE__) + "/fixtures/rails-guides"
+  ENV["KITABU_NAME"] = File.basename(ENV["KITABU_ROOT"])
+  ENV.delete("NO_SYNTAX_HIGHLIGHT")
 end
 
 alias :doing :lambda

@@ -1,0 +1,3 @@
+h2. Wikipedia
+
+Wikipedia (pronounced /ˌwiːkiˈpiːdiə/, WEE-kee-PEE-deeə or /ˌwɪkɨˈpiːdiə/, WI-kə-PEE-deeə) is a free, web-based, collaborative, multilingual encyclopedia project supported by the non-profit Wikimedia Foundation. Its name is a portmanteau of the words wiki (a technology for creating collaborative websites, from the Hawaiian word wiki, meaning "quick") and encyclopedia. Wikipedia's 13 million articles (three million in the English Wikipedia) have been written collaboratively by volunteers around the world, and almost all of its articles can be edited by anyone with access to the site. Launched in 2001 by Jimmy Wales and Larry Sanger, it is currently the largest and most popular general reference work on the Internet.

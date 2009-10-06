@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kitabu}
-  s.version = "0.4.4"
+  s.version = "0.4.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2009-10-05}
+  s.date = %q{2009-10-06}
   s.default_executable = %q{kitabu}
   s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby. 
 With Prince PDF generator, you'll be able to get high quality PDFs.
@@ -475,6 +475,7 @@ With Prince PDF generator, you'll be able to get high quality PDFs.
      "spec/fixtures/rails-guides/code/sample.rb",
      "spec/kitabu/base_spec.rb",
      "spec/kitabu/blackcloth_spec.rb",
+     "spec/kitabu/bug_fix_spec.rb",
      "spec/kitabu/command_spec.rb",
      "spec/kitabu/syntax_spec.rb",
      "spec/kitabu/toc_spec.rb",

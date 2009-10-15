@@ -13,7 +13,7 @@ TXT
   
   gem.authors = ["Nando Vieira"]
   gem.email = "fnando.vieira@gmail.com"
-  gem.homepage = "http://fnando.github.com/kitabu.html"
+  gem.homepage = "http://fnando.github.com/public/kitabu.html"
   
   gem.has_rdoc = false
   gem.files = %w(Rakefile kitabu.gemspec VERSION README.markdown) + Dir["{bin,templates,lib}/**/*"]

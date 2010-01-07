@@ -5,7 +5,7 @@ require "erb"
 require "ostruct"
 require "rexml/streamlistener"
 require "rexml/document"
-require "activesupport"
+require "active_support"
 
 $:.unshift File.dirname(__FILE__)
 

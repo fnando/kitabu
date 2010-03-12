@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kitabu}
-  s.version = "0.4.6"
+  s.version = "0.4.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2010-01-07}
+  s.date = %q{2010-03-12}
   s.default_executable = %q{kitabu}
   s.description = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby.
 With Prince PDF generator, you'll be able to get high quality PDFs.
@@ -465,10 +465,11 @@ With Prince PDF generator, you'll be able to get high quality PDFs.
      "templates/themes/sunburst.css",
      "templates/user.css"
   ]
+  s.has_rdoc = false
   s.homepage = %q{http://fnando.github.com/public/kitabu.html}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{A framework for creating e-books from Markdown/Textile text markup using Ruby.}
   s.test_files = [
     "spec/exit_matcher.rb",

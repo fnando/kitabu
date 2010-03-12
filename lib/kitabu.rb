@@ -1,11 +1,15 @@
 # encoding: utf-8
-require "rubygems"
 require "yaml"
 require "erb"
 require "ostruct"
 require "rexml/streamlistener"
 require "rexml/document"
-require "active_support"
+
+begin
+  require "active_support/all"
+rescue LoadError
+  require "active_support"
+end
 
 $:.unshift File.dirname(__FILE__)
 

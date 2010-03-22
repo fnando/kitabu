@@ -17,7 +17,7 @@ to a printer.
 SAMPLES:
 --------
 
-I'm published two PDFs (portuguese only) exploring lots of features. Check it out:
+I published two PDFs (portuguese only) exploring lots of features. Check it out:
 
 * http://howtocode.com.br/downloads/rdoc.pdf
 * http://howtocode.com.br/downloads/rails-application-templates.pdf

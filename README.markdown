@@ -6,13 +6,21 @@ Kitabu
 DESCRIPTION:
 ------------
 
-A framework for creating e-books from Markdown/Textile text markup using Ruby. 
+A framework for creating e-books from Markdown/Textile text markup using Ruby.
 Using the Prince PDF generator, you'll be able to get high quality PDFs.
 
-While Prince is too expensive (495USD for a single user license), the 
+While Prince is too expensive (495USD for a single user license), the
 free version available at [http://www.princexml.com/download/](http://www.princexml.com/download/) generates
 a PDF with a small logo on the first page, which is removed when sent
 to a printer.
+
+SAMPLES:
+--------
+
+I'm published two PDFs (portuguese only) exploring lots of features. Check it out:
+
+* http://howtocode.com.br/downloads/rdoc.pdf
+* http://howtocode.com.br/downloads/rails-application-templates.pdf
 
 FEATURES:
 ---------
@@ -27,12 +35,12 @@ Check it out <http://fnando.github.com/kitabu.html> for details.
 
 MAINTAINER
 ----------
- 
+
 * Nando Vieira (<http://simplesideias.com.br>)
 
 CONTRIBUTORS
 ------------
- 
+
 * Arthur Zapparoli (<http://arthurgeek.net>)
 
 LICENSE:

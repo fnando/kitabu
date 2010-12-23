@@ -1,0 +1,3 @@
+== RDoc
+
+This chapter was written with RDoc[http://rdoc.sourceforge.net/].

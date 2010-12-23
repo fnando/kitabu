@@ -1,0 +1,195 @@
+## Creating a New Rails Project
+
+If you follow this guide, you’ll create a Rails project called blog, a (very) simple weblog. Before you can start building the application, you need to make sure that you have Rails itself installed.
+
+### Installing Rails
+
+In most cases, the easiest way to install Rails is to take advantage of RubyGems:
+
+	Usually run this as the root user:
+	# gem install rails
+
+<p class="notice">
+	If you’re working on Windows, you should be aware that the vast majority of Rails development is done in Unix environments. While Ruby and Rails themselves install easily using for example Ruby Installer, the supporting ecosystem often assumes you are able to build C-based rubygems and work in a command window. If at all possible, we suggest that you install a Linux virtual machine and use that for Rails development, instead of using Windows.
+</p>
+
+### Creating the Blog Application
+
+The best way to use this guide is to follow each step as it happens, no code or step needed to make this example application has been left out, so you can literally follow along step by step. If you need to see the completed code, you can download it from [Getting Started Code](http://github.com/mikel/getting-started-code).
+
+To begin, open a terminal, navigate to a folder where you have rights to create files, and type:
+
+	$ rails new blog
+
+This will create a Rails application called Blog in a directory called blog.
+
+<p class="notice">
+	You can see all of the switches that the Rails application builder accepts by running <code>rails -h</code>.
+</p>
+
+After you create the blog application, switch to its folder to continue work directly in that application:
+
+	$ cd blog
+
+In any case, Rails will create a folder in your working directory called `blog`. Open up that folder and explore its contents. Most of the work in this tutorial will happen in the `app/` folder, but here’s a basic rundown on the function of each folder that Rails creates in a new application by default:
+
+<table>
+	<thead>
+		<tr>
+			<th>File/Folder	</th>
+			<th>Purpose</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td>Gemfile</td>
+			<td>This file allows you to specify what gem dependencies are needed for your Rails application.</td>
+		</tr>
+
+		<tr>
+			<td>README.rdoc</td>
+			<td>This is a brief instruction manual for your application. Use it to tell others what your application does, how to set it up, and so on.</td>
+		</tr>
+
+		<tr>
+			<td>Rakefile</td>
+			<td>This file contains batch jobs that can be run from the terminal.</td>
+		</tr>
+
+		<tr>
+			<td>app/</td>
+			<td>Contains the controllers, models, and views for your application. You’ll focus on this folder for the remainder of this guide.</td>
+		</tr>
+
+		<tr>
+			<td>config/</td>
+			<td>Configure your application’s runtime rules, routes, database, and more.</td>
+		</tr>
+
+		<tr>
+			<td>config.ru</td>
+			<td>Rack configuration for Rack based servers used to start the application.</td>
+		</tr>
+
+		<tr>
+			<td>db/</td>
+			<td>Shows your current database schema, as well as the database migrations. You’ll learn about migrations shortly.</td>
+		</tr>
+
+		<tr>
+			<td>doc/</td>
+			<td>In-depth documentation for your application.</td>
+		</tr>
+
+		<tr>
+			<td>lib/</td>
+			<td>Extended modules for your application (not covered in this guide).</td>
+		</tr>
+
+		<tr>
+			<td>log/</td>
+			<td>Application log files.</td>
+		</tr>
+
+		<tr>
+			<td>public/</td>
+			<td>The only folder seen to the world as-is. This is where your images, javascript, stylesheets (CSS), and other static files go.</td>
+		</tr>
+
+		<tr>
+			<td>script/</td>
+			<td>Contains the rails script that starts your app and can contain other scripts you use to deploy or run your application.</td>
+		</tr>
+
+		<tr>
+			<td>test/</td>
+			<td>Unit tests, fixtures, and other test apparatus.</td>
+		</tr>
+
+		<tr>
+			<td>tmp/</td>
+			<td>Temporary files.</td>
+		</tr>
+
+		<tr>
+			<td>vendor/</td>
+			<td>A place for all third-party code. In a typical Rails application, this includes Ruby Gems, the Rails source code (if you install it into your project) and plugins containing additional prepackaged functionality.</td>
+		</tr>
+
+	</tbody>
+</table>
+
+### Installing the Required Gems
+
+Rails applications manage gem dependencies with [Bundler](http://www.github.com/carlhuda/bundler) by default. As we don’t need any other gems beyond the ones in the generated `Gemfile` we can directly run
+
+	bundle install
+
+to have them ready.
+
+### Configuring a Database
+
+Just about every Rails application will interact with a database. The database to use is specified in a configuration file, `config/database.yml`. If you open this file in a new Rails application, you’ll see a default database configuration using SQLite3. The file contains sections for three different environments in which Rails can run by default:
+
+* The `development` environment is used on your development computer as you interact manually with the application
+* The `test` environment is used to run automated tests
+* The `production` environment is used when you deploy your application for the world to use.
+
+### Configuring an SQLite3 Database
+
+Rails comes with built-in support for [SQLite3](http://www.sqlite.org/), which is a lightweight serverless database application. While a busy production environment may overload SQLite, it works well for development and testing. Rails defaults to using an SQLite database when creating a new project, but you can always change it later.
+
+Here’s the section of the default configuration file (`config/database.yml`) with connection information for the development environment:
+
+	development:
+	  adapter: sqlite3
+	  database: db/development.sqlite3
+	  pool: 5
+	  timeout: 5000
+
+<p class="notice">
+	In this guide we are using an SQLite3 database for data storage, because it is a zero configuration database that just works. Rails also supports MySQL and PostgreSQL “out of the box”, and has plugins for many database systems. If you are using a database in a production environment Rails most likely has an adapter for it.
+</p>
+
+### Configuring a MySQL Database
+
+If you choose to use MySQL instead of the shipped Sqlite3 database, your `config/database.yml` will look a little different. Here’s the development section:
+
+	development:
+	  adapter: mysql2
+	  encoding: utf8
+	  database: blog_development
+	  pool: 5
+	  username: root
+	  password:
+	  socket: /tmp/mysql.sock
+
+
+If your development computer’s MySQL installation includes a root user with an empty password, this configuration should work for you. Otherwise, change the username and password in the `development` section as appropriate.
+
+### Configuring a PostgreSQL Database
+
+Finally if you choose to use PostgreSQL, your config/database.yml will be customized to use PostgreSQL databases:
+
+	development:
+	  adapter: postgresql
+	  encoding: unicode
+	  database: blog_development
+	  pool: 5
+	  username: blog
+	  password:
+
+Change the username and password in the `development` section as appropriate.
+
+### Creating the Database
+
+Now that you have your database configured, it’s time to have Rails create an empty database for you. You can do this by running a rake command:
+
+	$ rake db:create
+
+This will create your development and test SQLite3 databases inside the `db/` folder.
+
+<p class="notice">
+	Rake is a general-purpose command-runner that Rails uses for many things. You can see the list of available rake commands in your application by running <code>rake -T</code>.
+</p>

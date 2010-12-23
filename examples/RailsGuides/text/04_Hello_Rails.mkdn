@@ -1,0 +1,58 @@
+## Hello, Rails!
+
+One of the traditional places to start with a new language is by getting some text up on screen quickly, to do this, you need to get your Rails application server running.
+
+### Starting up the Web Server
+
+<p class="figure">
+	<img src="../images/rails_welcome.png" alt="Rails Welcome page" />
+</p>
+
+You actually have a functional Rails application already. To see it, you need to start a web server on your development machine. You can do this by running:
+
+	$ rails server
+
+This will fire up an instance of the Mongrel web server by default (Rails can also use several other web servers). To see your application in action, open a browser window and navigate to <http://localhost:3000>. You should see Rails’ default information page:
+
+To stop the web server, hit `Ctrl+C` in the terminal window where it’s running. In development mode, Rails does not generally require you to stop the server; changes you make in files will be automatically picked up by the server.
+
+The “Welcome Aboard” page is the *smoke test* for a new Rails application: it makes sure that you have your software configured correctly enough to serve a page. You can also click on the *About your application’s environment* link to see a summary of your Application’s environment.
+
+### Say “Hello”, Rails
+
+To get Rails saying “Hello”, you need to create at minimum a controller and a view. Fortunately, you can do that in a single command. Enter this command in your terminal:
+
+	$ rails generate controller home index
+
+<p class="notice">
+	If you’re on Windows, or your Ruby is set up in some non-standard fashion, you may need to explicitly pass Rails <code>rails</code> commands to Ruby: <code>ruby \path\to\rails controller home index</code>.
+</p>
+
+Rails will create several files for you, including `app/views/home/index.html.erb`. This is the template that will be used to display the results of the index action (method) in the home controller. Open this file in your text editor and edit it to contain a single line of code:
+
+	<h1>Hello, Rails!</h1>
+
+### Setting the Application Home Page
+
+Now that we have made the controller and view, we need to tell Rails when we want “Hello Rails” to show up. In our case, we want it to show up when we navigate to the root URL of our site, <http://localhost:3000>, instead of the “Welcome Aboard” smoke test.
+
+The first step to doing this is to delete the default page from your application:
+
+	$ rm public/index.html
+
+We need to do this as Rails will deliver any static file in the `public` directory in preference to any dynamic contact we generate from the controllers.
+
+Now, you have to tell Rails where your actual home page is located. Open the file `config/routes.rb` in your editor. This is your application’s routing file which holds entries in a special DSL (domain-specific language) that tells Rails how to connect incoming requests to controllers and actions. This file contains many sample routes on commented lines, and one of them actually shows you how to connect the root of your site to a specific controller and action. Find the line beginning with :root to, uncomment it and change it like the following:
+
+	Blog::Application.routes.draw do
+
+	  #...
+	  # You can have the root of your site routed with "root"
+	  # just remember to delete public/index.html.
+	  root :to => "home#index"
+
+The `root :to => "home#index"` tells Rails to map the root action to the home controller’s index action.
+
+Now if you navigate to <http://localhost:3000> in your browser, you’ll see `Hello, Rails!`.
+
+For more information about routing, refer to [Rails Routing from the Outside In](http://guides.rubyonrails.org/routing.html).

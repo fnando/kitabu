@@ -1,4 +1,4 @@
-*.gem
-spec/tmp/*
-spec/fixtures/rails-guides/output
-*.log
+.DS_Store
+pkg
+tmp
+Gemfile.lock

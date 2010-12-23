@@ -1,0 +1,13 @@
+## Guide Assumptions
+
+This guide is designed for beginners who want to get started with a Rails application from scratch. It does not assume that you have any prior experience with Rails. However, to get the most out of it, you need to have some prerequisites installed:
+
+* The [Ruby](http://www.ruby-lang.org/en/downloads) language version 1.8.7 or higher
+* The [RubyGems](http://rubyforge.org/frs/?group_id=126) packaging system
+* A working installation of the [SQLite3](http://www.sqlite.org/) Database
+
+Rails is a web application framework running on the Ruby programming language. If you have no prior experience with Ruby, you will find a very steep learning curve diving straight into Rails. There are some good free resources on the internet for learning Ruby, including:
+
+* [Mr. Neighborly’s Humble Little Ruby Book](http://www.humblelittlerubybook.com/)
+* [Programming Ruby](http://www.ruby-doc.org/docs/ProgrammingRuby/)
+* [Why's (Poignant) Guide to Ruby](http://mislav.uniqpath.com/poignant-guide/)

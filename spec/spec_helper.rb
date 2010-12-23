@@ -1,30 +1,29 @@
-# encoding: utf-8
-require "rubygems"
-require "spec"
-require "rspec-hpricot-matchers"
-
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + "/../lib")
-
 require "kitabu"
+require "pathname"
+require "test_notifier/runner/rspec"
 
-# Do require libs that are used by the tasks.rb file
-require "kitabu/redcloth"
-require "kitabu/blackcloth"
-require "rdiscount"
-require "hpricot"
-require "nokogiri"
+SPECDIR = Pathname.new(File.dirname(__FILE__))
+TMPDIR = SPECDIR.join("tmp")
 
-require File.dirname(__FILE__) + "/exit_matcher"
+Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|r| require r}
 
-Spec::Runner.configure do |config|
-  config.include(HpricotSpec::Matchers)
-  config.include(ExitMatcher)
+RSpec.configure do |config|
+  config.include(SpecHelper)
+  config.include(Matchers)
+  config.color_enabled = true
+
+  cleaner = proc {
+    [
+      TMPDIR,
+      SPECDIR.join("support/mybook/output/mybook.pdf"),
+      SPECDIR.join("support/mybook/output/mybook.epub"),
+      SPECDIR.join("support/mybook/output/mybook.html")
+    ].each do |i|
+      FileUtils.rm_rf(i) if File.exist?(i)
+    end
+  }
+
+  config.before(&cleaner)
+  config.before { FileUtils.mkdir_p(TMPDIR) }
+  config.after(&cleaner)
 end
-
-def reset_env!
-  ENV["KITABU_ROOT"] = File.dirname(__FILE__) + "/fixtures/rails-guides"
-  ENV["KITABU_NAME"] = File.basename(ENV["KITABU_ROOT"])
-  ENV.delete("NO_SYNTAX_HIGHLIGHT")
-end
-
-alias :doing :lambda

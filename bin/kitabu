@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
+# -*- mode: ruby -*-
 
-require "rubygems"
 require "kitabu"
-require "kitabu/command"
-require "optparse"
-
-Kitabu::Command.run!
+Kitabu::Cli.start

@@ -22,16 +22,18 @@ Then in the `PostsController` we need to have a way to block access to the vario
 
 To use the before filter, we specify it at the top of our `PostsController`, in this case, we want the user to be authenticated on every action, except for `index` and `show`, so we write that:
 
-	class PostsController < ApplicationController
+@@@ ruby
+class PostsController < ApplicationController
 
-	  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate, :except => [:index, :show]
 
-	  # GET /posts
-	  # GET /posts.xml
-	  def index
-	    @posts = Post.all
-	    respond_to do |format|
-	# snipped for brevity
+  # GET /posts
+  # GET /posts.xml
+  def index
+    @posts = Post.all
+    respond_to do |format|
+# snipped for brevity
+@@@
 
 <p class="figure">
 	<img src="../images/challenge.png" alt="Basic Auth challenge window" />
@@ -39,12 +41,14 @@ To use the before filter, we specify it at the top of our `PostsController`, in 
 
 We also only want to allow authenticated users to delete comments, so in the `CommentsController` we write:
 
-	class CommentsController < ApplicationController
+@@@ ruby
+class CommentsController < ApplicationController
 
-	  before_filter :authenticate, :only => :destroy
+  before_filter :authenticate, :only => :destroy
 
-	  def create
-	    @post = Post.find(params[:post_id])
-	# snipped for brevity
+  def create
+    @post = Post.find(params[:post_id])
+# snipped for brevity
+@@@
 
 Now if you try to create a new post, you will be greeted with a basic HTTP Authentication challenge.

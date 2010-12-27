@@ -21,6 +21,7 @@ module Kitabu
       create_file "templates/syntax.css" do
         String.new.tap do |s|
           Dir[File.dirname(__FILE__) + "/../../templates/styles/*.css"].each do |file|
+            s << "/*== #{File.basename(file)} ==*/\n"
             s << File.read(file)
             s << "\n\n"
           end

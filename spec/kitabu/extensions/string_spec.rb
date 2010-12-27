@@ -18,34 +18,4 @@ describe String do
       end
     end
   end
-
-  describe "#unindent" do
-    it "should unindent tabs" do
-      actual = "\tdef some_method\n\t  puts 'yay'\n\tend".unindent
-      expected = "def some_method\n  puts 'yay'\nend"
-
-      actual.should == expected
-    end
-
-    it "should unindent spaces" do
-      actual = "  def some_method\n    puts 'yay'\n  end".unindent
-      expected = "def some_method\n  puts 'yay'\nend"
-
-      actual.should == expected
-    end
-
-    it "should unindent both tabs and spaces" do
-      actual = "\t  def some_method\n\t    puts 'yay'\n\t  end".unindent
-      expected = "def some_method\n  puts 'yay'\nend"
-
-      actual.should == expected
-    end
-
-    it "should keep string intact" do
-      expected = "def some_method\n  puts 'yay'\nend"
-      actual = expected.unindent
-
-      actual.should == expected
-    end
-  end
 end

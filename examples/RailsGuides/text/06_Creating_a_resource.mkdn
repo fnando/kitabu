@@ -103,21 +103,23 @@ One of the products of the `rails generate scaffold` command is a database *migr
 
 If you look in the `db/migrate/20100207214725_create_posts.rb` file (remember, yours will have a slightly different name), here’s what you’ll find:
 
-	class CreatePosts < ActiveRecord::Migration
-	  def self.up
-	    create_table :posts do |t|
-	      t.string :name
-	      t.string :title
-	      t.text :content
+@@@ ruby
+class CreatePosts < ActiveRecord::Migration
+  def self.up
+    create_table :posts do |t|
+      t.string :name
+      t.string :title
+      t.text :content
 
-	      t.timestamps
-	    end
-	  end
+      t.timestamps
+    end
+  end
 
-	  def self.down
-	    drop_table :posts
-	  end
-	end
+  def self.down
+    drop_table :posts
+  end
+end
+@@@
 
 The above migration creates two methods, `up`, called when you run this migration into the database, and `down` in case you need to reverse the changes made by this migration at a later date. The up command in this case creates a posts table with two string columns and a text column. It also creates two timestamp fields to track record creation and updating. More information about Rails migrations can be found in the [Rails Database Migrations](http://guides.rubyonrails.org/migrations.html) guide.
 
@@ -164,8 +166,10 @@ Congratulations, you’re riding the rails! Now it’s time to see how it all wo
 
 The model file, `app/models/post.rb` is about as simple as it can get:
 
-	class Post < ActiveRecord::Base
-	end
+@@@ ruby
+class Post < ActiveRecord::Base
+end
+@@@
 
 There isn’t much to this file – but note that the `Post` class inherits from `ActiveRecord::Base`. Active Record supplies a great deal of functionality to your Rails models for free, including basic database CRUD (Create, Read, Update, Destroy) operations, data validation, as well as sophisticated search support and the ability to relate multiple models to one another.
 
@@ -173,11 +177,13 @@ There isn’t much to this file – but note that the `Post` class inherits from
 
 Rails includes methods to help you validate the data that you send to models. Open the `app/models/post.rb` file and edit it:
 
-	class Post < ActiveRecord::Base
-	  validates :name,  :presence => true
-	  validates :title, :presence => true,
-	                    :length => { :minimum => 5 }
-	end
+@@@ ruby
+class Post < ActiveRecord::Base
+  validates :name,  :presence => true
+  validates :title, :presence => true,
+                    :length => { :minimum => 5 }
+end
+@@@
 
 These changes will ensure that all posts have a name and a title, and that the title is at least five characters long. Rails can validate a variety of conditions in a model, including the presence or uniqueness of columns, their format, and the existence of associated objects.
 
@@ -189,16 +195,18 @@ To see your validations in action, you can use the console. The console is a com
 
 After the console loads, you can use it to work with your application’s models:
 
-	>> p = Post.new(:content => "A new post")
-	=> #<Post id: nil, name: nil, title: nil,
-	     content: "A new post", created_at: nil,
-	     updated_at: nil>
-	>> p.save
-	=> false
-	>> p.errors
-	=> #<OrderedHash { :title=>["can't be blank",
-	                           "is too short (minimum is 5 characters)"],
-	                   :name=>["can't be blank"] }>
+@@@ text
+>> p = Post.new(:content => "A new post")
+=> #<Post id: nil, name: nil, title: nil,
+     content: "A new post", created_at: nil,
+     updated_at: nil>
+>> p.save
+=> false
+>> p.errors
+=> #<OrderedHash { :title=>["can't be blank",
+                           "is too short (minimum is 5 characters)"],
+                   :name=>["can't be blank"] }>
+@@@
 
 This code shows creating a new `Post` instance, attempting to save it and getting `false` for a return value (indicating that the save failed), and inspecting the errors of the post.
 
@@ -212,14 +220,16 @@ When you’re finished, type `exit` and hit `return` to exit the console.
 
 The easiest place to start looking at functionality is with the code that lists all posts. Open the file `app/controllers/posts_controller.rb` and look at the `index` action:
 
-	def index
-	  @posts = Post.all
+@@@ ruby
+def index
+  @posts = Post.all
 
-	  respond_to do |format|
-	    format.html # index.html.erb
-	    format.xml  { render :xml => @posts }
-	  end
-	end
+  respond_to do |format|
+    format.html # index.html.erb
+    format.xml  { render :xml => @posts }
+  end
+end
+@@@
 
 `Post.all` calls the `Post` model to return all of the posts currently in the database. The result of this call is an array containing the posts which has been saved in an instance variable called `@posts`.
 
@@ -229,33 +239,35 @@ The easiest place to start looking at functionality is with the code that lists 
 
 The respond_to block handles both HTML and XML calls to this action. If you browse to <http://localhost:3000/posts.xml>, you’ll see all of the posts in XML format. The HTML format looks for a view in `app/views/posts/` with a name that corresponds to the action name. Rails makes all of the instance variables from the action available to the view. Here’s `app/views/posts/index.html.erb`:
 
-	<h1>Listing posts</h1>
+@@@ html
+<h1>Listing posts</h1>
 
-	<table>
-	  <tr>
-	    <th>Name</th>
-	    <th>Title</th>
-	    <th>Content</th>
-	    <th></th>
-	    <th></th>
-	    <th></th>
-	  </tr>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Title</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
-	<% @posts.each do |post| %>
-	  <tr>
-	    <td><%= post.name %></td>
-	    <td><%= post.title %></td>
-	    <td><%= post.content %></td>
-	    <td><%= link_to 'Show', post %></td>
-	    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-	    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
-	  </tr>
-	<% end %>
-	</table>
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.name %></td>
+    <td><%= post.title %></td>
+    <td><%= post.content %></td>
+    <td><%= link_to 'Show', post %></td>
+    <td><%= link_to 'Edit', edit_post_path(post) %></td>
+    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
 
-	<br />
+<br />
 
-	<%= link_to 'New post', new_post_path %>
+<%= link_to 'New post', new_post_path %>
+@@@
 
 This view iterates over the contents of the `@posts` array to display content and links. A few things to note in the view:
 
@@ -270,20 +282,22 @@ This view iterates over the contents of the `@posts` array to display content an
 
 The view is only part of the story of how HTML is displayed in your web browser. Rails also has the concept of *layouts*, which are containers for views. When Rails renders a view to the browser, it does so by putting the view’s HTML into a layout’s HTML. In previous versions of Rails, the `rails generate scaffold` command would automatically create a controller specific layout, like `app/views/layouts/posts.html.erb`, for the posts controller. However this has been changed in Rails 3.0. A application specific layout is used for all the controllers and can be found in `app/views/layouts/application.html.erb`. Open this layout in your editor and modify the body tag:
 
-	<!DOCTYPE html>
-	<html>
-	<head>
-	  <title>Blog</title>
-	  <%= stylesheet_link_tag :all %>
-	  <%= javascript_include_tag :defaults %>
-	  <%= csrf_meta_tag %>
-	</head>
-	<body style="background: #EEEEEE;">
+@@@ html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body style="background: #EEEEEE;">
 
-	<%= yield %>
+<%= yield %>
 
-	</body>
-	</html>
+</body>
+</html>
+@@@
 
 Now when you refresh the `/posts` page, you’ll see a gray background to the page. This same gray background will be used throughout all the views for posts.
 
@@ -291,55 +305,61 @@ Now when you refresh the `/posts` page, you’ll see a gray background to the pa
 
 Creating a new post involves two actions. The first is the `new` action, which instantiates an empty `Post` object:
 
-	def new
-	  @post = Post.new
+@@@ ruby
+def new
+  @post = Post.new
 
-	  respond_to do |format|
-	    format.html # new.html.erb
-	    format.xml  { render :xml => @post }
-	  end
-	end
+  respond_to do |format|
+    format.html # new.html.erb
+    format.xml  { render :xml => @post }
+  end
+end
+@@@
 
 The `new.html.erb` view displays this empty `Post` to the user:
 
-	<h1>New post</h1>
+@@@ html
+<h1>New post</h1>
 
-	<%= render 'form' %>
+<%= render 'form' %>
 
-	<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', posts_path %>
+@@@
 
 The `<%= render 'form' %>` line is our first introduction to *partials* in Rails. A partial is a snippet of HTML and Ruby code that can be reused in multiple locations. In this case, the form used to make a new post, is basically identical to a form used to edit a post, both have text fields for the name and title and a text area for the content with a button to make a new post or update the existing post.
 
 If you take a look at `views/posts/_form.html.erb` file, you will see the following:
 
-	<%= form_for(@post) do |f| %>
-	  <% if @post.errors.any? %>
-	  <div id="errorExplanation">
-	    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-	    <ul>
-	    <% @post.errors.full_messages.each do |msg| %>
-	      <li><%= msg %></li>
-	    <% end %>
-	    </ul>
-	  </div>
-	  <% end %>
+@@@ html
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
-	  <div class="field">
-	    <%= f.label :name %><br />
-	    <%= f.text_field :name %>
-	  </div>
-	  <div class="field">
-	    <%= f.label :title %><br />
-	    <%= f.text_field :title %>
-	  </div>
-	  <div class="field">
-	    <%= f.label :content %><br />
-	    <%= f.text_area :content %>
-	  </div>
-	  <div class="actions">
-	    <%= f.submit %>
-	  </div>
-	<% end %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+@@@
 
 This partial receives all the instance variables defined in the calling view file, so in this case, the controller assigned the new `Post` object to `@post` and so, this is available in both the view and partial as `@post`.
 
@@ -355,22 +375,24 @@ The `form_for` block is also smart enough to work out if you are doing a *New Po
 
 When the user clicks the *Create Post* button on this form, the browser will send information back to the create method of the controller (Rails knows to call the `create` method because the form is sent with an HTTP POST request; that’s one of the conventions that I mentioned earlier):
 
-	def create
-	  @post = Post.new(params[:post])
+@@@ ruby
+def create
+  @post = Post.new(params[:post])
 
-	  respond_to do |format|
-	    if @post.save
-	      format.html { redirect_to(@post,
-	                    :notice => 'Post was successfully created.') }
-	      format.xml  { render :xml => @post,
-	                    :status => :created, :location => @post }
-	    else
-	      format.html { render :action => "new" }
-	      format.xml  { render :xml => @post.errors,
-	                    :status => :unprocessable_entity }
-	    end
-	  end
-	end
+  respond_to do |format|
+    if @post.save
+      format.html { redirect_to(@post,
+                    :notice => 'Post was successfully created.') }
+      format.xml  { render :xml => @post,
+                    :status => :created, :location => @post }
+    else
+      format.html { render :action => "new" }
+      format.xml  { render :xml => @post.errors,
+                    :status => :unprocessable_entity }
+    end
+  end
+end
+@@@
 
 The `create` action instantiates a new Post object from the data supplied by the user on the form, which Rails makes available in the `params` hash. After successfully saving the new post, `create` returns the appropriate format that the user has requested (HTML in our case). It then redirects the user to the resulting post show action and sets a notice to the user that the Post was successfully created.
 
@@ -382,73 +404,83 @@ The “Post was successfully created” message is stored inside of the Rails `f
 
 When you click the `show` link for a post on the index page, it will bring you to a URL like `http://localhost:3000/posts/1`. Rails interprets this as a call to the `show` action for the resource, and passes in `1` as the `:id` parameter. Here’s the show action:
 
-	def show
-	  @post = Post.find(params[:id])
+@@@ ruby
+def show
+  @post = Post.find(params[:id])
 
-	  respond_to do |format|
-	    format.html # show.html.erb
-	    format.xml  { render :xml => @post }
-	  end
-	end
+  respond_to do |format|
+    format.html # show.html.erb
+    format.xml  { render :xml => @post }
+  end
+end
+@@@
 
 The `show` action uses `Post.find` to search for a single record in the database by its id value. After finding the record, Rails displays it by using `show.html.erb`:
 
-	<p class="notice"><%= notice %></p>
+@@@ html
+<p class="notice"><%= notice %></p>
 
-	<p>
-	  <b>Name:</b>
-	  <%= @post.name %>
-	</p>
+<p>
+  <b>Name:</b>
+  <%= @post.name %>
+</p>
 
-	<p>
-	  <b>Title:</b>
-	  <%= @post.title %>
-	</p>
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
 
-	<p>
-	  <b>Content:</b>
-	  <%= @post.content %>
-	</p>
+<p>
+  <b>Content:</b>
+  <%= @post.content %>
+</p>
 
-	<%= link_to 'Edit', edit_post_path(@post) %> |
-	<%= link_to 'Back', posts_path %>
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+@@@
 
 ### Editing Posts
 
 Like creating a new post, editing a post is a two-part process. The first step is a request to `edit_post_path(@post)` with a particular post. This calls the `edit` action in the controller:
 
-	def edit
-	  @post = Post.find(params[:id])
-	end
+@@@ ruby
+def edit
+  @post = Post.find(params[:id])
+end
+@@@
 
 After finding the requested post, Rails uses the `edit.html.erb` view to display it:
 
-	<h1>Editing post</h1>
+@@@ html
+<h1>Editing post</h1>
 
-	<%= render 'form' %>
+<%= render 'form' %>
 
-	<%= link_to 'Show', @post %> |
-	<%= link_to 'Back', posts_path %>
+<%= link_to 'Show', @post %> |
+<%= link_to 'Back', posts_path %>
+@@@
 
-Again, as with the `new` action, the `edit` action is using the `form` partial, this time however, the form will do a PUT action to the PostsController and the submit button will display “Update Post”
+Again, as with the `new` action, the `edit` action is using the `form` partial, this time however, the form will do a PUT action to the PostsController and the submit button will display “Update Post”.
 
 Submitting the form created by this view will invoke the `update` action within the controller:
 
-	def update
-	  @post = Post.find(params[:id])
+@@@ ruby
+def update
+  @post = Post.find(params[:id])
 
-	  respond_to do |format|
-	    if @post.update_attributes(params[:post])
-	      format.html { redirect_to(@post,
-	                    :notice => 'Post was successfully updated.') }
-	      format.xml  { head :ok }
-	    else
-	      format.html { render :action => "edit" }
-	      format.xml  { render :xml => @post.errors,
-	                    :status => :unprocessable_entity }
-	    end
-	  end
-	end
+  respond_to do |format|
+    if @post.update_attributes(params[:post])
+      format.html { redirect_to(@post,
+                    :notice => 'Post was successfully updated.') }
+      format.xml  { head :ok }
+    else
+      format.html { render :action => "edit" }
+      format.xml  { render :xml => @post.errors,
+                    :status => :unprocessable_entity }
+    end
+  end
+end
+@@@
 
 In the `update` action, Rails first uses the `:id` parameter passed back from the edit view to locate the database record that’s being edited. The `update_attributes` call then takes the rest of the parameters from the request and applies them to this record. If all goes well, the user is redirected to the post’s `show` view. If there are any problems, it’s back to the `edit` view to correct them.
 
@@ -456,14 +488,16 @@ In the `update` action, Rails first uses the `:id` parameter passed back from th
 
 Finally, clicking one of the `destroy` links sends the associated id to the destroy action:
 
-	def destroy
-	  @post = Post.find(params[:id])
-	  @post.destroy
+@@@ ruby
+def destroy
+  @post = Post.find(params[:id])
+  @post.destroy
 
-	  respond_to do |format|
-	    format.html { redirect_to(posts_url) }
-	    format.xml  { head :ok }
-	  end
-	end
+  respond_to do |format|
+    format.html { redirect_to(posts_url) }
+    format.xml  { head :ok }
+  end
+end
+@@@
 
 The `destroy` method of an Active Record model instance removes the corresponding record from the database. After that’s done, there isn’t any record to display, so Rails redirects the user’s browser to the index view for the model.

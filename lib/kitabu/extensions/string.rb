@@ -8,9 +8,4 @@ class String
     str.downcase!
     str
   end
-
-  def unindent
-    _, spaces = *StringIO.new(self).readlines.first.chomp.match(/^([\t ]+)/)
-    spaces ? gsub(%r[^#{spaces}]ms, "") : self
-  end
 end

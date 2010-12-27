@@ -4,43 +4,47 @@ View Helpers live in `app/helpers` and provide small snippets of reusable code f
 
 Open up `app/helpers/posts_helper.rb` and add the following:
 
-	module PostsHelper
-	  def join_tags(post)
-	    post.tags.map { |t| t.name }.join(", ")
-	  end
-	end
+@@@ ruby
+module PostsHelper
+  def join_tags(post)
+    post.tags.map { |t| t.name }.join(", ")
+  end
+end
+@@@
 
 Now you can edit the view in `app/views/posts/show.html.erb` to look like this:
 
-	<p class="notice"><%= notice %></p>
+@@@ html
+<p class="notice"><%= notice %></p>
 
-	<p>
-	  <b>Name:</b>
-	  <%= @post.name %>
-	</p>
+<p>
+  <b>Name:</b>
+  <%= @post.name %>
+</p>
 
-	<p>
-	  <b>Title:</b>
-	  <%= @post.title %>
-	</p>
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
 
-	<p>
-	  <b>Content:</b>
-	  <%= @post.content %>
-	</p>
+<p>
+  <b>Content:</b>
+  <%= @post.content %>
+</p>
 
-	<p>
-	  <b>Tags:</b>
-	  <%= join_tags(@post) %>
-	</p>
+<p>
+  <b>Tags:</b>
+  <%= join_tags(@post) %>
+</p>
 
-	<h2>Comments</h2>
-	<%= render :partial => "comments/comment",
-	           :collection => @post.comments %>
+<h2>Comments</h2>
+<%= render :partial => "comments/comment",
+           :collection => @post.comments %>
 
-	<h2>Add a comment:</h2>
-	<%= render "comments/form" %>
+<h2>Add a comment:</h2>
+<%= render "comments/form" %>
 
 
-	<%= link_to 'Edit Post', edit_post_path(@post) %> |
-	<%= link_to 'Back to Posts', posts_path %> |
+<%= link_to 'Edit Post', edit_post_path(@post) %> |
+<%= link_to 'Back to Posts', posts_path %> |
+@@@

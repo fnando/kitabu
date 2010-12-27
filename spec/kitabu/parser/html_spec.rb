@@ -22,16 +22,15 @@ describe Kitabu::Parser::Html do
     end
 
     it "should return only first-level entries" do
-      relative.should_not include("05_With_Directory/Some_Chapter.mkdn")
+      relative.should_not include("04_With_Directory/Some_Chapter.mkdn")
     end
 
     it "should return entries" do
       relative.first.should == "01_Markdown_Chapter.markdown"
       relative.second.should == "02_Textile_Chapter.textile"
-      relative.third.should == "03_RDoc_Chapter.rdoc"
-      relative.fourth.should == "04_HTML_Chapter.html"
-      relative.fifth.should == "05_With_Directory"
-      relative[5].should be_nil
+      relative.third.should == "03_HTML_Chapter.html"
+      relative.fourth.should == "04_With_Directory"
+      relative.fifth.should be_nil
     end
   end
 
@@ -41,7 +40,7 @@ describe Kitabu::Parser::Html do
     before { parser.parse }
 
     it "should have several chapters" do
-      html.should have_tag("div.chapter", 5)
+      html.should have_tag("div.chapter", 4)
     end
 
     it "should render .markdown" do
@@ -58,10 +57,6 @@ describe Kitabu::Parser::Html do
 
     it "should render .html" do
       html.should have_tag("div.chapter > h2#html", "HTML")
-    end
-
-    it "should render .rdoc" do
-      html.should have_tag("div.chapter > h2#rdoc", "RDoc")
     end
 
     it "should have use config file" do

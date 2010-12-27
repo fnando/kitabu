@@ -1,14 +1,12 @@
+require "active_support/all"
 require "digest/md5"
 require "eeepub"
 require "erb"
+require "nokogiri"
 require "notifier"
 require "optparse"
 require "ostruct"
-require "rdoc/markup"
-require "rdoc/markup/to_html"
 require "RedCloth"
-require "rexml/document"
-require "rexml/streamlistener"
 require "thor"
 require "thor/group"
 require "watchr"
@@ -23,8 +21,12 @@ require "yaml"
   end
 end
 
-require "active_support/all"
-require "nokogiri"
+dir = RUBY_VERSION =~ /^1.9/ ? "ruby1.9" : "ruby1.8"
+
+%w[plist textpow uv].each do |lib|
+  $LOAD_PATH.unshift File.dirname(__FILE__) + "/kitabu/vendor/#{dir}/#{lib}"
+  require lib
+end
 
 module Kitabu
   require "kitabu/extensions/string"
@@ -38,6 +40,11 @@ module Kitabu
   autoload :Toc,        "kitabu/toc"
   autoload :Cli,        "kitabu/cli"
   autoload :Parser,     "kitabu/parser"
-  autoload :Rearrange,  "kitabu/rearrange"
   autoload :Exporter,   "kitabu/exporter"
+  autoload :Syntax,     "kitabu/syntax"
+  autoload :Stream,     "kitabu/stream"
+
+  def self.config(root_dir = nil)
+    YAML.load_file(root_dir.join("config/kitabu.yml")).with_indifferent_access
+  end
 end

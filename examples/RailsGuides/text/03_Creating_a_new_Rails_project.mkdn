@@ -142,11 +142,13 @@ Rails comes with built-in support for [SQLite3](http://www.sqlite.org/), which i
 
 Here’s the section of the default configuration file (`config/database.yml`) with connection information for the development environment:
 
-	development:
-	  adapter: sqlite3
-	  database: db/development.sqlite3
-	  pool: 5
-	  timeout: 5000
+@@@ yaml
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+@@@
 
 <p class="notice">
 	In this guide we are using an SQLite3 database for data storage, because it is a zero configuration database that just works. Rails also supports MySQL and PostgreSQL “out of the box”, and has plugins for many database systems. If you are using a database in a production environment Rails most likely has an adapter for it.
@@ -156,15 +158,16 @@ Here’s the section of the default configuration file (`config/database.yml`) w
 
 If you choose to use MySQL instead of the shipped Sqlite3 database, your `config/database.yml` will look a little different. Here’s the development section:
 
-	development:
-	  adapter: mysql2
-	  encoding: utf8
-	  database: blog_development
-	  pool: 5
-	  username: root
-	  password:
-	  socket: /tmp/mysql.sock
-
+@@@ yaml
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: blog_development
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+@@@
 
 If your development computer’s MySQL installation includes a root user with an empty password, this configuration should work for you. Otherwise, change the username and password in the `development` section as appropriate.
 
@@ -172,13 +175,15 @@ If your development computer’s MySQL installation includes a root user with an
 
 Finally if you choose to use PostgreSQL, your config/database.yml will be customized to use PostgreSQL databases:
 
-	development:
-	  adapter: postgresql
-	  encoding: unicode
-	  database: blog_development
-	  pool: 5
-	  username: blog
-	  password:
+@@@ yaml
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: blog_development
+  pool: 5
+  username: blog
+  password:
+@@@
 
 Change the username and password in the `development` section as appropriate.
 

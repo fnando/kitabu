@@ -45,18 +45,6 @@ module Kitabu
       say "Kitabu version #{Version::STRING}"
     end
 
-    desc "rearrange", "Rename all files based on e-book's configuration file"
-
-    def rearrange
-      inside_ebook!
-
-      unless config.key?(:structure)
-        raise Error, "You need to add your e-book's structure to config/kitabu.yml"
-      end
-
-      Kitabu::Rearrange.new(root_dir, config)
-    end
-
     desc "permalinks", "List all title permalinks"
 
     def permalinks

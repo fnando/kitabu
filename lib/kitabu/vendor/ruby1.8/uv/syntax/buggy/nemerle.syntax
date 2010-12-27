@@ -1,0 +1,74 @@
+--- 
+name: Nemerle
+fileTypes: 
+- n
+scopeName: source.nemerle
+uuid: F563968D-4CB3-11DB-9F95-00112474B8F0
+foldingStartMarker: (\{|(|<\[)
+patterns: 
+- name: comment.line.double-slash.nemerle
+  begin: //
+  beginCaptures: 
+    "0": 
+      name: punctuation.definition.comment.nemerle
+  end: $\n?
+- name: comment.block.nemerle
+  captures: 
+    "0": 
+      name: punctuation.definition.comment.nemerle
+  begin: /\*
+  end: \*/
+- name: constant.language.nemerle
+  match: \b(|false|null|true)\b
+- name: constant.numeric.nemerle
+  match: \b(([0-9]+(\.|\_)?[0-9]*(b|bu|d|f|L|LU|m|u|ub|UL)?)|(0(b|o|x)[0-9]+))\b
+- name: keyword.control.nemerle
+  match: \b(catch|else|finally|for|foreach|if|match|repeat|try|unless|when|while)\b
+- name: keyword.operator.nemerle
+  match: (\+|\-|\*|\/|\%)\=?
+- name: keyword.other.nemerle
+  match: \b(\_|as|assert|base|checked|do|fun|get|ignore|implements|in|is|lock|namespace|out|params|ref|set|syntax|throw|typeof|unchecked|using|with)\b
+- name: storage.type.nemerle
+  match: \b(array|bool|byte|char|class|decimal|double|enum|float|int|interface|list|long|macro|module|object|sbyte|short|string|struct|type|uint|ulong|ushort|variant|void)\b
+- name: storage.modifier.nemerle
+  match: \b(abstract|def|delegate|event|extern|internal|mutable|override|public|private|protected|sealed|static|volatile|virtual|new)\b
+- name: variable.language.nemerle
+  match: this
+- name: string.quoted.double.nemerle
+  endCaptures: 
+    "0": 
+      name: punctuation.definition.string.end.nemerle
+  begin: "\""
+  beginCaptures: 
+    "0": 
+      name: punctuation.definition.string.begin.nemerle
+  end: "\""
+  patterns: 
+  - name: constant.character.escape.nemerle
+    match: \\(\\|'|\"|a|b|c[A-Z]+|e|f|n|r|u0+[0-9,A-Z]+|v)
+- name: string.interpolated.nemerle
+  endCaptures: 
+    "0": 
+      name: punctuation.definition.string.end.nemerle
+  begin: \$"
+  beginCaptures: 
+    "0": 
+      name: punctuation.definition.string.begin.nemerle
+  end: "\""
+  patterns: 
+  - name: constant.character.escape
+    match: \$[a-z,A-Z]+[a-z,A-Z,0-9]*( |\+|\-|\*|\/|\%)
+- name: string.quoted.single.nemerle
+  endCaptures: 
+    "0": 
+      name: punctuation.definition.string.end.nemerle
+  begin: "'"
+  beginCaptures: 
+    "0": 
+      name: punctuation.definition.string.begin.nemerle
+  end: "'"
+  patterns: 
+  - name: constant.character.escape
+    match: \\(\\|'|\"|a|b|c[A-Z]+|e|f|n|r|u0+[0-9,A-Z]+|v)
+foldingStopMarker: (\}|)|]>)
+keyEquivalent: ^~N

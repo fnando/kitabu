@@ -30,7 +30,9 @@ To get Rails saying “Hello”, you need to create at minimum a controller and 
 
 Rails will create several files for you, including `app/views/home/index.html.erb`. This is the template that will be used to display the results of the index action (method) in the home controller. Open this file in your text editor and edit it to contain a single line of code:
 
-	<h1>Hello, Rails!</h1>
+@@@ html
+<h1>Hello, Rails!</h1>
+@@@
 
 ### Setting the Application Home Page
 
@@ -44,12 +46,14 @@ We need to do this as Rails will deliver any static file in the `public` directo
 
 Now, you have to tell Rails where your actual home page is located. Open the file `config/routes.rb` in your editor. This is your application’s routing file which holds entries in a special DSL (domain-specific language) that tells Rails how to connect incoming requests to controllers and actions. This file contains many sample routes on commented lines, and one of them actually shows you how to connect the root of your site to a specific controller and action. Find the line beginning with :root to, uncomment it and change it like the following:
 
-	Blog::Application.routes.draw do
+@@@ ruby
+Blog::Application.routes.draw do
 
-	  #...
-	  # You can have the root of your site routed with "root"
-	  # just remember to delete public/index.html.
-	  root :to => "home#index"
+  #...
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root :to => "home#index"
+@@@
 
 The `root :to => "home#index"` tells Rails to map the root action to the home controller’s index action.
 

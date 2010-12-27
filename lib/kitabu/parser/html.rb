@@ -11,7 +11,7 @@ module Kitabu
 
       # List of recognized extensions.
       #
-      EXTENSIONS = %w[rdoc mkdn markdown textile html]
+      EXTENSIONS = %w[md mkdn markdown textile html]
 
       # Parse all files and save the parsed content
       # to <tt>output/book_name.html</tt>.
@@ -40,7 +40,7 @@ module Kitabu
       # Return the configuration file.
       #
       def config
-        YAML.load_file(root_dir.join("config/kitabu.yml")).with_indifferent_access
+        Kitabu.config(root_dir)
       end
 
       # Return a list of all recognized files.
@@ -85,24 +85,36 @@ module Kitabu
       # Render +file+ considering its extension.
       #
       def render_file(file)
-        content = File.read(file)
+        file_format = format(file)
+        content = Kitabu::Syntax.render(root_dir, file_format, File.read(file))
 
-        case File.extname(file).downcase
-        when ".markdown", ".mkdn"
+        case file_format
+        when :markdown
           markdown.new(content).to_html
-        when ".textile"
+        when :textile
           RedCloth.convert(content)
-        when ".rdoc"
-          RDoc::Markup::ToHtml.new.convert(content)
         else
           content
+        end
+      end
+
+      def format(file)
+        case File.extname(file).downcase
+        when ".markdown", ".mkdn", ".md"
+          :markdown
+        when ".textile"
+          :textile
+        else
+          :html
         end
       end
 
       # Parse layout file, making available all configuration entries.
       #
       def parse_layout(html)
-        locals = config.merge(Toc.generate(html).to_hash)
+        toc = Toc.generate(html)
+        toc_options = {:content => toc.content, :toc => toc.to_html}
+        locals = config.merge(toc_options)
         render_template(root_dir.join("templates/layout.erb"), locals)
       end
 

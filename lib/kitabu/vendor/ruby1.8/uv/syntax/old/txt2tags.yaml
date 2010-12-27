@@ -1,0 +1,139 @@
+--- 
+name: TXT2TAGS
+fileTypes: 
+- t2t
+scopeName: source.t2t
+foldingStartMarker: ^[^#]\s*.*:(\s*\[?| &.+)?$
+expressions:
+  patt_img        : '(\[)([\w_,.+%$#@!?+~/-]+\.(png|PNG|jpe?g|JPE?G|gif|GIF|eps|EPS|bmp|BMP))(\])'
+  proto           : '(https?|ftp|news|telnet|gopher|wais)://'
+  guess           : '(www[23]?|ftp)\.'
+  login           : 'A-Za-z0-9_.-'
+  pass            : '[^ @]*'
+  chars           : 'A-Za-z0-9%._/~:,=$@&+-'
+  anchor          : 'A-Za-z0-9%._-'
+  form            : 'A-Za-z0-9/%&=+;.,$@*_-'
+  punct           : '.,;:!?'
+  patt_url_login  : '([(?#login)]+(:(?#pass))?@)?'
+  retxt_url       : '\b((?#proto)(?#patt_url_login)|(?#guess))[(?#chars)]+\b/*(\?[(?#form)]+)?(#[(?#anchor)]*)?'
+  retxt_url_local : '[(?#chars)]+|[(?#chars)]*(#[(?#anchor)]*)'
+  patt_email      : '\b[(?#login)]+@([A-Za-z0-9_-]+\.)+[A-Za-z]{2,4}\b(\?[(?#form)]+)?'
+patterns: 
+- contentName: markup.other.paragraph
+  begin: ^\s*^ *(?!```|"""|%|\t|\+|=|-|:|\s)
+  end: ([\n\r])(\s*[\n\r]|\t|"""(?!")|```(?!`)|=|-)
+  endCaptures:
+    "1": { name: line.blank }
+- contentName: markup.raw.verbatim.block
+  begin: ^(```)([ \t]*[\n\r])
+  end: ^(```)([ \t]*[\n\r])
+  captures:
+    "1": { name: keyword.other.marker.verbatim }
+    "2": { name: line.blank }
+- contentName: markup.raw.block
+  begin: ^(""")\s*$
+  end: ^(""")\s*$
+  captures:
+    "1": { name: keyword.other.marker.raw }
+- name: comment.block
+  begin: ^%%%\s*$
+  end: ^%%%\s*$
+- match: ^(\t+)(.+?\n)
+  captures:
+    "1": { name: keyword.other.marker.quote }
+    "2": { name: markup.quote.line }
+- match: ((?<!`)```)(?!.*```)([^\n\r]+)([\n\r]\s*[\n\r])
+  captures:
+    "1": { name: keyword.other.marker.verbatim }
+    "2": { name: markup.raw.verbatim.line }
+    "3": { name: line.blank }
+- name: markup.raw.raw.line
+  match: ^""" (?=\S)
+- match: ((?<!`)``(?!`))(.+?)((?<!`)``(?!`))
+  captures:
+    "1": { name: keyword.other.marker.verbatim }
+    "2": { name: markup.raw.verbatim }
+    "3": { name: keyword.other.marker.verbatim }
+- match: ((?<!")""(?!\s))(.+?)((?<!\s)""(?!"))
+  captures:
+    "1": { name: keyword.other.marker.raw }
+    "2": { name: markup.raw.raw }
+    "3": { name: keyword.other.marker.raw }
+- match: (?<!\*)(\*\*)(?!\*)([^\n\r]+)(?<!\*)(\*\*)(?!\*)
+  captures:
+    "1": { name: keyword.other.marker.bold }
+    "2": { name: markup.bold }
+    "3": { name: keyword.other.marker.bold }
+- match: (?<!/)(//)(?!/)([^\n\r]+)(?<!/)(//)(?!/)
+  captures:
+    "1": { name: keyword.other.marker.italic }
+    "2": { name: markup.italic }
+    "3": { name: keyword.other.marker.italic }
+- match: (?<!_)(__)(?!_)([^\n\r]+)(?<!_)(__)(?!_)
+  captures:
+    "1": { name: keyword.other.marker.underline }
+    "2": { name: markup.underline }
+    "3": { name: keyword.other.marker.underline }
+- match: ^( *-)( (?=[^ ]).*?[\n\t])
+  captures:
+    "1": { name: keyword.other.marker.list.unnumbered }
+    "2": { name: markup.list.unnumbered }
+- match: ^( *\+) (?=[^ ])(.*?)[\n\t]
+  captures:
+    "1": { name: keyword.other.marker.list.numbered }
+    "2": { name: markup.list.numbered }
+- match: ^( *\:) ([^\s].*?)$
+  captures:
+    "1": { name: keyword.other.marker.list.definition }
+    "2": { name: markup.list.definition.name }
+- name: line.list.close
+  match: ^( *)([-+:])\s*$
+- match: ^\s*([_-]{20,})\s*?$
+  captures: 
+    "1": { name: markup.other.bar.thin }
+- match: ^\s*(={20,})\s*?$
+  captures: 
+    "1": { name: markup.other.bar.thick }
+- name: line.table
+  match: ^ *\|\|? 
+- name: line.blank
+  match: (^[ \t]*[\n\r])+
+- name: comment.line
+  match: ^%\s*.*?\n
+- match: ^([\t ]*?)(=+(?!=))([^\n\r]+)((?<!=)\2)([\t ]*[\n\r])
+  captures:
+    "1": { name: other.filler }
+    "2": { name: keyword.other.marker.heading.plain }
+    "3": { name: markup.heading.plain }
+    "4": { name: keyword.other.marker.heading.plain }
+    "5": { name: other.filler }
+- match: ^\s*(\++(?!\+))([^\n\r]+)((?<!\+)\1)$
+  captures:
+    "1": { name: keyword.other.marker.heading.numbered }
+    "2": { name: markup.heading.numbered }
+    "3": { name: keyword.other.marker.heading.numbered }
+- name: markup.other.email
+  match: '(?#patt_email)'
+  preprocess: true
+- name: markup.other.link
+  match: (?#retxt_url)
+  preprocess: true
+- name: meta.link.complex
+  match: '(?<open>\[)(?<label>(?#patt_img)|[^]]+)(?<middle> )(?<link>(?#retxt_url)|(?#patt_email)|(?#retxt_url_local))(?<close>\])'
+  preprocess: true
+  namedCaptures:
+    "open"  : { name: keyword.other.marker.link }
+    "label" : { name: variable.link.label }
+    "middle": { name: keyword.other.marker.link }
+    "close" : { name: keyword.other.marker.link }
+- match: (?#patt_img)
+  preprocess: true
+  captures:
+    "1": { name: keyword.other.marker.img }
+    "2": { name: markup.other.img }
+    "4": { name: keyword.other.marker.img }
+- name: markup.other.special
+  match: '^%!\s*'
+  preprocess: true
+foldingStopMarker: ^\s*$|^\s*\}|^\s*\]|^\s*\)
+keyEquivalent: ^~Y

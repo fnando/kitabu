@@ -39,13 +39,13 @@ module Kitabu
       Notifier.notify(
         :image   => Kitabu::ROOT.join("templates/ebook.png"),
         :title   => "Kitabu",
-        :message => "Your '#{config[:title]}' e-book has been exported!"
+        :message => "Your \"#{config[:title]}\" e-book has been exported!"
       )
       ui.say message, :green
     end
 
     def config
-      YAML.load_file(root_dir.join("config/kitabu.yml")).with_indifferent_access
+      Kitabu.config(root_dir)
     end
 
     def auto!

@@ -1,13 +1,17 @@
 module Kitabu
   class Toc
-    include REXML::StreamListener
+    # Return the table of contents in hash format.
+    #
+    attr_reader :toc
 
     private_class_method :new
-    attr_reader :buffer
-    attr_reader :toc
-    attr_reader :attrs
-    attr_accessor :content
+    attr_reader :buffer # :nodoc:
+    attr_reader :attrs # :nodoc:
+    attr_accessor :content # :nodoc:
 
+    # Traverse every title and add a +id+ attribute.
+    # Return the modified content.
+    #
     def self.normalize(content)
       counter = {}
       html = Nokogiri::HTML.parse(content)
@@ -23,63 +27,38 @@ module Kitabu
         tag.set_attribute("id", permalink)
       end
 
-      _, content = *html.to_xhtml.match(/<body>(.*?)<\/body>/xm)
+      html = html.to_xhtml
+      html.force_encoding("UTF-8") if html.encoding_aware?
+
+      _, content = *html.match(/<body>(.*?)<\/body>/m)
       content
     end
 
+    # Traverse every title normalizing its content as a permalink.
+    #
     def self.generate(content)
       content = normalize(content)
-      streamer = new
-      streamer.content = content
-      io = StringIO.new(content)
-      REXML::Document.parse_stream(io, streamer)
-      streamer
+      listener = new
+      listener.content = content
+      Stream.new(content, listener).parse
+      listener
     end
 
-    def initialize
-      @buffer = ""
-      @attrs = {}
+    def initialize # :nodoc:
       @toc = []
       @counters = {}
     end
 
-    def in_header?
-      @in_header
-    end
-
-    def header?(tag)
-      tag =~ /h[2-6]/i
-    end
-
-    def tag_start(name, attrs)
-      return unless header?(name)
-      @in_header = true
-      @attrs = attrs
-    end
-
-    def text(string)
-      return unless in_header?
-      @buffer << string
-    end
-
-    def tag_end(name)
-      return unless header?(name)
-
+    def tag(node) # :nodoc:
       toc << {
-        :level     => name.gsub(/[^\d]/, "").to_i,
-        :text      => buffer,
-        :permalink => attrs["id"]
+        :level     => node.name.gsub(/[^\d]/, "").to_i,
+        :text      => node.text,
+        :permalink => node["id"]
       }
-
-      reset!
     end
 
-    def reset!
-      @current_tag = nil
-      @in_header = false
-      @buffer = ""
-    end
-
+    # Return a hash with all normalized attributes.
+    #
     def to_hash
       {
         :content => content,
@@ -88,6 +67,8 @@ module Kitabu
       }
     end
 
+    # Return the table of contents in HTML format.
+    #
     def to_html
       String.new.tap do |html|
         toc.each do |options|

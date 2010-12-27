@@ -4,7 +4,7 @@ While Prince is too expensive (495USD for a single user license), the free versi
 
 == Features
 
-* Write PDF using Markdown, Textile, RDoc or plain HTML
+* Write PDF using Markdown, Textile or plain HTML
 * Book layout support
 * Syntax highlight theme based on Textmate
 * Generate a HTML, PDF and e-Pub files
@@ -49,7 +49,7 @@ Now it's time to write your e-book. All your book content will be placed on the 
       * 01_introduction.markdown
     * 02_What_is_Ruby_on_Rails
       * 01_MVC.html
-      * 02_DRY.rdoc
+      * 02_DRY.html
       * 03_Convention_Over_Configuration.markdown
     * 03_Installing_Ruby_on_Rails
       * 01_Installing.textile
@@ -64,9 +64,72 @@ If you prefer, you can add a chapter per file:
     * 02_What_is_Ruby_on_Rails.markdown
     * 03_Installing_Ruby_on_Rails.markdown
 
-Note that you can use any format you want at the same time. Just use one of the following extensions: <tt>.html</tt>, <tt>.markdown</tt>, <tt>.mkdn</tt>, <tt>.textile</tt> or <tt>.rdoc</tt>.
+Note that you can use any format you want at the same time. Just use one of the following extensions: <tt>.html</tt>, <tt>.markdown</tt>, <tt>.mkdn</tt> or <tt>.textile</tt>.
 
 You'll want to see your progress eventually; it's time for you to generate the book PDF. Just run the command <tt>kitabu export</tt> and your book will be created on the <tt>output</tt> directory.
+
+Kitabu can generate a Table of Contents (TOC) based on your h2-h6 tags. The h1 tag is discarded because it's meant to be the book title.
+
+To print the TOC, you need to print a variable called +toc+, using the eRb tag.
+
+  <%= toc %>
+
+=== Syntax Highlighting
+
+We use Pygments[http://pygments.org/], a really nice Python syntax highlighter. You'll need a Python installation if you want to use the syntax highlighting. You'll need the Pygments library as well. To install it, just run
+
+  easy_install Pygments
+
+Pygments is also part of the Debian and Gentoo Linux distributions, you can install it via the package manager there.
+
+To highlight a given code snippet, just do something like
+
+  @@@ ruby
+  class User < ActiveRecord::Base
+    validates_presence_of :login, :password, :email
+    validates_uniqueness_of :login, :email
+  end
+  @@@
+
+<b>Don't indent</b> the source block or will end up with unexpected results.
+
+If you want to highlight a file, you need to place it into the <tt>code</tt> directory and call it like this:
+
+  @@@ ruby some_file.rb @@@
+
+You can specify the lines you want to highlight; the example below will highlight lines 10-17 from some_file.rb.
+
+  @@@ ruby some_file.rb:10,15 @@@
+
+You can also specify named blocks. Named blocks are identified by <tt>@begin</tt> and <tt>@end</tt> marks. If <tt>some_file.rb</tt> has the following code
+
+  require "rubygems"
+  require "hpricot"
+  require "open"
+
+  # @begin: get_all_h2_tags
+  doc = Hpricot(open('http://simplesideias.com.br'))
+  (doc/"h2").each {|h2| puts h2.inner_text }
+  # @end: get_all_h2_tags
+
+and you can get the code between <tt>get_all_h2_tags</tt> using
+
+  @@@ ruby some_file#get_all_h2_tags @@@
+
+NOTE: Any named block annotation will be removed from <tt>@@@ ruby file.rb</tt> usage.
+
+=== Markdown Processors
+
+By default, RDiscount[http://github.com/rtomayko/rdiscount/tree/master] is the Markdown processor. However, you can switch to different implementations by simply installing any of the following processors:
+
+* Maruku: https://rubygems.org/gems/maruku
+* PEGMarkdown: https://rubygems.org/gems/rpeg-markdown
+* BlueCloth: https://rubygems.org/gems/bluecloth
+
+=== References
+
+* Textile: http://hobix.com/textile/
+* Markdown: http://daringfireball.net/projects/markdown/syntax
 
 == Samples
 
@@ -75,7 +138,29 @@ I published two PDFs (portuguese only) exploring lots of features. Check it out:
 * http://howtocode.com.br/downloads/rdoc.pdf
 * http://howtocode.com.br/downloads/rails-application-templates.pdf
 
-There's also an (probably) outdated Rails Guide section
+There's also an (probably) outdated Rails Guide section in the <tt>examples</tt> directory.
+
+== Upgrading from previous version
+
+To upgrade a e-book created with Kitabu < 1.0.0, create a new e-book.
+
+  $ kitabu new mybook
+
+Then copy all your configuration info from <tt>config.yml</tt> to <tt>config/kitabu.yml</tt>.
+
+Any Textile extension need to be ported to <tt>config/helper.rb</tt>. Check commented source for examples.
+
+Move directories <tt>text</tt>, <tt>code</tt>, and <tt>images</tt> to your new e-book directory.
+
+The last thing you need to upgrade is the syntax highlighting. You have to move from
+
+  syntax. some_file.rb
+
+to
+
+  @@@ ruby some_file.rb @@@
+
+Check the section "Syntax Highlighting" for detailed info.
 
 == Maintainer
 

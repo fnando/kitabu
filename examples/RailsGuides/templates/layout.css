@@ -23,7 +23,7 @@ html {
 	    color: #000;
 		content: counter(page);
         font-size: 12px;
-        margin-top: 20px;
+        margin-top: 0px;
 		margin-right: -40px;
     }
 }

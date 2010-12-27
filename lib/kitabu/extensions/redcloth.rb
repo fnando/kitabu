@@ -47,7 +47,7 @@ module RedCloth
       end
 
       def file(options = {})
-        base_url = Kitabu.config["base_url"]
+        base_url = Kitabu.config[:base_url]
 
         if base_url
           url = File.join(base_url, options[:text])

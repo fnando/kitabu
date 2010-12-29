@@ -1,7 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-	"http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <head>
+	<title>Rails Guides: Getting Started</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="../templates/layout.css"/>
 	<link rel="stylesheet" type="text/css" href="../templates/syntax.css"/>
@@ -9,7 +9,8 @@
 
 	<meta name="author" content="Rails Documentation Team" />
 	<meta name="subject" content="These guides are designed to make you immediately productive with Rails, and to help you understand how all of the pieces fit together." />
-	<meta name="keywords" content="[Your book keywords (comma-separated)]" />
+	<meta name="keywords" content="Ruby on Rails, Ruby, MVC, Getting Started, PDF, HOWTO, Web Development, Framework" />
+	<meta name="date" content="2010-12-19" />
 </head>
 <body>
 	<div class="frontcover container">
@@ -532,7 +533,17 @@
 
 <p>After the console loads, you can use it to work with your application&#x2019;s models:</p>
 
-<p>["&lt;pre", "class=\"#{config[:theme]}\"&gt;#{code}"]</p>
+<pre class="idle"><code>&gt;&gt; p = Post.new(:content =&gt; "A new post")
+=&gt; #&lt;Post id: nil, name: nil, title: nil,
+     content: "A new post", created_at: nil,
+     updated_at: nil&gt;
+&gt;&gt; p.save
+=&gt; false
+&gt;&gt; p.errors
+=&gt; #&lt;OrderedHash { :title=&gt;["can't be blank",
+                           "is too short (minimum is 5 characters)"],
+                   :name=&gt;["can't be blank"] }&gt;</code></pre>
+
 
 <p>This code shows creating a new <code>Post</code> instance, attempting to save it and getting <code>false</code> for a return value (indicating that the save failed), and inspecting the errors of the post.</p>
 
@@ -1263,18 +1274,19 @@
 
 <p>Rails provides a very simple HTTP authentication system that will work nicely in this situation. First, we enable simple HTTP based authentication in our <code>app/controllers/application_controller.rb</code>:</p>
 
-<pre><code>class ApplicationController &lt; ActionController::Base
+<pre class="idle"><span class="Keyword">class</span> <span class="TypeName">ApplicationController<span class="InheritedClass"> <span class="InheritedClass">&lt;</span> ActionController::Base</span></span>
 &#xA0;&#xA0;protect_from_forgery
 
-&#xA0;&#xA0;private
+&#xA0;&#xA0;<span class="Keyword">private</span>
 
 &#xA0;&#xA0;def authenticate
-&#xA0;&#xA0;&#xA0;&#xA0;authenticate_or_request_with_http_basic do |user_name, password|
-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;user_name == 'admin' &amp;&amp; password == 'password'
-&#xA0;&#xA0;&#xA0;&#xA0;end
-&#xA0;&#xA0;end
-end
-</code></pre>
+&#xA0;&#xA0;&#xA0;&#xA0;authenticate_or_request_with_http_basic <span class="Keyword">do </span>|<span class="Variable">user_name</span>, <span class="Variable">password</span>|
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;user_name <span class="Keyword">==</span> <span class="String"><span class="String">'</span>admin<span class="String">'</span></span> <span class="Keyword">&amp;&amp;</span> password <span class="Keyword">==</span> <span class="String"><span class="String">'</span>password<span class="String">'</span></span>
+&#xA0;&#xA0;&#xA0;&#xA0;<span class="Keyword">end</span>
+&#xA0;&#xA0;<span class="Keyword">end</span>
+<span class="Keyword">end</span>
+</pre>
+
 
 <p>You can obviously change the username and password to whatever you want. We put this method inside of <code>ApplicationController</code> so that it is available to all of our controllers.</p>
 

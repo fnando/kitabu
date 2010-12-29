@@ -4,17 +4,19 @@ If you were to publish your blog online, anybody would be able to add, edit and 
 
 Rails provides a very simple HTTP authentication system that will work nicely in this situation. First, we enable simple HTTP based authentication in our `app/controllers/application_controller.rb`:
 
-	class ApplicationController < ActionController::Base
-	  protect_from_forgery
+@@@ ruby
+class ApplicationController < ActionController::Base
+  protect_from_forgery
 
-	  private
+  private
 
-	  def authenticate
-	    authenticate_or_request_with_http_basic do |user_name, password|
-	      user_name == 'admin' && password == 'password'
-	    end
-	  end
-	end
+  def authenticate
+    authenticate_or_request_with_http_basic do |user_name, password|
+      user_name == 'admin' && password == 'password'
+    end
+  end
+end
+@@@
 
 You can obviously change the username and password to whatever you want. We put this method inside of `ApplicationController` so that it is available to all of our controllers.
 

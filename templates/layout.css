@@ -1,7 +1,7 @@
 /* ============ */
 /* = DEFAULTS = */
 /* ============ */
-html {
+html * {
 	font: normal normal normal 12pt/normal Constantia, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
@@ -22,8 +22,9 @@ html {
 	@bottom-right {
 	    color: #000;
 		content: counter(page);
+		font-family: helvetica, arial, sans-serif;
         font-size: 12px;
-        margin-top: 20px;
+        margin-top: -10px;
 		margin-right: -40px;
     }
 }
@@ -47,12 +48,16 @@ html {
 /* ============= */
 /* = BOOKMARKS = */
 /* ============= */
-.imprint h2,
-.chapter h4,
-.chapter h5,
-.chapter h6 {
+h1, h2, h3, h4, h5, h6 {
 	prince-bookmark-level: none;
 }
+
+.frontcover h1 { prince-bookmark-level: 1; }
+.chapter h2 { prince-bookmark-level: 2; }
+.chapter h3 { prince-bookmark-level: 3; }
+.chapter h4 { prince-bookmark-level: 4; }
+.chapter h5 { prince-bookmark-level: 5; }
+.chapter h6 { prince-bookmark-level: 6; }
 
 /* ============= */
 /* = CONTAINER = */
@@ -124,7 +129,6 @@ div.frontcover * {
 
 .chapter a {
 	color: #0AE;
-	font-weight: bold;
 	text-decoration: none;
 }
 
@@ -132,7 +136,7 @@ div.frontcover * {
 .chapter h3,
 .chapter h4,
 .chapter h5 {
-	margin-top: 25pt;
+	margin: 25pt 0 15pt 0;
 }
 
 .chapter h2 {
@@ -143,9 +147,9 @@ div.frontcover * {
 	string-set: header "Chapter " counter(chapter) ": " content();
 }
 
-div.chapter h2::before {
+.chapter h2::before {
 	content: "Chapter " counter(chapter);
-	color: #c0c0c0;
+	color: #999;
 	display: block;
 	font-size: 18pt;
 	letter-spacing: 0;
@@ -153,18 +157,29 @@ div.chapter h2::before {
 	white-space: pre;
 }
 
+.chapter h3,
+.chapter h5 {
+	font-family: "helvetica", arial, sans-serif;
+}
+
 .chapter h3 {
-	color: #888;
-	font-size: 24pt;
+	color: #b62f32;
+	font-size: 28px;
 }
 
 .chapter h4 {
-	font-size: 18pt;
+	font-size: 18px;
+	font-family: "helvetica neue", "arial narrow", sans-serif;
 }
 
 .chapter h5 {
-	font-size: 16pt;
+	font-size: 15px;
+}
+
+.chapter h6 {
+	font-size: 15px;
 	font-weight: normal;
+	text-transform: uppercase;
 }
 
 /* =========== */
@@ -199,6 +214,12 @@ pre, code {
 	color: #090;
 	font-family: monaco, monospace;
 	font-size: 9pt;
+}
+
+pre, pre code {
+	font-size: 8pt;
+	line-height: 1.4;
+	padding-left: 25pt;
 }
 
 /* ========= */
@@ -317,4 +338,15 @@ div.table-of-contents div.level6 {
 /* ===================== */
 acronym:after {
 	content: " (" attr(title) ")";
+}
+
+/* ============= */
+/* = HIGHLIGHT = */
+/* ============= */
+.highlight {
+	font-size: 20pt;
+}
+
+.highlight strong {
+	color: #b62f32;
 }

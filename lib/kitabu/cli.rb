@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding: utf-8 -*-
 module Kitabu
   class Cli < Thor
     FORMATS = %w[pdf html epub]
@@ -26,7 +26,7 @@ module Kitabu
 
     desc "export [OPTIONS]", "Export e-book"
     method_option :only, :type => :string, :desc => "Can be one of: #{FORMATS.join(", ")}"
-    method_option :auto, :type => :boolean, :desc => "Watch changes and automatically generate files"
+    method_option :auto, :type => :boolean, :desc => "Watch changes and automatically export files"
 
     def export
       if options[:only] && !FORMATS.include?(options[:only])
@@ -45,7 +45,7 @@ module Kitabu
       say "Kitabu version #{Version::STRING}"
     end
 
-    desc "permalinks", "List all title permalinks"
+    desc "permalinks", "List title permalinks"
 
     def permalinks
       html = Kitabu::Parser::Html.new(root_dir).content
@@ -63,6 +63,18 @@ module Kitabu
         text <<  (color_support ? shell.set_color(permalink, :yellow) : permalink)
         say(text)
       end
+    end
+
+    desc "syntaxes", "List available syntaxes"
+
+    def syntaxes
+      say Uv.syntaxes.join(", ")
+    end
+
+    desc "themes", "List available themes"
+
+    def themes
+      say Uv.themes.join(", ")
     end
 
     private

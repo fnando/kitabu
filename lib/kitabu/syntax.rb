@@ -69,7 +69,8 @@ module Kitabu
       end
 
       if meta[:language] == "text"
-        code = %w[<pre class="#{config[:theme]}">#{code}</code>]
+        code.gsub!(/</, "&lt;")
+        code = %[<pre class="#{config[:theme]}"><code>#{code}</code></pre>]
       else
         silence_warnings do
           code = Uv.parse(code, "xhtml", meta[:language], false, config[:theme])

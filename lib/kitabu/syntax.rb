@@ -1,18 +1,24 @@
 module Kitabu
   class Syntax
-    # include Ink::Helper
-
     attr_reader :io
     attr_reader :lines
     attr_reader :root_dir
     attr_reader :format
 
-    def self.render(root_dir, format, source)
-      source.gsub(/@@@(.*?)@@@/m) do |match|
+    # Render syntax blocks from specified source code.
+    #
+    #   dir = Pathname.new(File.dirname(__FILE__))
+    #   text = File.read(dir.join("text/some_file.textile"))
+    #   Kitabu::Syntax.render(dir, :textile, text)
+    #
+    def self.render(root_dir, format, source_code)
+      source_code.gsub(/@@@(.*?)@@@/m) do |match|
         new(root_dir, format, $1).process
       end
     end
 
+    # Process each syntax block individually.
+    #
     def initialize(root_dir, format, code)
       @format = format
       @root_dir = root_dir
@@ -20,10 +26,14 @@ module Kitabu
       @lines = io.readlines.collect(&:chomp)
     end
 
+    # Return unprocessed line codes.
+    #
     def raw
       lines[1..-1].join("\n")
     end
 
+    # Return meta data from syntax annotation.
+    #
     def meta
       @meta ||= begin
         line = lines.first.squish
@@ -48,25 +58,11 @@ module Kitabu
       end
     end
 
+    # Process syntax block, returning a +pre+ HTML tag.
+    #
     def process
       code = raw.to_s.strip_heredoc
-      file_path = root_dir.join("code/#{meta[:file]}")
-
-      if meta[:file] && File.exist?(file_path)
-        code = File.read(file_path)
-
-        if meta[:type] == :range
-          starts, ends = meta[:reference].split(",").collect(&:to_i)
-          code = StringIO.new(code).readlines[starts-1..ends-1].join("\n").strip_heredoc.chomp
-        elsif meta[:type] == :block
-          code.gsub!(/\r\n/, "\n")
-          re = %r[@begin: *\b#{meta[:block]}\b *[^\n]*\n(.*?)\n[^\n]*@end: \b#{meta[:block]}\b]im
-          code = $1.strip_heredoc if code.match(re)
-        end
-
-        # remove block annotations
-        code.gsub!(/\n^.*?@(begin|end):.*?$/, "")
-      end
+      code = process_file.gsub(/\n^.*?@(begin|end):.*?$/, "") if meta[:file]
 
       if meta[:language] == "text"
         code.gsub!(/</, "&lt;")
@@ -79,10 +75,52 @@ module Kitabu
 
       # escape for textile
       code = %[<notextile>#{code}</notextile>] if format == :textile
-
       code
     end
 
+    private
+    # Process line range as in <tt>@@@ ruby some_file.rb:15,20 @@@</tt>.
+    #
+    def process_range(code)
+      starts, ends = meta[:reference].split(",").collect(&:to_i)
+      code = StringIO.new(code).readlines[starts-1..ends-1].join("\n").strip_heredoc.chomp
+    end
+
+    # Process block name as in <tt>@@@ ruby some_file.rb#some_block @@@</tt>.
+    #
+    def process_block(code)
+      code.gsub!(/\r\n/, "\n")
+      re = %r[@begin: *\b(#{meta[:reference]})\b *[^\n]*\n(.*?)\n[^\n]*@end: \1]im
+
+      if code.match(re)
+        $2.strip_heredoc
+      else
+        "[missing '#{meta[:reference]}' block name]"
+      end
+    end
+
+    # Process file and its relatives.
+    #
+    def process_file
+      file_path = root_dir.join("code/#{meta[:file]}")
+
+      if File.exist?(file_path)
+        code = File.read(file_path)
+
+        if meta[:type] == :range
+          process_range(code)
+        elsif meta[:type] == :block
+          process_block(code)
+        else
+          code
+        end
+      else
+        "[missing 'code/#{meta[:file]}' file]"
+      end
+    end
+
+    # Return e-book's configuration.
+    #
     def config
       Kitabu.config(root_dir)
     end

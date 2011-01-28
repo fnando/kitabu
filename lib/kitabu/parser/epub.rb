@@ -21,8 +21,21 @@ module Kitabu
         epub.save(epub_path)
       end
 
+      def cover
+        @cover ||= Tempfile.new("kitabu")
+      end
+
+      def generate_cover
+        cover.write render_template(
+          root_dir.join("templates/cover.erb"),
+          config
+        )
+      end
+
       def set_assets
+        generate_cover
         epub.assets << Kitabu::ROOT.join("templates/epub.css")
+        epub.assets << cover.path
         Dir[root_dir.join("images/**/*")].each {|i| epub.assets << i}
       end
 

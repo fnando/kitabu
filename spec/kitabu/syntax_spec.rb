@@ -28,12 +28,42 @@ describe Kitabu::Syntax do
 	  html.text.should match(/def self\.say/)
 	end
 
-	it "should render block name" do
+	it "should render first block by its name" do
 	  content = Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb#method @@@")
 	  content.should have_tag("pre", 1)
 	  html = Nokogiri::HTML(content)
 	  html.text.should_not match(/class HelloWorld/)
+	  html.text.should_not match(/def self\.shout/)
 	  html.text.should match(/def self\.say/)
+	end
+
+	it "should render second block by its name" do
+	  content = Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb#another_method @@@")
+	  content.should have_tag("pre", 1)
+	  html = Nokogiri::HTML(content)
+	  html.text.should_not match(/class HelloWorld/)
+	  html.text.should_not match(/def self\.say/)
+	  html.text.should match(/def self\.shout/)
+	end
+
+	it "should render missing block message" do
+	  content = Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb#invalid @@@")
+	  content.should have_tag("pre", 1)
+	  html = Nokogiri::HTML(content)
+	  html.text.should_not match(/class HelloWorld/)
+	  html.text.should_not match(/def self\.say/)
+	  html.text.should_not match(/def self\.shout/)
+	  html.text.should match(/\[missing 'invalid' block name\]/)
+	end
+
+	it "should render missing file message" do
+	  content = Kitabu::Syntax.render(root, :markdown, "@@@ ruby invalid.rb @@@")
+	  content.should have_tag("pre", 1)
+	  html = Nokogiri::HTML(content)
+	  html.text.should_not match(/class HelloWorld/)
+	  html.text.should_not match(/def self\.say/)
+	  html.text.should_not match(/def self\.shout/)
+	  html.text.should match(/\[missing 'code\/invalid.rb' file\]/)
 	end
 
 	it "should render file" do

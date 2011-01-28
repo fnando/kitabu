@@ -40,7 +40,7 @@ This command creates a directory <tt>mybook</tt> with the following structure:
       * user.css
     * text
 
-The <tt>config.yml</tt> file holds some information about your book; so you'll always change it.
+The <tt>config/kitabu.yml</tt> file holds some information about your book; so you'll always change it.
 
 Now it's time to write your e-book. All your book content will be placed on the text directory. Kitabu requires you to separate your book into chapters. A chapter is nothing but a directory that holds lots of text files. The e-book will be generated using every folder/file alphabetically. So be sure to use a sequential numbering as the name. Here's a sample:
 
@@ -76,11 +76,7 @@ To print the TOC, you need to print a variable called +toc+, using the eRb tag.
 
 === Syntax Highlighting
 
-We use Pygments[http://pygments.org/], a really nice Python syntax highlighter. You'll need a Python installation if you want to use the syntax highlighting. You'll need the Pygments library as well. To install it, just run
-
-  easy_install Pygments
-
-Pygments is also part of the Debian and Gentoo Linux distributions, you can install it via the package manager there.
+We use Ultraviolet[http://rubygems.org/gems/ultraviolet] for syntax highlighting. If you're running Kitabu under Ruby 1.8, you'll need the Oniguruma[http://rubygems.org/gems/oniguruma] library. Ruby 1.9 already comes with Oniguruma as its regular expression engine.
 
 To highlight a given code snippet, just do something like
 
@@ -90,6 +86,8 @@ To highlight a given code snippet, just do something like
     validates_uniqueness_of :login, :email
   end
   @@@
+
+Run @kitabu syntaxes@ to list all available syntaxes.
 
 <b>Don't indent</b> the source block or will end up with unexpected results.
 

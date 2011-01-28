@@ -2,7 +2,7 @@ module Kitabu
   module Parser
     class Pdf < Base
       def parse
-        IO.popen("prince %s -o %s" % [html_file, pdf_file]).close
+        IO.popen("prince '#{html_file.to_s}' -o '#{pdf_file.to_s}'").close
       end
 
       def html_file

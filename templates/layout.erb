@@ -1,43 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
 	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<head>
-	<title><%= title %></title>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" type="text/css" href="../templates/layout.css"/>
-	<link rel="stylesheet" type="text/css" href="../templates/syntax.css"/>
-	<link rel="stylesheet" type="text/css" href="../templates/user.css"/>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../templates/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="../templates/syntax.css"/>
+    <link rel="stylesheet" type="text/css" href="../templates/user.css"/>
 
-	<meta name="author" content="<%= authors.join(', ') %>" />
-	<meta name="subject" content="<%= subject %>" />
-	<meta name="keywords" content="<%= keywords %>" />
-	<meta name="date" content="<%= published_at %>" />
-</head>
-<body>
-	<div class="frontcover container">
-		<div>
-			<h1><%= title %></h1>
-			<p class="description"><%= subject %></p>
-			<p class="authors"><%= authors.to_sentence %></p>
-		</div>
-	</div>
+    <meta name="author" content="<%= authors.join(', ') %>" />
+    <meta name="subject" content="<%= subject %>" />
+    <meta name="keywords" content="<%= keywords %>" />
+    <meta name="date" content="<%= published_at %>" />
+  </head>
+  <body>
+    <div class="frontcover container">
+      <div>
+        <h1><%= title %></h1>
+        <p class="description"><%= subject %></p>
+        <p class="authors"><%= authors.to_sentence %></p>
+      </div>
+    </div>
 
-	<div class="table-of-contents">
-		<h2 class="no-toc">Content</h2>
-		<div id="toc">
-			<%= toc %>
-		</div>
-	</div>
+    <div class="table-of-contents">
+      <h2 class="no-toc">Content</h2>
+      <div id="toc">
+        <%= toc %>
+      </div>
+    </div>
 
-	<div id="chapters">
-		<%= content %>
-	</div>
+    <div id="chapters">
+      <%= content %>
+    </div>
 
-	<div class="imprint container">
-		<div>
-			<h2><%= title %></h2>
-			<p><%= authors.to_sentence %></p>
-			<p><%= copyright %></p>
-		</div>
-	</div>
-</body>
+    <div class="imprint container">
+      <div>
+        <h2><%= title %></h2>
+        <p><%= authors.to_sentence %></p>
+        <p><%= copyright %></p>
+      </div>
+    </div>
+  </body>
 </html>

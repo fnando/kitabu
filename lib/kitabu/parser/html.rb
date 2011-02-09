@@ -9,6 +9,10 @@ module Kitabu
       #
       IGNORE_DIR = %w[. .. .svn]
 
+      # Files that should be skipped.
+      #
+      IGNORE_FILES = /^(CHANGELOG|TOC)\..*?$/
+
       # List of recognized extensions.
       #
       EXTENSIONS = %w[md mkdn markdown textile html]
@@ -79,7 +83,7 @@ module Kitabu
       #
       def valid_file?(entry)
         ext = File.extname(entry).gsub(/\./, "").downcase
-        File.file?(source.join(entry)) && EXTENSIONS.include?(ext)
+        File.file?(source.join(entry)) && EXTENSIONS.include?(ext) && entry !~ IGNORE_FILES
       end
 
       # Render +file+ considering its extension.
@@ -113,9 +117,21 @@ module Kitabu
       #
       def parse_layout(html)
         toc = Toc.generate(html)
-        toc_options = {:content => toc.content, :toc => toc.to_html}
-        locals = config.merge(toc_options)
+        locals = config.merge({
+          :content   => toc.content,
+          :toc       => toc.to_html,
+          :changelog => render_changelog
+        })
         render_template(root_dir.join("templates/layout.erb"), locals)
+      end
+
+      # Render changelog file.
+      # This file can be used to inform any book change.
+      #
+      def render_changelog
+        changelog = Dir[root_dir.join("text/CHANGELOG.*")].first
+        return render_file(changelog) if changelog
+        nil
       end
 
       # Render a eRb template using +locals+ as data seed.
@@ -135,7 +151,7 @@ module Kitabu
       end
 
       # Retrieve preferred Markdown processor.
-      # Requires one of the following libraries:
+      # You'll need one of the following libraries:
       #
       # # RDiscount: https://rubygems.org/gems/rdiscount
       # # Maruku: https://rubygems.org/gems/maruku

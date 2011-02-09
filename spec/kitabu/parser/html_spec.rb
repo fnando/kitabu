@@ -21,6 +21,11 @@ describe Kitabu::Parser::Html do
       relative.should_not include("_00_Introduction.markdown")
     end
 
+    it "should skip other files" do
+      relative.should_not include("CHANGELOG.textile")
+      relative.should_not include("TOC.textile")
+    end
+
     it "should return only first-level entries" do
       relative.should_not include("04_With_Directory/Some_Chapter.mkdn")
     end
@@ -61,6 +66,10 @@ describe Kitabu::Parser::Html do
 
     it "should have use config file" do
       html.should have_tag("div.imprint p", "Copyright (C) 2010 John Doe.")
+    end
+
+    it "should render changelog" do
+      html.should have_tag("div.changelog h2", "Revisions")
     end
   end
 end

@@ -6,7 +6,7 @@ While Prince is too expensive (495USD for a single user license), the free versi
 
 * Write PDF using Markdown, Textile or plain HTML
 * Book layout support
-* Syntax highlight theme based on Textmate
+* Syntax highlight
 * Generate a HTML, PDF and e-Pub files
 * Table of Contents automatically generated from chapter titles
 
@@ -76,9 +76,7 @@ To print the TOC, you need to print a variable called +toc+, using the eRb tag.
 
 === Syntax Highlighting
 
-We use Ultraviolet[http://rubygems.org/gems/ultraviolet] for syntax highlighting. If you're running Kitabu under Ruby 1.8, you'll need the Oniguruma[http://rubygems.org/gems/oniguruma] library. Ruby 1.9 already comes with Oniguruma as its regular expression engine.
-
-To highlight a given code snippet, just do something like
+We use Ultraviolet[http://rubygems.org/gems/ultraviolet] for syntax highlighting. To highlight a given code snippet, just do something like
 
   @@@ ruby
   class User < ActiveRecord::Base

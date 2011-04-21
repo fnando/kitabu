@@ -15,10 +15,10 @@ module Kitabu
     end
 
     def copy_template_files
-      copy_file "layout.erb",   "templates/layout.erb"
-      copy_file "layout.css",   "templates/layout.css"
-      copy_file "user.css",     "templates/user.css"
-      copy_file "cover.erb",  "templates/cover.erb"
+      copy_file "layout.erb"  , "templates/layout.erb"
+      copy_file "layout.css"  , "templates/layout.css"
+      copy_file "user.css"    , "templates/user.css"
+      copy_file "cover.erb"   , "templates/cover.erb"
       create_file "templates/syntax.css" do
         String.new.tap do |s|
           Dir[File.dirname(__FILE__) + "/../../templates/styles/*.css"].each do |file|

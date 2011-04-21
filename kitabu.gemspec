@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.homepage              = "http://rubygems.org/gems/kitabu"
   s.summary               = "A framework that generates PDF and e-Pub from Markdown, Textile, and HTML files."
   s.description           = s.summary
+  s.license               = "MIT"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

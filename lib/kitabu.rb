@@ -2,8 +2,10 @@ require "active_support/all"
 require "digest/md5"
 require "eeepub"
 require "erb"
+require "logger"
 require "nokogiri"
 require "notifier"
+require "open3"
 require "optparse"
 require "ostruct"
 require "RedCloth"
@@ -23,6 +25,11 @@ require "yaml"
 end
 
 dir = RUBY_VERSION =~ /^1.9/ ? "ruby1.9" : "ruby1.8"
+
+if defined?(Encoding)
+  Encoding.default_internal = "utf-8"
+  Encoding.default_external = "utf-8"
+end
 
 %w[plist textpow uv].each do |lib|
   $LOAD_PATH.unshift File.dirname(__FILE__) + "/kitabu/vendor/#{dir}/#{lib}"
@@ -46,6 +53,14 @@ module Kitabu
   autoload :Stream,     "kitabu/stream"
 
   def self.config(root_dir = nil)
-    YAML.load_file(root_dir.join("config/kitabu.yml")).with_indifferent_access
+    root_dir ||= Pathname.new(Dir.pwd)
+    path = root_dir.join("config/kitabu.yml")
+
+    raise "Invalid Kitabu directory; couldn't found config/kitabu.yml file." unless File.file?(path)
+    YAML.load_file(path).with_indifferent_access
+  end
+
+  def self.logger
+    @logger ||= Logger.new(File.open("/tmp/kitabu.log", "a+"))
   end
 end

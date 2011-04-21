@@ -19,6 +19,9 @@ module Kitabu
         set_assets
         set_chapters
         epub.save(epub_path)
+        true
+      rescue Exception
+        false
       end
 
       def cover

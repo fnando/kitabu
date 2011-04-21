@@ -24,6 +24,9 @@ module Kitabu
         File.open(root_dir.join("output/#{name}.html"), "w+") do |file|
           file << parse_layout(content)
         end
+        true
+      rescue Exception
+        false
       end
 
       # Return all chapters wrapped in a <tt>div.chapter</tt> tag.

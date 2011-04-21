@@ -30,27 +30,31 @@ module Kitabu
       export_pdf = [nil, "pdf"].include?(options[:only])
       export_epub = [nil, "epub"].include?(options[:only])
 
-      Parser::Html.parse(root_dir) if export_html
-      Parser::Pdf.parse(root_dir) if export_pdf
-      Parser::Epub.parse(root_dir) if export_epub
+      exported = []
+      exported << Parser::Html.parse(root_dir) if export_html
+      exported << Parser::Pdf.parse(root_dir) if export_pdf
+      exported << Parser::Epub.parse(root_dir) if export_epub
 
-      if options[:auto]
-        message = "exported!"
+      if exported.all?
+        color = :green
+        message = options[:auto] ? "exported!" : "** e-book has been exported"
+
+        if options[:open] && export_pdf && RUBY_PLATFORM =~ /darwin/
+          filepath = root_dir.join("output/#{File.basename(root_dir)}.pdf")
+          IO.popen("open -a Preview.app '#{filepath}'").close
+        end
+
+        Notifier.notify(
+          :image   => Kitabu::ROOT.join("templates/ebook.png"),
+          :title   => "Kitabu",
+          :message => "Your \"#{config[:title]}\" e-book has been exported!"
+        )
       else
-        message = "** e-book has been exported"
+        color = :red
+        message = options[:auto] ? "could not be exported!" : "** e-book couldn't be exported"
       end
 
-      if options[:open] && export_pdf && RUBY_PLATFORM =~ /darwin/
-        filepath = root_dir.join("output/#{File.basename(root_dir)}.pdf")
-        IO.popen("open -a Preview.app '#{filepath}'").close
-      end
-
-      Notifier.notify(
-        :image   => Kitabu::ROOT.join("templates/ebook.png"),
-        :title   => "Kitabu",
-        :message => "Your \"#{config[:title]}\" e-book has been exported!"
-      )
-      ui.say message, :green
+      ui.say message, color
     end
 
     def config

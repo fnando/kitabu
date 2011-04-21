@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec",         "~> 2.4.0"
   s.add_development_dependency "ZenTest",       "~> 4.4.1"
   s.add_development_dependency "test_notifier", "~> 0.3.6"
-  s.add_development_dependency "ruby-debug19"
+  s.add_development_dependency "ruby-debug19" if RUBY_VERSION >= "1.9"
 
   s.requirements << "oniguruma gem, if you're running Kitabu over Ruby 1.8"
 end

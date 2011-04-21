@@ -3,14 +3,15 @@ $:.push File.expand_path("../lib", __FILE__)
 require "kitabu/version"
 
 Gem::Specification.new do |s|
-  s.name        = "kitabu"
-  s.version     = Kitabu::Version::STRING
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Nando Vieira"]
-  s.email       = ["fnando.vieira@gmail.com"]
-  s.homepage    = "http://rubygems.org/gems/kitabu"
-  s.summary     = "A framework that generates PDF and e-Pub from Markdown, Textile, and HTML files."
-  s.description = s.summary
+  s.name                  = "kitabu"
+  s.version               = Kitabu::Version::STRING
+  s.platform              = Gem::Platform::RUBY
+  s.required_ruby_version = "~> 1.9"
+  s.authors               = ["Nando Vieira"]
+  s.email                 = ["fnando.vieira@gmail.com"]
+  s.homepage              = "http://rubygems.org/gems/kitabu"
+  s.summary               = "A framework that generates PDF and e-Pub from Markdown, Textile, and HTML files."
+  s.description           = s.summary
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -30,7 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec",         "~> 2.4.0"
   s.add_development_dependency "ZenTest",       "~> 4.4.1"
   s.add_development_dependency "test_notifier", "~> 0.3.6"
-  s.add_development_dependency "ruby-debug19" if RUBY_VERSION >= "1.9"
-
-  s.requirements << "oniguruma gem, if you're running Kitabu over Ruby 1.8"
+  s.add_development_dependency "ruby-debug19"
 end

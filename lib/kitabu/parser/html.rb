@@ -3,7 +3,7 @@ module Kitabu
     class Html < Base
       # Supported Markdown libraries
       #
-      MARKDOWN_LIBRARIES = %w[Maruku BlueCloth PEGMarkdown RDiscount]
+      MARKDOWN_LIBRARIES = %w[Maruku BlueCloth PEGMarkdown Redcarpet RDiscount]
 
       # List of directories that should be skipped.
       #
@@ -160,6 +160,7 @@ module Kitabu
       # # Maruku: https://rubygems.org/gems/maruku
       # # PEGMarkdown: https://rubygems.org/gems/rpeg-markdown
       # # BlueCloth: https://rubygems.org/gems/bluecloth
+      # # Redcarpet: https://rubygems.org/gems/redcarpet
       #
       # Note: RDiscount will always be installed as Kitabu's dependency but only used when no
       # alternative library is available.

@@ -15,7 +15,7 @@ require "thor/group"
 require "watchr"
 require "yaml"
 
-%w[maruku peg_markdown bluecloth rdiscount].each do |lib|
+%w[maruku peg_markdown bluecloth redcarpet rdiscount].each do |lib|
   begin
     require lib
     break

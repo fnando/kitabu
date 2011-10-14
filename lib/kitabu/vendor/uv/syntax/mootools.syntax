@@ -445,7 +445,7 @@ patterns:
   - endCaptures: 
       "1": 
         name: punctuation.definition.parameters.end.js
-    begin: ,\s*(\{)
+    begin: ',\s*(\{)'
     contentName: variable.parameter.fx.style.options.js.mootools
     beginCaptures: 
       "1": 

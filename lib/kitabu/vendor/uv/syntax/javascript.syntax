@@ -242,7 +242,7 @@ patterns:
 - name: punctuation.terminator.statement.js
   match: \;
 - name: meta.delimiter.object.comma.js
-  match: ,[ |\t]*
+  match: ",[ |\t]*"
 - name: meta.delimiter.method.period.js
   match: \.
 - name: meta.brace.curly.js

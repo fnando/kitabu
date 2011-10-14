@@ -492,7 +492,7 @@ patterns:
   endCaptures: 
     "0": 
       name: punctuation.definition.string.end.latex
-  begin: ``
+  begin: "``"
   beginCaptures: 
     "0": 
       name: punctuation.definition.string.begin.latex

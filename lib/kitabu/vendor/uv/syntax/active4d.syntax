@@ -28,11 +28,11 @@ repository:
     endCaptures: 
       "0": 
         name: punctuation.definition.string.end.active4d
-    begin: `
+    begin: "`"
     beginCaptures: 
       "0": 
         name: punctuation.definition.string.begin.active4d
-    end: `
+    end: "`"
     patterns: 
     - include: $self
   interpolated_collection_ref: 

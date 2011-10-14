@@ -683,7 +683,7 @@ patterns:
 - name: keyword.other.storage.modifier.ocaml
   match: \b(mutable|ref)\b
 - name: entity.name.type.variant.polymorphic.ocaml
-  match: `[A-Za-z][a-zA-Z0-9'_]*\b
+  match: "`[A-Za-z][a-zA-Z0-9'_]*\\b"
 - name: entity.name.type.variant.ocaml
   match: \b[A-Z][a-zA-Z0-9'_]*\b
 - name: keyword.operator.symbol.ocaml

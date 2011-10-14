@@ -17,11 +17,11 @@ repository:
       endCaptures: 
         "0": 
           name: punctuation.definition.string.end.shell
-      begin: `
+      begin: "`"
       beginCaptures: 
         "0": 
           name: punctuation.definition.string.begin.shell
-      end: `
+      end: "`"
       patterns: 
       - name: constant.character.escape.shell
         match: \\[`\\$]

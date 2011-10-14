@@ -196,8 +196,8 @@ repository:
       captures: 
         "0": 
           name: punctuation.definition.raw.restructuredtext
-      begin: ``
-      end: ``
+      begin: "``"
+      end: "``"
       comment: inline literal
     - name: markup.other.command.restructuredtext
       captures: 

@@ -407,11 +407,11 @@ patterns:
   endCaptures: 
     "0": 
       name: punctuation.definition.string.end.ruby
-  begin: `
+  begin: "`"
   beginCaptures: 
     "0": 
       name: punctuation.definition.string.begin.ruby
-  end: `
+  end: "`"
   patterns: 
   - include: "#interpolated_ruby"
   - include: "#escaped_char"

@@ -70,11 +70,11 @@ patterns:
     endCaptures: 
       "0": 
         name: punctuation.definition.string.end.qmake
-    begin: `
+    begin: "`"
     beginCaptures: 
       "0": 
         name: punctuation.definition.string.begin.qmake
-    end: `
+    end: "`"
   - name: markup.other.assignment.continuation.qmake
     captures: 
       "1": 

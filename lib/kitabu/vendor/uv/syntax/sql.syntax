@@ -66,11 +66,11 @@ repository:
       endCaptures: 
         "0": 
           name: punctuation.definition.string.end.sql
-      begin: `
+      begin: "`"
       beginCaptures: 
         "0": 
           name: punctuation.definition.string.begin.sql
-      end: `
+      end: "`"
       patterns: 
       - include: "#string_escape"
     - name: string.quoted.double.sql

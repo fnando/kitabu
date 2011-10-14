@@ -820,7 +820,7 @@ repository:
           match: ","
         - include: "#everything-else"
       - name: punctuation.separator.guards.erlang
-        match: ,|;
+        match: ",|;"
       - include: "#everything-else"
     - name: punctuation.separator.expressions.erlang
       match: ","

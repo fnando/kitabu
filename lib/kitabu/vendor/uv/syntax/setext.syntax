@@ -102,11 +102,11 @@ patterns:
   endCaptures: 
     "0": 
       name: punctuation.definition.raw.end.setext
-  begin: `
+  begin: "`"
   beginCaptures: 
     "0": 
       name: punctuation.definition.raw.begin.setext
-  end: `
+  end: "`"
 - name: meta.note.def.setext
   captures: 
     "7": 

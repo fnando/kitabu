@@ -57,7 +57,7 @@ patterns:
 - name: markup.raw.verb.line.txt2tags
   match: ^``` (?=.).*$\n?
 - name: markup.raw.verb.inline.txt2tags
-  match: ``([^\s](|.*?[^\s])`*)``
+  match: "``([^\\s](|.*?[^\\s])`*)``"
 - name: invalid.deprecated.trailing-whitespace.txt2tags
   match: \s+$
 - name: string.interpolated.txt2tags

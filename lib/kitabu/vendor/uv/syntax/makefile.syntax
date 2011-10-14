@@ -14,8 +14,8 @@ patterns:
   patterns: 
   - match: \\\n
 - name: string.interpolated.backtick.makefile
-  begin: `
-  end: `
+  begin: "`"
+  end: "`"
   patterns: 
   - include: source.shell
 - name: comment.line.number-sign.makefile

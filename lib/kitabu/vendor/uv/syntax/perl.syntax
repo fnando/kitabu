@@ -925,11 +925,11 @@ patterns:
   endCaptures: 
     "0": 
       name: punctuation.definition.string.end.perl
-  begin: `
+  begin: "`"
   beginCaptures: 
     "0": 
       name: punctuation.definition.string.begin.perl
-  end: `
+  end: "`"
   patterns: 
   - include: "#escaped_char"
   - include: "#variable"
@@ -1110,6 +1110,3 @@ patterns:
 foldingStopMarker: (\*/|^\s*(\}|\]|\)))
 keyEquivalent: ^~P
 comment: |
-  
-  	TODO:	Include RegExp syntax
-

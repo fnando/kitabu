@@ -119,11 +119,11 @@ patterns:
   endCaptures: 
     "0": 
       name: punctuation.definition.string.end.yaml
-  begin: `
+  begin: "`"
   beginCaptures: 
     "0": 
       name: punctuation.definition.string.begin.yaml
-  end: `
+  end: "`"
   patterns: 
   - include: "#escaped_char"
   - include: "#erb"

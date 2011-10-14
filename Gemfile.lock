@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     kitabu (1.0.0)
-      RedCloth (~> 4.2.3)
+      RedCloth (~> 4.2.4)
       activesupport (~> 3.0.3)
       eeepub (~> 0.6.1)
       i18n (~> 0.5.0)
@@ -15,9 +15,9 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.3)
+    RedCloth (4.2.8)
     ZenTest (4.4.2)
-    activesupport (3.0.3)
+    activesupport (3.0.10)
     archive-tar-minitar (0.5.2)
     builder (3.0.0)
     columnize (0.3.2)
@@ -27,9 +27,9 @@ GEM
     i18n (0.5.0)
     linecache19 (0.5.11)
       ruby_core_source (>= 0.1.4)
-    nokogiri (1.4.4)
+    nokogiri (1.4.7)
     notifier (0.1.2)
-    rdiscount (1.6.5)
+    rdiscount (1.6.8)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)

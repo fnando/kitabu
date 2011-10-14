@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "activesupport",             "~> 3.0.3"
   s.add_dependency "nokogiri",                  "~> 1.4.4"
-  s.add_dependency "RedCloth",                  "~> 4.2.3"
+  s.add_dependency "RedCloth",                  "~> 4.2.4"
   s.add_dependency "rdiscount",                 "~> 1.6.5"
   s.add_dependency "i18n",                      "~> 0.5.0"
   s.add_dependency "thor",                      "~> 0.14.6"

@@ -118,7 +118,8 @@ div.frontcover * {
 /* =========== */
 #chapters {
     counter-reset: page 1;
-	page-break-before: always;
+    counter-reset: chapter 1;
+    page-break-before: always;
 }
 
 .chapter {

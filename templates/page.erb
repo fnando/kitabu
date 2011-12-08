@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%= language %>">
-	<head>
-		<title></title>
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="epub.css"/>
-	</head>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="epub.css"/>
 
-	<body>
-		<div class="chapter">
-			<%= content %>
-		</div>
-	</body>
+    <style type='text/css'>
+      pre.sunburst {
+        background-color: #EEE;
+        color: #444;
+        line-height: 1.5em;
+
+        padding: 0.7em;
+      }
+
+      code {
+        background-color: #EEE;
+        color: #444;
+        line-height: 1.5em;
+        padding: 2px;
+      }
+
+      pre span {
+        font-size: 9pt;
+        line-height: 1.4;
+        font-family: monaco, monospace;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="chapter">
+      <%= content %>
+    </div>
+  </body>
 </html>

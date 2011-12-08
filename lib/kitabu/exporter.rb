@@ -4,6 +4,7 @@ module Kitabu
       exporter = new(root_dir, options)
 
       if options[:auto]
+        exporter.export!
         exporter.auto! if options[:auto]
       else
         exporter.export!

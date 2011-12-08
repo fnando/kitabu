@@ -29,10 +29,7 @@ module Kitabu
       end
 
       def generate_cover
-        cover.write render_template(
-          root_dir.join("templates/cover.erb"),
-          config
-        )
+        epub.sections << ['cover', render_template(root_dir.join("templates/cover.erb"), config)]
       end
 
       def set_assets

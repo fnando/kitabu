@@ -53,7 +53,9 @@ module Kitabu
     path = root_dir.join("config/kitabu.yml")
 
     raise "Invalid Kitabu directory; couldn't found config/kitabu.yml file." unless File.file?(path)
-    YAML.load_file(path).with_indifferent_access
+    content = File.read(path)
+    erb = ERB.new(content).result
+    YAML.load(erb).with_indifferent_access
   end
 
   def self.logger

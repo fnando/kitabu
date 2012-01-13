@@ -19,6 +19,9 @@ module Kitabu
       copy_file "layout.css"  , "templates/layout.css"
       copy_file "user.css"    , "templates/user.css"
       copy_file "cover.erb"   , "templates/cover.erb"
+      copy_file "epub.css"    , "templates/epub.css"
+      copy_file "epub.erb"    , "templates/epub.erb"
+      
       create_file "templates/syntax.css" do
         String.new.tap do |s|
           Dir[File.dirname(__FILE__) + "/../../templates/styles/*.css"].each do |file|

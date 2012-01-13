@@ -34,7 +34,7 @@ module Kitabu
 
       def set_assets
         generate_cover
-        epub.assets << Kitabu::ROOT.join("templates/epub.css")
+        epub.assets << root_dir.join("templates/epub.css")
         epub.assets << cover.path
         Dir[root_dir.join("images/**/*")].each {|i| epub.assets << i}
       end
@@ -48,7 +48,7 @@ module Kitabu
         [
           title,
           render_template(
-            Kitabu::ROOT.join("templates/page.erb"),
+            root_dir.join("templates/epub.erb"),
             {:chapter_title => title, :content => content}
           )
         ]

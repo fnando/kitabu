@@ -41,7 +41,7 @@ module Kitabu
 
       def chapter(entry)
         files = chapter_files(entry)
-        content = replace_paths(render_chapter(files))
+        content = replace_paths(render_chapter(files, true))
         html = Nokogiri(content)
         title = html.css("h2").first.text
 

@@ -91,9 +91,10 @@ module Kitabu
 
       # Render +file+ considering its extension.
       #
-      def render_file(file)
+      def render_file(file, plain_syntax = false)
         file_format = format(file)
-        content = Kitabu::Syntax.render(root_dir, file_format, File.read(file))
+
+        content = Kitabu::Syntax.render(root_dir, file_format, File.read(file), plain_syntax)
 
         case file_format
         when :markdown
@@ -145,10 +146,10 @@ module Kitabu
 
       # Render all +files+ from a given chapter.
       #
-      def render_chapter(files)
+      def render_chapter(files, plain_syntax = false)
         String.new.tap do |chapter|
           files.each do |file|
-            chapter << render_file(file) << "\n\n"
+            chapter << render_file(file, plain_syntax) << "\n\n"
           end
         end
       end

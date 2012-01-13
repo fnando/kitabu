@@ -66,18 +66,6 @@ module Kitabu
       end
     end
 
-    desc "syntaxes", "List available syntaxes"
-
-    def syntaxes
-      say Uv.syntaxes.join(", ")
-    end
-
-    desc "themes", "List available themes"
-
-    def themes
-      say Uv.themes.join(", ")
-    end
-
     private
     def inside_ebook!
       unless File.exist?(config_path)

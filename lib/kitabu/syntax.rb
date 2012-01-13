@@ -65,14 +65,7 @@ module Kitabu
       code = raw.to_s.strip_heredoc
       code = process_file.gsub(/\n^.*?@(begin|end):.*?$/, "") if meta[:file]
 
-      if language == "text"
-        code.gsub!(/</, "&lt;")
-        code = %[<pre class="#{config[:theme]}"><code>#{code}</code></pre>]
-      else
-        silence_warnings do
-          code = Uv.parse(code, "xhtml", meta[:language], false, config[:theme])
-        end
-      end
+      code = Pygments.highlight(code, :lexer => language)
 
       # escape for textile
       code = %[<notextile>#{code}</notextile>] if format == :textile

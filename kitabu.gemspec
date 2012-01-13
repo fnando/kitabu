@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency "eeepub",                    "~> 0.6.1"
   s.add_dependency "watchr",                    "~> 0.7.0"
   s.add_dependency "notifier",                  "~> 0.1.2"
+  s.add_dependency "pygments.rb",               "~> 0.2.4"
 
   s.add_development_dependency "rspec",         "~> 2.5.0"
   s.add_development_dependency "ZenTest",       "~> 4.4.1"

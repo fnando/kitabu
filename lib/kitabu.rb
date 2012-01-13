@@ -27,10 +27,7 @@ end
 Encoding.default_internal = "utf-8"
 Encoding.default_external = "utf-8"
 
-%w[plist textpow uv].each do |lib|
-  $LOAD_PATH.unshift File.dirname(__FILE__) + "/kitabu/vendor/#{lib}"
-  require lib
-end
+require 'pygments.rb'
 
 module Kitabu
   require "kitabu/extensions/string"

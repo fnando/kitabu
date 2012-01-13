@@ -3,6 +3,7 @@ module Kitabu
     autoload :Html  , "kitabu/parser/html"
     autoload :Pdf   , "kitabu/parser/pdf"
     autoload :Epub  , "kitabu/parser/epub"
+    autoload :Mobi  , "kitabu/parser/mobi"
 
     class Base
       # The e-book directory.

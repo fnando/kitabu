@@ -5,7 +5,7 @@ module Kitabu
 
       def initialize(*args)
         super
-        @epub = EeePub::Easy.new
+        @epub = EeePub::Maker.new
       end
 
       def parse
@@ -16,27 +16,24 @@ module Kitabu
         epub.date         config[:published_at]
         epub.uid          config[:uid]
         epub.identifier   config[:identifier][:id], :scheme => config[:identifier][:type]
-        set_assets
-        set_chapters
+        epub.cover_page   root_dir.join('images/cover-epub.jpg')
+
+        assets            = collect_assets
+        sections          = collect_sections
+        filenames         = collect_filenames(sections)
+
+        epub.files        filenames + assets
+        epub.nav          collect_nav(sections, filenames)
+
         epub.save(epub_path)
         true
       rescue Exception
+        p $!, $@
         false
       end
 
-      def cover
-        @cover ||= Tempfile.new("kitabu")
-      end
-
-      def generate_cover
-        epub.sections << ['cover', render_template(root_dir.join("templates/cover.erb"), config)]
-      end
-
-      def set_assets
-        generate_cover
-        epub.assets << root_dir.join("templates/epub.css")
-        epub.assets << cover.path
-        Dir[root_dir.join("images/**/*")].each {|i| epub.assets << i}
+      def collect_assets
+        Dir[root_dir.join("images/**/*")].push root_dir.join("templates/epub.css")
       end
 
       def chapter(entry)
@@ -54,9 +51,25 @@ module Kitabu
         ]
       end
 
-      def set_chapters
-        entries.each do |entry|
-          epub.sections << chapter(entry)
+      def collect_sections
+        entries.map { |entry| chapter(entry) }
+      end
+
+      def collect_filenames(sections)
+        index = 0
+        
+        sections.map do |section|
+          index += 1
+          
+          filename = File.join(root_dir, "tmp", "section_#{index}.html")
+          File.open(filename, 'w') { |file| file.write section[1] }
+          filename
+        end
+      end
+      
+      def collect_nav(sections, filenames)
+        [sections, filenames].transpose.map do |section, filename|
+          {:label => section[0], :content => File.basename(filename)}
         end
       end
 

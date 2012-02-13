@@ -16,7 +16,7 @@ module Kitabu
         epub.date         config[:published_at]
         epub.uid          config[:uid]
         epub.identifier   config[:identifier][:id], :scheme => config[:identifier][:type]
-        epub.cover_page   root_dir.join('images/cover-epub.jpg')
+        epub.cover_page   render_cover
 
         assets            = collect_assets
         sections          = collect_sections
@@ -33,7 +33,18 @@ module Kitabu
       end
 
       def collect_assets
-        [File.join(root_dir, "templates", "epub.css")]
+        [File.join(root_dir, "images", "cover-epub.jpg"), File.join(root_dir, "templates", "epub", "style.css")]
+      end
+
+      def render_cover
+        data = render_template(
+          root_dir.join("templates/epub/cover.erb"),
+          {:title => config[:title], :language => config[:language]}
+        )
+
+        filename = File.join(root_dir, "tmp", "cover.html")
+        File.open(filename, 'w') { |file| file.write data }
+        filename
       end
 
       def chapter(entry)
@@ -45,7 +56,7 @@ module Kitabu
         [
           title,
           render_template(
-            root_dir.join("templates/epub.erb"),
+            root_dir.join("templates/epub/page.erb"),
             {:chapter_title => title, :content => content, :language => config[:language]}
           )
         ]

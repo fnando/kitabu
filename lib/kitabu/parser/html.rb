@@ -126,7 +126,7 @@ module Kitabu
           :toc       => toc.to_html,
           :changelog => render_changelog
         })
-        render_template(root_dir.join("templates/layout.erb"), locals)
+        render_template(root_dir.join("templates/html/layout.erb"), locals)
       end
 
       # Render changelog file.

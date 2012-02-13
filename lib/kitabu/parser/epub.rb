@@ -46,7 +46,7 @@ module Kitabu
           title,
           render_template(
             root_dir.join("templates/epub.erb"),
-            {:chapter_title => title, :content => content}
+            {:chapter_title => title, :content => content, :language => config[:language]}
           )
         ]
       end

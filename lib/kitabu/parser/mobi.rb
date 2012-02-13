@@ -5,7 +5,8 @@ module Kitabu
         command = ["kindlegen", epub_file.to_s,]
         puts command
 
-        system(command)
+        system(*command)
+        true
       end
 
       def epub_file

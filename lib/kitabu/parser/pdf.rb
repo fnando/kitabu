@@ -5,7 +5,8 @@ module Kitabu
         command = ["prince", html_file.to_s, "-o", pdf_file.to_s]
         puts command
 
-        system(command)
+        system(*command)
+        true
       end
 
       def html_file

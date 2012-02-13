@@ -1,6 +1,44 @@
 module Kitabu
   module Parser
     class Epub < Html
+
+      module Toc
+        HEAD = <<-HEAD
+        <?xml version='1.0' encoding='utf-8' ?>
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+        <html xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+          <head>
+            <meta content='application/xhtml+xml; charset=utf-8' http-equiv='Content-Type' />
+            <title>Table of Contents</title>
+          </head>
+          <body>
+            <div id='toc'>
+              <ul>
+        HEAD
+
+        TAIL = <<-TAIL
+              </ul>
+            </div>
+          </body>
+        </html>
+        TAIL
+
+        def generate_html(nav)
+          HEAD + 
+          nav.map { |element| 
+            "<li><a href='#{element[:content]}'>#{element[:label]}</a></li>"
+          }.join + 
+          TAIL
+        end
+
+        def generate_file(*args)
+          filename = "tmp/toc.html"
+          File.open(filename, 'w') { |file| file.write generate_html(*args) }
+          filename
+        end
+        module_function :generate_file, :generate_html
+      end
+
       attr_accessor :epub
 
       def initialize(*args)
@@ -24,6 +62,8 @@ module Kitabu
 
         epub.files        filenames + assets
         epub.nav          collect_nav(sections, filenames)
+
+        epub.toc_page     Toc.generate_file collect_nav(sections, filenames)
 
         epub.save(epub_path)
         true
@@ -61,7 +101,7 @@ module Kitabu
         sections.map do |section|
           index += 1
           
-          filename = File.join(root_dir, "tmp", "section_#{index}.html")
+          filename = "tmp/section_#{index}.html"
           File.open(filename, 'w') { |file| file.write section[1] }
           filename
         end

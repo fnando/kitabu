@@ -33,7 +33,7 @@ module Kitabu
       end
 
       def collect_assets
-        Dir[root_dir.join("images/**/*")].push root_dir.join("templates/epub.css")
+        [root_dir.join("templates/epub.css")]
       end
 
       def chapter(entry)

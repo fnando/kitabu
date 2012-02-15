@@ -53,7 +53,7 @@ module Kitabu
       # Return a list of all recognized files.
       #
       def entries
-        Dir.entries(source).inject([]) do |buffer, entry|
+        Dir.entries(source).sort.inject([]) do |buffer, entry|
           buffer << source.join(entry) if valid_entry?(entry)
           buffer
         end
@@ -65,7 +65,7 @@ module Kitabu
         if File.file?(entry)
           [entry]
         else
-          Dir.glob("#{entry}/**/*.{#{EXTENSIONS.join(",")}}")
+          Dir.glob("#{entry}/**/*.{#{EXTENSIONS.join(",")}}").sort
         end
       end
 

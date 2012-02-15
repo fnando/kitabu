@@ -15,14 +15,15 @@ module Kitabu
     end
 
     def copy_template_files
-      copy_file "layout.erb"  , "templates/layout.erb"
-      copy_file "layout.css"  , "templates/layout.css"
-      copy_file "user.css"    , "templates/user.css"
-      copy_file "cover.erb"   , "templates/cover.erb"
-      copy_file "epub.css"    , "templates/epub.css"
-      copy_file "epub.erb"    , "templates/epub.erb"
+      copy_file "layout.erb"  , "templates/html/layout.erb"
+      copy_file "layout.css"  , "templates/html/layout.css"
+      copy_file "user.css"    , "templates/html/user.css"
+      copy_file "cover.erb"   , "templates/html/cover.erb"
+      copy_file "cover.erb"   , "templates/epub/cover.erb"
+      copy_file "epub.css"    , "templates/epub/style.css"
+      copy_file "epub.erb"    , "templates/epub/page.erb"
       
-      create_file "templates/syntax.css" do
+      create_file "templates/html/syntax.css" do
         String.new.tap do |s|
           Dir[File.dirname(__FILE__) + "/../../templates/styles/*.css"].each do |file|
             s << "/*== #{File.basename(file)} ==*/\n"

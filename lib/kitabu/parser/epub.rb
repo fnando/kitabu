@@ -43,6 +43,7 @@ module Kitabu
 
       def initialize(*args)
         super
+        FileUtils.mkdir_p('tmp')
         @epub = EeePub::Maker.new
       end
 
@@ -54,7 +55,7 @@ module Kitabu
         epub.date         config[:published_at]
         epub.uid          config[:uid]
         epub.identifier   config[:identifier][:id], :scheme => config[:identifier][:type]
-        epub.cover_page   root_dir.join('images/cover-epub.jpg')
+        epub.cover_page   cover_image
 
         assets            = collect_assets
         sections          = collect_sections
@@ -73,7 +74,12 @@ module Kitabu
       end
 
       def collect_assets
-        [File.join(root_dir, "images", "cover-epub.jpg"), File.join(root_dir, "templates", "epub", "style.css")]
+        [cover_image, File.join(root_dir, "templates", "epub", "style.css")].compact
+      end
+
+      def cover_image
+        path = root_dir.join('images/cover-epub.jpg')
+        return path if File.exist?(path)
       end
 
       def chapter(entry)

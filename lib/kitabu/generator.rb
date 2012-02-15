@@ -18,7 +18,6 @@ module Kitabu
       copy_file "layout.erb"  , "templates/html/layout.erb"
       copy_file "layout.css"  , "templates/html/layout.css"
       copy_file "user.css"    , "templates/html/user.css"
-      copy_file "cover.erb"   , "templates/html/cover.erb"
       copy_file "cover.erb"   , "templates/epub/cover.erb"
       copy_file "epub.css"    , "templates/epub/style.css"
       copy_file "epub.erb"    , "templates/epub/page.erb"

@@ -27,16 +27,18 @@ module Kitabu
       helper = root_dir.join("config/helper.rb")
       load(helper) if helper.exist?
 
-      export_html = [nil, "pdf", "html"].include?(options[:only])
+      export_html = [nil, "pdf", "txt", "html"].include?(options[:only])
       export_pdf = [nil, "pdf"].include?(options[:only])
       export_epub = [nil, "mobi", "epub"].include?(options[:only])
       export_mobi = [nil, "mobi"].include?(options[:only])
+      export_txt = [nil, "txt"].include?(options[:only])
 
       exported = []
       exported << Parser::Html.parse(root_dir) if export_html
       exported << Parser::Pdf.parse(root_dir) if export_pdf
       exported << Parser::Epub.parse(root_dir) if export_epub
       exported << Parser::Mobi.parse(root_dir) if export_mobi
+      exported << Parser::Txt.parse(root_dir) if export_txt
 
       if exported.all?
         color = :green

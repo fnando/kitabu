@@ -19,7 +19,7 @@ module Kitabu
 
       def transform_footnotes(content)
         doc = Nokogiri::HTML(content)
-        doc.css('a.footnote').each do |node|
+        doc.css('a').each do |node|
           prince_friendly_footnote = <<-FN
             #{node.text}<span class='fn'><a href='#{node['href']}'>#{node['href']}</a></span>
           FN

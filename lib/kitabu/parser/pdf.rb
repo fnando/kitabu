@@ -9,8 +9,7 @@ module Kitabu
         transformed_html_file.write prince_friendly_footnotes
 
         command = ["prince", transformed_html_file.path, "-o", pdf_file.to_s]
-        p command
-        system(*command)
+        Process.wait Process.spawn(*command)
 
         transformed_html_file.close
         File.unlink(transformed_html_file)

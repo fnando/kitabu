@@ -5,7 +5,7 @@ module Kitabu
         command = ["kindlegen", epub_file.to_s,]
         puts command
 
-        system(*command)
+        Process.wait Process.spawn(*command)
         true
       end
 

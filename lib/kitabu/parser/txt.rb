@@ -5,7 +5,7 @@ module Kitabu
         command = ["html2text", "-style", "pretty", "-o", txt_file.to_s, html_file.to_s]
         puts command.join(' ')
 
-        system(*command)
+        Process.wait Process.spawn(*command)
         true
       end
 

@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency "notifier",                  "~> 0.1"
   s.add_dependency "pygments.rb",               "~> 0.2"
 
-  s.add_development_dependency "rspec",         "~> 2.9"
-  s.add_development_dependency "test_notifier", "~> 1.0"
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "test_notifier"
+  s.add_development_dependency "rake"
 end

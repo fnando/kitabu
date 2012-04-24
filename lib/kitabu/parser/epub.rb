@@ -4,24 +4,24 @@ module Kitabu
 
       module Toc
         HEAD = <<-HEAD
-        <?xml version='1.0' encoding='utf-8' ?>
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-        <html xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
-          <head>
-            <meta content='application/xhtml+xml; charset=utf-8' http-equiv='Content-Type' />
-            <title>Table of Contents</title>
-          </head>
-          <body>
-            <div id='toc'>
-              <ul>
-        HEAD
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='application/xhtml+xml; charset=utf-8' http-equiv='Content-Type' />
+    <title>Table of Contents</title>
+  </head>
+  <body>
+    <div id='toc'>
+      <ul>
+HEAD
 
-        TAIL = <<-TAIL
-              </ul>
-            </div>
-          </body>
-        </html>
-        TAIL
+TAIL = <<-TAIL
+      </ul>
+    </div>
+  </body>
+</html>
+TAIL
 
         def generate_html(nav)
           HEAD + 

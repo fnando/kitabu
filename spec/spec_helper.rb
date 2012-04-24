@@ -10,9 +10,8 @@ Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|r| require r}
 RSpec.configure do |config|
   config.include(SpecHelper)
   config.include(Matchers)
-  config.color_enabled = true
 
-  cleaner = proc {
+  config.around do
     [
       TMPDIR,
       SPECDIR.join("support/mybook/output/mybook.pdf"),
@@ -21,9 +20,7 @@ RSpec.configure do |config|
     ].each do |i|
       FileUtils.rm_rf(i) if File.exist?(i)
     end
-  }
+  end
 
-  config.before(&cleaner)
   config.before { FileUtils.mkdir_p(TMPDIR) }
-  config.after(&cleaner)
 end

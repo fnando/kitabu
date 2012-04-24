@@ -19,18 +19,17 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency "activesupport",             "~> 3.0.3"
-  s.add_dependency "nokogiri",                  "~> 1.4.4"
-  s.add_dependency "RedCloth",                  "~> 4.2.4"
-  s.add_dependency "rdiscount",                 "~> 1.6.5"
-  s.add_dependency "i18n",                      "~> 0.5.0"
-  s.add_dependency "thor",                      "~> 0.14.6"
-  s.add_dependency "eeepub-with-cover-support", "~> 0.8.6"
-  s.add_dependency "watchr",                    "~> 0.7.0"
-  s.add_dependency "notifier",                  "~> 0.1.2"
-  s.add_dependency "pygments.rb",               "~> 0.2.4"
+  s.add_dependency "activesupport",             "~> 3.0"
+  s.add_dependency "nokogiri",                  "~> 1.5"
+  s.add_dependency "RedCloth",                  "~> 4.2"
+  s.add_dependency "rdiscount",                 "~> 1.6"
+  s.add_dependency "i18n",                      "~> 0.5"
+  s.add_dependency "thor",                      "~> 0.14"
+  s.add_dependency "eeepub-with-cover-support", "~> 0.8"
+  s.add_dependency "watchr",                    "~> 0.7"
+  s.add_dependency "notifier",                  "~> 0.1"
+  s.add_dependency "pygments.rb",               "~> 0.2"
 
-  s.add_development_dependency "rspec",         "~> 2.5.0"
-  s.add_development_dependency "ZenTest",       "~> 4.4.1"
-  s.add_development_dependency "test_notifier", "~> 0.3.6"
+  s.add_development_dependency "rspec",         "~> 2.9"
+  s.add_development_dependency "test_notifier", "~> 1.0"
 end

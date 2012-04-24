@@ -14,6 +14,7 @@ require "thor"
 require "thor/group"
 require "watchr"
 require "yaml"
+require "cgi"
 
 %w[maruku peg_markdown bluecloth redcarpet rdiscount].each do |lib|
   begin

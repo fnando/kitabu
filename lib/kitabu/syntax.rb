@@ -11,19 +11,20 @@ module Kitabu
     #   text = File.read(dir.join("text/some_file.textile"))
     #   Kitabu::Syntax.render(dir, :textile, text)
     #
-    def self.render(root_dir, format, source_code)
+    def self.render(root_dir, format, source_code, raw = false)
       source_code.gsub(/@@@(.*?)@@@/m) do |match|
-        new(root_dir, format, $1).process
+        new(root_dir, format, $1, raw).process
       end
     end
 
     # Process each syntax block individually.
     #
-    def initialize(root_dir, format, code)
+    def initialize(root_dir, format, code, raw = false)
       @format = format
       @root_dir = root_dir
       @io = StringIO.new(code)
       @lines = io.readlines.collect(&:chomp)
+      @language = 'text' if raw
     end
 
     # Return unprocessed line codes.
@@ -64,14 +65,7 @@ module Kitabu
       code = raw.to_s.strip_heredoc
       code = process_file.gsub(/\n^.*?@(begin|end):.*?$/, "") if meta[:file]
 
-      if meta[:language] == "text"
-        code.gsub!(/</, "&lt;")
-        code = %[<pre class="#{config[:theme]}"><code>#{code}</code></pre>]
-      else
-        silence_warnings do
-          code = Uv.parse(code, "xhtml", meta[:language], false, config[:theme])
-        end
-      end
+      code = Pygments.highlight(code, :lexer => language)
 
       # escape for textile
       code = %[<notextile>#{code}</notextile>] if format == :textile
@@ -123,6 +117,12 @@ module Kitabu
     #
     def config
       Kitabu.config(root_dir)
+    end    
+    
+    # Return the language used for this syntax block. Overrideable
+    # for epub generation.
+    def language
+      @language || meta[:language]
     end
   end
 end

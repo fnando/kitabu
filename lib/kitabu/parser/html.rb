@@ -53,7 +53,7 @@ module Kitabu
       # Return a list of all recognized files.
       #
       def entries
-        Dir.entries(source).inject([]) do |buffer, entry|
+        Dir.entries(source).sort.inject([]) do |buffer, entry|
           buffer << source.join(entry) if valid_entry?(entry)
           buffer
         end
@@ -65,7 +65,7 @@ module Kitabu
         if File.file?(entry)
           [entry]
         else
-          Dir.glob("#{entry}/**/*.{#{EXTENSIONS.join(",")}}")
+          Dir.glob("#{entry}/**/*.{#{EXTENSIONS.join(",")}}").sort
         end
       end
 
@@ -91,9 +91,10 @@ module Kitabu
 
       # Render +file+ considering its extension.
       #
-      def render_file(file)
+      def render_file(file, plain_syntax = false)
         file_format = format(file)
-        content = Kitabu::Syntax.render(root_dir, file_format, File.read(file))
+
+        content = Kitabu::Syntax.render(root_dir, file_format, File.read(file), plain_syntax)
 
         case file_format
         when :markdown
@@ -125,7 +126,7 @@ module Kitabu
           :toc       => toc.to_html,
           :changelog => render_changelog
         })
-        render_template(root_dir.join("templates/layout.erb"), locals)
+        render_template(root_dir.join("templates/html/layout.erb"), locals)
       end
 
       # Render changelog file.
@@ -145,10 +146,10 @@ module Kitabu
 
       # Render all +files+ from a given chapter.
       #
-      def render_chapter(files)
+      def render_chapter(files, plain_syntax = false)
         String.new.tap do |chapter|
           files.each do |file|
-            chapter << render_file(file) << "\n\n"
+            chapter << render_file(file, plain_syntax) << "\n\n"
           end
         end
       end

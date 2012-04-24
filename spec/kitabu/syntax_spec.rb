@@ -73,8 +73,8 @@ describe Kitabu::Syntax do
 	  html.text.should match(/def self\.say/)
 	end
 
-	it "should add theme class" do
-	  Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb @@@").should have_tag("pre.idle", 1)
+	it "should add highlight class" do
+	  Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb @@@").should have_tag("div.highlight", 1)
 	end
 
 	it "should wrap code in pre tag" do

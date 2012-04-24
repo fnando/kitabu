@@ -161,6 +161,7 @@ Check the section "Syntax Highlighting" for detailed info.
 == Maintainer
 
 * Nando Vieira (http://nandovieira.com.br)
+* Jesse Storimer (http://jstorimer.com)
 
 == License
 

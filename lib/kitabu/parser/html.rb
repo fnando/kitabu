@@ -17,10 +17,19 @@ module Kitabu
       #
       EXTENSIONS = %w[md mkdn markdown textile html]
 
+      class << self
+        # The footnote index control. We have to manipulate footnotes
+        # because each chapter starts from 1, so we have duplicated references.
+        #
+        attr_accessor :footnote_index
+      end
+
       # Parse all files and save the parsed content
       # to <tt>output/book_name.html</tt>.
       #
       def parse
+        self.class.footnote_index = 1
+
         File.open(root_dir.join("output/#{name}.html"), "w+") do |file|
           file << parse_layout(content)
         end
@@ -96,7 +105,7 @@ module Kitabu
 
         content = Kitabu::Syntax.render(root_dir, file_format, File.read(file), plain_syntax)
 
-        case file_format
+        content = case file_format
         when :markdown
           markdown.new(content).to_html
         when :textile
@@ -104,6 +113,38 @@ module Kitabu
         else
           content
         end
+
+        render_footnotes(content, plain_syntax)
+      end
+
+      def render_footnotes(content, plain_syntax = false)
+        html = Nokogiri::HTML(content)
+        footnotes = html.css("p[id^='fn']")
+
+        return content if footnotes.empty?
+
+        footnotes.each do |fn|
+          index = self.class.footnote_index
+          actual_index = fn["id"].gsub(/[^\d]/, "")
+
+          fn.set_attribute("id", "fn#{index}")
+
+          html.css("a[href='#fn#{actual_index}']").each do |link|
+            link.set_attribute("href", "#fn#{index}")
+          end
+
+          html.css("a[href='#fnr#{actual_index}']").each do |link|
+            link.set_attribute("href", "#fnr#{index}")
+          end
+
+          html.css("[id=fnr#{actual_index}]").each do |tag|
+            tag.set_attribute("id", "fnr#{index}")
+          end
+
+          self.class.footnote_index += 1
+        end
+
+        html.css("body").inner_html
       end
 
       def format(file)

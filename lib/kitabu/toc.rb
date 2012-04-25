@@ -27,10 +27,8 @@ module Kitabu
         tag.set_attribute("id", permalink)
       end
 
-      html = html.to_xhtml
-      html.force_encoding("UTF-8") if html.encoding_aware?
-
-      _, content = *html.match(/<body>(.*?)<\/body>/m)
+      content = html.css("body").inner_html
+      content.force_encoding("UTF-8") if content.encoding_aware?
       content
     end
 

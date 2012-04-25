@@ -65,7 +65,7 @@ module Kitabu
       code = raw.to_s.strip_heredoc
       code = process_file.gsub(/\n^.*?@(begin|end):.*?$/, "") if meta[:file]
 
-      code = Pygments.highlight(code, :lexer => language)
+      code = Pygments.highlight(code, :lexer => language, :options => {:encoding => "utf-8"})
 
       # escape for textile
       code = %[<notextile>#{code}</notextile>] if format == :textile
@@ -117,8 +117,8 @@ module Kitabu
     #
     def config
       Kitabu.config(root_dir)
-    end    
-    
+    end
+
     # Return the language used for this syntax block. Overrideable
     # for epub generation.
     def language

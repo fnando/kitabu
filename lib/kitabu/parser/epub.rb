@@ -4,15 +4,15 @@ module Kitabu
 
       module Toc
         HEAD = <<-HEAD
-<?xml version='1.0' encoding='utf-8' ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta content='application/xhtml+xml; charset=utf-8' http-equiv='Content-Type' />
+    <meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type" />
     <title>Table of Contents</title>
   </head>
   <body>
-    <div id='toc'>
+    <div id="toc">
       <ul>
 HEAD
 
@@ -24,16 +24,16 @@ TAIL = <<-TAIL
 TAIL
 
         def generate_html(nav)
-          HEAD + 
-          nav.map { |element| 
-            "<li><a href='#{element[:content]}'>#{element[:label]}</a></li>"
-          }.join + 
+          HEAD +
+          nav.map { |element|
+            "<li><a href='#{element[:content]}'>#{CGI.escapeHTML(element[:label])}</a></li>"
+          }.join +
           TAIL
         end
 
         def generate_file(*args)
           filename = "tmp/toc.html"
-          File.open(filename, 'w') { |file| file.write generate_html(*args) }
+          File.open(filename, "w") { |file| file.write generate_html(*args) }
           filename
         end
         module_function :generate_file, :generate_html
@@ -43,11 +43,13 @@ TAIL
 
       def initialize(*args)
         super
-        FileUtils.mkdir_p('tmp')
+        FileUtils.mkdir_p("tmp")
         @epub = EeePub::Maker.new
       end
 
       def parse
+        reset_footnote_index!
+
         epub.title        config[:title]
         epub.language     config[:language]
         epub.creator      config[:authors].to_sentence
@@ -78,8 +80,8 @@ TAIL
       end
 
       def cover_image
-        path = root_dir.join('images/cover-epub.jpg')
-        return path if File.exist?(path)
+        path = Dir[root_dir.join("images/cover-epub.*").to_s].first
+        return path if path && File.exist?(path)
       end
 
       def chapter(entry)
@@ -103,16 +105,16 @@ TAIL
 
       def collect_filenames(sections)
         index = 0
-        
+
         sections.map do |section|
           index += 1
-          
+
           filename = "tmp/section_#{index}.html"
-          File.open(filename, 'w') { |file| file.write section[1] }
+          File.open(filename, "w") { |file| file.write section[1] }
           filename
         end
       end
-      
+
       def collect_nav(sections, filenames)
         [sections, filenames].transpose.map do |section, filename|
           {:label => section[0], :content => File.basename(filename)}

@@ -28,7 +28,7 @@ module Kitabu
       # to <tt>output/book_name.html</tt>.
       #
       def parse
-        self.class.footnote_index = 1
+        reset_footnote_index!
 
         File.open(root_dir.join("output/#{name}.html"), "w+") do |file|
           file << parse_layout(content)
@@ -36,6 +36,10 @@ module Kitabu
         true
       rescue Exception
         false
+      end
+
+      def reset_footnote_index!
+        self.class.footnote_index = 1
       end
 
       # Return all chapters wrapped in a <tt>div.chapter</tt> tag.

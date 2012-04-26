@@ -14,6 +14,7 @@ module Kitabu
 
         # https://github.com/tenderlove/nokogiri/issues/339
         html.css("html").first.tap do |element|
+          next unless element
           element.delete("xmlns")
           element.delete("xml:lang")
         end

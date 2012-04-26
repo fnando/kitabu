@@ -1,5 +1,7 @@
 module Kitabu
   class Syntax
+    autoload :Highlight, "kitabu/syntax/highlight"
+
     attr_reader :io
     attr_reader :lines
     attr_reader :root_dir
@@ -65,7 +67,7 @@ module Kitabu
       code = raw.to_s.strip_heredoc
       code = process_file.gsub(/\n^.*?@(begin|end):.*?$/, "") if meta[:file]
 
-      code = Pygments.highlight(code, :lexer => language, :options => {:encoding => "utf-8"})
+      code = Highlight.apply(code, language)
 
       # escape for textile
       code = %[<notextile>#{code}</notextile>] if format == :textile

@@ -16,6 +16,14 @@ require "watchr"
 require "yaml"
 require "cgi"
 
+%w[pygments.rb coderay].each do |lib|
+  begin
+    require lib
+  rescue LoadError => e
+    next
+  end
+end
+
 %w[maruku peg_markdown bluecloth redcarpet rdiscount].each do |lib|
   begin
     require lib
@@ -27,8 +35,6 @@ end
 
 Encoding.default_internal = "utf-8"
 Encoding.default_external = "utf-8"
-
-require 'pygments.rb'
 
 module Kitabu
   require "kitabu/extensions/string"

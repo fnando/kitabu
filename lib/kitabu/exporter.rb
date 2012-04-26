@@ -35,10 +35,10 @@ module Kitabu
 
       exported = []
       exported << Parser::Html.parse(root_dir) if export_html
-      exported << Parser::Pdf.parse(root_dir) if export_pdf
+      exported << Parser::Pdf.parse(root_dir) if export_pdf && Dependency.prince?
       exported << Parser::Epub.parse(root_dir) if export_epub
-      exported << Parser::Mobi.parse(root_dir) if export_mobi
-      exported << Parser::Txt.parse(root_dir) if export_txt
+      exported << Parser::Mobi.parse(root_dir) if export_mobi && Dependency.kindlegen?
+      exported << Parser::Txt.parse(root_dir) if export_txt && Dependency.html2text?
 
       if exported.all?
         color = :green

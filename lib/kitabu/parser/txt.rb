@@ -2,11 +2,7 @@ module Kitabu
   module Parser
     class Txt < Base
       def parse
-        command = ["html2text", "-style", "pretty", "-o", txt_file.to_s, html_file.to_s]
-        puts command.join(' ')
-
-        Process.wait Process.spawn(*command)
-        true
+        spawn_command ["html2text", "-style", "pretty", "-o", txt_file.to_s, html_file.to_s]
       end
 
       def html_file

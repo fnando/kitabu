@@ -3,10 +3,7 @@ module Kitabu
     class Pdf < Base
       def parse
         apply_footnotes!
-
-        command = ["prince", with_footnotes_file.to_s, "-o", pdf_file.to_s]
-        Process.wait Process.spawn(*command)
-        true
+        spawn_command ["prince", with_footnotes_file.to_s, "-o", pdf_file.to_s]
       end
 
       def apply_footnotes!

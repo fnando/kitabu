@@ -51,6 +51,7 @@ module Kitabu
   autoload :Exporter,   "kitabu/exporter"
   autoload :Syntax,     "kitabu/syntax"
   autoload :Stream,     "kitabu/stream"
+  autoload :Dependency, "kitabu/dependency"
 
   def self.config(root_dir = nil)
     root_dir ||= Pathname.new(Dir.pwd)

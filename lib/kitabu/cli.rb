@@ -46,13 +46,46 @@ module Kitabu
       say "Kitabu version #{Version::STRING}"
     end
 
+    desc "check", "Check if all external dependencies are installed"
+
+    def check
+      result = []
+
+      result << {
+        :description => "Prince XML: Converts HTML files into PDF files.",
+        :installed => Kitabu::Dependency.prince?
+      }
+
+      result << {
+        :description => "KindleGen: Converts ePub e-books into .mobi files.",
+        :installed => Kitabu::Dependency.kindlegen?
+      }
+
+      result << {
+        :description => "html2text: Converts HTML documents into plain text.",
+        :installed => Kitabu::Dependency.html2text?
+      }
+
+      result << {
+        :description => "pygments.rb: A generic syntax highlight. If installed, replaces CodeRay.",
+        :installed => Kitabu::Dependency.pygments_rb?
+      }
+
+      result.each do |result|
+        text = color(result[:name], :blue)
+        text << "\n" << result[:description]
+        text << "\n" << (result[:installed] ? color("Installed.", :green) : color("Not installed.", :red))
+        text << "\n"
+
+        say(text)
+      end
+    end
+
     desc "permalinks", "List title permalinks"
 
     def permalinks
       html = Kitabu::Parser::Html.new(root_dir).content
       toc = Kitabu::Toc.generate(html)
-
-      color_support = shell.instance_of?(Thor::Shell::Color)
 
       toc.toc.each do |options|
         level = options[:level] - 1
@@ -60,8 +93,8 @@ module Kitabu
         permalink = "##{options[:permalink]}"
 
         text = "*" * level
-        text << (color_support ? shell.set_color(title, :blue) : title)
-        text <<  (color_support ? shell.set_color(permalink, :yellow) : permalink)
+        text << color(title, :blue)
+        text << color(permalink, :yellow)
         say(text)
       end
     end
@@ -83,6 +116,14 @@ module Kitabu
 
     def root_dir
       @root ||= Pathname.new(Dir.pwd)
+    end
+
+    def color(text, color)
+      color? ? shell.set_color(text, color) : text
+    end
+
+    def color?
+      shell.instance_of?(Thor::Shell::Color)
     end
   end
 end

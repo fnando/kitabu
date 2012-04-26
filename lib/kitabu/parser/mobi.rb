@@ -2,10 +2,7 @@ module Kitabu
   module Parser
     class Mobi < Base
       def parse
-        command = ["kindlegen", epub_file.to_s,]
-        puts command
-
-        Process.wait Process.spawn(*command)
+        spawn_command ["kindlegen", epub_file.to_s,]
         true
       end
 

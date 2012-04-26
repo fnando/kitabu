@@ -1,3 +1,5 @@
+require 'open3'
+
 module Kitabu
   module Parser
     autoload :Html  , "kitabu/parser/html"
@@ -28,6 +30,20 @@ module Kitabu
       #
       def name
         File.basename(root_dir)
+      end
+
+      def spawn_command(cmd)
+        begin
+          stdout_and_stderr, status = Open3.capture2e *cmd
+        rescue Errno::ENOENT => e
+          puts e.message
+        else
+          if ! status.success?
+            puts stdout_and_stderr
+          end
+
+          status.success?
+        end
       end
     end
   end

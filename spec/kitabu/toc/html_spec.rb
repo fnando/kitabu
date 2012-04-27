@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require "spec_helper"
 
-describe Kitabu::Toc do
+describe Kitabu::TOC::HTML do
   HTML = <<-HTML
     <h1>Item 1</h1>
     <h2>Item 1.2</h2>
@@ -17,7 +17,7 @@ describe Kitabu::Toc do
 
   HTML.force_encoding("utf-8")
 
-  let(:toc) { Kitabu::Toc.generate(HTML) }
+  let(:toc) { described_class.generate(HTML) }
   let(:html) { toc.to_html }
   let(:content) { toc.content }
 

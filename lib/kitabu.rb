@@ -45,7 +45,7 @@ module Kitabu
 
   autoload :Version,    "kitabu/version"
   autoload :Generator,  "kitabu/generator"
-  autoload :Toc,        "kitabu/toc"
+  autoload :TOC,        "kitabu/toc"
   autoload :Cli,        "kitabu/cli"
   autoload :Parser,     "kitabu/parser"
   autoload :Exporter,   "kitabu/exporter"
@@ -64,6 +64,6 @@ module Kitabu
   end
 
   def self.logger
-    @logger ||= Logger.new(File.open("/tmp/kitabu.log", "a+"))
+    @logger ||= Logger.new(File.open("/tmp/kitabu.log", "a"))
   end
 end

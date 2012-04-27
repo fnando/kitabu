@@ -25,7 +25,7 @@ module Kitabu
           end
         end
 
-        File.open(with_footnotes_file, "w+") {|f| f << html.to_xhtml}
+        File.open(with_footnotes_file, "w") {|f| f << html.to_xhtml}
       end
 
       def with_footnotes_file

@@ -32,16 +32,25 @@ module Kitabu
         File.basename(root_dir)
       end
 
+      # Return the configuration file.
+      #
+      def config
+        Kitabu.config(root_dir)
+      end
+
+      # Render a eRb template using +locals+ as data seed.
+      #
+      def render_template(file, locals = {})
+        ERB.new(File.read(file)).result OpenStruct.new(locals).instance_eval{ binding }
+      end
+
       def spawn_command(cmd)
         begin
-          stdout_and_stderr, status = Open3.capture2e *cmd
+          stdout_and_stderr, status = Open3.capture2e(*cmd)
         rescue Errno::ENOENT => e
           puts e.message
         else
-          if ! status.success?
-            puts stdout_and_stderr
-          end
-
+          puts stdout_and_stderr unless status.success?
           status.success?
         end
       end

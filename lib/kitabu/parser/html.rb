@@ -30,7 +30,7 @@ module Kitabu
       def parse
         reset_footnote_index!
 
-        File.open(root_dir.join("output/#{name}.html"), "w+") do |file|
+        File.open(root_dir.join("output/#{name}.html"), "w") do |file|
           file << parse_layout(content)
         end
         true
@@ -55,12 +55,6 @@ module Kitabu
             chapters << %[<div class="chapter">#{render_chapter(files)}</div>]
           end
         end
-      end
-
-      # Return the configuration file.
-      #
-      def config
-        Kitabu.config(root_dir)
       end
 
       # Return a list of all recognized files.
@@ -165,7 +159,7 @@ module Kitabu
       # Parse layout file, making available all configuration entries.
       #
       def parse_layout(html)
-        toc = Toc.generate(html)
+        toc = TOC::HTML.generate(html)
         locals = config.merge({
           :content   => toc.content,
           :toc       => toc.to_html,
@@ -181,12 +175,6 @@ module Kitabu
         changelog = Dir[root_dir.join("text/CHANGELOG.*")].first
         return render_file(changelog) if changelog
         nil
-      end
-
-      # Render a eRb template using +locals+ as data seed.
-      #
-      def render_template(file, locals = {})
-        ERB.new(File.read(file)).result OpenStruct.new(locals).instance_eval{ binding }
       end
 
       # Render all +files+ from a given chapter.

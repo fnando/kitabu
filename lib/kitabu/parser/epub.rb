@@ -1,55 +1,26 @@
 module Kitabu
   module Parser
-    class Epub < Html
-
-      module Toc
-        HEAD = <<-HEAD
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type" />
-    <title>Table of Contents</title>
-  </head>
-  <body>
-    <div id="toc">
-      <ul>
-HEAD
-
-TAIL = <<-TAIL
-      </ul>
-    </div>
-  </body>
-</html>
-TAIL
-
-        def generate_html(nav)
-          HEAD +
-          nav.map { |element|
-            "<li><a href='#{element[:content]}'>#{CGI.escapeHTML(element[:label])}</a></li>"
-          }.join +
-          TAIL
+    class Epub < Base
+      def sections
+        @sections ||= html.css("div.chapter").each_with_index.map do |chapter, index|
+          OpenStruct.new({
+            :index    => index,
+            :filename => "section_#{index}.html",
+            :filepath => tmp_dir.join("section_#{index}.html").to_s,
+            :html     => Nokogiri::HTML(chapter.inner_html)
+          })
         end
-
-        def generate_file(*args)
-          filename = "tmp/toc.html"
-          File.open(filename, "w") { |file| file.write generate_html(*args) }
-          filename
-        end
-        module_function :generate_file, :generate_html
       end
 
-      attr_accessor :epub
+      def epub
+        @epub ||= EeePub::Maker.new
+      end
 
-      def initialize(*args)
-        super
-        FileUtils.mkdir_p("tmp")
-        @epub = EeePub::Maker.new
+      def html
+        @html ||= Nokogiri::HTML(html_path.read)
       end
 
       def parse
-        reset_footnote_index!
-
         epub.title        config[:title]
         epub.language     config[:language]
         epub.creator      config[:authors].to_sentence
@@ -59,74 +30,114 @@ TAIL
         epub.identifier   config[:identifier][:id], :scheme => config[:identifier][:type]
         epub.cover_page   cover_image
 
-        assets            = collect_assets
-        sections          = collect_sections
-        filenames         = collect_filenames(sections)
+        write_sections!
+        write_toc!
 
-        epub.files        filenames + assets
-        epub.nav          collect_nav(sections, filenames)
-
-        epub.toc_page     Toc.generate_file collect_nav(sections, filenames)
+        epub.files    sections.map(&:filepath) + assets
+        epub.nav      navigation
+        epub.toc_page toc_path
 
         epub.save(epub_path)
+
         true
       rescue Exception
         p $!, $@
         false
       end
 
-      def collect_assets
-        [cover_image, File.join(root_dir, "templates", "epub", "style.css")].compact
+      def write_toc!
+        toc = TOC::Epub.new(navigation)
+
+        File.open(toc_path, "w") do |file|
+          file << toc.to_html
+        end
+      end
+
+      def write_sections!
+        # First we need to get all ids, which are used as
+        # the anchor target.
+        #
+        links = sections.inject({}) do |buffer, section|
+          section.html.css("[id]").each do |element|
+            anchor = "##{element["id"]}"
+            buffer[anchor] = "#{section.filename}#{anchor}"
+          end
+
+          buffer
+        end
+
+        # Then we can normalize all links and
+        # manipulate other paths.
+        #
+        sections.each do |section|
+          section.html.css("a[href^='#']").each do |link|
+            href = link["href"]
+            link.set_attribute("href", links.fetch(href, href))
+          end
+
+          # Replace all srcs.
+          #
+          section.html.css("[src]").each do |element|
+            src = File.basename(element["src"]).gsub(/\.svg$/, ".png")
+            element.set_attribute("src", src)
+          end
+
+          FileUtils.mkdir_p(tmp_dir)
+
+          # Save file to disk.
+          #
+          File.open(section.filepath, "w") do |file|
+            file << render_chapter(section.html.css("body").inner_html)
+          end
+        end
+      end
+
+      def render_chapter(content)
+        locals = config.merge(:content => content)
+        render_template(template_path, locals)
+      end
+
+      def assets
+        @assets ||= begin
+          assets = Dir[root_dir.join("templates/epub/*.css")]
+          assets += Dir[root_dir.join("images/**/*.{jpg,png,gif}")]
+          assets << cover_image if cover_image
+          assets
+        end
       end
 
       def cover_image
-        path = Dir[root_dir.join("images/cover-epub.*").to_s].first
+        path = Dir[root_dir.join("templates/epub/cover.{jpg,png,gif}").to_s].first
         return path if path && File.exist?(path)
       end
 
-      def chapter(entry)
-        files = chapter_files(entry)
-        content = replace_paths(render_chapter(files, true))
-        html = Nokogiri(content)
-        title = html.css("h2").first.text
-
-        [
-          title,
-          render_template(
-            root_dir.join("templates/epub/page.erb"),
-            {:chapter_title => title, :content => content, :language => config[:language]}
-          )
-        ]
-      end
-
-      def collect_sections
-        entries.map { |entry| chapter(entry) }
-      end
-
-      def collect_filenames(sections)
-        index = 0
-
+      def navigation
         sections.map do |section|
-          index += 1
-
-          filename = "tmp/section_#{index}.html"
-          File.open(filename, "w") { |file| file.write section[1] }
-          filename
+          {
+            :label => section.html.css("h2:first-of-type").text,
+            :content => section.filename
+          }
         end
       end
 
-      def collect_nav(sections, filenames)
-        [sections, filenames].transpose.map do |section, filename|
-          {:label => section[0], :content => File.basename(filename)}
-        end
+      def template_path
+        root_dir.join("templates/epub/page.erb")
       end
 
-      def replace_paths(text)
-        text.gsub(%r[src="(.*?)"]) {|m| %[src="#{File.basename($1)}"]}
+      def html_path
+        root_dir.join("output/#{name}.html")
       end
 
       def epub_path
         root_dir.join("output/#{name}.epub")
+      end
+
+      def tmp_dir
+        root_dir.join("output/tmp")
+      end
+
+      def toc_path
+        tmp_dir.join("toc.html")
       end
     end
   end

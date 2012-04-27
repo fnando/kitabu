@@ -1,6 +1,6 @@
 module Kitabu
   module Parser
-    class Pdf < Base
+    class PDF < Base
       def parse
         apply_footnotes!
         spawn_command ["prince", with_footnotes_file.to_s, "-o", pdf_file.to_s]

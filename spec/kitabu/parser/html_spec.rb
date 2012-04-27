@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe Kitabu::Parser::Html do
+describe Kitabu::Parser::HTML do
   let(:root) { SPECDIR.join("support/mybook") }
   let(:source) { root.join("text") }
-  let(:parser) { Kitabu::Parser::Html.new(root) }
+  let(:parser) { described_class.new(root) }
   let(:entries) { parser.entries }
   let(:relative) { entries.collect {|e| e.to_s.gsub(/^#{Regexp.escape(source.to_s)}\//, "")} }
 

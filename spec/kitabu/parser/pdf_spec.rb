@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Kitabu::Parser::Pdf do
+describe Kitabu::Parser::PDF do
   let(:root) { SPECDIR.join("support/mybook") }
 
   before do
-    Kitabu::Parser::Html.new(root).parse
-    Kitabu::Parser::Pdf.new(root).parse
+    Kitabu::Parser::HTML.new(root).parse
+    Kitabu::Parser::PDF.new(root).parse
   end
 
   it "should generate pdf file" do

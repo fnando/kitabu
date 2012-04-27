@@ -84,8 +84,10 @@ module Kitabu
     desc "permalinks", "List title permalinks"
 
     def permalinks
-      html = Kitabu::Parser::Html.new(root_dir).content
-      toc = Kitabu::Toc.generate(html)
+      inside_ebook!
+
+      html = Kitabu::Parser::HTML.new(root_dir).content
+      toc = Kitabu::TOC::HTML.generate(html)
 
       toc.toc.each do |options|
         level = options[:level] - 1
@@ -102,7 +104,7 @@ module Kitabu
     private
     def inside_ebook!
       unless File.exist?(config_path)
-        raise Error, "You can't export files when you're outside an e-book directory"
+        raise Error, "You have to run this command from inside an e-book directory."
       end
     end
 

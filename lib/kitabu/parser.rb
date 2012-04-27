@@ -2,8 +2,8 @@ require 'open3'
 
 module Kitabu
   module Parser
-    autoload :Html  , "kitabu/parser/html"
-    autoload :Pdf   , "kitabu/parser/pdf"
+    autoload :HTML  , "kitabu/parser/html"
+    autoload :PDF   , "kitabu/parser/pdf"
     autoload :Epub  , "kitabu/parser/epub"
     autoload :Mobi  , "kitabu/parser/mobi"
     autoload :Txt   , "kitabu/parser/txt"

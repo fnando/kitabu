@@ -1,6 +1,6 @@
 module Kitabu
   module Parser
-    class Html < Base
+    class HTML < Base
       # Supported Markdown libraries
       #
       MARKDOWN_LIBRARIES = %w[Maruku BlueCloth PEGMarkdown Redcarpet RDiscount]
@@ -120,6 +120,8 @@ module Kitabu
         footnotes = html.css("p[id^='fn']")
 
         return content if footnotes.empty?
+
+        reset_footnote_index! unless self.class.footnote_index
 
         footnotes.each do |fn|
           index = self.class.footnote_index

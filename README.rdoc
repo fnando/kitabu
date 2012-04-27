@@ -144,10 +144,10 @@ NOTE: Any named block annotation will be removed from <tt>@@@ ruby file.rb</tt> 
 
 By default, RDiscount[http://github.com/rtomayko/rdiscount/tree/master] is the Markdown processor. However, you can switch to different implementations by simply installing any of the following processors:
 
-# Maruku: https://rubygems.org/gems/maruku
-# PEGMarkdown: https://rubygems.org/gems/rpeg-markdown
-# BlueCloth: https://rubygems.org/gems/bluecloth
-# Redcarpet: https://rubygems.org/gems/redcarpet
+* Maruku: https://rubygems.org/gems/maruku
+* PEGMarkdown: https://rubygems.org/gems/rpeg-markdown
+* BlueCloth: https://rubygems.org/gems/bluecloth
+* Redcarpet: https://rubygems.org/gems/redcarpet
 
 Note: RDiscount will always be installed as Kitabu's dependency but only used when no
 alternative library is available.
@@ -161,8 +161,9 @@ alternative library is available.
 
 I published two PDFs (portuguese only) exploring lots of features. Check it out:
 
-* http://howtocode.com.br/downloads/rdoc.pdf
-* http://howtocode.com.br/downloads/rails-application-templates.pdf
+* http://cl.ly/3j1s2g1O1b1c0S3M0n20
+* http://cl.ly/1L1o123L3Z0p3P0L1Q3t
+* http://cl.ly/0a2W3s3u2T2P1V0C0c3g
 
 There's also an (probably) outdated Rails Guide section in the <tt>examples</tt> directory.
 

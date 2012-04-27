@@ -4,15 +4,15 @@ While Prince is too expensive (495USD for a single user license), the free versi
 
 == Features
 
-* Write PDF using Markdown, Textile or plain HTML
+* Write using Markdown, Textile or plain HTML
 * Book layout support
 * Syntax highlight
-* Generate a HTML, PDF, e-Pub, Mobi and Text files
+* Generate HTML, PDF, e-Pub, Mobi and Text files
 * Table of Contents automatically generated from chapter titles
 
 == Installation
 
-To install Kitabu, you’ll need a working Ruby installation with Rubygems.
+To install Kitabu, you’ll need a working Ruby 1.9+ installation.
 If you’re cool with it, just run the following command to install it.
 
   gem install kitabu --pre

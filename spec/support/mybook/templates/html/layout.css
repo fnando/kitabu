@@ -1,0 +1,353 @@
+/* ============ */
+/* = DEFAULTS = */
+/* ============ */
+html * {
+	font: normal normal normal 12pt/normal Constantia, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+}
+
+/* ========= */
+/* = PAGES = */
+/* ========= */
+@page {
+	margin: 12mm 16mm 10mm 16mm;
+	size: 7in 9.25in landscape;
+
+	@footnotes {
+		border-top: thin solid black;
+		margin-left: 30%;
+		margin-top: 0.6em;
+		padding-top: 0.3em;
+	}
+
+	@bottom-right {
+	    color: #000;
+		content: counter(page);
+		font-family: helvetica, arial, sans-serif;
+        font-size: 12px;
+        margin-top: -10px;
+		margin-right: -40px;
+    }
+}
+
+@page toc {
+	margin-right: 6mm;
+
+    @bottom-right {
+        content: "";
+    }
+}
+
+@page cover {
+	margin: 0;
+
+	@bottom-right {
+        content: "";
+    }
+}
+
+/* ============= */
+/* = BOOKMARKS = */
+/* ============= */
+h1, h2, h3, h4, h5, h6 {
+	prince-bookmark-level: none;
+}
+
+.frontcover h1 { prince-bookmark-level: 1; }
+.chapter h2 { prince-bookmark-level: 2; }
+.chapter h3 { prince-bookmark-level: 3; }
+.chapter h4 { prince-bookmark-level: 4; }
+.chapter h5 { prince-bookmark-level: 5; }
+.chapter h6 { prince-bookmark-level: 6; }
+
+/* ============= */
+/* = CONTAINER = */
+/* ============= */
+div.container {
+	height: 7in;
+	left: 0;
+	page: cover;
+	position: absolute;
+	top: 0;
+	width: 9.25in;
+	z-index: -1;
+}
+
+/* ============== */
+/* = FRONTCOVER = */
+/* ============== */
+div.frontcover {
+	background: #fff;
+}
+
+div.frontcover div {
+	left: 1in;
+	padding-top: 0.25in;
+	position: absolute;
+	top: 2.5in;
+	width: 7.25in;
+}
+
+div.frontcover h1 {
+	color: #f00;
+	font-size: 46pt;
+}
+
+div.frontcover p {
+	font-size: 18pt;
+}
+
+div.frontcover p.description {
+	color: #666;
+	font: italic normal normal 14pt/normal Baskerville, "Hoefler Text", Garamond, "Times New Roman", serif;
+	margin-top: -.1in;
+}
+
+div.frontcover p.authors {
+	color: #000;
+	font-style: italic;
+	position: absolute;
+	top: 0;
+}
+
+div.frontcover * {
+	margin: 0;
+}
+
+/* =========== */
+/* = CHAPTER = */
+/* =========== */
+#chapters {
+    counter-reset: page 1;
+    counter-reset: chapter 1;
+    page-break-before: always;
+}
+
+.chapter {
+	color: #444;
+	counter-reset: footnote 0;
+	page-break-after: always;
+}
+
+.chapter a {
+	color: #0AE;
+	text-decoration: none;
+}
+
+.chapter h2,
+.chapter h3,
+.chapter h4,
+.chapter h5 {
+	margin: 25pt 0 15pt 0;
+}
+
+.chapter h2 {
+	color: #222;
+	counter-increment: chapter;
+	font-size: 36pt;
+	line-height: 1;
+	string-set: header "Chapter " counter(chapter) ": " content();
+}
+
+.chapter h2::before {
+	content: "Chapter " counter(chapter);
+	color: #999;
+	display: block;
+	font-size: 18pt;
+	letter-spacing: 0;
+    margin-bottom: .2em;
+	white-space: pre;
+}
+
+.chapter h3,
+.chapter h5 {
+	font-family: "helvetica", arial, sans-serif;
+}
+
+.chapter h3 {
+	color: #b62f32;
+	font-size: 28px;
+}
+
+.chapter h4 {
+	font-size: 18px;
+	font-family: "helvetica neue", "arial narrow", sans-serif;
+}
+
+.chapter h5 {
+	font-size: 15px;
+}
+
+.chapter h6 {
+	font-size: 15px;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+/* =========== */
+/* = IMPRINT = */
+/* =========== */
+.imprint {
+	background: #E2E7E2;
+	page: cover;
+	string-set: header "";
+}
+
+.imprint, .imprint * {
+	color: #5b5b5b;
+}
+
+.imprint * {
+	font-family: "Lucida Grande", arial, sans-serif;
+	font-size: 10pt;
+	margin: 0 0 2pt 0;
+}
+
+.imprint div {
+	left: 0.5in;
+	position: absolute;
+	bottom: 0.3in;
+}
+
+/* ========== */
+/* = CODING = */
+/* ========== */
+pre, code {
+	color: #090;
+	font-family: monaco, monospace;
+	font-size: 9pt;
+}
+
+pre, pre code {
+	font-size: 8pt;
+	line-height: 1.4;
+	padding-left: 25pt;
+}
+
+/* ========= */
+/* = TABLE = */
+/* ========= */
+table {
+	border-collapse: collapse;
+}
+
+thead th {
+	background: #e9e9e9;
+}
+
+th, td {
+	border: 1px solid #ccc;
+	font-size: 11pt;
+	padding: 5pt;
+}
+
+/* ========= */
+/* = LISTS = */
+/* ========= */
+li {
+	margin-bottom: 8pt;
+}
+
+li ul,
+li ol {
+	margin-left: 15pt;
+}
+
+/* ========== */
+/* = FIGURE = */
+/* ========== */
+.figure img:after {
+	content: attr("alt");
+	display: block;
+	font-size: 10pt;
+}
+
+img {
+	max-width: none;
+	prince-image-resolution: 96dpi;
+}
+
+.figure {
+	float: right;
+	margin: 0 0 20pt 20pt;
+	overflow: auto;
+	text-align: center;
+}
+
+/* ===================== */
+/* = TABLE OF CONTENTS = */
+/* ===================== */
+div.table-of-contents {
+	page: toc;
+}
+
+div.table-of-contents h2 {
+	font-size: 36pt;
+}
+
+div.table-of-contents a {
+	font-size: 11pt;
+	text-decoration: none;
+}
+
+div.table-of-contents div.level2 a {
+	color: #000;
+	font-weight: bold;
+}
+
+div.table-of-contents #toc {
+    column-count: 2;
+    column-fill: auto;
+    column-gap: 5%;
+    column-rule: none;
+    column-width: 45%;
+}
+
+div.table-of-contents #toc div {
+    padding-bottom: 10px;
+}
+
+div.table-of-contents div.level3 {
+    margin-left: 20px;
+}
+
+div.table-of-contents #toc div.level3 a {
+	color: #555;
+}
+
+div.table-of-contents div a::before {
+	color: #888;
+	content: target-counter(attr(href), page) " ";
+	float: left;
+	font-weight: normal;
+	font-size: 11pt !important;
+	margin-right: 4px;
+	width: 40px;
+}
+
+div.table-of-contents div.level3 a::before {
+    width: 20px;
+}
+
+div.table-of-contents div.level4,
+div.table-of-contents div.level5,
+div.table-of-contents div.level6 {
+	display: none;
+}
+
+/* ===================== */
+/* = OTHER TEXT TWEAKS = */
+/* ===================== */
+acronym:after {
+	content: " (" attr(title) ")";
+}
+
+/* ============= */
+/* = HIGHLIGHT = */
+/* ============= */
+.highlight {
+	font-size: 20pt;
+}
+
+.highlight strong {
+	color: #b62f32;
+}

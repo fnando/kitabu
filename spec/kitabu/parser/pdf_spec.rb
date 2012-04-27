@@ -8,7 +8,7 @@ describe Kitabu::Parser::PDF do
     Kitabu::Parser::PDF.new(root).parse
   end
 
-  it "should generate pdf file" do
+  it "generates pdf file" do
     root.join("output/mybook.pdf").should be_file
   end
 end

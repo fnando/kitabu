@@ -3,7 +3,7 @@ require "spec_helper"
 
 describe String do
   describe "#to_permalink" do
-    it "should normalize strings" do
+    it "normalizes strings" do
       {
         'This IS a Tripped out title!!.!1  (well/ not really)' => 'this-is-a-tripped-out-title-1-well-not-really',
         '////// meph1sto r0x ! \\\\\\' => 'meph1sto-r0x',

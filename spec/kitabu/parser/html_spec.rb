@@ -8,29 +8,29 @@ describe Kitabu::Parser::HTML do
   let(:relative) { entries.collect {|e| e.to_s.gsub(/^#{Regexp.escape(source.to_s)}\//, "")} }
 
   context "when filtering entries" do
-    it "should skip dot directories" do
+    it "skips dot directories" do
       relative.should_not include(".")
       relative.should_not include("..")
     end
 
-    it "should skip dot files" do
+    it "skips dot files" do
       relative.should_not include(".gitkeep")
     end
 
-    it "should skip files that start with underscore" do
+    it "skips files that start with underscore" do
       relative.should_not include("_00_Introduction.markdown")
     end
 
-    it "should skip other files" do
+    it "skips other files" do
       relative.should_not include("CHANGELOG.textile")
       relative.should_not include("TOC.textile")
     end
 
-    it "should return only first-level entries" do
+    it "returns only first-level entries" do
       relative.should_not include("04_With_Directory/Some_Chapter.mkdn")
     end
 
-    it "should return entries" do
+    it "returns entries" do
       relative.first.should == "01_Markdown_Chapter.markdown"
       relative.second.should == "02_Textile_Chapter.textile"
       relative.third.should == "03_HTML_Chapter.html"
@@ -44,31 +44,31 @@ describe Kitabu::Parser::HTML do
     let(:html) { File.read(file) }
     before { parser.parse }
 
-    it "should have several chapters" do
+    it "has several chapters" do
       html.should have_tag("div.chapter", 4)
     end
 
-    it "should render .markdown" do
+    it "renders .markdown" do
       html.should have_tag("div.chapter > h2#markdown", "Markdown")
     end
 
-    it "should render .mkdn" do
+    it "renders .mkdn" do
       html.should have_tag("div.chapter > h2#some-chapter", "Some Chapter")
     end
 
-    it "should render .textile" do
+    it "renders .textile" do
       html.should have_tag("div.chapter > h2#textile", "Textile")
     end
 
-    it "should render .html" do
+    it "renders .html" do
       html.should have_tag("div.chapter > h2#html", "HTML")
     end
 
-    it "should have use config file" do
+    it "uses config file" do
       html.should have_tag("div.imprint p", "Copyright (C) 2010 John Doe.")
     end
 
-    it "should render changelog" do
+    it "renders changelog" do
       html.should have_tag("div.changelog h2", "Revisions")
     end
   end

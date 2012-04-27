@@ -11,7 +11,7 @@ RSpec.configure do |config|
   config.include(SpecHelper)
   config.include(Matchers)
 
-  config.around do
+  cleaner = proc do
     [
       TMPDIR,
       SPECDIR.join("support/mybook/output/mybook.pdf"),
@@ -22,5 +22,7 @@ RSpec.configure do |config|
     end
   end
 
+  config.before(&cleaner)
+  config.after(&cleaner)
   config.before { FileUtils.mkdir_p(TMPDIR) }
 end

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Kitabu::Cli do
   context "while running permalinks" do
-    it "should recognize command" do
+    it "recognizes command" do
       Dir.chdir SPECDIR.join("support/mybook")
       expect {
         capture(:stdout) { Kitabu::Cli.start(["permalinks"]) }

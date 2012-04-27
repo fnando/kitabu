@@ -21,11 +21,11 @@ describe Kitabu::TOC::HTML do
   let(:html) { toc.to_html }
   let(:content) { toc.content }
 
-  it "should not have body tag" do
+  it "has no body tag" do
     content.should_not match(/<body>/)
   end
 
-  it "should generate toc" do
+  it "generates toc" do
     html.should have_tag("div.level2.item-1-2", "Item 1.2")
     html.should have_tag("div.level3.item-1-1-3", "Item 1.1.3")
     html.should have_tag("div.level4.item-1-1-1-4", "Item 1.1.1.4")
@@ -38,7 +38,7 @@ describe Kitabu::TOC::HTML do
     html.should have_tag("div.level2.internacionalizacao", "Internacionalização")
   end
 
-  it "should add ID attribute to content" do
+  it "adds id attribute to content" do
     content.should have_tag("h2#item-1-2", "Item 1.2")
     content.should have_tag("h3#item-1-1-3", "Item 1.1.3")
     content.should have_tag("h4#item-1-1-1-4", "Item 1.1.1.4")

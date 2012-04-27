@@ -2,7 +2,7 @@ module Kitabu
   class Syntax
     class Highlight
       def self.apply(code, language)
-        if defined?(Pygments)
+        if Dependency.pygments_rb?
           pygments(code, language)
         else
           coderay(code, language)

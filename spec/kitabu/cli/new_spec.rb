@@ -10,7 +10,7 @@ describe Kitabu::Cli do
       it_behaves_like "e-book"
     end
 
-    it "should exit with status 1 when no path is provided" do
+    it "exits with status 1 when no path is provided" do
       expect {
         capture(:stderr){ Kitabu::Cli.start(["new"]) }
       }.to exit_with_code(1)

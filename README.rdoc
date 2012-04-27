@@ -7,7 +7,7 @@ While Prince is too expensive (495USD for a single user license), the free versi
 * Write PDF using Markdown, Textile or plain HTML
 * Book layout support
 * Syntax highlight
-* Generate a HTML, PDF and e-Pub files
+* Generate a HTML, PDF, e-Pub, Mobi and Text files
 * Table of Contents automatically generated from chapter titles
 
 == Installation
@@ -17,6 +17,26 @@ If you’re cool with it, just run the following command to install it.
 
   gem install kitabu --pre
 
+After installing Kitabu, run the following command to check your external
+dependencies.
+
+  $ kitabu check
+
+  Prince XML: Converts HTML files into PDF files.
+  Installed.
+
+  KindleGen: Converts ePub e-books into .mobi files.
+  Installed.
+
+  html2text: Converts HTML documents into plain text.
+  Not installed.
+
+  pygments.rb: A generic syntax highlight. If installed, replaces CodeRay.
+  Not installed.
+
+There's no requirements here; just make sure you cleared the correct dependency based
+on the formats you want to export to.
+
 == Usage
 
 To create a new e-book, just run
@@ -25,20 +45,26 @@ To create a new e-book, just run
 
 This command creates a directory <tt>mybook</tt> with the following structure:
 
-  * mypdf
-    * code
-    * config
-      * kitabu.yml
-      * helper.rb
-    * images
-    * output
-    * Rakefile
-    * templates
-      * layout.css
-      * layout.html
-      * syntax.css
-      * user.css
-    * text
+  mybook
+  ├── code
+  ├── config
+  │   ├── helper.rb
+  │   └── kitabu.yml
+  ├── images
+  ├── output
+  ├── templates
+  │   ├── epub
+  │   │   ├── cover.erb
+  │   │   ├── cover.png
+  │   │   ├── page.erb
+  │   │   └── user.css
+  │   └── html
+  │       ├── layout.css
+  │       ├── layout.erb
+  │       ├── syntax.css
+  │       └── user.css
+  └── text
+      └── 01_Welcome.md
 
 The <tt>config/kitabu.yml</tt> file holds some information about your book; so you'll always change it.
 
@@ -76,7 +102,7 @@ To print the TOC, you need to print a variable called +toc+, using the eRb tag.
 
 === Syntax Highlighting
 
-We use Ultraviolet[http://rubygems.org/gems/ultraviolet] for syntax highlighting. To highlight a given code snippet, just do something like
+We use CodeRay[http://rubygems.org/gems/coderay] for syntax highlighting. To highlight a given code snippet, just do something like
 
   @@@ ruby
   class User < ActiveRecord::Base
@@ -85,7 +111,7 @@ We use Ultraviolet[http://rubygems.org/gems/ultraviolet] for syntax highlighting
   end
   @@@
 
-Run @kitabu syntaxes@ to list all available syntaxes.
+If can replace CodeRay by Pygments; just install the gem pygments.rb[http://rubygems.org/pygments.rb].
 
 <b>Don't indent</b> the source block or will end up with unexpected results.
 
@@ -118,9 +144,13 @@ NOTE: Any named block annotation will be removed from <tt>@@@ ruby file.rb</tt> 
 
 By default, RDiscount[http://github.com/rtomayko/rdiscount/tree/master] is the Markdown processor. However, you can switch to different implementations by simply installing any of the following processors:
 
-* Maruku: https://rubygems.org/gems/maruku
-* PEGMarkdown: https://rubygems.org/gems/rpeg-markdown
-* BlueCloth: https://rubygems.org/gems/bluecloth
+# Maruku: https://rubygems.org/gems/maruku
+# PEGMarkdown: https://rubygems.org/gems/rpeg-markdown
+# BlueCloth: https://rubygems.org/gems/bluecloth
+# Redcarpet: https://rubygems.org/gems/redcarpet
+
+Note: RDiscount will always be installed as Kitabu's dependency but only used when no
+alternative library is available.
 
 === References
 

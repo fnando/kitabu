@@ -27,6 +27,7 @@ module Kitabu
     desc "export [OPTIONS]", "Export e-book"
     method_option :only, :type => :string, :desc => "Can be one of: #{FORMATS.join(", ")}"
     method_option :open, :type => :boolean, :desc => "Automatically open PDF (Mac OS X only)"
+    method_option :overwrite, :type => :boolean, :desc => "Overwrite html file if already exported"
 
     def export
       if options[:only] && !FORMATS.include?(options[:only])

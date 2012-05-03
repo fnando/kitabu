@@ -24,6 +24,7 @@ module Kitabu
       # to <tt>output/book_name.html</tt>.
       #
       def parse
+        return true if File.exists?(root_dir.join("output/#{name}.html"))
         reset_footnote_index!
 
         File.open(root_dir.join("output/#{name}.html"), "w") do |file|

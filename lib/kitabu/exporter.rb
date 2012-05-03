@@ -26,6 +26,11 @@ module Kitabu
       export_mobi = [nil, "mobi"].include?(options[:only])
       export_txt = [nil, "txt"].include?(options[:only])
 
+      if options[:overwrite]
+        filename = root_dir.join("output/#{File.basename(root_dir)}.html")
+        File.unlink(filename) if File.exists?(filename)
+      end
+
       exported = []
       exported << Parser::HTML.parse(root_dir)
       exported << Parser::PDF.parse(root_dir) if export_pdf && Dependency.prince?

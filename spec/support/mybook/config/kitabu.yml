@@ -41,10 +41,6 @@ authors:
   - "John Doe"
   - "Mary Doe"
 
-# The theme that will be used for source
-# code syntax highlighting.
-theme: idle
-
 # The base URL from your source code.
 base_url: http://example.com
 

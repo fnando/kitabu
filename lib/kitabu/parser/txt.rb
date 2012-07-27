@@ -2,7 +2,7 @@ module Kitabu
   module Parser
     class Txt < Base
       def parse
-        spawn_command ["html2text", "-style", "pretty", "-o", txt_file.to_s, html_file.to_s]
+        spawn_command ["html2text", "-style", "pretty", "-nobs", "-o", txt_file.to_s, html_file.to_s]
       end
 
       def html_file

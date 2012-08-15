@@ -9,7 +9,7 @@ module Kitabu
       def apply_footnotes!
         html = Nokogiri::HTML(html_file.read)
 
-        # https://github.com/tenderlove/nokogiri/issues/339
+        # https://github.com/sparklemotion/nokogiri/issues/339
         html.css("html").first.tap do |element|
           next unless element
           element.delete("xmlns")

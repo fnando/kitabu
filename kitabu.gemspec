@@ -19,15 +19,15 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency "activesupport",             "~> 3.0"
-  s.add_dependency "nokogiri",                  "~> 1.5"
-  s.add_dependency "RedCloth",                  "~> 4.2"
-  s.add_dependency "rdiscount",                 "~> 1.6"
-  s.add_dependency "i18n",                      "~> 0.5"
-  s.add_dependency "thor",                      "~> 0.14"
-  s.add_dependency "eeepub-with-cover-support", "~> 0.8"
-  s.add_dependency "watchr",                    "~> 0.7"
-  s.add_dependency "notifier",                  "~> 0.1"
+  s.add_dependency "activesupport"
+  s.add_dependency "nokogiri"
+  s.add_dependency "RedCloth"
+  s.add_dependency "rdiscount"
+  s.add_dependency "i18n"
+  s.add_dependency "thor"
+  s.add_dependency "eeepub-with-cover-support"
+  s.add_dependency "watchr"
+  s.add_dependency "notifier"
   s.add_dependency "coderay"
 
   s.add_development_dependency "rspec"

@@ -1,10 +1,6 @@
 module Kitabu
   module Parser
     class HTML < Base
-      # Supported Markdown libraries
-      #
-      MARKDOWN_LIBRARIES = %w[Maruku BlueCloth PEGMarkdown Redcarpet RDiscount]
-
       # List of directories that should be skipped.
       #
       IGNORE_DIR = %w[. .. .svn]
@@ -105,7 +101,7 @@ module Kitabu
 
         content = case file_format
         when :markdown
-          markdown.new(content).to_html
+          Markdown.to_html(content)
         when :textile
           RedCloth.convert(content)
         else
@@ -187,22 +183,6 @@ module Kitabu
             chapter << render_file(file, plain_syntax) << "\n\n"
           end
         end
-      end
-
-      # Retrieve preferred Markdown processor.
-      # You'll need one of the following libraries:
-      #
-      # # RDiscount: https://rubygems.org/gems/rdiscount
-      # # Maruku: https://rubygems.org/gems/maruku
-      # # PEGMarkdown: https://rubygems.org/gems/rpeg-markdown
-      # # BlueCloth: https://rubygems.org/gems/bluecloth
-      # # Redcarpet: https://rubygems.org/gems/redcarpet
-      #
-      # Note: RDiscount will always be installed as Kitabu's dependency but only used when no
-      # alternative library is available.
-      #
-      def markdown
-        @markdown ||= Object.const_get(MARKDOWN_LIBRARIES.find {|lib| Object.const_defined?(lib)})
       end
     end
   end

@@ -47,6 +47,7 @@ module Kitabu
   autoload :Generator,  "kitabu/generator"
   autoload :TOC,        "kitabu/toc"
   autoload :Cli,        "kitabu/cli"
+  autoload :Markdown,   "kitabu/adapters/markdown"
   autoload :Parser,     "kitabu/parser"
   autoload :Exporter,   "kitabu/exporter"
   autoload :Syntax,     "kitabu/syntax"

@@ -28,7 +28,7 @@ module Kitabu
         epub.date         config[:published_at]
         epub.uid          config[:uid]
         epub.identifier   config[:identifier][:id], :scheme => config[:identifier][:type]
-        epub.cover_page   cover_image
+        epub.cover_page   cover_image if cover_image && File.exist?(cover_image)
 
         write_sections!
         write_toc!
@@ -80,6 +80,8 @@ module Kitabu
           section.html.css("[src]").each do |element|
             src = File.basename(element["src"]).gsub(/\.svg$/, ".png")
             element.set_attribute("src", src)
+            element.set_attribute("alt", "")
+            element.node_name = "img"
           end
 
           FileUtils.mkdir_p(tmp_dir)
@@ -87,7 +89,8 @@ module Kitabu
           # Save file to disk.
           #
           File.open(section.filepath, "w") do |file|
-            file << render_chapter(section.html.css("body").inner_html)
+            body = section.html.css("body").to_xhtml.gsub(%r[<body>(.*?)</body>]m, "\\1")
+            file << render_chapter(body)
           end
         end
       end
@@ -101,7 +104,6 @@ module Kitabu
         @assets ||= begin
           assets = Dir[root_dir.join("templates/epub/*.css")]
           assets += Dir[root_dir.join("images/**/*.{jpg,png,gif}")]
-          assets << cover_image if cover_image
           assets
         end
       end

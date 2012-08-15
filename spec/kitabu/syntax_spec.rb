@@ -81,8 +81,16 @@ describe Kitabu::Syntax do
     Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb @@@").should have_tag("div.CodeRay", 1)
   end
 
+  it "adds language class" do
+    Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb @@@").should have_tag("div.CodeRay.ruby", 1)
+  end
+
   it "wraps code in pre tag" do
     Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb @@@").should have_tag("pre", 1)
+  end
+
+  it "wraps source in code tag" do
+    Kitabu::Syntax.render(root, :markdown, "@@@ ruby code.rb @@@").should have_tag("pre > code", 1)
   end
 
   it "wraps code in notextile tag" do

@@ -123,18 +123,18 @@ module Kitabu
           index = self.class.footnote_index
           actual_index = fn["id"].gsub(/[^\d]/, "")
 
-          fn.set_attribute("id", "fn#{index}")
+          fn.set_attribute("id", "_fn#{index}")
 
           html.css("a[href='#fn#{actual_index}']").each do |link|
-            link.set_attribute("href", "#fn#{index}")
+            link.set_attribute("href", "#_fn#{index}")
           end
 
           html.css("a[href='#fnr#{actual_index}']").each do |link|
-            link.set_attribute("href", "#fnr#{index}")
+            link.set_attribute("href", "#_fnr#{index}")
           end
 
           html.css("[id=fnr#{actual_index}]").each do |tag|
-            tag.set_attribute("id", "fnr#{index}")
+            tag.set_attribute("id", "_fnr#{index}")
           end
 
           self.class.footnote_index += 1

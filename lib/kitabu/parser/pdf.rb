@@ -16,7 +16,7 @@ module Kitabu
           element.delete("xml:lang")
         end
 
-        html.css("p.footnote[id^='fn']").each do |fn|
+        html.css("p.footnote[id^='_fn']").each do |fn|
           fn.node_name = "span"
           fn.set_attribute("class", "fn")
 

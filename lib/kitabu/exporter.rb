@@ -2,13 +2,7 @@ module Kitabu
   class Exporter
     def self.run(root_dir, options)
       exporter = new(root_dir, options)
-
-      if options[:auto]
-        exporter.export!
-        exporter.auto! if options[:auto]
-      else
-        exporter.export!
-      end
+      exporter.export!
     end
 
     attr_accessor :root_dir
@@ -63,18 +57,6 @@ module Kitabu
 
     def config
       Kitabu.config(root_dir)
-    end
-
-    def auto!
-      script = Watchr::Script.new
-
-      script.watch(%r[(code|config|images|templates|text)/.*]) do |match|
-        ui.say "* #{match[0]}... ", :yellow, false
-        export!
-      end
-
-      contrl = Watchr::Controller.new(script, Watchr.handler.new)
-      contrl.run
     end
   end
 end

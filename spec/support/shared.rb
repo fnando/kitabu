@@ -33,6 +33,10 @@ shared_examples_for "e-book" do
     mybook.join("text/01_Welcome.md")
   end
 
+  it "copies Guardfile" do
+    mybook.join("Guardfile")
+  end
+
   it "copies html template files" do
     mybook.join("templates/html/user.css").should be_file
     mybook.join("templates/html/layout.css").should be_file

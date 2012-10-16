@@ -59,6 +59,10 @@ module Kitabu
       create_file "code/.gitkeep"
     end
 
+    def copy_guardfile
+      copy_file "Guardfile", "Guardfile"
+    end
+
     private
     # Retrieve user's name using finger.
     # Defaults to <tt>John Doe</tt>.

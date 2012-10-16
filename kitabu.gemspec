@@ -26,8 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency "i18n"
   s.add_dependency "thor"
   s.add_dependency "eeepub-with-cover-support"
-  s.add_dependency "watchr"
-  s.add_dependency "notifier"
   s.add_dependency "coderay"
 
   s.add_development_dependency "rspec"

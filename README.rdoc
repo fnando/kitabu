@@ -15,7 +15,7 @@ While Prince is too expensive (495USD for a single user license), the free versi
 To install Kitabu, you’ll need a working Ruby 1.9+ installation.
 If you’re cool with it, just run the following command to install it.
 
-  gem install kitabu --pre
+  gem install kitabu
 
 After installing Kitabu, run the following command to check your external
 dependencies.

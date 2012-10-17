@@ -100,6 +100,21 @@ module Kitabu
       end
     end
 
+    desc "stats", "Display some stats about your e-book"
+    def stats
+      inside_ebook!
+      stats = Kitabu::Stats.new(root_dir)
+
+      say [
+        "Chapters: #{stats.chapters}",
+        "Words: #{stats.words}",
+        "Images: #{stats.images}",
+        "Links: #{stats.links}",
+        "Footnotes: #{stats.footnotes}",
+        "Code blocks: #{stats.code_blocks}"
+      ].join("\n")
+    end
+
     private
     def inside_ebook!
       unless File.exist?(config_path)

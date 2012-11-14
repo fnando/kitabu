@@ -26,6 +26,7 @@ describe Kitabu::TOC::HTML do
   end
 
   it "generates toc" do
+    html.should have_tag("div.level1.item-1", "Item 1")
     html.should have_tag("div.level2.item-1-2", "Item 1.2")
     html.should have_tag("div.level3.item-1-1-3", "Item 1.1.3")
     html.should have_tag("div.level4.item-1-1-1-4", "Item 1.1.1.4")
@@ -39,6 +40,7 @@ describe Kitabu::TOC::HTML do
   end
 
   it "adds id attribute to content" do
+    content.should have_tag("h1#item-1", "Item 1")
     content.should have_tag("h2#item-1-2", "Item 1.2")
     content.should have_tag("h3#item-1-1-3", "Item 1.1.3")
     content.should have_tag("h4#item-1-1-1-4", "Item 1.1.1.4")

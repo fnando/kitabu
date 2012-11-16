@@ -13,7 +13,6 @@ require "tempfile"
 require "pathname"
 require "thor"
 require "thor/group"
-require "listen"
 require "yaml"
 require "cgi"
 

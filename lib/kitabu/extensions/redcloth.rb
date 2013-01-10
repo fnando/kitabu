@@ -7,15 +7,19 @@ module RedCloth
 
   module Inline
     FN_RE = /
-      (\s+)?    # getting spaces
-      %\{       # opening
-      (.*?)     # footnote
-      \}#       # closing
+      (\s+)?     # getting spaces
+      (\\)?%\{   # opening
+      (.*?)      # footnote
+      \}#        # closing
     /xm
 
     def footnote(text)
       text.gsub!(FN_RE) do |m|
-        %(<span class="footnote">#{$2}</span>)
+        if $2
+          %[#{$1}%{#{$3}}]
+        else
+          %(<span class="footnote">#{$3}</span>)
+        end
       end
     end
 

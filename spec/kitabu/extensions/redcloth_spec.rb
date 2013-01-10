@@ -41,6 +41,11 @@ describe RedCloth do
       html = RedCloth.convert("Writing some text with a footnote %{this is a footnote}")
       html.should == %[<p>Writing some text with a footnote<span class="footnote">this is a footnote</span></p>]
     end
+
+    it "ignores escaped notations" do
+      html = RedCloth.convert("It must skip \\%{this}")
+      html.should == %[<p>It must skip %{this}</p>]
+    end
   end
 
   context "custom url helper" do

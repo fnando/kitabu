@@ -37,9 +37,14 @@ module Kitabu
         color = :green
         message = options[:auto] ? "exported!" : "** e-book has been exported"
 
-        if options[:open] && export_pdf && RUBY_PLATFORM =~ /darwin/
+        if options[:open] && export_pdf
           filepath = root_dir.join("output/#{File.basename(root_dir)}.pdf")
-          IO.popen("open -a Preview.app '#{filepath}'").close
+
+          if RUBY_PLATFORM =~ /darwin/
+            IO.popen("open -a Preview.app '#{filepath}'").close
+          elsif RUBY_PLATFORM =~ /linux/
+            Process.detach(Process.spawn("xdg-open '#{filepath}'", :out => "/dev/null"))
+          end
         end
 
         Notifier.notify(

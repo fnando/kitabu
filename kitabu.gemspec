@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name                  = "kitabu"
   s.version               = Kitabu::Version::STRING
   s.platform              = Gem::Platform::RUBY
-  s.required_ruby_version = "~> 1.9"
+  s.required_ruby_version = ">= 1.9"
   s.authors               = ["Nando Vieira"]
   s.email                 = ["fnando.vieira@gmail.com"]
   s.homepage              = "http://rubygems.org/gems/kitabu"

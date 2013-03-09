@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kitabu (1.0.2)
+    kitabu (1.0.3)
       RedCloth
       activesupport
       coderay
@@ -13,7 +13,7 @@ PATH
       thor
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
     activesupport (3.2.12)

@@ -9,7 +9,7 @@ module Kitabu
     end
 
     def initialize(args = [], options = {}, config = {})
-      if config[:current_task].name == "new" && args.empty?
+      if (config[:current_task] || config[:current_command]).name == "new" && args.empty?
         raise Error, "The e-Book path is required. For details run: kitabu help new"
       end
 

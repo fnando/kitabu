@@ -140,6 +140,10 @@ and you can get the code between <tt>get_all_h2_tags</tt> using
 
 NOTE: Any named block annotation will be removed from <tt>@@@ ruby file.rb</tt> usage.
 
+=== Generating content
+
+eRb templates in the text directory will be evaluated before being processed as content. Make sure to append <tt>.erb</tt> to the regular file name (<tt>.html.erb</tt>, <tt>.markdown.erb</tt>, etc). You should probably use this sparingly, maybe to call code defined in <tt>config/helper.rb</tt>.
+
 === Markdown Processors
 
 By default, RDiscount[http://github.com/rtomayko/rdiscount/tree/master] is the Markdown processor. However, you can switch to different implementations by simply installing any of the following processors:

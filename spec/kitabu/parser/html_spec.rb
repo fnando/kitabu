@@ -35,7 +35,8 @@ describe Kitabu::Parser::HTML do
       relative.second.should == "02_Textile_Chapter.textile"
       relative.third.should == "03_HTML_Chapter.html"
       relative.fourth.should == "04_With_Directory"
-      relative.fifth.should be_nil
+      relative.fifth.should == "11_Markdown_Chapter_Template.md.erb"
+      relative[5].should be_nil
     end
   end
 
@@ -45,7 +46,7 @@ describe Kitabu::Parser::HTML do
     before { parser.parse }
 
     it "has several chapters" do
-      html.should have_tag("div.chapter", 4)
+      html.should have_tag("div.chapter", 5)
     end
 
     it "renders .markdown" do
@@ -54,6 +55,14 @@ describe Kitabu::Parser::HTML do
 
     it "renders .mkdn" do
       html.should have_tag("div.chapter > h2#some-chapter", "Some Chapter")
+    end
+
+    it "renders .erb" do
+      html.should have_tag("div.chapter > h2#erb", "ERB")
+    end
+
+    it "renders .erb inside directory" do
+      html.should have_tag("div > h3#yet-another-paragraph", "Yet Another Paragraph")
     end
 
     it "renders .textile" do

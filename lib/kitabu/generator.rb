@@ -68,7 +68,7 @@ module Kitabu
     # Defaults to <tt>John Doe</tt>.
     #
     def full_name
-      name = `finger $USER 2> /dev/null | grep Login | colrm 1 46`.chomp
+      name = `finger $USER 2> /dev/null | grep Login | colrm 1 46 2> /dev/null`.chomp
       name.present? ? name.squish : "John Doe"
     end
   end

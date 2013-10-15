@@ -14,13 +14,13 @@ describe Kitabu::Cli, "while running stats" do
     Kitabu::Stats
       .should_receive(:new)
       .with(root_dir)
-      .and_return(mock.as_null_object)
+      .and_return(double.as_null_object)
 
     capture(:stdout) { Kitabu::Cli.start(["stats"]) }
   end
 
   context "outputting stats" do
-    let(:stats) { mock("stats", {
+    let(:stats) { double("stats", {
       :chapters => 4,
       :words => 50,
       :images => 10,

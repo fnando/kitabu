@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe Kitabu::Stats do
-  let(:root_dir) { mock("root dir").as_null_object }
-  let(:parser) { mock("parser").as_null_object }
+  let(:root_dir) { double("root dir").as_null_object }
+  let(:parser) { double("parser").as_null_object }
   let(:content) { "" }
   subject(:stats) { Kitabu::Stats.new(root_dir) }
   before { stats.stub :content => content }

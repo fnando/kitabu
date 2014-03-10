@@ -43,6 +43,10 @@ module Kitabu
       copy_file "helper.rb", "config/helper.rb"
     end
 
+    def copy_gemfile
+      copy_file "Gemfile", "Gemfile"
+    end
+
     def create_directories
       empty_directory "output"
       empty_directory "images"
@@ -61,6 +65,12 @@ module Kitabu
 
     def copy_guardfile
       copy_file "Guardfile", "Guardfile"
+    end
+
+    def bundle_install
+      inside destination_root do
+        run "bundle install"
+      end
     end
 
     private

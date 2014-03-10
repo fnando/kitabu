@@ -30,11 +30,15 @@ shared_examples_for "e-book" do
   end
 
   it "copies sample page" do
-    mybook.join("text/01_Welcome.md")
+    mybook.join("text/01_Welcome.md").should be_file
   end
 
   it "copies Guardfile" do
-    mybook.join("Guardfile")
+    mybook.join("Guardfile").should be_file
+  end
+
+  it "copies Gemfile" do
+    mybook.join("Gemfile").should be_file
   end
 
   it "copies html template files" do

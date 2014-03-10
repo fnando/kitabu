@@ -7,6 +7,13 @@ TMPDIR = SPECDIR.join("tmp")
 
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|r| require r}
 
+# Disable the bundle install command.
+# TODO: Figure out the best way of doing it so.
+class Kitabu::Generator < Thor::Group
+  def bundle_install
+  end
+end
+
 RSpec.configure do |config|
   config.include(SpecHelper)
   config.include(Matchers)

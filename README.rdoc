@@ -111,7 +111,7 @@ We use CodeRay[http://rubygems.org/gems/coderay] for syntax highlighting. To hig
   end
   @@@
 
-If can replace CodeRay by Pygments; just install the gem pygments.rb[http://rubygems.org/pygments.rb].
+If can replace CodeRay by Pygments; just install the gem pygments.rb[http://rubygems.org/gems/pygments.rb].
 
 <b>Don't indent</b> the source block or will end up with unexpected results.
 

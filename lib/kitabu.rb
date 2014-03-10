@@ -16,6 +16,8 @@ require "thor/group"
 require "yaml"
 require "cgi"
 
+I18n.enforce_available_locales = false
+
 %w[pygments.rb coderay].each do |lib|
   begin
     require lib

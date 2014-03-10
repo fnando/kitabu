@@ -39,23 +39,22 @@ Encoding.default_internal = "utf-8"
 Encoding.default_external = "utf-8"
 
 module Kitabu
+  ROOT = Pathname.new(File.dirname(__FILE__) + "/..")
+
   require "kitabu/extensions/string"
   require "kitabu/extensions/redcloth"
   require "kitabu/errors"
-
-  ROOT = Pathname.new(File.dirname(__FILE__) + "/..")
-
-  autoload :Version,    "kitabu/version"
-  autoload :Generator,  "kitabu/generator"
-  autoload :TOC,        "kitabu/toc"
-  autoload :Cli,        "kitabu/cli"
-  autoload :Markdown,   "kitabu/adapters/markdown"
-  autoload :Parser,     "kitabu/parser"
-  autoload :Exporter,   "kitabu/exporter"
-  autoload :Syntax,     "kitabu/syntax"
-  autoload :Stream,     "kitabu/stream"
-  autoload :Dependency, "kitabu/dependency"
-  autoload :Stats,      "kitabu/stats"
+  require "kitabu/version"
+  require "kitabu/generator"
+  require "kitabu/toc"
+  require "kitabu/cli"
+  require "kitabu/adapters/markdown"
+  require "kitabu/parser"
+  require "kitabu/exporter"
+  require "kitabu/syntax"
+  require "kitabu/stream"
+  require "kitabu/dependency"
+  require "kitabu/stats"
 
   def self.config(root_dir = nil)
     root_dir ||= Pathname.new(Dir.pwd)

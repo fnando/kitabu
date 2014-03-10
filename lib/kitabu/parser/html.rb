@@ -68,7 +68,10 @@ module Kitabu
         if File.file?(entry)
           [entry]
         else
-          Dir.glob("#{entry}/**/*.{#{EXTENSIONS.join(",")}}").sort
+          extensions_and_templates = EXTENSIONS.inject([]) do |memo, ext|
+            memo << ext << "#{ext}.erb"
+          end
+          Dir.glob("#{entry}/**/*.{#{extensions_and_templates.join(",")}}").sort
         end
       end
 
@@ -88,7 +91,7 @@ module Kitabu
       # Check if path is a valid file.
       #
       def valid_file?(entry)
-        ext = File.extname(entry).gsub(/\./, "").downcase
+        ext = File.extname(File.basename(entry, ".erb")).gsub(/\./, "").downcase
         File.file?(source.join(entry)) && EXTENSIONS.include?(ext) && entry !~ IGNORE_FILES
       end
 
@@ -98,6 +101,7 @@ module Kitabu
         file_format = format(file)
 
         content = Kitabu::Syntax.render(root_dir, file_format, File.read(file), plain_syntax)
+        content = ERB.new(content).result if File.extname(file) == ".erb"
 
         content = case file_format
         when :markdown
@@ -144,7 +148,7 @@ module Kitabu
       end
 
       def format(file)
-        case File.extname(file).downcase
+        case File.extname(File.basename(file, ".erb")).downcase
         when ".markdown", ".mkdn", ".md"
           :markdown
         when ".textile"

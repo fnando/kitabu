@@ -28,7 +28,8 @@ Gem::Specification.new do |s|
   s.add_dependency "eeepub-with-cover-support"
   s.add_dependency "coderay"
   s.add_dependency "notifier"
-  s.add_dependency "rubyzip", "< 1.0.0"
+  s.add_dependency "rubyzip"
+  s.add_dependency "zip-zip"
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"

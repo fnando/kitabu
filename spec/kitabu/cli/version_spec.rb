@@ -5,7 +5,7 @@ describe Kitabu::Cli do
     it "outputs version" do
       %w[version -v --version].each do |arg|
         output = capture(:stdout){ Kitabu::Cli.start([arg]) }.chomp
-        output.should == "Kitabu version #{Kitabu::Version::STRING}"
+        expect(output).to eq("Kitabu version #{Kitabu::Version::STRING}")
       end
     end
   end

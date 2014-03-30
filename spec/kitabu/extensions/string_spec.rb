@@ -14,7 +14,7 @@ describe String do
         "Don't Repeat Yourself (DRY)" => 'don-t-repeat-yourself-dry',
         "Text\nwith\nline\n\n\tbreaks" => 'text-with-line-breaks'
       }.each do |dirty, normalized|
-        dirty.to_permalink.should == normalized
+        expect(dirty.to_permalink).to eq(normalized)
       end
     end
   end

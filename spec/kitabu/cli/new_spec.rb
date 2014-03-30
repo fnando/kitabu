@@ -17,7 +17,7 @@ describe Kitabu::Cli do
         capture(:stderr){ Kitabu::Cli.start(["new"]) }
       }.to exit_with_code(1)
 
-      File.should_not be_directory(tmpdir.join("mybook"))
+      expect(File).not_to be_directory(tmpdir.join("mybook"))
     end
   end
 end

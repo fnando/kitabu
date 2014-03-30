@@ -9,6 +9,6 @@ describe Kitabu::Parser::PDF do
   end
 
   it "generates pdf file" do
-    root.join("output/mybook.pdf").should be_file
+    expect(root.join("output/mybook.pdf")).to be_file
   end
 end

@@ -1,6 +1,5 @@
 require "kitabu"
 require "pathname"
-require "test_notifier/runner/rspec"
 
 SPECDIR = Pathname.new(File.dirname(__FILE__))
 TMPDIR = SPECDIR.join("tmp")

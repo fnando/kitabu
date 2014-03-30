@@ -9,33 +9,33 @@ describe Kitabu::Parser::HTML do
 
   context "when filtering entries" do
     it "skips dot directories" do
-      relative.should_not include(".")
-      relative.should_not include("..")
+      expect(relative).not_to include(".")
+      expect(relative).not_to include("..")
     end
 
     it "skips dot files" do
-      relative.should_not include(".gitkeep")
+      expect(relative).not_to include(".gitkeep")
     end
 
     it "skips files that start with underscore" do
-      relative.should_not include("_00_Introduction.markdown")
+      expect(relative).not_to include("_00_Introduction.markdown")
     end
 
     it "skips other files" do
-      relative.should_not include("CHANGELOG.textile")
-      relative.should_not include("TOC.textile")
+      expect(relative).not_to include("CHANGELOG.textile")
+      expect(relative).not_to include("TOC.textile")
     end
 
     it "returns only first-level entries" do
-      relative.should_not include("04_With_Directory/Some_Chapter.mkdn")
+      expect(relative).not_to include("04_With_Directory/Some_Chapter.mkdn")
     end
 
     it "returns entries" do
-      relative.first.should == "01_Markdown_Chapter.markdown"
-      relative.second.should == "02_Textile_Chapter.textile"
-      relative.third.should == "03_HTML_Chapter.html"
-      relative.fourth.should == "04_With_Directory"
-      relative.fifth.should be_nil
+      expect(relative.first).to eq("01_Markdown_Chapter.markdown")
+      expect(relative.second).to eq("02_Textile_Chapter.textile")
+      expect(relative.third).to eq("03_HTML_Chapter.html")
+      expect(relative.fourth).to eq("04_With_Directory")
+      expect(relative.fifth).to be_nil
     end
   end
 
@@ -45,31 +45,31 @@ describe Kitabu::Parser::HTML do
     before { parser.parse }
 
     it "has several chapters" do
-      html.should have_tag("div.chapter", 4)
+      expect(html).to have_tag("div.chapter", 4)
     end
 
     it "renders .markdown" do
-      html.should have_tag("div.chapter > h2#markdown", "Markdown")
+      expect(html).to have_tag("div.chapter > h2#markdown", "Markdown")
     end
 
     it "renders .mkdn" do
-      html.should have_tag("div.chapter > h2#some-chapter", "Some Chapter")
+      expect(html).to have_tag("div.chapter > h2#some-chapter", "Some Chapter")
     end
 
     it "renders .textile" do
-      html.should have_tag("div.chapter > h2#textile", "Textile")
+      expect(html).to have_tag("div.chapter > h2#textile", "Textile")
     end
 
     it "renders .html" do
-      html.should have_tag("div.chapter > h2#html", "HTML")
+      expect(html).to have_tag("div.chapter > h2#html", "HTML")
     end
 
     it "uses config file" do
-      html.should have_tag("div.imprint p", "Copyright (C) 2010 John Doe.")
+      expect(html).to have_tag("div.imprint p", "Copyright (C) 2010 John Doe.")
     end
 
     it "renders changelog" do
-      html.should have_tag("div.changelog h2", "Revisions")
+      expect(html).to have_tag("div.changelog h2", "Revisions")
     end
   end
 end

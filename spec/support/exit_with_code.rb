@@ -11,12 +11,12 @@ RSpec::Matchers.define :exit_with_code do |code|
     actual && actual == code
   end
 
-  failure_message_for_should do |block|
+  failure_message do |block|
     "expected block to call exit(#{code}) but exit" +
     (actual ? "(#{actual}) was called" : " not called")
   end
 
-  failure_message_for_should_not do |block|
+  failure_message_when_negated do |block|
     "expected block not to call exit(#{code})"
   end
 

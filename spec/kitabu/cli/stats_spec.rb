@@ -11,8 +11,8 @@ describe Kitabu::Cli, "while running stats" do
   end
 
   it "initializes stats with root dir" do
-    Kitabu::Stats
-      .should_receive(:new)
+    expect(Kitabu::Stats)
+      .to receive(:new)
       .with(root_dir)
       .and_return(double.as_null_object)
 
@@ -29,7 +29,10 @@ describe Kitabu::Cli, "while running stats" do
       :code_blocks => 25
     })}
 
-    before { Kitabu::Stats.stub :new => stats }
+    before {
+      allow(Kitabu::Stats).to receive_message_chain(:new).and_return(stats)
+    }
+
     subject(:output) {
       capture(:stdout) { Kitabu::Cli.start(["stats"]) }
     }

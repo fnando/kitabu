@@ -62,7 +62,7 @@ module Matchers
       "expected\n#{doc.to_s}\nto have #{failure_count_phrase} #{failure_selector_phrase}, #{explanation}"
     end
 
-    def negative_failure_message
+    def failure_message_when_negated
       explanation = actual_count ? "but found #{actual_count}" : "but did"
       "expected\n#{doc.to_s}\nnot to have #{failure_count_phrase} #{failure_selector_phrase}, #{explanation}"
     end

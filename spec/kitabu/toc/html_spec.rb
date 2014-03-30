@@ -22,34 +22,34 @@ describe Kitabu::TOC::HTML do
   let(:content) { toc.content }
 
   it "has no body tag" do
-    content.should_not match(/<body>/)
+    expect(content).not_to match(/<body>/)
   end
 
   it "generates toc" do
-    html.should have_tag("div.level1.item-1", "Item 1")
-    html.should have_tag("div.level2.item-1-2", "Item 1.2")
-    html.should have_tag("div.level3.item-1-1-3", "Item 1.1.3")
-    html.should have_tag("div.level4.item-1-1-1-4", "Item 1.1.1.4")
-    html.should have_tag("div.level5.item-1-1-1-1-5", "Item 1.1.1.1.5")
-    html.should have_tag("div.level6.item-1-1-1-1-1-6", "Item 1.1.1.1.1.6")
+    expect(html).to have_tag("div.level1.item-1", "Item 1")
+    expect(html).to have_tag("div.level2.item-1-2", "Item 1.2")
+    expect(html).to have_tag("div.level3.item-1-1-3", "Item 1.1.3")
+    expect(html).to have_tag("div.level4.item-1-1-1-4", "Item 1.1.1.4")
+    expect(html).to have_tag("div.level5.item-1-1-1-1-5", "Item 1.1.1.1.5")
+    expect(html).to have_tag("div.level6.item-1-1-1-1-1-6", "Item 1.1.1.1.1.6")
 
-    html.should have_tag("div.level2.item-2-1", "Item 2.1")
-    html.should have_tag("div.level2.item-2-1-again", "Item 2.1 again")
+    expect(html).to have_tag("div.level2.item-2-1", "Item 2.1")
+    expect(html).to have_tag("div.level2.item-2-1-again", "Item 2.1 again")
 
-    html.should have_tag("div.level2.internacionalizacao", "Internacionalização")
+    expect(html).to have_tag("div.level2.internacionalizacao", "Internacionalização")
   end
 
   it "adds id attribute to content" do
-    content.should have_tag("h1#item-1", "Item 1")
-    content.should have_tag("h2#item-1-2", "Item 1.2")
-    content.should have_tag("h3#item-1-1-3", "Item 1.1.3")
-    content.should have_tag("h4#item-1-1-1-4", "Item 1.1.1.4")
-    content.should have_tag("h5#item-1-1-1-1-5", "Item 1.1.1.1.5")
-    content.should have_tag("h6#item-1-1-1-1-1-6", "Item 1.1.1.1.1.6")
+    expect(content).to have_tag("h1#item-1", "Item 1")
+    expect(content).to have_tag("h2#item-1-2", "Item 1.2")
+    expect(content).to have_tag("h3#item-1-1-3", "Item 1.1.3")
+    expect(content).to have_tag("h4#item-1-1-1-4", "Item 1.1.1.4")
+    expect(content).to have_tag("h5#item-1-1-1-1-5", "Item 1.1.1.1.5")
+    expect(content).to have_tag("h6#item-1-1-1-1-1-6", "Item 1.1.1.1.1.6")
 
-    content.should have_tag("h2#item-2-1", "Item 2.1")
-    content.should have_tag("h2#item-2-1-again", "Item 2.1 again")
+    expect(content).to have_tag("h2#item-2-1", "Item 2.1")
+    expect(content).to have_tag("h2#item-2-1-again", "Item 2.1 again")
 
-    content.should have_tag("h2#internacionalizacao", "Internacionalização")
+    expect(content).to have_tag("h2#internacionalizacao", "Internacionalização")
   end
 end

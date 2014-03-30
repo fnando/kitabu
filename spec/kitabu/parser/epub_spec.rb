@@ -9,6 +9,6 @@ describe Kitabu::Parser::Epub do
   end
 
   it "generates e-pub" do
-    root.join("output/mybook.epub").should be_file
+    expect(root.join("output/mybook.epub")).to be_file
   end
 end

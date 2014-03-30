@@ -2,56 +2,56 @@ shared_examples_for "e-book" do
   let(:mybook) { tmpdir.join("mybook") }
 
   it "generates e-book" do
-    mybook.should be_directory
+    expect(mybook).to be_directory
   end
 
   it "creates images directory" do
-    mybook.join("images").should be_directory
+    expect(mybook.join("images")).to be_directory
   end
 
   it "creates text directory" do
-    mybook.join("text").should be_directory
+    expect(mybook.join("text")).to be_directory
   end
 
   it "creates code directory" do
-    mybook.join("code").should be_directory
+    expect(mybook.join("code")).to be_directory
   end
 
   it "creates template directory" do
-    mybook.join("templates").should be_directory
+    expect(mybook.join("templates")).to be_directory
   end
 
   it "creates configuration file" do
-    mybook.join("config/kitabu.yml").should be_file
+    expect(mybook.join("config/kitabu.yml")).to be_file
   end
 
   it "creates helper file" do
-    mybook.join("config/helper.rb").should be_file
+    expect(mybook.join("config/helper.rb")).to be_file
   end
 
   it "copies sample page" do
-    mybook.join("text/01_Welcome.md").should be_file
+    expect(mybook.join("text/01_Welcome.md")).to be_file
   end
 
   it "copies Guardfile" do
-    mybook.join("Guardfile").should be_file
+    expect(mybook.join("Guardfile")).to be_file
   end
 
   it "copies Gemfile" do
-    mybook.join("Gemfile").should be_file
+    expect(mybook.join("Gemfile")).to be_file
   end
 
   it "copies html template files" do
-    mybook.join("templates/html/user.css").should be_file
-    mybook.join("templates/html/layout.css").should be_file
-    mybook.join("templates/html/layout.erb").should be_file
-    mybook.join("templates/html/syntax.css").should be_file
+    expect(mybook.join("templates/html/user.css")).to be_file
+    expect(mybook.join("templates/html/layout.css")).to be_file
+    expect(mybook.join("templates/html/layout.erb")).to be_file
+    expect(mybook.join("templates/html/syntax.css")).to be_file
   end
 
   it "copies epub template files" do
-    mybook.join("templates/epub/user.css").should be_file
-    mybook.join("templates/epub/cover.erb").should be_file
-    mybook.join("templates/epub/cover.png").should be_file
-    mybook.join("templates/epub/page.erb").should be_file
+    expect(mybook.join("templates/epub/user.css")).to be_file
+    expect(mybook.join("templates/epub/cover.erb")).to be_file
+    expect(mybook.join("templates/epub/cover.png")).to be_file
+    expect(mybook.join("templates/epub/page.erb")).to be_file
   end
 end

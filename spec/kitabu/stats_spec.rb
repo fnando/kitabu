@@ -5,12 +5,15 @@ describe Kitabu::Stats do
   let(:parser) { double("parser").as_null_object }
   let(:content) { "" }
   subject(:stats) { Kitabu::Stats.new(root_dir) }
-  before { stats.stub :content => content }
+
+  before {
+    allow(stats).to receive_message_chain(:content).and_return(content)
+  }
 
   context "getting content" do
     it "parses content" do
-      Kitabu::Parser::HTML
-        .should_receive(:new)
+      expect(Kitabu::Parser::HTML)
+        .to receive(:new)
         .with(root_dir)
         .and_return(parser)
 
@@ -18,8 +21,8 @@ describe Kitabu::Stats do
     end
 
     it "returns parser content" do
-      Kitabu::Parser::HTML.stub :new => parser
-      parser.stub :content => "some content"
+      allow(Kitabu::Parser::HTML).to receive_message_chain(:new).and_return(parser)
+      allow(parser).to receive_message_chain(:content).and_return("some content")
 
       expect(Kitabu::Stats.new(root_dir).content).to eql("some content")
     end

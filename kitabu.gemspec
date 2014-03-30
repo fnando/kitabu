@@ -31,9 +31,6 @@ Gem::Specification.new do |s|
   s.add_dependency "rubyzip", "< 1.0.0"
 
   s.add_development_dependency "rspec"
-  s.add_development_dependency "test_notifier"
   s.add_development_dependency "rake"
-  s.add_development_dependency "pry"
-  s.add_development_dependency "pry-nav"
-  s.add_development_dependency "awesome_print"
+  s.add_development_dependency "pry-meta"
 end

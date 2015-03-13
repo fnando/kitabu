@@ -15,21 +15,21 @@ module Kitabu
     end
 
     def copy_html_templates
-      copy_file "layout.erb"  , "templates/html/layout.erb"
-      copy_file "layout.css"  , "templates/html/layout.css"
-      copy_file "user.css"    , "templates/html/user.css"
-      copy_file "syntax.css"  , "templates/html/syntax.css"
+      copy_file "layout.erb", "templates/html/layout.erb"
     end
 
     def copy_epub_templates
-      copy_file "cover.erb"   , "templates/epub/cover.erb"
-      copy_file "epub.css"    , "templates/epub/user.css"
-      copy_file "epub.erb"    , "templates/epub/page.erb"
-      copy_file "cover.png"   , "templates/epub/cover.png"
+      copy_file "cover.erb", "templates/epub/cover.erb"
+      copy_file "epub.erb", "templates/epub/page.erb"
+      copy_file "cover.png", "templates/epub/cover.png"
+    end
+
+    def copy_stylesheets
+      directory "styles", "templates/styles"
     end
 
     def copy_sample_page
-      copy_file "sample.md"   , "text/01_Welcome.md"
+      copy_file "sample.md", "text/01_Welcome.md"
     end
 
     def copy_config_file
@@ -44,7 +44,7 @@ module Kitabu
     end
 
     def copy_gemfile
-      copy_file "Gemfile", "Gemfile"
+      copy_file "Gemfile"
     end
 
     def create_directories
@@ -64,7 +64,7 @@ module Kitabu
     end
 
     def copy_guardfile
-      copy_file "Guardfile", "Guardfile"
+      copy_file "Guardfile"
     end
 
     def bundle_install

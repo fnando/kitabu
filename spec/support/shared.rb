@@ -37,19 +37,23 @@ shared_examples_for "e-book" do
     expect(mybook.join("Guardfile")).to be_file
   end
 
+  it "copies stylesheets" do
+    expect(mybook.join("templates/styles")).to be_directory
+    expect(mybook.join("templates/styles/epub.scss")).to be_file
+    expect(mybook.join("templates/styles/print.scss")).to be_file
+    expect(mybook.join("templates/styles/pdf.scss")).to be_file
+    expect(mybook.join("templates/styles/html.scss")).to be_file
+  end
+
   it "copies Gemfile" do
     expect(mybook.join("Gemfile")).to be_file
   end
 
   it "copies html template files" do
-    expect(mybook.join("templates/html/user.css")).to be_file
-    expect(mybook.join("templates/html/layout.css")).to be_file
     expect(mybook.join("templates/html/layout.erb")).to be_file
-    expect(mybook.join("templates/html/syntax.css")).to be_file
   end
 
   it "copies epub template files" do
-    expect(mybook.join("templates/epub/user.css")).to be_file
     expect(mybook.join("templates/epub/cover.erb")).to be_file
     expect(mybook.join("templates/epub/cover.png")).to be_file
     expect(mybook.join("templates/epub/page.erb")).to be_file

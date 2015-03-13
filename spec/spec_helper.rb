@@ -23,12 +23,7 @@ RSpec.configure do |config|
   config.include(Matchers)
 
   cleaner = proc do
-    [
-      TMPDIR,
-      SPECDIR.join("support/mybook/output/mybook.pdf"),
-      SPECDIR.join("support/mybook/output/mybook.epub"),
-      SPECDIR.join("support/mybook/output/mybook.html")
-    ].each do |i|
+    [TMPDIR].each do |i|
       FileUtils.rm_rf(i) if File.exist?(i)
     end
 

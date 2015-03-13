@@ -1,17 +1,15 @@
 <!doctype html>
-<html>
+<html class="html">
   <head>
     <title><%= title %></title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="../templates/html/layout.css"/>
-    <link rel="stylesheet" type="text/css" href="../templates/html/syntax.css"/>
-    <link rel="stylesheet" type="text/css" href="../templates/html/user.css"/>
-
+    <link name="stylesheet" rel="stylesheet" type="text/css" href="styles/html.css" />
     <meta name="author" content="<%= authors.join(', ') %>" />
     <meta name="subject" content="<%= subject %>" />
     <meta name="keywords" content="<%= keywords %>" />
     <meta name="date" content="<%= published_at %>" />
   </head>
+
   <body>
     <div class="frontcover container">
       <div>
@@ -31,6 +29,12 @@
     <div id="chapters">
       <%= content %>
     </div>
+
+    <% if changelog %>
+      <div class="container changelog">
+        <%= changelog %>
+      </div>
+    <% end %>
 
     <div class="imprint container">
       <div>

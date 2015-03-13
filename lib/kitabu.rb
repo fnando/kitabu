@@ -20,6 +20,9 @@ require "redcarpet"
 require "rouge"
 require "rouge/plugins/redcarpet"
 
+require "sass"
+require "sass-globbing"
+
 I18n.enforce_available_locales = false
 
 Encoding.default_internal = "utf-8"

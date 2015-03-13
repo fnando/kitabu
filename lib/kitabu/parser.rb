@@ -45,9 +45,9 @@ module Kitabu
         ERB.new(File.read(file), 0, "%<>", "@_output").result context.instance_eval { binding }
       end
 
-      def spawn_command(cmd)
+      def spawn_command(command)
         begin
-          stdout_and_stderr, status = Open3.capture2e(*cmd)
+          stdout_and_stderr, status = Open3.capture2e(*command)
         rescue Errno::ENOENT => e
           puts e.message
         else

@@ -4,10 +4,10 @@ module Kitabu
       def sections
         @sections ||= html.css("div.chapter").each_with_index.map do |chapter, index|
           OpenStruct.new({
-            :index    => index,
-            :filename => "section_#{index}.html",
-            :filepath => tmp_dir.join("section_#{index}.html").to_s,
-            :html     => Nokogiri::HTML(chapter.inner_html)
+            index: index,
+            filename: "section_#{index}.html",
+            filepath: tmp_dir.join("section_#{index}.html").to_s,
+            html: Nokogiri::HTML(chapter.inner_html)
           })
         end
       end
@@ -21,15 +21,9 @@ module Kitabu
       end
 
       def parse
-        epub.title        config[:title]
-        epub.language     config[:language]
-        epub.creator      config[:authors].to_sentence
-        epub.publisher    config[:publisher]
-        epub.date         config[:published_at]
-        epub.uid          config[:uid]
-        epub.identifier   config[:identifier][:id], :scheme => config[:identifier][:type]
-        epub.cover_page   cover_image if cover_image && File.exist?(cover_image)
-
+        copy_styles!
+        copy_images!
+        set_metadata!
         write_sections!
         write_toc!
 
@@ -43,6 +37,25 @@ module Kitabu
       rescue Exception
         p $!, $@
         false
+      end
+
+      def copy_styles!
+        FileUtils.cp_r root_dir.join('output/styles'), tmp_dir
+      end
+
+      def copy_images!
+        FileUtils.cp_r root_dir.join('output/images'), tmp_dir
+      end
+
+      def set_metadata!
+        epub.title        config[:title]
+        epub.language     config[:language]
+        epub.creator      config[:authors].to_sentence
+        epub.publisher    config[:publisher]
+        epub.date         config[:published_at]
+        epub.uid          config[:uid]
+        epub.identifier   config[:identifier][:id], scheme: config[:identifier][:type]
+        epub.cover_page   cover_image if cover_image && File.exist?(cover_image)
       end
 
       def write_toc!
@@ -116,8 +129,8 @@ module Kitabu
       def navigation
         sections.map do |section|
           {
-            :label => section.html.css("h2:first-of-type").text,
-            :content => section.filename
+            label: section.html.css("h2:first-of-type").text,
+            content: section.filename
           }
         end
       end
@@ -135,7 +148,7 @@ module Kitabu
       end
 
       def tmp_dir
-        root_dir.join("output/tmp")
+        root_dir.join("output/epub")
       end
 
       def toc_path

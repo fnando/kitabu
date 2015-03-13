@@ -25,10 +25,13 @@ module Kitabu
       #
       def parse
         reset_footnote_index!
+        copy_images!
+        export_stylesheets!
 
         File.open(root_dir.join("output/#{name}.html"), "w") do |file|
           file << parse_layout(content)
         end
+
         true
       rescue Exception
         false
@@ -172,6 +175,26 @@ module Kitabu
           files.each do |file|
             chapter << render_file(file) << "\n\n"
           end
+        end
+      end
+
+      # Copy images
+      #
+      def copy_images!
+        FileUtils.cp_r root_dir.join("images/"), root_dir.join("output")
+      end
+
+      # Export all root stylesheets.
+      #
+      def export_stylesheets!
+        files = Dir[root_dir.join("templates/styles/*.{scss,sass}").to_s]
+
+        files.each do |file|
+          _, file_name, syntax = *File.basename(file).match(/(.*?)\.(.*?)$/)
+          engine = Sass::Engine.new(File.read(file), syntax: syntax.to_sym, style: :expanded, line_numbers: true)
+          target = root_dir.join("output/styles", "#{file_name}.css")
+          FileUtils.mkdir_p(File.dirname(target))
+          File.open(target, "w") {|io| io << engine.render }
         end
       end
     end

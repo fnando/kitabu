@@ -43,6 +43,10 @@ describe Kitabu::Parser::HTML do
     let(:html) { File.read(file) }
     before { parser.parse }
 
+    it "keeps html file around" do
+      expect(file).to be_file
+    end
+
     it "has several chapters" do
       expect(html).to have_tag("div.chapter", 3)
     end

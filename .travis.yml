@@ -3,12 +3,16 @@ cache: bundler
 sudo: true
 script: bundle exec rspec
 before_install:
-  - wget http://www.princexml.com/download/prince_9.0-5_ubuntu12.04_amd64.deb
-  - sudo apt-get install -yqq fontconfig-config libfontconfig1 libgif4 libjpeg-turbo8 libjpeg8 libtiff4 ttf-dejavu-core
-  - sudo dpkg -i prince_9.0-5_ubuntu12.04_amd64.deb
+- wget http://www.princexml.com/download/prince_9.0-5_ubuntu12.04_amd64.deb
+- sudo apt-get install -yqq fontconfig-config libfontconfig1 libgif4 libjpeg-turbo8 libjpeg8 libtiff4 ttf-dejavu-core
+- sudo dpkg -i prince_9.0-5_ubuntu12.04_amd64.deb
 rvm:
 - '2.0'
 - '2.1'
 - '2.2'
 notifications:
   email: false
+addons:
+  code_climate:
+    repo_token:
+      secure: "WvgB6WqwxgwLvNCR/dFtm9JkQfaLMLuqaFs2nKKsw92BL4qi3rk3m3GxVR+LoODWx0Tsdl9zCWF3fFBwmgiM7eFdqSJ4dmy3iTH7fHOu/iruP6yDV9+iyI6oNXLGlyx4kZdxGvjOh95AFBMQ1KQis/0ibzA5Ax2qg19JUcB3+ao="

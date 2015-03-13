@@ -65,11 +65,6 @@ module Kitabu
         :installed => Kitabu::Dependency.html2text?
       }
 
-      result << {
-        :description => "pygments.rb: A generic syntax highlight. If installed, replaces CodeRay.",
-        :installed => Kitabu::Dependency.pygments_rb?
-      }
-
       result.each do |result|
         text = color(result[:name], :blue)
         text << "\n" << result[:description]

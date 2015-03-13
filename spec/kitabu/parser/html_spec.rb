@@ -31,11 +31,9 @@ describe Kitabu::Parser::HTML do
     end
 
     it "returns entries" do
-      expect(relative.first).to eq("01_Markdown_Chapter.markdown")
-      expect(relative.second).to eq("02_Textile_Chapter.textile")
-      expect(relative.third).to eq("03_HTML_Chapter.html")
-      expect(relative.fourth).to eq("04_With_Directory")
-      expect(relative.fifth).to be_nil
+      expect(relative.first).to eq("01_Markdown_Chapter.md")
+      expect(relative.second).to eq("02_With_Directory")
+      expect(relative.third).to be_nil
     end
   end
 
@@ -45,23 +43,7 @@ describe Kitabu::Parser::HTML do
     before { parser.parse }
 
     it "has several chapters" do
-      expect(html).to have_tag("div.chapter", 4)
-    end
-
-    it "renders .markdown" do
-      expect(html).to have_tag("div.chapter > h2#markdown", "Markdown")
-    end
-
-    it "renders .mkdn" do
-      expect(html).to have_tag("div.chapter > h2#some-chapter", "Some Chapter")
-    end
-
-    it "renders .textile" do
-      expect(html).to have_tag("div.chapter > h2#textile", "Textile")
-    end
-
-    it "renders .html" do
-      expect(html).to have_tag("div.chapter > h2#html", "HTML")
+      expect(html).to have_tag("div.chapter", 2)
     end
 
     it "uses config file" do

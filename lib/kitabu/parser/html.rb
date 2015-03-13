@@ -11,7 +11,7 @@ module Kitabu
 
       # List of recognized extensions.
       #
-      EXTENSIONS = %w[md mkdn markdown textile html]
+      EXTENSIONS = %w[md]
 
       class << self
         # The footnote index control. We have to manipulate footnotes
@@ -68,7 +68,7 @@ module Kitabu
         if File.file?(entry)
           [entry]
         else
-          Dir.glob("#{entry}/**/*.{#{EXTENSIONS.join(",")}}").sort
+          Dir["#{entry}/**/*.{#{EXTENSIONS.join(",")}}"].sort
         end
       end
 
@@ -97,16 +97,13 @@ module Kitabu
       def render_file(file, plain_syntax = false)
         file_format = format(file)
 
-        content = Kitabu::Syntax.render(root_dir, file_format, File.read(file), plain_syntax)
-
+        content = File.read(file)
         content = case file_format
-        when :markdown
-          Markdown.to_html(content)
-        when :textile
-          RedCloth.convert(content)
-        else
-          content
-        end
+                  when :markdown
+                    Kitabu::Markdown.render(content)
+                  else
+                    content
+                  end
 
         render_footnotes(content, plain_syntax)
       end
@@ -147,8 +144,6 @@ module Kitabu
         case File.extname(file).downcase
         when ".markdown", ".mkdn", ".md"
           :markdown
-        when ".textile"
-          :textile
         else
           :html
         end
@@ -171,8 +166,7 @@ module Kitabu
       #
       def render_changelog
         changelog = Dir[root_dir.join("text/CHANGELOG.*")].first
-        return render_file(changelog) if changelog
-        nil
+        render_file(changelog) if changelog
       end
 
       # Render all +files+ from a given chapter.

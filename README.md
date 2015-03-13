@@ -4,7 +4,7 @@ While Prince is too expensive (495USD for a single user license), the free versi
 
 ## Features
 
-* Write using Markdown, Textile or plain HTML
+* Write using Markdown
 * Book layout support
 * Syntax highlight
 * Generate HTML, PDF, e-Pub, Mobi and Text files
@@ -31,11 +31,7 @@ dependencies.
     html2text: Converts HTML documents into plain text.
     Not installed.
 
-    pygments.rb: A generic syntax highlight. If installed, replaces CodeRay.
-    Not installed.
-
-There's no requirements here; just make sure you cleared the correct dependency based
-on the formats you want to export to.
+There are no hard requirements here; just make sure you cleared the correct dependency based on the formats you want to export to.
 
 ## Usage
 
@@ -72,25 +68,23 @@ Now it's time to write your e-book. All your book content will be placed on the 
 
     * text
       * 01_Introduction
-        * 01_introduction.markdown
+        * 01_introduction.md
       * 02_What_is_Ruby_on_Rails
-        * 01_MVC.html
-        * 02_DRY.html
-        * 03_Convention_Over_Configuration.markdown
+        * 01_MVC.md
+        * 02_DRY.md
+        * 03_Convention_Over_Configuration.md
       * 03_Installing_Ruby_on_Rails
-        * 01_Installing.textile
-        * 02_Mac_OS_X_instructions.textile
-        * 03_Windows_instructions.markdown
-        * 04_Ubuntu_Linux_instructions.markdown
+        * 01_Installing.md
+        * 02_Mac_OS_X_instructions.md
+        * 03_Windows_instructions.md
+        * 04_Ubuntu_Linux_instructions.md
 
 If you prefer, you can add a chapter per file:
 
     * text
-      * 01_Introduction.markdown
-      * 02_What_is_Ruby_on_Rails.markdown
-      * 03_Installing_Ruby_on_Rails.markdown
-
-Note that you can use any format you want at the same time. Just use one of the following extensions: `.html`, `.markdown`, `.mkdn` or `.textile`.
+      * 01_Introduction.md
+      * 02_What_is_Ruby_on_Rails.md
+      * 03_Installing_Ruby_on_Rails.md
 
 You'll want to see your progress eventually; it's time for you to generate the book PDF. Just run the command `kitabu export` and your book will be created on the `output` directory.
 
@@ -102,97 +96,47 @@ To print the TOC, you need to print a variable called +toc+, using the eRb tag.
 
 ### Syntax Highlighting
 
-We use [CodeRay](http://rubygems.org/gems/coderay) for syntax highlighting. To highlight a given code snippet, just do something like
+To highlight code, use fenced code blocks.
 
-    @@@ ruby
+    ``` ruby
     class User < ActiveRecord::Base
       validates_presence_of :login, :password, :email
       validates_uniqueness_of :login, :email
     end
-    @@@
+    ```
 
-You can replace CodeRay with Pygments; just install the gem [pygments.rb](http://rubygems.org/gems/pygments.rb).
+You can even provide options:
 
-Don't indent the source block or will end up with unexpected results.
+    ```php?start_inline=1&line_numbers=1
+    echo "Hello World";
+    ```
 
-If you want to highlight a file, you need to place it into the `code` directory and call it like this:
+- We use [Redcarpet](https://rubygems.org/gems/redcarpet) for Markdown processing.
+- We use [Rouge](https://rubygems.org/gems/rouge) for syntax highlighting.
 
-    @@@ ruby some_file.rb @@@
+The following Redcarpet options are enabled:
 
-You can specify the lines you want to highlight; the example below will highlight lines 10-17 from some_file.rb.
-
-    @@@ ruby some_file.rb:10,15 @@@
-
-You can also specify named blocks. Named blocks are identified by `@begin` and `@end` marks. If `some_file.rb` has the following code
-
-    require "rubygems"
-    require "hpricot"
-    require "open"
-
-    # @begin: get_all_h2_tags
-    doc = Hpricot(open('http://simplesideias.com.br'))
-    (doc/"h2").each {|h2| puts h2.inner_text }
-    # @end: get_all_h2_tags
-
-and you can get the code between `get_all_h2_tags` using
-
-    @@@ ruby some_file#get_all_h2_tags @@@
-
-NOTE: Any named block annotation will be removed from `@@@ ruby file.rb` usage.
-
-### Markdown Processors
-
-By default, [RDiscount](http://github.com/rtomayko/rdiscount/tree/master) is the Markdown processor. However, you can switch to different implementations by simply installing any of the following processors:
-
-* Maruku: <https://rubygems.org/gems/maruku>
-* PEGMarkdown: <https://rubygems.org/gems/rpeg-markdown>
-* BlueCloth: <https://rubygems.org/gems/bluecloth>
-* Redcarpet: <https://rubygems.org/gems/redcarpet>
-
-Note: RDiscount will always be installed as Kitabu's dependency but only used when no
-alternative library is available.
+* `autolink`
+* `fenced_code_blocks`
+* `footnotes`
+* `hard_wrap`
+* `highlight`
+* `no_intra_emphasis`
+* `safe_links_only`
+* `space_after_headers`
+* `strikethrough`
+* `superscript`
+* `tables`
 
 ### References
 
-* Textile: <http://hobix.com/textile>
 * Markdown: <http://daringfireball.net/projects/markdown/syntax>
-
-## Samples
-
-I published two PDFs (portuguese only) exploring lots of features. Check it out:
-
-* <http://cl.ly/3j1s2g1O1b1c0S3M0n20>
-* <http://cl.ly/1L1o123L3Z0p3P0L1Q3t>
-* <http://cl.ly/0a2W3s3u2T2P1V0C0c3g>
-
-There's also an (probably) outdated Rails Guide section in the `examples` directory.
-
-## Upgrading from previous version
-
-To upgrade a e-book created with Kitabu < 1.0.0, create a new e-book.
-
-    $ kitabu new mybook
-
-Then copy all your configuration info from `config.yml` to `config/kitabu.yml`.
-
-Any Textile extension need to be ported to `config/helper.rb`. Check commented source for examples.
-
-Move directories `text`, `code`, and `images` to your new e-book directory.
-
-The last thing you need to upgrade is the syntax highlighting. You have to move from
-
-    syntax. some_file.rb
-
-to
-
-    @@@ ruby some_file.rb @@@
-
-Check the section "Syntax Highlighting" for detailed info.
+* Markdown PHP: <https://michelf.ca/projects/php-markdown/extra/>
 
 ## Maintainer
 
-* Nando Vieira (http://nandovieira.com.br)
-* Jesse Storimer (http://jstorimer.com)
+* [Nando Vieira](http://nandovieira.com.br)
+* [Jesse Storimer](http://jstorimer.com)
 
 ## License
 

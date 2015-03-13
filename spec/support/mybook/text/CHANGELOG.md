@@ -1,6 +1,6 @@
-h2. Revisions
+## Revisions
 
-h3. Version 1
+### Version 1
 
 * Some text fixes
 * Added chapter about something

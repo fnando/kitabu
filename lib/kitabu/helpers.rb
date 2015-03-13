@@ -1,5 +1,12 @@
 module Kitabu
   module Helpers
+    def highlight_theme(name = theme)
+      html = '<style type="text/css">'
+      html << Rouge::Theme.find(name).render(scope: '.highlight')
+      html << '</style>'
+      html
+    end
+
     def escape_html(content)
       CGI.escape_html(content.to_s)
     end

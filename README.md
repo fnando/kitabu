@@ -1,5 +1,7 @@
 # kitabu
 
+[![Build Status](https://travis-ci.org/fnando/kitabu.svg)](https://travis-ci.org/fnando/kitabu)
+
 While Prince is too expensive (495USD for a single user license), the free version available at <http://www.princexml.com/download> generates a PDF with a small logo on the first page, which is removed when sent to a printer.
 
 ## Features

@@ -167,6 +167,16 @@ The following Redcarpet options are enabled:
 * Markdown: <http://daringfireball.net/projects/markdown/syntax>
 * Markdown PHP: <https://michelf.ca/projects/php-markdown/extra/>
 
+## Legal Notes
+
+* KindleGen: [license](http://www.amazon.com/gp/feature.html?docId=1000599251).
+* PrinceXML: [license](http://www.princexml.com/license/)
+
+Alternatives:
+
+- If you're planning to to sell your e-book, consider using [Calibre](http://calibre-ebook.com/) to convert from `.epub` to `.mobi`.
+- If you're not planning to buy PrinceXML, consider using [DocRaptor](http://docraptor.com).
+
 ## Maintainer
 
 * [Nando Vieira](http://nandovieira.com.br)

@@ -13,9 +13,9 @@ describe Kitabu::Cli do
     end
 
     it "exits with status 1 when no path is provided" do
-      expect {
+      expect(->{
         capture(:stderr){ Kitabu::Cli.start(["new"]) }
-      }.to exit_with_code(1)
+      }).to exit_with_code(1)
 
       expect(File).not_to be_directory(tmpdir.join("mybook"))
     end

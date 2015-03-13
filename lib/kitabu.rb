@@ -14,6 +14,7 @@ require "thor"
 require "thor/group"
 require "yaml"
 require "cgi"
+require "erb"
 
 require "redcarpet"
 require "rouge"
@@ -40,6 +41,7 @@ module Kitabu
   require "kitabu/stream"
   require "kitabu/dependency"
   require "kitabu/stats"
+  require "kitabu/helpers"
 
   def self.config(root_dir = nil)
     root_dir ||= Pathname.new(Dir.pwd)

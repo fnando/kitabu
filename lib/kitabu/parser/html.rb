@@ -11,7 +11,7 @@ module Kitabu
 
       # List of recognized extensions.
       #
-      EXTENSIONS = %w[md]
+      EXTENSIONS = %w[md erb]
 
       class << self
         # The footnote index control. We have to manipulate footnotes
@@ -94,21 +94,18 @@ module Kitabu
 
       # Render +file+ considering its extension.
       #
-      def render_file(file, plain_syntax = false)
-        file_format = format(file)
+      def render_file(file)
+        if format(file) == :erb
+          content = render_template(file, config)
+        else
+          content = File.read(file)
+        end
 
-        content = File.read(file)
-        content = case file_format
-                  when :markdown
-                    Kitabu::Markdown.render(content)
-                  else
-                    content
-                  end
-
-        render_footnotes(content, plain_syntax)
+        content = Kitabu::Markdown.render(content)
+        render_footnotes(content)
       end
 
-      def render_footnotes(content, plain_syntax = false)
+      def render_footnotes(content)
         html = Nokogiri::HTML(content)
         footnotes = html.css("p[id^='fn']")
 
@@ -141,11 +138,10 @@ module Kitabu
       end
 
       def format(file)
-        case File.extname(file).downcase
-        when ".markdown", ".mkdn", ".md"
-          :markdown
+        if File.extname(file) == '.erb'
+          :erb
         else
-          :html
+          :markdown
         end
       end
 
@@ -154,9 +150,9 @@ module Kitabu
       def parse_layout(html)
         toc = TOC::HTML.generate(html)
         locals = config.merge({
-          :content   => toc.content,
-          :toc       => toc.to_html,
-          :changelog => render_changelog
+          content: toc.content,
+          toc: toc.to_html,
+          changelog: render_changelog
         })
         render_template(root_dir.join("templates/html/layout.erb"), locals)
       end
@@ -171,10 +167,10 @@ module Kitabu
 
       # Render all +files+ from a given chapter.
       #
-      def render_chapter(files, plain_syntax = false)
+      def render_chapter(files)
         String.new.tap do |chapter|
           files.each do |file|
-            chapter << render_file(file, plain_syntax) << "\n\n"
+            chapter << render_file(file) << "\n\n"
           end
         end
       end

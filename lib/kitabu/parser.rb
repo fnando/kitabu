@@ -41,7 +41,8 @@ module Kitabu
       # Render a eRb template using +locals+ as data seed.
       #
       def render_template(file, locals = {})
-        ERB.new(File.read(file)).result OpenStruct.new(locals).instance_eval { binding }
+        context = OpenStruct.new(locals).extend(Helpers)
+        ERB.new(File.read(file), 0, "%<>", "@_output").result context.instance_eval { binding }
       end
 
       def spawn_command(cmd)

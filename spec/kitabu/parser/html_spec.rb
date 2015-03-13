@@ -18,22 +18,23 @@ describe Kitabu::Parser::HTML do
     end
 
     it "skips files that start with underscore" do
-      expect(relative).not_to include("_00_Introduction.markdown")
+      expect(relative).not_to include("_00_Introduction.md")
     end
 
     it "skips other files" do
-      expect(relative).not_to include("CHANGELOG.textile")
-      expect(relative).not_to include("TOC.textile")
+      expect(relative).not_to include("CHANGELOG.md")
+      expect(relative).not_to include("TOC.md")
     end
 
     it "returns only first-level entries" do
-      expect(relative).not_to include("04_With_Directory/Some_Chapter.mkdn")
+      expect(relative).not_to include("03_With_Directory/Some_Chapter.md")
     end
 
     it "returns entries" do
       expect(relative.first).to eq("01_Markdown_Chapter.md")
-      expect(relative.second).to eq("02_With_Directory")
-      expect(relative.third).to be_nil
+      expect(relative.second).to eq("02_ERB_Chapter.md.erb")
+      expect(relative.third).to eq("03_With_Directory")
+      expect(relative.fourth).to be_nil
     end
   end
 
@@ -43,7 +44,7 @@ describe Kitabu::Parser::HTML do
     before { parser.parse }
 
     it "has several chapters" do
-      expect(html).to have_tag("div.chapter", 2)
+      expect(html).to have_tag("div.chapter", 3)
     end
 
     it "uses config file" do
@@ -52,6 +53,14 @@ describe Kitabu::Parser::HTML do
 
     it "renders changelog" do
       expect(html).to have_tag("div.changelog h2", "Revisions")
+    end
+
+    it "renders erb" do
+      expect(html).to have_tag("h2", "ERB")
+    end
+
+    it "renders erb blocks" do
+      expect(html).to have_tag("div.note.info > p", "This is a note!")
     end
   end
 end

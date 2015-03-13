@@ -98,6 +98,36 @@ To print the TOC, you need to print a variable called +toc+, using the eRb tag.
 
     <%= toc %>
 
+#### Using ERB
+
+You can also have .erb files. You can mix Markdown and HTML, like the following:
+
+    ## This the chapter title
+
+    <% note do %>
+      Make sure you try .erb files!
+    <% end %>
+
+The above content must be placed in a `.erb` file. The generated content will be something like this:
+
+```html
+<div class="note info">
+  <p>
+    Make sure you try .erb files!
+  </p>
+</div>
+```
+
+The `note` helper is built-in and can accept a different note type.
+
+```erb
+<% note :warning do %>
+  Make sure you write valid ERB code.
+<% end %>
+```
+
+You can see available helpers on <https://github.com/fnando/kitabu/blob/master/lib/kitabu/markdown.rb>.
+
 ### Syntax Highlighting
 
 To highlight code, use fenced code blocks.

@@ -43,13 +43,3 @@ authors:
 
 # The base URL from your source code.
 base_url: http://example.com
-
-# You can rename your text structure automatically.
-# All you have to do is using a list will all your chapters and
-# then you can run `kitabu rearrange`.
-structure:
-  - Markdown_Chapter.markdown
-  - Textile_Chapter.textile
-  - HTML_Chapter.html
-  - With_Directory
-    - Some_Chapter.mkdn

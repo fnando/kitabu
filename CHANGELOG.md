@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v2.0.0
 
 - Remove support for different markdown processors; now using Redcarpet.
 - Remove support for other file types like textile and html.

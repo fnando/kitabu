@@ -1,4 +1,0 @@
-## Getting Up and Running Quickly with Scaffolding
-
-Rails *scaffolding* is a quick way to generate some of the major pieces of an application. If you want to create the models, views, and controllers for a new resource in a single operation, scaffolding is the tool for the job.
-

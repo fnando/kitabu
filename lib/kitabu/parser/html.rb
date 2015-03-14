@@ -33,7 +33,8 @@ module Kitabu
         end
 
         true
-      rescue Exception
+      rescue Exception => error
+        handle_error(error)
         false
       end
 
@@ -181,17 +182,22 @@ module Kitabu
       # Copy images
       #
       def copy_images!
-        FileUtils.cp_r root_dir.join("images/"), root_dir.join("output")
+        copy_directory("images", "output/images")
       end
 
       # Export all root stylesheets.
       #
       def export_stylesheets!
         files = Dir[root_dir.join("templates/styles/*.{scss,sass}").to_s]
+        options = {
+          style: :expanded,
+          line_numbers: true,
+          load_paths: [root_dir.join("templates/styles")]
+        }
 
         files.each do |file|
           _, file_name, syntax = *File.basename(file).match(/(.*?)\.(.*?)$/)
-          engine = Sass::Engine.new(File.read(file), syntax: syntax.to_sym, style: :expanded, line_numbers: true)
+          engine = Sass::Engine.new(File.read(file), options.merge(syntax: syntax.to_sym))
           target = root_dir.join("output/styles", "#{file_name}.css")
           FileUtils.mkdir_p(File.dirname(target))
           File.open(target, "w") {|io| io << engine.render }

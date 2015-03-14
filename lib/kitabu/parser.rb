@@ -55,6 +55,23 @@ module Kitabu
           status.success?
         end
       end
+
+      def ui
+        @ui ||= Thor::Base.shell.new
+      end
+
+      def handle_error(error)
+        ui.say "#{error.class}: #{error.message}", :red
+        ui.say error.backtrace.join("\n"), :white
+      end
+
+      def copy_directory(source, target)
+        source = root_dir.join("#{source}/.")
+        target = root_dir.join(target)
+
+        FileUtils.mkdir_p target
+        FileUtils.cp_r source, target, remove_destination: true
+      end
     end
   end
 end

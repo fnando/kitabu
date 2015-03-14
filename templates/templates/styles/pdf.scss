@@ -1,0 +1,371 @@
+@import './files/normalize';
+
+$frontcover-color: #5091b1;
+$page-height: 22.86cm;
+$page-height: 19.05cm;
+
+$frontcover-padding: 50px;
+
+@page {
+  size: 19.05cm 22.86cm portrait;
+}
+
+@page chapter:left {
+  @bottom-left {
+    background: #000;
+    color: #fff;
+    content: counter(page);
+    font-size: 12px;
+    margin-left: -100px;
+    text-align: center;
+    width: 35px;
+  }
+}
+
+@page chapter:right {
+  @bottom-right {
+    background: #000;
+    color: #fff;
+    content: counter(page);
+    font-size: 12px;
+    margin-right: -100px;
+    text-align: center;
+    width: 35px;
+  }
+}
+
+@page frontcover {
+  margin: 0;
+  background: $frontcover-color;
+  border-left: 50px solid darken($frontcover-color, 10%);
+}
+
+@page chapter {
+  margin: 100px 100px 50px;
+  background: #fff;
+
+  @footnotes {
+    border-top: thin solid #777;
+    margin-top: 1em;
+    padding-top: .5em;
+  }
+}
+
+@page white {
+  margin: 0;
+  background: #fff;
+  display: block;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Caslon, serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+a {
+  color: $frontcover-color;
+}
+
+.go-top {
+  display: none;
+}
+
+// White page
+.white-page {
+  page: white;
+  page-break-before: always;
+  page-break-after: always;
+}
+
+.white-page:before {
+  content: 'This page intentionally left blank';
+  text-transform: uppercase;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 50%;
+  transform: translatey(-50%);
+}
+
+// Style frontcover
+.frontcover {
+  page: frontcover;
+  padding: $frontcover-padding;
+  padding-left: 0;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.frontcover * {
+  margin: 0;
+}
+
+.frontcover .logo {
+  background: url('../images/kitabu-word.svg') no-repeat center bottom;
+  height: 150px;
+  margin-bottom: 35px;
+}
+
+.frontcover .logo img {
+  display: none;
+}
+
+.frontcover .description {
+  display: inline-block;
+  width: 400px;
+  font-size: 20px;
+  color: rgba(#fff, .7);
+}
+
+.frontcover .description:after {
+  content: '';
+  display: block;
+  background: url('../images/kitabu-icon.svg') no-repeat center bottom;
+  background-size: 200px;
+  height: 300px;
+  margin-top: 50px;
+}
+
+.frontcover .authors {
+  font-size: 24px;
+  padding: $frontcover-padding;
+  font-weight: bold;
+  margin-top: 30px;
+  color: rgba(#000, .4);
+  text-transform: uppercase;
+}
+
+.frontcover .authors:before {
+  content: 'By ';
+}
+
+// Style chapter
+.chapters {
+  counter-reset: chapter;
+}
+
+.chapter {
+  page: chapter;
+  page-break-before: always;
+  counter-increment: chapter;
+}
+
+.chapter > h2 {
+  font-family: sans-serif;
+  margin: -100px -100px 75px -100px;
+  background: $frontcover-color;
+  padding: 100px;
+  color: rgba(#fff, .6);
+  font-size: 40px;
+}
+
+.chapter > h3 {
+  margin-top: 40px;
+}
+
+.chapter > h2:before {
+  content: 'Chapter ' counter(chapter);
+  display: block;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+// Code highlighting
+p code,
+li code {
+  font-size: 12px;
+  font-family: Menlo, monospace;
+}
+
+.highlight {
+  padding: 15px;
+  font-size: 12px;
+}
+
+.highlight * {
+  font-family: Menlo, monospace;
+}
+
+.highlight .gutter {
+  color: #aaa;
+  padding-right: 15px;
+}
+
+// Format lexers list
+.lexers-list {
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  list-style: none;
+}
+
+.lexers-list li {
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid-column;
+}
+
+.lexers-list span {
+  font-size: 13px;
+}
+
+.lexers-list li + li {
+  margin-top: 15px;
+}
+
+// Footnotes
+.fn {
+  counter-increment: footnote;
+  display: prince-footnote;
+  font-size: 9pt;
+  footnote-style-position: inside;
+  line-height: 1.4;
+  position: footnote;
+}
+
+.fn::footnote-call {
+  content: "";
+  font-size: 80%;
+}
+
+.fn::footnote-marker {
+  padding-right: 0.4em;
+  vertical-align: super;
+  display: none;
+}
+
+.footnote a,
+.fn a {
+  color: #000;
+}
+
+.fn code {
+  font-size: 8pt;
+}
+
+// Table of contents
+.table-of-contents {
+  page: chapter;
+  font-family: sans-serif;
+}
+
+.table-of-contents > h2 {
+  font-family: sans-serif;
+  margin: -100px -100px 75px -100px;
+  background: $frontcover-color;
+  padding: 100px;
+  color: rgba(#fff, .6);
+  font-size: 40px;
+}
+
+.table-of-contents a {
+  text-decoration: none;
+}
+
+.table-of-contents {
+  .level4 { display: none; }
+  .level5 { display: none; }
+  .level6 { display: none; }
+}
+
+.table-of-contents * + .level2 {
+  margin-top: 25px;
+}
+
+.table-of-contents .level2 a {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #000;
+  font-size: 20px;
+  position: relative;
+  padding-left: 25px;
+
+  &:before {
+    content: target-counter(attr(href), page) " ";
+    position: absolute;
+    left: 0;
+    transform: translatex(-100%);
+  }
+}
+
+.table-of-contents .level3 {
+  padding-left: 25px;
+}
+
+.table-of-contents .level3 {
+  margin-top: 10px;
+}
+
+.table-of-contents .level3 a {
+  position: relative;
+  color: #777;
+
+  &:after {
+    content: leader('.') target-counter(attr(href), page) " ";
+    cursor: default;
+  }
+}
+
+// Footnotes
+.chapters {
+  counter-reset: fnref;
+  counter-reset: fndesc;
+}
+
+.fn-ref {
+  counter-increment: fnref;
+}
+
+.fn-desc {
+  counter-increment: fndesc;
+  display: prince-footnote;
+  footnote-style-position: inside;
+  position: footnote;
+}
+
+.fn-desc:footnote-marker {
+  vertical-align: super;
+  content: counter(fndesc);
+  margin-right: 5px;
+}
+
+// Notes
+.note {
+  font-size: 13px;
+  float: right;
+  overflow: hidden;
+  position: relative;
+  padding-left: 50px;
+  margin: 30px 0;
+}
+
+.note:before {
+  content: '!';
+  display: inline-block;
+  font-size: 25px;
+  width: 10px;
+  height: 10px;
+  padding: 15px;
+  line-height: 15px;
+  text-align: center;
+  position: absolute;
+  top: 15px;
+  left: 0;
+}
+
+.note.info:before {
+  background: #f5be28;
+  color: #fff;
+}
+
+.note.warning:before {
+  background: #e42e24;
+  color: #fff;
+}

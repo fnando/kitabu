@@ -34,17 +34,17 @@ module Kitabu
         epub.save(epub_path)
 
         true
-      rescue Exception
-        p $!, $@
+      rescue Exception => error
+        handle_error(error)
         false
       end
 
       def copy_styles!
-        FileUtils.cp_r root_dir.join('output/styles'), tmp_dir
+        copy_directory("output/styles", "output/epub/styles")
       end
 
       def copy_images!
-        FileUtils.cp_r root_dir.join('output/images'), tmp_dir
+        copy_directory("output/images", "output/epub/images")
       end
 
       def set_metadata!

@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html class="epub" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link name="stylesheet" rel="stylesheet" type="text/css" href="styles/epub.css" />
+    <style type="text/css">.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .c, .highlight .cd {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+.highlight .gr {
+  color: #aa0000;
+}
+.highlight .gh {
+  color: #999999;
+}
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .gt {
+  color: #aa0000;
+}
+.highlight .kc {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kd {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kv {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .mf {
+  color: #009999;
+}
+.highlight .mh {
+  color: #009999;
+}
+.highlight .il {
+  color: #009999;
+}
+.highlight .mi {
+  color: #009999;
+}
+.highlight .mo {
+  color: #009999;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #009999;
+}
+.highlight .sb {
+  color: #d14;
+}
+.highlight .sc {
+  color: #d14;
+}
+.highlight .sd {
+  color: #d14;
+}
+.highlight .s2 {
+  color: #d14;
+}
+.highlight .se {
+  color: #d14;
+}
+.highlight .sh {
+  color: #d14;
+}
+.highlight .si {
+  color: #d14;
+}
+.highlight .sx {
+  color: #d14;
+}
+.highlight .sr {
+  color: #009926;
+}
+.highlight .s1 {
+  color: #d14;
+}
+.highlight .ss {
+  color: #990073;
+}
+.highlight .s {
+  color: #d14;
+}
+.highlight .na {
+  color: #008080;
+}
+.highlight .bp {
+  color: #999999;
+}
+.highlight .nb {
+  color: #0086B3;
+}
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #008080;
+}
+.highlight .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #800080;
+}
+.highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nf {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #555555;
+}
+.highlight .nt {
+  color: #000080;
+}
+.highlight .vc {
+  color: #008080;
+}
+.highlight .vg {
+  color: #008080;
+}
+.highlight .vi {
+  color: #008080;
+}
+.highlight .nv {
+  color: #008080;
+}
+.highlight .ow {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .o {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #bbbbbb;
+}
+.highlight {
+  background-color: #f8f8f8;
+}</style>
+  </head>
+
+  <body>
+    <div class="chapter">
+      <h2 id="syntax-highlighting">Syntax Highlighting</h2>
+
+<h3 id="what-about-the-syntax">What about the syntax</h3>
+
+<p>Kitabu uses <a href="http://rubygems.org/gems/rouge">Route</a> as the syntax highlight formatter. It emits an output compatible with stylesheets designed for <a href="https://pygments.org">pygments</a>, the Python library used by many.</p>
+
+<p>To highlight a code block, use the fenced block syntax. The following example would be formatted as Ruby.</p>
+<pre class="highlight plaintext"><code>```ruby
+class User
+  attr_accessor :name, :email
+
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+end
+```
+</code></pre>
+
+<p>The output would be something like this:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+    <span class="vi">@email</span> <span class="o">=</span> <span class="n">email</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<div class="note info">
+<p>If you’re using Sublime Text, make sure you install the <a href="https://packagecontrol.io/packages/Markdown%20Extended">Markdown Extended</a> plugin; it enables code syntax highlighting on your Markdown files.</p>
+</div>
+
+<p>You can also provide inline options such as line numbers and inline rendering.</p>
+<pre class="highlight plaintext"><code>```ruby?line_numbers=1
+class User
+  attr_accessor :name, :email
+
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+end
+```
+</code></pre>
+
+<p>This would be rendered like this:</p>
+<div class="highlight ruby">
+<table style="border-spacing: 0"><tbody><tr>
+<td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td>
+<td class="code"><pre><span class="k">class</span> <span class="nc">User</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+    <span class="vi">@email</span> <span class="o">=</span> <span class="n">email</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td>
+</tr></tbody></table>
+</div>
+
+<h3 id="lexers">Lexers</h3>
+
+<p>Rouge comes with dozens of lexers. Check out this list, generated dynamically when you export your e-book.</p>
+
+<ul class="lexers-list">
+<li>
+<strong>Apache</strong> <code>apache</code><br /><span>configuration files for Apache web server</span>
+</li>
+<li>
+<strong>AppleScript</strong> <code>applescript</code><br /><span>The AppleScript scripting language by Apple Inc. (http://developer.apple.com/applescript/)</span>
+</li>
+<li>
+<strong>C</strong> <code>c</code><br /><span>The C programming language</span>
+</li>
+<li>
+<strong>Clojure</strong> <code>clojure</code><br /><span>The Clojure programming language (clojure.org)</span>
+</li>
+<li>
+<strong>CoffeeScript</strong> <code>coffeescript</code><br /><span>The Coffeescript programming language (coffeescript.org)</span>
+</li>
+<li>
+<strong>Common Lisp</strong> <code>common_lisp</code><br /><span>The Common Lisp variant of Lisp (common-lisp.net)</span>
+</li>
+<li>
+<strong>Config File</strong> <code>conf</code><br /><span>A generic lexer for configuration files</span>
+</li>
+<li>
+<strong>C++</strong> <code>cpp</code><br /><span>The C++ programming language</span>
+</li>
+<li>
+<strong>C#</strong> <code>csharp</code><br /><span>a multi-paradigm language targeting .NET</span>
+</li>
+<li>
+<strong>CSS</strong> <code>css</code><br /><span>Cascading Style Sheets, used to style web pages</span>
+</li>
+<li>
+<strong>Dart</strong> <code>dart</code><br /><span>The Dart programming language (dartlang.com)</span>
+</li>
+<li>
+<strong>diff</strong> <code>diff</code><br /><span>Lexes unified diffs or patches</span>
+</li>
+<li>
+<strong>Elixir</strong> <code>elixir</code><br /><span>Elixir language (elixir-lang.org)</span>
+</li>
+<li>
+<strong>ERB</strong> <code>erb</code><br /><span>Embedded ruby template files</span>
+</li>
+<li>
+<strong>Erlang</strong> <code>erlang</code><br /><span>The Erlang programming language (erlang.org)</span>
+</li>
+<li>
+<strong>Factor</strong> <code>factor</code><br /><span>Factor, the practical stack language (factorcode.org)</span>
+</li>
+<li>
+<strong>Gherkin</strong> <code>gherkin</code><br /><span>A business-readable spec DSL ( github.com/cucumber/cucumber/wiki/Gherkin )</span>
+</li>
+<li>
+<strong>Go</strong> <code>go</code><br /><span>The Go programming language (http://golang.org)</span>
+</li>
+<li>
+<strong>Groovy</strong> <code>groovy</code><br /><span>The Groovy programming language (groovy.codehaus.org)</span>
+</li>
+<li>
+<strong>Haml</strong> <code>haml</code><br /><span>The Haml templating system for Ruby (haml.info)</span>
+</li>
+<li>
+<strong>Handlebars</strong> <code>handlebars</code><br /><span>the Handlebars and Mustache templating languages</span>
+</li>
+<li>
+<strong>Haskell</strong> <code>haskell</code><br /><span>The Haskell programming language (haskell.org)</span>
+</li>
+<li>
+<strong>HTML</strong> <code>html</code><br /><span>HTML, the markup language of the web</span>
+</li>
+<li>
+<strong>HTTP</strong> <code>http</code><br /><span>http requests and responses</span>
+</li>
+<li>
+<strong>INI</strong> <code>ini</code><br /><span>the INI configuration format</span>
+</li>
+<li>
+<strong>Io</strong> <code>io</code><br /><span>The IO programming language (http://iolanguage.com)</span>
+</li>
+<li>
+<strong>Java</strong> <code>java</code><br /><span>The Java programming language (java.com)</span>
+</li>
+<li>
+<strong>JavaScript</strong> <code>javascript</code><br /><span>JavaScript, the browser scripting language</span>
+</li>
+<li>
+<strong>Json</strong> <code>json</code><br /><span>JavaScript Object Notation (json.org)</span>
+</li>
+<li>
+<strong>Liquid</strong> <code>liquid</code><br /><span>Liquid is a templating engine for Ruby (liquidmarkup.org)</span>
+</li>
+<li>
+<strong>Literate CoffeeScript</strong> <code>literate_coffeescript</code><br /><span>Literate coffeescript</span>
+</li>
+<li>
+<strong>Literate Haskell</strong> <code>literate_haskell</code><br /><span>Literate haskell</span>
+</li>
+<li>
+<strong>LLVM</strong> <code>llvm</code><br /><span>The LLVM Compiler Infrastructure (http://llvm.org/)</span>
+</li>
+<li>
+<strong>Lua</strong> <code>lua</code><br /><span>Lua (http://www.lua.org)</span>
+</li>
+<li>
+<strong>Make</strong> <code>make</code><br /><span>Makefile syntax</span>
+</li>
+<li>
+<strong>Markdown</strong> <code>markdown</code><br /><span>Markdown, a light-weight markup language for authors</span>
+</li>
+<li>
+<strong>MATLAB</strong> <code>matlab</code><br /><span>Matlab</span>
+</li>
+<li>
+<strong>MoonScript</strong> <code>moonscript</code><br /><span>Moonscript (http://www.moonscript.org)</span>
+</li>
+<li>
+<strong>nginx</strong> <code>nginx</code><br /><span>configuration files for the nginx web server (nginx.org)</span>
+</li>
+<li>
+<strong>Nim</strong> <code>nim</code><br /><span>The Nim programming language (http://nim-lang.org/)</span>
+</li>
+<li>
+<strong>Objective-C</strong> <code>objective_c</code><br /><span>an extension of C commonly used to write Apple software</span>
+</li>
+<li>
+<strong>OCaml</strong> <code>ocaml</code><br /><span>Objective CAML (ocaml.org)</span>
+</li>
+<li>
+<strong>Perl</strong> <code>perl</code><br /><span>The Perl scripting language (perl.org)</span>
+</li>
+<li>
+<strong>PHP</strong> <code>php</code><br /><span>The PHP scripting language (php.net)</span>
+</li>
+<li>
+<strong>Plain Text</strong> <code>plaintext</code><br /><span>A boring lexer that doesn’t highlight anything</span>
+</li>
+<li>
+<strong>Prolog</strong> <code>prolog</code><br /><span>The Prolog programming language (http://en.wikipedia.org/wiki/Prolog)</span>
+</li>
+<li>
+<strong>.properties</strong> <code>properties</code><br /><span>.properties config files for Java</span>
+</li>
+<li>
+<strong>Puppet</strong> <code>puppet</code><br /><span>The Puppet configuration management language (puppetlabs.org)</span>
+</li>
+<li>
+<strong>Python</strong> <code>python</code><br /><span>The Python programming language (python.org)</span>
+</li>
+<li>
+<strong>QML</strong> <code>qml</code><br /><span>QML, a UI markup language</span>
+</li>
+<li>
+<strong>R</strong> <code>r</code><br /><span>The R statistics language (r-project.org)</span>
+</li>
+<li>
+<strong>Racket</strong> <code>racket</code><br /><span>Racket is a Lisp descended from Scheme (racket-lang.org)</span>
+</li>
+<li>
+<strong>Ruby</strong> <code>ruby</code><br /><span>The Ruby programming language (ruby-lang.org)</span>
+</li>
+<li>
+<strong>Rust</strong> <code>rust</code><br /><span>The Rust programming language (rust-lang.org)</span>
+</li>
+<li>
+<strong>Sass</strong> <code>sass</code><br /><span>The Sass stylesheet language language (sass-lang.com)</span>
+</li>
+<li>
+<strong>Scala</strong> <code>scala</code><br /><span>The Scala programming language (scala-lang.org)</span>
+</li>
+<li>
+<strong>Scheme</strong> <code>scheme</code><br /><span>The Scheme variant of Lisp</span>
+</li>
+<li>
+<strong>SCSS</strong> <code>scss</code><br /><span>SCSS stylesheets (sass-lang.com)</span>
+</li>
+<li>
+<strong>sed</strong> <code>sed</code><br /><span>sed, the ultimate stream editor</span>
+</li>
+<li>
+<strong>shell</strong> <code>shell</code><br /><span>Various shell languages, including sh and bash</span>
+</li>
+<li>
+<strong>Slim</strong> <code>slim</code><br /><span>The Slim template language</span>
+</li>
+<li>
+<strong>Smalltalk</strong> <code>smalltalk</code><br /><span>The Smalltalk programming language</span>
+</li>
+<li>
+<strong>SML</strong> <code>sml</code><br /><span>Standard ML</span>
+</li>
+<li>
+<strong>SQL</strong> <code>sql</code><br /><span>Structured Query Language, for relational databases</span>
+</li>
+<li>
+<strong>Swift</strong> <code>swift</code><br /><span>Multi paradigm, compiled programming language developed by Apple for iOS and OS X development. (developer.apple.com/swift)</span>
+</li>
+<li>
+<strong>Tcl</strong> <code>tcl</code><br /><span>The Tool Command Language (tcl.tk)</span>
+</li>
+<li>
+<strong>TeX</strong> <code>tex</code><br /><span>The TeX typesetting system</span>
+</li>
+<li>
+<strong>TOML</strong> <code>toml</code><br /><span>the TOML configuration format (https://github.com/mojombo/toml)</span>
+</li>
+<li>
+<strong>Visual Basic</strong> <code>vb</code><br /><span>Visual Basic</span>
+</li>
+<li>
+<strong>VimL</strong> <code>viml</code><br /><span>VimL, the scripting language for the Vim editor (vim.org)</span>
+</li>
+<li>
+<strong>XML</strong> <code>xml</code><br /><span><desc for="this-lexer">XML</desc></span>
+</li>
+<li>
+<strong>YAML</strong> <code>yaml</code><br /><span>Yaml Ain’t Markup Language (yaml.org)</span>
+</li>
+</ul>
+
+<p>And if what you want is not on this list, make you <a href="https://github.com/jneen/rouge/issues">open a ticket</a> on the project.</p>
+
+
+
+    </div>
+  </body>
+</html>

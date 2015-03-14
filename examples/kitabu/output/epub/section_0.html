@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html class="epub" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link name="stylesheet" rel="stylesheet" type="text/css" href="styles/epub.css" />
+    <style type="text/css">.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .c, .highlight .cd {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+.highlight .gr {
+  color: #aa0000;
+}
+.highlight .gh {
+  color: #999999;
+}
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .gt {
+  color: #aa0000;
+}
+.highlight .kc {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kd {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kv {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .mf {
+  color: #009999;
+}
+.highlight .mh {
+  color: #009999;
+}
+.highlight .il {
+  color: #009999;
+}
+.highlight .mi {
+  color: #009999;
+}
+.highlight .mo {
+  color: #009999;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #009999;
+}
+.highlight .sb {
+  color: #d14;
+}
+.highlight .sc {
+  color: #d14;
+}
+.highlight .sd {
+  color: #d14;
+}
+.highlight .s2 {
+  color: #d14;
+}
+.highlight .se {
+  color: #d14;
+}
+.highlight .sh {
+  color: #d14;
+}
+.highlight .si {
+  color: #d14;
+}
+.highlight .sx {
+  color: #d14;
+}
+.highlight .sr {
+  color: #009926;
+}
+.highlight .s1 {
+  color: #d14;
+}
+.highlight .ss {
+  color: #990073;
+}
+.highlight .s {
+  color: #d14;
+}
+.highlight .na {
+  color: #008080;
+}
+.highlight .bp {
+  color: #999999;
+}
+.highlight .nb {
+  color: #0086B3;
+}
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #008080;
+}
+.highlight .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #800080;
+}
+.highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nf {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #555555;
+}
+.highlight .nt {
+  color: #000080;
+}
+.highlight .vc {
+  color: #008080;
+}
+.highlight .vg {
+  color: #008080;
+}
+.highlight .vi {
+  color: #008080;
+}
+.highlight .nv {
+  color: #008080;
+}
+.highlight .ow {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .o {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #bbbbbb;
+}
+.highlight {
+  background-color: #f8f8f8;
+}</style>
+  </head>
+
+  <body>
+    <div class="chapter">
+      <h2 id="getting-started">Getting Started</h2>
+
+<p>This guide is designed for beginners who want to get started with Kitabu from scratch. However, to get the most out of it, you need to have some prerequisites installed:</p>
+
+<ul>
+<li>The <a href="http://ruby-lang.org">Ruby</a> interpreter version 2.0.0 or greater.</li>
+<li>The <a href="http://princexml.com">PrinceXML</a> converter version 9.0 or greater.</li>
+<li>The <a href="http://www.amazon.com/gp/feature.html?docId=1000765211">KindleGen</a> converter.</li>
+</ul>
+
+<h3 id="installing-ruby">Installing Ruby</h3>
+
+<p>To install Ruby, consider using <a href="http://rvm.io">RVM</a> or <a href="http://rbenv.org">rbenv</a>, both available for Mac OSX and Linux distros. If you’re running a Windows, well, I can’t help you. I don’t even know if Kitabu runs over Windows boxes, so if you find any bugs, make sure you <a href="http://github.com/fnando/kitabu/issues">let me know</a>.</p>
+
+<h3 id="installing-princexml">Installing PrinceXML</h3>
+
+<p><a href="http://princexml.com">PrinceXML</a> is the best HTML to PDF converter available. You can use advanced CSS features to style your book in any way you want. But good things don’t come for free, and PrinceXML is no exception. The Professional License, which you grant you a installation on a single computer by a single user costs 495USD. If you don’t like the price tag, consider using <a href="http://docraptor.com">DocRaptor</a> when you’re ready to publish your book.</p>
+
+<p>To install PrinceXML, go to the website and download the correct version for your platform; you can choose from Mac OSX, to Linux and Windows.</p>
+
+<h3 id="installing-kindlegen">Installing KindleGen</h3>
+
+<p>KindleGen is the command-line tool that allows you to convert e-pubs into <code>.mobi</code> files. You can’t sell these files, though.<sup id="fnref1"><a href="section_4.html#fn1" rel="footnote">1</a></sup> So if that’s the case, consider using <a href="http://calibre-ebook.com/">Calibre</a> for this task.<sup id="fnref2"><a href="section_0.html#fn2" rel="footnote">2</a></sup></p>
+
+<p>If you’re running <a href="http://brew.sh">Homebrew</a> on the Mac OSX, you can install it with <code>brew install kindlegen</code>. Go to <a href="http://www.amazon.com/gp/feature.html?docId=1000765211">KindleGen’s website</a> and download the appropriate installer otherwise.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn1">
+<p>You can, but that would be a violation of Amazon’s terms of use. <a href="section_4.html#fnref1" rev="footnote">↩</a></p>
+</li>
+
+<li id="fn2">
+<p>Calibre is not perfect, but does a good job. <a href="section_0.html#fnref2" rev="footnote">↩</a></p>
+</li>
+
+</ol>
+</div>
+
+
+
+    </div>
+  </body>
+</html>

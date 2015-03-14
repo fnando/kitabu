@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="79px" height="108px" viewBox="0 0 79 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+    <title>kitabu-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-1" sketch:type="MSArtboardGroup" transform="translate(-731.000000, -27.000000)" fill="#FFFFFF">
+            <g id="kitabu-icon" sketch:type="MSLayerGroup" transform="translate(731.000000, 27.000000)">
+                <g id="icon" transform="translate(0.895522, 0.000000)" sketch:type="MSShapeGroup">
+                    <path d="M22.5432836,0.158684932 L22.5432836,0.225876712 L0.0402985075,22.6918219 L0.0402985075,107.69689 L77.9477612,107.69689 L77.9477612,0.158684932 L22.5432836,0.158684932 L22.5432836,0.158684932 Z M68.9925373,98.7379863 L8.99552239,98.7379863 L8.99552239,31.650726 L31.4985075,31.650726 L31.4985075,9.11758904 L68.9925373,9.11758904 L68.9925373,98.7379863 L68.9925373,98.7379863 Z" id="Fill-811"></path>
+                    <path d="M16.9567164,41.0710137 L53.0014925,41.0710137 L53.0014925,48.2246986 L16.9567164,48.2246986 L16.9567164,41.0710137 Z" id="Fill-812"></path>
+                    <path d="M16.9567164,57.1895753 L42.4641791,57.1895753 L42.4641791,64.3432603 L16.9567164,64.3432603 L16.9567164,57.1895753 Z" id="Fill-813"></path>
+                    <path d="M16.9567164,73.2006301 L60.7552239,73.2006301 L60.7552239,80.3543151 L16.9567164,80.3543151 L16.9567164,73.2006301 Z" id="Fill-814"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

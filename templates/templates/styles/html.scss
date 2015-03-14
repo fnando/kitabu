@@ -1,0 +1,252 @@
+@import './files/normalize';
+
+$cover-color: #5091b1;
+$link-color: $cover-color;
+
+html {
+  background: #eee;
+  padding: 50px;
+}
+
+body {
+  width: 700px;
+  padding: 50px;
+  background: #fff;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+a {
+  color: $link-color;
+}
+
+p code,
+li code {
+  color: #3F9C55;
+}
+
+// Format cover page.
+.frontcover {
+  background: $cover-color;
+  color: #fff;
+  padding: 50px;
+  margin: -50px -50px 50px -50px;
+  text-align: center;
+}
+
+.frontcover * {
+  margin: 0;
+}
+
+.frontcover .description {
+  width: 45%;
+  margin: 20px auto;
+  color: rgba(#fff, .7);
+}
+
+.frontcover .authors {
+  font-weight: thin;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+// Define asterism.
+.chapter + .chapter:before {
+  content: '\2234';
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  padding: 50px 0;
+}
+
+.chapter > h2 {
+  margin-top: 0;
+}
+
+// Code highlighting
+.highlight {
+  padding: 15px;
+}
+
+.highlight .gutter {
+  color: #ccc;
+  padding-right: 15px;
+}
+
+// Table of contents
+.toc {
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+  border-bottom: 1px solid #eee;
+}
+
+// Define chapter numbering
+.chapters {
+  counter-reset: chapter 1;
+}
+
+.chapter {
+  counter-increment: chapter;
+}
+
+.chapter h2:before {
+  content: 'Chapter ' counter(chapter);
+  display: block;
+  text-transform: uppercase;
+  font-weight: normal;
+  color: #DB0209;
+  font-size: 14px;
+}
+
+.chapter h3 {
+  margin-top: 50px;
+}
+
+// Footnotes
+.footnotes {
+  margin-top: 50px;
+  padding-top: 25px;
+  border-top: 1px solid #eee;
+}
+
+.footnotes hr {
+  display: none;
+}
+
+// Notes
+.note {
+  font-size: 13px;
+  float: right;
+  overflow: hidden;
+  position: relative;
+  padding-left: 50px;
+  margin: 30px 0;
+}
+
+.note:before {
+  content: '!';
+  display: inline-block;
+  font-size: 25px;
+  width: 10px;
+  height: 10px;
+  padding: 15px;
+  line-height: 15px;
+  text-align: center;
+  border-radius: 50%;
+  border-bottom-right-radius: 0;
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+
+.note.info:before {
+  background: #f5be28;
+  color: #fff;
+}
+
+.note.warning:before {
+  background: #e42e24;
+  color: #fff;
+}
+
+// Format lexers list
+.lexers-list {
+  margin: 0;
+  padding: 0;
+  -webkit-columns: 2;
+  columns: 2;
+}
+
+.lexers-list li {
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid-column;
+}
+
+.lexers-list span {
+  font-size: 13px;
+}
+
+.lexers-list li + li {
+  margin-top: 15px;
+}
+
+// Format imprint
+.imprint {
+  margin-top: 50px;
+  padding-top: 50px;
+  border-top: 1px solid #eee;
+}
+
+.imprint * {
+  margin: 0;
+  font-size: 12px;
+}
+
+.imprint .description {
+  margin-bottom: 10px;
+}
+
+// Table of contents
+.table-of-contents {
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+  border-bottom: 1px solid #eee;
+}
+
+.table-of-contents .level2 {
+  counter-increment: toc-level2;
+  counter-reset: toc-level3;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.table-of-contents .level2 a {
+  text-decoration: none;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.table-of-contents .level2:before {
+  content: 'Chapter ' counter(toc-level2);
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #aaa;
+  display: block;
+}
+
+.table-of-contents .level2 ~ .level2 {
+  margin-top: 40px;
+}
+
+#toc {
+  -webkit-columns: 2;
+  columns: 2;
+}
+
+#toc > div {
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid-column;
+}
+
+// Go top
+.go-top {
+  font-size: 50px;
+  text-decoration: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 60px;
+  display: inline-block;
+  background: rgba(#000, .2);
+  text-align: center;
+  border-radius: 10px;
+  line-height: 1;
+  color: rgba(#fff, .4);
+  padding-top: 10px;
+
+  &:hover {
+    color: #fff;
+  }
+}

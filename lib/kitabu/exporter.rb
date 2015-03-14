@@ -30,7 +30,6 @@ module Kitabu
 
       exported = []
       exported << Parser::HTML.parse(root_dir)
-      exported << Parser::HTML.parse(root_dir)
       exported << Parser::PDF.parse(root_dir) if export_pdf && Dependency.prince?
       exported << Parser::Epub.parse(root_dir) if export_epub
       exported << Parser::Mobi.parse(root_dir) if export_mobi && Dependency.kindlegen?

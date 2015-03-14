@@ -7,6 +7,10 @@ module Kitabu
       html
     end
 
+    def image_tag(path, attributes = {})
+      html = %[<img src="images/#{path}" />]
+    end
+
     def escape_html(content)
       CGI.escape_html(content.to_s)
     end

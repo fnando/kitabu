@@ -22,6 +22,8 @@ RSpec.configure do |config|
   config.include(SpecHelper)
   config.include(Matchers)
 
+  config.filter_run_excluding html2text: false, kindlegen: false, prince: false
+
   cleaner = proc do
     [TMPDIR].each do |i|
       FileUtils.rm_rf(i) if File.exist?(i)

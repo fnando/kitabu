@@ -14,22 +14,16 @@ module Kitabu
       File.dirname(__FILE__) + "/../../templates"
     end
 
-    def copy_html_templates
-      copy_file "layout.erb", "templates/html/layout.erb"
+    def copy_templates
+      directory "templates", "templates"
     end
 
-    def copy_epub_templates
-      copy_file "cover.erb", "templates/epub/cover.erb"
-      copy_file "epub.erb", "templates/epub/page.erb"
-      copy_file "cover.png", "templates/epub/cover.png"
+    def copy_sample_texts
+      directory "text", "text"
     end
 
-    def copy_stylesheets
-      directory "styles", "templates/styles"
-    end
-
-    def copy_sample_page
-      copy_file "sample.md", "text/01_Welcome.md"
+    def copy_images
+      directory "images", "images"
     end
 
     def copy_config_file
@@ -49,18 +43,12 @@ module Kitabu
 
     def create_directories
       empty_directory "output"
-      empty_directory "images"
-      empty_directory "code"
     end
 
     def create_git_files
       create_file ".gitignore" do
-        "output/*.{html,epub,pdf}\noutput/tmp"
+        "/output"
       end
-
-      create_file "output/.gitkeep"
-      create_file "images/.gitkeep"
-      create_file "code/.gitkeep"
     end
 
     def copy_guardfile

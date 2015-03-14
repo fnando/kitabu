@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Kitabu::Parser::PDF do
+describe Kitabu::Parser::PDF, prince: Kitabu::Dependency.prince? do
   let(:root) { SPECDIR.join("support/mybook") }
 
   before do

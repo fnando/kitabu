@@ -4,7 +4,7 @@ sudo: true
 script: bundle exec rspec
 before_install:
 - wget http://www.princexml.com/download/prince_9.0-5_ubuntu12.04_amd64.deb
-- sudo apt-get install -yqq fontconfig-config libfontconfig1 libgif4 libjpeg-turbo8 libjpeg8 libtiff4 ttf-dejavu-core
+- sudo apt-get install -yqq fontconfig-config libfontconfig1 libgif4 libjpeg-turbo8 libjpeg8 libtiff4 ttf-dejavu-core html2text
 - sudo dpkg -i prince_9.0-5_ubuntu12.04_amd64.deb
 rvm:
 - '2.0'

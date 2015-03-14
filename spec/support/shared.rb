@@ -13,10 +13,6 @@ shared_examples_for "e-book" do
     expect(mybook.join("text")).to be_directory
   end
 
-  it "creates code directory" do
-    expect(mybook.join("code")).to be_directory
-  end
-
   it "creates template directory" do
     expect(mybook.join("templates")).to be_directory
   end
@@ -29,8 +25,12 @@ shared_examples_for "e-book" do
     expect(mybook.join("config/helper.rb")).to be_file
   end
 
-  it "copies sample page" do
-    expect(mybook.join("text/01_Welcome.md")).to be_file
+  it "copies sample texts" do
+    expect(mybook.join("text/01_Getting_Started.md")).to be_file
+    expect(mybook.join("text/02_Creating_Chapters.md")).to be_file
+    expect(mybook.join("text/03_Syntax_Highlighting.erb")).to be_file
+    expect(mybook.join("text/04_Dynamic_Content.erb")).to be_file
+    expect(mybook.join("text/05_Exporting_Files.md")).to be_file
   end
 
   it "copies Guardfile" do

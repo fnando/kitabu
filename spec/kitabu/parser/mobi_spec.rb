@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Kitabu::Parser::Mobi do
+describe Kitabu::Parser::Mobi, kindlegen: Kitabu::Dependency.kindlegen? do
   let(:root) { SPECDIR.join("support/mybook") }
 
   before do

@@ -1,0 +1,69 @@
+## Syntax Highlighting
+
+### What about the syntax
+
+Kitabu uses [Route](http://rubygems.org/gems/rouge) as the syntax highlight formatter. It emits an output compatible with stylesheets designed for [pygments](https://pygments.org), the Python library used by many.
+
+To highlight a code block, use the fenced block syntax. The following example would be formatted as Ruby.
+
+    ```ruby
+    class User
+      attr_accessor :name, :email
+
+      def initialize(name, email)
+        @name = name
+        @email = email
+      end
+    end
+    ```
+
+The output would be something like this:
+
+```ruby
+class User
+  attr_accessor :name, :email
+
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+end
+```
+
+<% note do %>
+  If you're using Sublime Text, make sure you install the [Markdown Extended](https://packagecontrol.io/packages/Markdown%20Extended) plugin; it enables code syntax highlighting on your Markdown files.
+<% end %>
+
+You can also provide inline options such as line numbers and inline rendering.
+
+    ```ruby?line_numbers=1
+    class User
+      attr_accessor :name, :email
+
+      def initialize(name, email)
+        @name = name
+        @email = email
+      end
+    end
+    ```
+
+This would be rendered like this:
+
+```ruby?line_numbers=1
+class User
+  attr_accessor :name, :email
+
+  def initialize(name, email)
+    @name = name
+    @email = email
+  end
+end
+```
+
+### Lexers
+
+Rouge comes with dozens of lexers. Check out this list, generated dynamically when you export your e-book.
+
+<%= lexers_list %>
+
+And if what you want is not on this list, make you [open a ticket](https://github.com/jneen/rouge/issues) on the project.

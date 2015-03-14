@@ -45,28 +45,53 @@ To create a new e-book, just run
 
 This command creates a directory `mybook` with the following structure:
 
-    mybook
-    ├── code
+    .
+    ├── Gemfile
+    ├── Gemfile.lock
+    ├── Guardfile
     ├── config
     │   ├── helper.rb
     │   └── kitabu.yml
     ├── images
+    │   ├── kitabu-icon.png
+    │   ├── kitabu-icon.svg
+    │   ├── kitabu-word.png
+    │   ├── kitabu-word.svg
+    │   ├── kitabu.png
+    │   └── kitabu.svg
     ├── output
     ├── templates
     │   ├── epub
     │   │   ├── cover.erb
     │   │   ├── cover.png
-    │   │   ├── page.erb
-    │   │   └── user.css
-    │   └── html
-    │       ├── layout.css
-    │       ├── layout.erb
-    │       ├── syntax.css
-    │       └── user.css
+    │   │   └── page.erb
+    │   ├── html
+    │   │   └── layout.erb
+    │   └── styles
+    │       ├── epub.scss
+    │       ├── files
+    │       │   └── _normalize.scss
+    │       ├── html.scss
+    │       ├── pdf.scss
+    │       └── print.scss
     └── text
-        └── 01_Welcome.md
+        ├── 01_Getting_Started.md
+        ├── 02_Creating_Chapters.md
+        ├── 03_Syntax_Highlighting.erb
+        ├── 04_Dynamic_Content.erb
+        └── 05_Exporting_Files.md
 
 The `config/kitabu.yml` file holds some information about your book; so you'll always change it.
+
+The generated structure is actually a good example. So make sure you try it!
+
+![Kitabu - Sample Book](https://github.com/fnando/kitabu/raw/master/attachments/cover.png)
+
+There's a generated sample available on the [attachments directory](https://github.com/fnando/kitabu/tree/master/attachments) •
+[PDF](https://github.com/fnando/kitabu/raw/master/attachments/kitabu.pdf) /
+[EPUB](https://github.com/fnando/kitabu/raw/master/attachments/kitabu.epub) /
+[MOBI](https://github.com/fnando/kitabu/raw/master/attachments/kitabu.mobi) /
+[HTML](https://github.com/fnando/kitabu/raw/master/attachments/browser-version.png).
 
 Now it's time to write your e-book. All your book content will be placed on the text directory. Kitabu requires you to separate your book into chapters. A chapter is nothing but a directory that holds lots of text files. The e-book will be generated using every folder/file alphabetically. So be sure to use a sequential numbering as the name. Here's a sample:
 

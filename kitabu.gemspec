@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name                  = "kitabu"
   s.version               = Kitabu::Version::STRING
   s.platform              = Gem::Platform::RUBY
-  s.required_ruby_version = ">= 1.9"
+  s.required_ruby_version = ">= 2.0"
   s.authors               = ["Nando Vieira"]
   s.email                 = ["fnando.vieira@gmail.com"]
   s.homepage              = "http://rubygems.org/gems/kitabu"
-  s.summary               = "A framework that generates PDF and e-Pub from Markdown, Textile, and HTML files."
+  s.summary               = "A framework for creating e-books from Markdown using Ruby. Using the Prince PDF generator, you'll be able to get high quality PDFs. Also supports EPUB, Mobi, Text and HTML generation."
   s.description           = s.summary
   s.license               = "MIT"
 

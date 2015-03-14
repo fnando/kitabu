@@ -200,7 +200,11 @@ The following Redcarpet options are enabled:
 Alternatives:
 
 - If you're planning to to sell your e-book, consider using [Calibre](http://calibre-ebook.com/) to convert from `.epub` to `.mobi`.
-- If you're not planning to buy PrinceXML, consider using [DocRaptor](http://docraptor.com).
+- If you're not planning to buy PrinceXML, consider using [DocRaptor](http://docraptor.com). Here's how you can easily do it:
+
+```bash
+curl -H "Content-Type:application/json" -d'{"user_credentials":"YOUR_CREDENTIALS_HERE", "doc":{"name":"kitabu.pdf", "document_type":"pdf", "test":"false", "document_url":"https://dl.dropboxusercontent.com/u/123456789/output/kitabu.pdf.html"}}' http://docraptor.com/docs > kitabu.pdf
+```
 
 ## Maintainer
 

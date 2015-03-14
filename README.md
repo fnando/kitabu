@@ -4,7 +4,9 @@
 [![Code Climate](https://codeclimate.com/github/fnando/kitabu/badges/gpa.svg)](https://codeclimate.com/github/fnando/kitabu)
 [![Test Coverage](https://codeclimate.com/github/fnando/kitabu/badges/coverage.svg)](https://codeclimate.com/github/fnando/kitabu)
 
-While Prince is too expensive (495USD for a single user license), the free version available at <http://www.princexml.com/download> generates a PDF with a small logo on the first page, which is removed when sent to a printer.
+Kitabu is a framework for creating e-books from Markdown using Ruby. Using Prince PDF generator, you'll be able to get high quality PDFs. Also supports EPUB, Mobi, Text and HTML generation.
+
+While Prince is too expensive (495USD for a single user license), the free version available at <http://www.princexml.com/download> generates a PDF with a small logo on the first page, which is removed when sent to a printer; you can use it locally for viewing the results immediately. When you're done writing your e-book, you can use [DocRaptor](http://docraptor.com), which have plans starting at $15/mo.
 
 ## Features
 
@@ -16,8 +18,8 @@ While Prince is too expensive (495USD for a single user license), the free versi
 
 ## Installation
 
-To install Kitabu, you’ll need a working Ruby 1.9+ installation.
-If you’re cool with it, just run the following command to install it.
+To install Kitabu, you'll need a working Ruby 2.0+ installation.
+If you're cool with it, just run the following command to install it.
 
     gem install kitabu
 
@@ -119,13 +121,13 @@ You'll want to see your progress eventually; it's time for you to generate the b
 
 Kitabu can generate a Table of Contents (TOC) based on your h2-h6 tags. The h1 tag is discarded because it's meant to be the book title.
 
-To print the TOC, you need to print a variable called +toc+, using the eRb tag.
+To print the TOC, you need to print a variable called `toc`, using the eRb tag.
 
     <%= toc %>
 
 #### Using ERB
 
-You can also have .erb files. You can mix Markdown and HTML, like the following:
+You can also have `.erb` files. You can mix Markdown and HTML, like the following:
 
     ## This the chapter title
 

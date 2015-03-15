@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kitabu (2.0.0)
+    kitabu (2.0.1)
       activesupport
       eeepub-with-cover-support
       i18n

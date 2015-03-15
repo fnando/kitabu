@@ -64,7 +64,7 @@ module Kitabu
       #
       def parse_layout(html)
         toc = TOC::HTML.generate(html)
-        content = toc.content
+        content = Footnotes::HTML.process(toc.content).html.css('html').first.inner_html
 
         locals = config.merge({
           content: content,

@@ -314,26 +314,10 @@ li code {
 }
 
 // Footnotes
-.chapters {
-  counter-reset: fnref;
-  counter-reset: fndesc;
-}
-
-.fn-ref {
-  counter-increment: fnref;
-}
-
-.fn-desc {
-  counter-increment: fndesc;
+.footnote {
   display: prince-footnote;
   footnote-style-position: inside;
   position: footnote;
-}
-
-.fn-desc:footnote-marker {
-  vertical-align: super;
-  content: counter(fndesc);
-  margin-right: 5px;
 }
 
 // Notes

@@ -8,52 +8,7 @@ module Kitabu
       end
 
       def apply_footnotes!
-        html = Nokogiri::HTML(html_file.read)
-        footnote_count = 1
-
-        # https://github.com/sparklemotion/nokogiri/issues/339
-        html.css("html").first.tap do |element|
-          next unless element
-          element.delete("xmlns")
-          element.delete("xml:lang")
-        end
-
-        chapters = html.css(".chapter")
-
-        chapters.each do |chapter|
-          footnotes = chapter.css(".footnotes li")
-
-          footnotes.each do |fn|
-            # Get current footnote number
-            footnote_number = footnote_count
-            footnote_count += 1
-
-            # Remove rev links
-            fn.css('[rev=footnote]').map(&:remove)
-
-            # Create an element for storing the footnote description
-            fn_desc = Nokogiri::XML::Node.new('span', Nokogiri::HTML::DocumentFragment.parse(''))
-            fn_desc.set_attribute 'class', 'fn-desc'
-            fn_desc.inner_html = fn.css('p').map(&:inner_html).join("\n")
-
-            # Find ref based on footnote's id
-            fn_id = fn.get_attribute('id')
-            ref = chapter.css("a[href='##{fn_id}']").first
-
-            # Go up to parent and reformat it.
-            sup = ref.parent
-            sup.delete("id")
-            sup.set_attribute 'class', 'fn-ref'
-            sup.inner_html = ''
-
-            # Finally, add the description after the <sup> tag.
-            sup.after(fn_desc)
-          end
-
-          # Remove the footnotes element
-          chapter.css('.footnotes').map(&:remove)
-        end
-
+        html = Footnotes::PDF.process(html_file.read).html
         create_html_file(html_for_print, html, 'print')
         create_html_file(html_for_pdf, html, 'pdf')
       end

@@ -57,7 +57,7 @@ By default, this will generate a `<div class="note info">` tag, but you can use 
 
 ### Escaping ERb code
 
-If you want to write a book about Rails, you're likely to use lots of ERb tags. In this case, make sure you escape the `<% %>` and `<%= %>` markers as `<%% %>` and `<%%= %>`; otherwise you'll have a syntax error.
+If you want to write a book about Rails, you're likely to use lots of ERb tags. In this case, make sure you escape the `<%% %>` and `<%%= %>` markers as `<%%% %>` and `<%%%= %>`; otherwise you'll have a syntax error.
 
 ```
 <%%%= Date.today %>

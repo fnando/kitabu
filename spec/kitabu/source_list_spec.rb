@@ -1,11 +1,12 @@
-require "spec_helper"
+require 'spec_helper'
 
-describe Kitabu::Parser::HTML do
+describe Kitabu::SourceList do
   let(:root) { SPECDIR.join("support/mybook") }
+  let(:format) { Kitabu::Exporter::HTML.new(root) }
+  let(:entries) { source_list.entries }
   let(:source) { root.join("text") }
-  let(:parser) { described_class.new(root) }
-  let(:entries) { parser.entries }
   let(:relative) { entries.collect {|e| e.to_s.gsub(/^#{Regexp.escape(source.to_s)}\//, "")} }
+  subject(:source_list) { Kitabu::SourceList.new(root) }
 
   context "when filtering entries" do
     it "skips dot directories" do
@@ -35,36 +36,6 @@ describe Kitabu::Parser::HTML do
       expect(relative.second).to eq("02_ERB_Chapter.md.erb")
       expect(relative.third).to eq("03_With_Directory")
       expect(relative.fourth).to be_nil
-    end
-  end
-
-  context "when generating HTML" do
-    let(:file) { SPECDIR.join("support/mybook/output/mybook.html") }
-    let(:html) { File.read(file) }
-    before { parser.parse }
-
-    it "keeps html file around" do
-      expect(file).to be_file
-    end
-
-    it "has several chapters" do
-      expect(html).to have_tag("div.chapter", 3)
-    end
-
-    it "uses config file" do
-      expect(html).to have_tag("div.imprint p", "Copyright (C) 2010 John Doe.")
-    end
-
-    it "renders changelog" do
-      expect(html).to have_tag("div.changelog h2", "Revisions")
-    end
-
-    it "renders erb" do
-      expect(html).to have_tag("h2", "ERB")
-    end
-
-    it "renders erb blocks" do
-      expect(html).to have_tag("div.note.info > p", "This is a note!")
     end
   end
 end

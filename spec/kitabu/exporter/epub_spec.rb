@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Kitabu::Parser::Epub do
+describe Kitabu::Exporter::Epub do
   let(:root) { SPECDIR.join("support/mybook") }
 
   before do
-    Kitabu::Parser::HTML.parse(root)
-    Kitabu::Parser::Epub.parse(root)
+    Kitabu::Exporter::HTML.export(root)
+    Kitabu::Exporter::Epub.export(root)
   end
 
   it "generates e-pub" do

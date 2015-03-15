@@ -1,13 +1,5 @@
-require 'open3'
-
 module Kitabu
-  module Parser
-    autoload :HTML  , "kitabu/parser/html"
-    autoload :PDF   , "kitabu/parser/pdf"
-    autoload :Epub  , "kitabu/parser/epub"
-    autoload :Mobi  , "kitabu/parser/mobi"
-    autoload :Txt   , "kitabu/parser/txt"
-
+  class Exporter
     class Base
       # The e-book directory.
       #
@@ -17,13 +9,19 @@ module Kitabu
       #
       attr_accessor :source
 
-      def self.parse(root_dir)
-        new(root_dir).parse
+      def self.export(root_dir)
+        new(root_dir).export
       end
 
       def initialize(root_dir)
         @root_dir = Pathname.new(root_dir)
         @source = root_dir.join("text")
+      end
+
+      #
+      #
+      def source_list
+        @source_list ||= SourceList.new(root_dir)
       end
 
       # Return directory's basename.

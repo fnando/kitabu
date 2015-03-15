@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Kitabu::Parser::Mobi, kindlegen: Kitabu::Dependency.kindlegen? do
+describe Kitabu::Exporter::Mobi, kindlegen: Kitabu::Dependency.kindlegen? do
   let(:root) { SPECDIR.join("support/mybook") }
 
   before do
-    Kitabu::Parser::HTML.parse(root)
-    Kitabu::Parser::Mobi.parse(root)
+    Kitabu::Exporter::HTML.export(root)
+    Kitabu::Exporter::Mobi.export(root)
   end
 
   it "generates mobi" do

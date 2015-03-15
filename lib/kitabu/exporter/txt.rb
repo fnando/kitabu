@@ -1,7 +1,7 @@
 module Kitabu
-  module Parser
+  class Exporter
     class Txt < Base
-      def parse
+      def export
         spawn_command ["html2text", "-style", "pretty", "-nobs", "-o", txt_file.to_s, html_file.to_s]
       end
 

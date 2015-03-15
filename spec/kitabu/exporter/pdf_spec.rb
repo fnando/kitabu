@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Kitabu::Parser::PDF, prince: Kitabu::Dependency.prince? do
+describe Kitabu::Exporter::PDF, prince: Kitabu::Dependency.prince? do
   let(:root) { SPECDIR.join("support/mybook") }
 
   before do
-    Kitabu::Parser::HTML.new(root).parse
-    Kitabu::Parser::PDF.new(root).parse
+    Kitabu::Exporter::HTML.new(root).export
+    Kitabu::Exporter::PDF.new(root).export
   end
 
   it "creates html with css identifier" do

@@ -39,7 +39,7 @@ module Kitabu
     end
 
     def content
-      @content ||= Parser::HTML.new(root_dir).content
+      @content ||= Exporter::HTML.new(root_dir).content
     end
   end
 end

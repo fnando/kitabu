@@ -80,7 +80,7 @@ module Kitabu
     def permalinks
       inside_ebook!
 
-      html = Kitabu::Parser::HTML.new(root_dir).content
+      html = Kitabu::Exporter::HTML.new(root_dir).content
       toc = Kitabu::TOC::HTML.generate(html)
 
       toc.toc.each do |options|

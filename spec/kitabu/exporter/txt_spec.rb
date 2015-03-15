@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Kitabu::Parser::Txt, html2text: Kitabu::Dependency.html2text? do
+describe Kitabu::Exporter::Txt, html2text: Kitabu::Dependency.html2text? do
   let(:root) { SPECDIR.join("support/mybook") }
 
   before do
-    Kitabu::Parser::HTML.parse(root)
-    Kitabu::Parser::Txt.parse(root)
+    Kitabu::Exporter::HTML.export(root)
+    Kitabu::Exporter::Txt.export(root)
   end
 
   it "generates text file" do

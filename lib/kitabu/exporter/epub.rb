@@ -1,5 +1,5 @@
 module Kitabu
-  module Parser
+  class Exporter
     class Epub < Base
       def sections
         @sections ||= html.css("div.chapter").each_with_index.map do |chapter, index|
@@ -20,7 +20,7 @@ module Kitabu
         @html ||= Nokogiri::HTML(html_path.read)
       end
 
-      def parse
+      def export
         copy_styles!
         copy_images!
         set_metadata!

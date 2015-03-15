@@ -1,7 +1,7 @@
 module Kitabu
-  module Parser
+  class Exporter
     class Mobi < Base
-      def parse
+      def export
         spawn_command ["kindlegen", epub_file.to_s]
         true
       end

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Kitabu::Stats do
   let(:root_dir) { double("root dir").as_null_object }
-  let(:parser) { double("parser").as_null_object }
+  let(:format) { double("format").as_null_object }
   let(:content) { "" }
   subject(:stats) { Kitabu::Stats.new(root_dir) }
 
@@ -11,18 +11,18 @@ describe Kitabu::Stats do
   }
 
   context "getting content" do
-    it "parses content" do
-      expect(Kitabu::Parser::HTML)
+    it "generates content" do
+      expect(Kitabu::Exporter::HTML)
         .to receive(:new)
         .with(root_dir)
-        .and_return(parser)
+        .and_return(format)
 
       Kitabu::Stats.new(root_dir).content
     end
 
-    it "returns parser content" do
-      allow(Kitabu::Parser::HTML).to receive_message_chain(:new).and_return(parser)
-      allow(parser).to receive_message_chain(:content).and_return("some content")
+    it "returns content" do
+      allow(Kitabu::Exporter::HTML).to receive_message_chain(:new).and_return(format)
+      allow(format).to receive_message_chain(:content).and_return("some content")
 
       expect(Kitabu::Stats.new(root_dir).content).to eql("some content")
     end

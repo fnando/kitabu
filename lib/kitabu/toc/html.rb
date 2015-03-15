@@ -48,9 +48,9 @@ module Kitabu
 
       def tag(node) # :nodoc:
         toc << {
-          :level     => node.name.gsub(/[^\d]/, "").to_i,
-          :text      => node.text,
-          :permalink => node["id"]
+          level: node.name.gsub(/[^\d]/, "").to_i,
+          text: node.text,
+          permalink: node["id"]
         }
       end
 
@@ -58,9 +58,9 @@ module Kitabu
       #
       def to_hash
         {
-          :content => content,
-          :html => to_html,
-          :toc => toc
+          content: content,
+          html: to_html,
+          toc: toc
         }
       end
 

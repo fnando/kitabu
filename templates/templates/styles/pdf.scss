@@ -220,36 +220,6 @@ li code {
   margin-top: 15px;
 }
 
-// Footnotes
-.fn {
-  counter-increment: footnote;
-  display: prince-footnote;
-  font-size: 9pt;
-  footnote-style-position: inside;
-  line-height: 1.4;
-  position: footnote;
-}
-
-.fn::footnote-call {
-  content: "";
-  font-size: 80%;
-}
-
-.fn::footnote-marker {
-  padding-right: 0.4em;
-  vertical-align: super;
-  display: none;
-}
-
-.footnote a,
-.fn a {
-  color: #000;
-}
-
-.fn code {
-  font-size: 8pt;
-}
-
 // Table of contents
 .table-of-contents {
   page: chapter;

@@ -9,6 +9,16 @@ describe Kitabu::Exporter::HTML do
     let(:html) { File.read(file) }
     before { format.export }
 
+    it "generates valid markup", osx: RUBY_PLATFORM.include?('darwin') do
+      `./vendor/bin/tidy5_osx '#{file}' 2>&1 > /dev/null`
+      expect($?.exitstatus).to eq(0)
+    end
+
+    it "generates valid markup", linux: RUBY_PLATFORM.include?('linux') do
+      `./vendor/bin/tidy5_linux '#{file}' 2>&1 > /dev/null`
+      expect($?.exitstatus).to eq(0)
+    end
+
     it "keeps html file around" do
       expect(file).to be_file
     end

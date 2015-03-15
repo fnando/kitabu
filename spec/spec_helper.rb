@@ -22,7 +22,13 @@ RSpec.configure do |config|
   config.include(SpecHelper)
   config.include(Matchers)
 
-  config.filter_run_excluding html2text: false, kindlegen: false, prince: false
+  config.filter_run_excluding(
+    html2text: false,
+    kindlegen: false,
+    prince: false,
+    osx: false,
+    linux: false
+  )
 
   cleaner = proc do
     [TMPDIR].each do |i|

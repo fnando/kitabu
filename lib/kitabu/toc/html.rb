@@ -28,7 +28,7 @@ module Kitabu
           tag.set_attribute("id", permalink)
         end
 
-        html.css("body").to_xhtml.gsub(/<body>(.*?)<\/body>/m, "\\1")
+        html.css("body").first.inner_html
       end
 
       # Traverse every title normalizing its content as a permalink.

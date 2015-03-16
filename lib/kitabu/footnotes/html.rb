@@ -45,6 +45,8 @@ module Kitabu
           else
             sup.remove_attribute 'id'
           end
+
+          sup.css('a').first.content = footnote_index
         end
       end
     end

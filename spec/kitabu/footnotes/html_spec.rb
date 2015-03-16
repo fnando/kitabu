@@ -57,6 +57,14 @@ describe Kitabu::Footnotes::HTML do
     expect(chapter2).to have_tag('sup[id=fnref4]', count: 1)
   end
 
+  it 'updates link to footnote' do
+    expect(chapter1).to have_tag('sup:nth-child(1) > a', text: '1', count: 2)
+    expect(chapter1).to have_tag('sup:nth-child(2) > a', text: '2', count: 1)
+
+    expect(chapter2).to have_tag('sup:nth-child(1) > a', text: '3', count: 2)
+    expect(chapter2).to have_tag('sup:nth-child(2) > a', text: '4', count: 1)
+  end
+
   it 'sets footnote link-back' do
     expect(chapter1).to have_tag('.footnotes li:nth-child(1) a[rev=footnote][href="#fnref1"]')
     expect(chapter1).to have_tag('.footnotes li:nth-child(2) a[rev=footnote][href="#fnref2"]')

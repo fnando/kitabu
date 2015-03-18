@@ -125,7 +125,7 @@ To print the TOC, you need to print a variable called `toc`, using the eRb tag.
 
     <%= toc %>
 
-#### Using ERB
+### Using ERB
 
 You can also have `.erb` files. You can mix Markdown and HTML, like the following:
 
@@ -189,7 +189,28 @@ The following Redcarpet options are enabled:
 * `superscript`
 * `tables`
 
-### References
+### Using custom fonts
+
+You can use custom fonts for your PDF. Just add them to the `fonts` directory (you can create this directory on your book's root directory if it doesn't exist).
+
+Then, on `templates/styles/pdf.scss` you can add the `@font-face` declaration.
+
+```css
+@font-face {
+  font-family: 'Open Sans Condensed Bold';
+  src: url('../fonts/OpenSans-CondBold.ttf');
+}
+```
+
+Finally, to use this font, do something like this:
+
+```css
+.chapter > h2 {
+  font-family: 'Open Sans Condensed Bold';
+}
+```
+
+## References
 
 * Markdown: <http://daringfireball.net/projects/markdown/syntax>
 * Markdown PHP: <https://michelf.ca/projects/php-markdown/extra/>

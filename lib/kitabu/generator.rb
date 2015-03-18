@@ -43,12 +43,15 @@ module Kitabu
 
     def create_directories
       empty_directory "output"
+      empty_directory "fonts"
     end
 
     def create_git_files
       create_file ".gitignore" do
         "/output"
       end
+
+      create_file "fonts/.keep"
     end
 
     def copy_guardfile

@@ -64,6 +64,8 @@ module Kitabu
       end
 
       def copy_directory(source, target)
+        return unless root_dir.join(source).directory?
+
         source = root_dir.join("#{source}/.")
         target = root_dir.join(target)
 

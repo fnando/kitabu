@@ -13,6 +13,7 @@ module Kitabu
       #
       def export
         copy_images!
+        copy_fonts!
         export_stylesheets!
 
         File.open(root_dir.join("output/#{name}.html"), "w") do |file|
@@ -97,6 +98,12 @@ module Kitabu
       #
       def copy_images!
         copy_directory("images", "output/images")
+      end
+
+      # Copy font files
+      #
+      def copy_fonts!
+        copy_directory("fonts", "output/fonts")
       end
 
       # Export all root stylesheets.

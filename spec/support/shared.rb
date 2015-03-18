@@ -13,6 +13,10 @@ shared_examples_for "e-book" do
     expect(mybook.join("text")).to be_directory
   end
 
+  it "creates fonts directory" do
+    expect(mybook.join("fonts")).to be_directory
+  end
+
   it "creates template directory" do
     expect(mybook.join("templates")).to be_directory
   end

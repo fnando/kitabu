@@ -5,6 +5,7 @@ module Kitabu
 
       def export
         files = Dir[root_dir.join("templates/styles/*.{scss,sass}").to_s]
+
         options = {
           style: :expanded,
           line_numbers: true,

@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+- Support fonts directory
+- Allow having any element as the chapter title (e.g. h1). Previously you could only use h2.
+
+## v2.0.3
+
+- Bug fix: footnote label wasn't updated with current count
+
+## v2.0.2
+
+- Bug fix: generate valid HTML markup
+
+## v2.0.1
+
+- Improve footnote generation
+
 ## v2.0.0
 
 - Remove support for different markdown processors; now using Redcarpet.

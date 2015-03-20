@@ -4,6 +4,7 @@
 
 - Support fonts directory
 - Allow having any element as the chapter title (e.g. h1). Previously you could only use h2.
+- Bug fix: unknown Rouge lexer was raising an error.
 
 ## v2.0.3
 

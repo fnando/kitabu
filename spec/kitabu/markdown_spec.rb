@@ -21,4 +21,14 @@ describe Kitabu::Markdown do
 
     expect(html).to include('<span class="k">echo</span>')
   end
+
+  it 'does not raise with unknown lexers' do
+    expect {
+      Kitabu::Markdown.render <<-TEXT.strip_heredoc
+      ```terminal
+      Text plain.
+      ```
+      TEXT
+    }.not_to raise_error
+  end
 end

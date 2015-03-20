@@ -4,3 +4,4 @@
 /spec/support/mybook/output
 /coverage
 .sass-cache
+*.lock

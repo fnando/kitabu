@@ -50,7 +50,7 @@ module Kitabu
         end
 
         Notifier.notify(
-          :image   => Kitabu::ROOT.join("templates/ebook.png"),
+          :image   => Kitabu::ROOT.join("templates/ebook.png").to_s,
           :title   => "Kitabu",
           :message => "Your \"#{config[:title]}\" e-book has been exported!"
         )

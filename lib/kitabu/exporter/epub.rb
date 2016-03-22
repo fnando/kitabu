@@ -129,7 +129,7 @@ module Kitabu
       def navigation
         sections.map do |section|
           {
-            label: section.html.css(":first-child").text[0..20],
+            label: section.html.css(":first-child").text,
             content: section.filename
           }
         end

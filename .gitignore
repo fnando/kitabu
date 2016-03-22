@@ -5,3 +5,5 @@
 /coverage
 .sass-cache
 *.lock
+*.gem
+*.rvmrc

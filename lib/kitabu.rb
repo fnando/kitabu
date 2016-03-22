@@ -16,6 +16,7 @@ require "yaml"
 require "cgi"
 require "erb"
 require "open3"
+require "slim"
 
 require "redcarpet"
 require "rouge"

@@ -27,7 +27,7 @@ module Kitabu
                 <ul>
                   <% navigation.each do |nav| %>
                     <li>
-                      <a href="<%= nav[:content] %>"><%= nav[:label] %></a>
+                      <a href="<%= nav[:content] %>"><%= nav[:label][30] %> </a>
                     </li>
                   <% end %>
                 </ul>

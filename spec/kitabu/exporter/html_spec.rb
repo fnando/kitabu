@@ -24,7 +24,7 @@ describe Kitabu::Exporter::HTML do
     end
 
     it "has several chapters" do
-      expect(html).to have_tag("div.chapter", 3)
+      expect(html).to have_tag("div.chapter", 4)
     end
 
     it "uses config file" do

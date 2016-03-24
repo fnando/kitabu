@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency "zip-zip"
   s.add_dependency "sass"
   s.add_dependency "sass-globbing"
+  s.add_dependency "slim"
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"

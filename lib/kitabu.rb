@@ -40,6 +40,7 @@ module Kitabu
   require "kitabu/generator"
   require "kitabu/cli"
   require "kitabu/markdown"
+  require "kitabu/slim"
   require "kitabu/source_list"
   require "kitabu/exporter"
   require "kitabu/exporter/base"

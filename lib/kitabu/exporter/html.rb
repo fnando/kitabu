@@ -47,7 +47,7 @@ module Kitabu
         if format(file) == :erb
           content = render_template(file, config)
         elsif format(file) == :slim
-          content = Slim::Template.new("#{file}", {pretty:true}).render(self)
+          content = Kitabu::ToSlim.render(file)
         else
           content = File.read(file)
         end

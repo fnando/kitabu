@@ -35,7 +35,8 @@ describe Kitabu::SourceList do
       expect(relative.first).to eq("01_Markdown_Chapter.md")
       expect(relative.second).to eq("02_ERB_Chapter.md.erb")
       expect(relative.third).to eq("03_With_Directory")
-      expect(relative.fourth).to be_nil
+      expect(relative.fourth).to eq("04_Slim_Content.md.slim")
+      expect(relative[5]).to be_nil
     end
   end
 end

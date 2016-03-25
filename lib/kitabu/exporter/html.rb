@@ -46,6 +46,8 @@ module Kitabu
       def render_file(file)
         if format(file) == :erb
           content = render_template(file, config)
+        elsif format(file) == :slim
+          content = Kitabu::ToSlim.render(file)
         else
           content = File.read(file)
         end
@@ -56,6 +58,8 @@ module Kitabu
       def format(file)
         if File.extname(file) == '.erb'
           :erb
+        elsif File.extname(file) == '.slim'
+          :slim
         else
           :markdown
         end

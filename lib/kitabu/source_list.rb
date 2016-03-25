@@ -10,7 +10,7 @@ module Kitabu
 
     # List of recognized extensions.
     #
-    EXTENSIONS = %w[md erb]
+    EXTENSIONS = %w[md erb slim]
 
     attr_reader :root_dir
     attr_reader :source

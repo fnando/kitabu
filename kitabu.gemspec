@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "thor"
   s.add_dependency "redcarpet"
   s.add_dependency "eeepub-with-cover-support"
-  s.add_dependency "rouge"
+  s.add_dependency "rouge", "~> 2.0"
   s.add_dependency "notifier"
   s.add_dependency "rubyzip"
   s.add_dependency "zip-zip"

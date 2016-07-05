@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.0
+
+- Lock Rouge version to ~>2.0.
+
 ## v2.0.4
 
 - Support fonts directory

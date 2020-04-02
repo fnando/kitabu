@@ -66,10 +66,10 @@ describe Kitabu::Footnotes::HTML do
   end
 
   it 'sets footnote link-back' do
-    expect(chapter1).to have_tag('.footnotes li:nth-child(1) a[rev=footnote][href="#fnref1"]')
-    expect(chapter1).to have_tag('.footnotes li:nth-child(2) a[rev=footnote][href="#fnref2"]')
+    expect(chapter1).to have_tag('.footnotes li:nth-child(1) a[href="#fnref1"]')
+    expect(chapter1).to have_tag('.footnotes li:nth-child(2) a[href="#fnref2"]')
 
-    expect(chapter2).to have_tag('.footnotes li:nth-child(1) a[rev=footnote][href="#fnref3"]')
-    expect(chapter2).to have_tag('.footnotes li:nth-child(2) a[rev=footnote][href="#fnref4"]')
+    expect(chapter2).to have_tag('.footnotes li:nth-child(1) a[href="#fnref3"]')
+    expect(chapter2).to have_tag('.footnotes li:nth-child(2) a[href="#fnref4"]')
   end
 end

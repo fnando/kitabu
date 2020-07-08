@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 class HelloWorld
   # @begin: method
   def self.say

@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   class Syntax
     class Highlight
@@ -9,13 +11,12 @@ module Kitabu
         end
       end
 
-      private
       def self.pygments(code, language)
-        Pygments.highlight(code, :lexer => language, :options => {:encoding => "utf-8"})
+        Pygments.highlight(code, lexer: language, options: {encoding: "utf-8"})
       end
 
       def self.coderay(code, language)
-        html = Nokogiri::HTML(CodeRay.scan(code, language).div(:css => :class))
+        html = Nokogiri::HTML(CodeRay.scan(code, language).div(css: :class))
         coderay = html.css("div.CodeRay").first
         coderay.set_attribute "class", "CodeRay #{language}"
         pre = html.css("pre").first

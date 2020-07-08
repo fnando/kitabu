@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+# frozen_string_literal: false
+
 require "spec_helper"
 
 describe Kitabu::TOC::HTML do
@@ -6,22 +7,22 @@ describe Kitabu::TOC::HTML do
     /#{Regexp.escape(text)}/
   end
 
-  HTML = <<-HTML
-    <h1>Item 1</h1>
-    <h2>Item 1.2</h2>
-    <h3>Item 1.1.3</h3>
-    <h4>Item 1.1.1.4</h4>
-    <h5>Item 1.1.1.1.5</h5>
-    <h6>Item 1.1.1.1.1.6</h6>
+  def input
+    <<-HTML.force_encoding("utf-8")
+      <h1>Item 1</h1>
+      <h2>Item 1.2</h2>
+      <h3>Item 1.1.3</h3>
+      <h4>Item 1.1.1.4</h4>
+      <h5>Item 1.1.1.1.5</h5>
+      <h6>Item 1.1.1.1.1.6</h6>
 
-    <h2>Item 2.1</h2>
-    <h2>Item 2.1 again</h2>
-    <h2>Internacionalização</h2>
-  HTML
+      <h2>Item 2.1</h2>
+      <h2>Item 2.1 again</h2>
+      <h2>Internacionalização</h2>
+    HTML
+  end
 
-  HTML.force_encoding("utf-8")
-
-  let(:toc) { described_class.generate(HTML) }
+  let(:toc) { described_class.generate(input) }
   let(:html) { toc.to_html }
   let(:content) { toc.content }
 

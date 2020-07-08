@@ -1,11 +1,13 @@
-require 'spec_helper'
+# frozen_string_literal: false
+
+require "spec_helper"
 
 describe Kitabu::SourceList do
   let(:root) { SPECDIR.join("support/mybook") }
   let(:format) { Kitabu::Exporter::HTML.new(root) }
   let(:entries) { source_list.entries }
   let(:source) { root.join("text") }
-  let(:relative) { entries.collect {|e| e.to_s.gsub(/^#{Regexp.escape(source.to_s)}\//, "")} }
+  let(:relative) { entries.collect {|e| e.to_s.gsub(%r{^#{Regexp.escape(source.to_s)}/}, "") } }
   subject(:source_list) { Kitabu::SourceList.new(root) }
 
   context "when filtering entries" do

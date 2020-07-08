@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 shared_examples_for "e-book" do
   let(:mybook) { tmpdir.join("mybook") }
 

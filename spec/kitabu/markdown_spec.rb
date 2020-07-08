@@ -1,7 +1,9 @@
-require 'spec_helper'
+# frozen_string_literal: false
+
+require "spec_helper"
 
 describe Kitabu::Markdown do
-  it 'enables fenced code blocks' do
+  it "enables fenced code blocks" do
     html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
       ```ruby
       class User
@@ -12,7 +14,7 @@ describe Kitabu::Markdown do
     expect(html).to include('<pre class="highlight ruby">')
   end
 
-  it 'enables options' do
+  it "enables options" do
     html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
     ```php?start_inline=true
     echo 'Hello';
@@ -22,13 +24,13 @@ describe Kitabu::Markdown do
     expect(html).to include('<span class="k">echo</span>')
   end
 
-  it 'does not raise with unknown lexers' do
-    expect {
+  it "does not raise with unknown lexers" do
+    expect do
       Kitabu::Markdown.render <<-TEXT.strip_heredoc
       ```terminal
       Text plain.
       ```
       TEXT
-    }.not_to raise_error
+    end.not_to raise_error
   end
 end

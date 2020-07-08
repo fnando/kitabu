@@ -1,22 +1,24 @@
+# frozen_string_literal: false
+
 RSpec::Matchers.define :exit_with_code do |code|
   actual = nil
 
   match do |block|
     begin
       block.call
-    rescue SystemExit => e
-      actual = e.status
+    rescue SystemExit => error
+      actual = error.status
     end
 
     actual && actual == code
   end
 
-  failure_message do |block|
+  failure_message do |_block|
     "expected block to call exit(#{code}) but exit" +
-    (actual ? "(#{actual}) was called" : " not called")
+      (actual ? "(#{actual}) was called" : " not called")
   end
 
-  failure_message_when_negated do |block|
+  failure_message_when_negated do |_block|
     "expected block not to call exit(#{code})"
   end
 

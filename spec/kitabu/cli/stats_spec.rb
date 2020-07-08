@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require "spec_helper"
 
 describe Kitabu::Cli, "while running stats" do
@@ -5,9 +7,9 @@ describe Kitabu::Cli, "while running stats" do
   before { Dir.chdir(root_dir) }
 
   it "recognizes command" do
-    expect {
+    expect do
       capture(:stdout) { Kitabu::Cli.start(["stats"]) }
-    }.to_not raise_error
+    end.to_not raise_error
   end
 
   it "initializes stats with root dir" do
@@ -20,22 +22,24 @@ describe Kitabu::Cli, "while running stats" do
   end
 
   context "outputting stats" do
-    let(:stats) { double("stats", {
-      :chapters => 4,
-      :words => 50,
-      :images => 10,
-      :footnotes => 15,
-      :links => 20,
-      :code_blocks => 25
-    })}
+    let(:stats) do
+      double("stats", {
+               chapters: 4,
+               words: 50,
+               images: 10,
+               footnotes: 15,
+               links: 20,
+               code_blocks: 25
+             })
+    end
 
-    before {
+    before do
       allow(Kitabu::Stats).to receive_message_chain(:new).and_return(stats)
-    }
+    end
 
-    subject(:output) {
+    subject(:output) do
       capture(:stdout) { Kitabu::Cli.start(["stats"]) }
-    }
+    end
 
     it { expect(output).to include("Chapters: 4") }
     it { expect(output).to include("Words: 50") }

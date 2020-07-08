@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   module Helpers
     def lexers_list
@@ -10,18 +12,18 @@ module Kitabu
           title = lexer.title
           tag = lexer.tag
           description = lexer.desc
-        rescue Exception => e
+        rescue StandardError
           next
         end
 
-        buffer << '<li>'
+        buffer << "<li>"
         buffer << "<strong>#{title}</strong> "
         buffer << "<code>#{tag}</code><br>"
         buffer << "<span>#{description}</span>"
-        buffer << '</li>'
+        buffer << "</li>"
       end
 
-      buffer << '</ul>'
+      buffer << "</ul>"
       buffer
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   class Exporter
     class Base
@@ -18,8 +20,6 @@ module Kitabu
         @source = root_dir.join("text")
       end
 
-      #
-      #
       def source_list
         @source_list ||= SourceList.new(root_dir)
       end
@@ -40,18 +40,17 @@ module Kitabu
       #
       def render_template(file, locals = {})
         context = OpenStruct.new(locals).extend(Helpers)
-        ERB.new(File.read(file), 0, "%<>", "@_output").result context.instance_eval { binding }
+        data = context.instance_eval { binding }
+        ERB.new(File.read(file), trim_mode: "%<>", eoutvar: "@_output").result(data)
       end
 
       def spawn_command(command)
-        begin
-          stdout_and_stderr, status = Open3.capture2e(*command)
-        rescue Errno::ENOENT => e
-          puts e.message
-        else
-          puts stdout_and_stderr unless status.success?
-          status.success?
-        end
+        stdout_and_stderr, status = Open3.capture2e(*command)
+      rescue Errno::ENOENT => error
+        puts error.message
+      else
+        puts stdout_and_stderr unless status.success?
+        status.success?
       end
 
       def ui

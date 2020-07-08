@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   class Exporter
     def self.run(root_dir, options)
@@ -45,14 +47,14 @@ module Kitabu
           if RUBY_PLATFORM =~ /darwin/
             IO.popen("open -a Preview.app '#{filepath}'").close
           elsif RUBY_PLATFORM =~ /linux/
-            Process.detach(Process.spawn("xdg-open '#{filepath}'", :out => "/dev/null"))
+            Process.detach(Process.spawn("xdg-open '#{filepath}'", out: "/dev/null"))
           end
         end
 
         Notifier.notify(
-          :image   => Kitabu::ROOT.join("templates/ebook.png").to_s,
-          :title   => "Kitabu",
-          :message => "Your \"#{config[:title]}\" e-book has been exported!"
+          image: Kitabu::ROOT.join("templates/ebook.png").to_s,
+          title: "Kitabu",
+          message: "Your \"#{config[:title]}\" e-book has been exported!"
         )
       else
         color = :red

@@ -1,5 +1,7 @@
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+# frozen_string_literal: false
+
+require "simplecov"
+SimpleCov.start
 
 require "bundler/setup"
 
@@ -9,12 +11,14 @@ require "pathname"
 SPECDIR = Pathname.new(File.dirname(__FILE__))
 TMPDIR = SPECDIR.join("tmp")
 
-Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|r| require r}
+Dir[File.dirname(__FILE__) + "/support/**/*.rb"].sort.each {|r| require r }
 
 # Disable the bundle install command.
 # TODO: Figure out the best way of doing it so.
-class Kitabu::Generator < Thor::Group
-  def bundle_install
+module Kitabu
+  class Generator < Thor::Group
+    def bundle_install
+    end
   end
 end
 
@@ -35,7 +39,7 @@ RSpec.configure do |config|
       FileUtils.rm_rf(i) if File.exist?(i)
     end
 
-    Dir.chdir File.expand_path('../..', __FILE__)
+    Dir.chdir File.expand_path("..", __dir__)
   end
 
   config.before(&cleaner)

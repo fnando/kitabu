@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   class Stats
     attr_reader :root_dir

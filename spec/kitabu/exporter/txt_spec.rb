@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require "spec_helper"
 
 describe Kitabu::Exporter::Txt, html2text: Kitabu::Dependency.html2text? do

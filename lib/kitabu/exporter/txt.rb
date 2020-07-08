@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   class Exporter
     class Txt < Base
@@ -15,4 +17,3 @@ module Kitabu
     end
   end
 end
-

@@ -1,14 +1,16 @@
+# frozen_string_literal: false
+
 module Kitabu
   class Exporter
     class Epub < Base
       def sections
         @sections ||= html.css("div.chapter").each_with_index.map do |chapter, index|
           OpenStruct.new({
-            index: index,
-            filename: "section_#{index}.html",
-            filepath: tmp_dir.join("section_#{index}.html").to_s,
-            html: Nokogiri::HTML(chapter.inner_html)
-          })
+                           index: index,
+                           filename: "section_#{index}.html",
+                           filepath: tmp_dir.join("section_#{index}.html").to_s,
+                           html: Nokogiri::HTML(chapter.inner_html)
+                         })
         end
       end
 
@@ -34,7 +36,7 @@ module Kitabu
         epub.save(epub_path)
 
         true
-      rescue Exception => error
+      rescue StandardError => error
         handle_error(error)
         false
       end
@@ -70,13 +72,11 @@ module Kitabu
         # First we need to get all ids, which are used as
         # the anchor target.
         #
-        links = sections.inject({}) do |buffer, section|
+        links = sections.each_with_object({}) do |section, buffer|
           section.html.css("[id]").each do |element|
-            anchor = "##{element["id"]}"
+            anchor = "##{element['id']}"
             buffer[anchor] = "#{section.filename}#{anchor}"
           end
-
-          buffer
         end
 
         # Then we can normalize all links and
@@ -102,14 +102,14 @@ module Kitabu
           # Save file to disk.
           #
           File.open(section.filepath, "w") do |file|
-            body = section.html.css("body").to_xhtml.gsub(%r[<body>(.*?)</body>]m, "\\1")
+            body = section.html.css("body").to_xhtml.gsub(%r{<body>(.*?)</body>}m, "\\1")
             file << render_chapter(body)
           end
         end
       end
 
       def render_chapter(content)
-        locals = config.merge(:content => content)
+        locals = config.merge(content: content)
         render_template(template_path, locals)
       end
 

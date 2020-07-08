@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   module TOC
     class Epub
@@ -8,7 +10,8 @@ module Kitabu
       end
 
       def to_html
-        ERB.new(template).result OpenStruct.new(:navigation => navigation).instance_eval{ binding }
+        data = OpenStruct.new(navigation: navigation).instance_eval { binding }
+        ERB.new(template).result(data)
       end
 
       def template

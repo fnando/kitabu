@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   # The Kitabu::Generator class will create a new book structure.
   #
@@ -64,13 +66,14 @@ module Kitabu
       end
     end
 
-    private
-    # Retrieve user's name using finger.
-    # Defaults to <tt>John Doe</tt>.
-    #
-    def full_name
-      name = `finger $USER 2> /dev/null | grep Login | colrm 1 46 2> /dev/null`.chomp
-      name.present? ? name.squish : "John Doe"
+    no_commands do
+      # Retrieve user's name using finger.
+      # Defaults to <tt>John Doe</tt>.
+      #
+      def full_name
+        name = `finger $USER 2> /dev/null | grep Login | colrm 1 46 2> /dev/null`.chomp
+        name.present? ? name.squish : "John Doe"
+      end
     end
   end
 end

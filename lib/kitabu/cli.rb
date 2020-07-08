@@ -1,7 +1,8 @@
-# -*- encoding: utf-8 -*-
+# frozen_string_literal: false
+
 module Kitabu
   class Cli < Thor
-    FORMATS = %w[pdf html epub mobi txt]
+    FORMATS = %w[pdf html epub mobi txt].freeze
     check_unknown_options!
 
     def self.exit_on_failure?
@@ -9,9 +10,7 @@ module Kitabu
     end
 
     def initialize(args = [], options = {}, config = {})
-      if (config[:current_task] || config[:current_command]).name == "new" && args.empty?
-        raise Error, "The e-Book path is required. For details run: kitabu help new"
-      end
+      raise Error, "The e-Book path is required. For details run: kitabu help new" if (config[:current_task] || config[:current_command]).name == "new" && args.empty?
 
       super
     end
@@ -25,13 +24,11 @@ module Kitabu
     end
 
     desc "export [OPTIONS]", "Export e-book"
-    method_option :only, :type => :string, :desc => "Can be one of: #{FORMATS.join(", ")}"
-    method_option :open, :type => :boolean, :desc => "Automatically open PDF (Preview.app for Mac OS X and xdg-open for Linux)"
+    method_option :only, type: :string, desc: "Can be one of: #{FORMATS.join(', ')}"
+    method_option :open, type: :boolean, desc: "Automatically open PDF (Preview.app for Mac OS X and xdg-open for Linux)"
 
     def export
-      if options[:only] && !FORMATS.include?(options[:only])
-        raise Error, "The --only option need to be one of: #{FORMATS.join(", ")}"
-      end
+      raise Error, "The --only option need to be one of: #{FORMATS.join(', ')}" if options[:only] && !FORMATS.include?(options[:only])
 
       inside_ebook!
 
@@ -39,7 +36,7 @@ module Kitabu
     end
 
     desc "version", "Prints the Kitabu's version information"
-    map %w(-v --version) => :version
+    map %w[-v --version] => :version
 
     def version
       say "Kitabu version #{Version::STRING}"
@@ -51,24 +48,24 @@ module Kitabu
       result = []
 
       result << {
-        :description => "Prince XML: Converts HTML files into PDF files.",
-        :installed => Kitabu::Dependency.prince?
+        description: "Prince XML: Converts HTML files into PDF files.",
+        installed: Kitabu::Dependency.prince?
       }
 
       result << {
-        :description => "KindleGen: Converts ePub e-books into .mobi files.",
-        :installed => Kitabu::Dependency.kindlegen?
+        description: "KindleGen: Converts ePub e-books into .mobi files.",
+        installed: Kitabu::Dependency.kindlegen?
       }
 
       result << {
-        :description => "html2text: Converts HTML documents into plain text.",
-        :installed => Kitabu::Dependency.html2text?
+        description: "html2text: Converts HTML documents into plain text.",
+        installed: Kitabu::Dependency.html2text?
       }
 
-      result.each do |result|
-        text = color(result[:name], :blue)
-        text << "\n" << result[:description]
-        text << "\n" << (result[:installed] ? color("Installed.", :green) : color("Not installed.", :red))
+      result.each do |info|
+        text = color(info[:name], :blue)
+        text << "\n" << info[:description]
+        text << "\n" << (info[:installed] ? color("Installed.", :green) : color("Not installed.", :red))
         text << "\n"
 
         say(text)
@@ -110,31 +107,30 @@ module Kitabu
       ].join("\n")
     end
 
-    private
-    def inside_ebook!
-      unless File.exist?(config_path)
-        raise Error, "You have to run this command from inside an e-book directory."
+    no_commands do
+      def inside_ebook!
+        raise Error, "You have to run this command from inside an e-book directory." unless File.exist?(config_path)
       end
-    end
 
-    def config
-      YAML.load_file(config_path).with_indifferent_access
-    end
+      def config
+        YAML.load_file(config_path).with_indifferent_access
+      end
 
-    def config_path
-      root_dir.join("config/kitabu.yml")
-    end
+      def config_path
+        root_dir.join("config/kitabu.yml")
+      end
 
-    def root_dir
-      @root ||= Pathname.new(Dir.pwd)
-    end
+      def root_dir
+        @root_dir ||= Pathname.new(Dir.pwd)
+      end
 
-    def color(text, color)
-      color? ? shell.set_color(text, color) : text
-    end
+      def color(text, color)
+        color? ? shell.set_color(text, color) : text
+      end
 
-    def color?
-      shell.instance_of?(Thor::Shell::Color)
+      def color?
+        shell.instance_of?(Thor::Shell::Color)
+      end
     end
   end
 end

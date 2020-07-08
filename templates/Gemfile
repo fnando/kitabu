@@ -1,3 +1,5 @@
-source 'https://rubygems.org'
-gem 'kitabu'
-gem 'guard-shell'
+# frozen_string_literal: false
+
+source "https://rubygems.org"
+gem "guard-shell"
+gem "kitabu"

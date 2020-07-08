@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require "spec_helper"
 
 describe Kitabu::Cli do
@@ -5,9 +7,9 @@ describe Kitabu::Cli do
     it "recognizes command" do
       Dir.chdir SPECDIR.join("support/mybook")
 
-      expect {
+      expect do
         capture(:stdout) { Kitabu::Cli.start(["permalinks"]) }
-      }.to_not raise_error
+      end.to_not raise_error
     end
   end
 end

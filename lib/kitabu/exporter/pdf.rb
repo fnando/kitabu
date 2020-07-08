@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   class Exporter
     class PDF < Base
@@ -9,8 +11,8 @@ module Kitabu
 
       def apply_footnotes!
         html = Footnotes::PDF.process(html_file.read).html
-        create_html_file(html_for_print, html, 'print')
-        create_html_file(html_for_pdf, html, 'pdf')
+        create_html_file(html_for_print, html, "print")
+        create_html_file(html_for_pdf, html, "pdf")
       end
 
       def create_html_file(target, html, class_name)

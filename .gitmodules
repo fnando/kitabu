@@ -1,3 +1,0 @@
-[submodule "lib/kitabu/vendor/colorize"]
-	path = lib/kitabu/vendor/colorize
-	url = git://github.com/fnando/colorize.git

@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require "active_support/all"
 require "digest/md5"
 require "eeepub"
@@ -63,9 +65,10 @@ module Kitabu
     path = root_dir.join("config/kitabu.yml")
 
     raise "Invalid Kitabu directory; couldn't found config/kitabu.yml file." unless File.file?(path)
+
     content = File.read(path)
     erb = ERB.new(content).result
-    YAML.load(erb).with_indifferent_access
+    YAML.safe_load(erb).with_indifferent_access
   end
 
   def self.logger

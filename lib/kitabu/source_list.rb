@@ -1,27 +1,27 @@
+# frozen_string_literal: false
+
 module Kitabu
   class SourceList
     # List of directories that should be skipped.
     #
-    IGNORE_DIR = %w[. .. .svn .git]
+    IGNORE_DIR = %w[. .. .svn .git].freeze
 
     # Files that should be skipped.
     #
-    IGNORE_FILES = /^(CHANGELOG|TOC)\..*?$/
+    IGNORE_FILES = /^(CHANGELOG|TOC)\..*?$/.freeze
 
     # List of recognized extensions.
     #
-    EXTENSIONS = %w[md erb]
+    EXTENSIONS = %w[md erb].freeze
 
     attr_reader :root_dir
     attr_reader :source
 
     def initialize(root_dir)
       @root_dir = root_dir
-      @source = root_dir.join('text')
+      @source = root_dir.join("text")
     end
 
-    #
-    #
     def each_chapter(&block)
       files_grouped_by_chapter.each(&block)
     end
@@ -38,7 +38,7 @@ module Kitabu
       if File.file?(entry)
         [entry]
       else
-        Dir["#{entry}/**/*.{#{EXTENSIONS.join(",")}}"].sort
+        Dir["#{entry}/**/*.{#{EXTENSIONS.join(',')}}"].sort
       end
     end
 

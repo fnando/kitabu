@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require "spec_helper"
 
 describe Kitabu::Exporter::HTML do
@@ -9,14 +11,14 @@ describe Kitabu::Exporter::HTML do
     let(:html) { File.read(file) }
     before { format.export }
 
-    it "generates valid markup", osx: RUBY_PLATFORM.include?('darwin') do
+    it "generates valid markup", osx: RUBY_PLATFORM.include?("darwin") do
       `./vendor/bin/tidy5_osx '#{file}' 2>&1 > /dev/null`
-      expect($?.exitstatus).to eq(0)
+      expect($CHILD_STATUS.exitstatus).to eq(0)
     end
 
-    it "generates valid markup", linux: RUBY_PLATFORM.include?('linux') do
+    it "generates valid markup", linux: RUBY_PLATFORM.include?("linux") do
       `./vendor/bin/tidy5_linux '#{file}' 2>&1 > /dev/null`
-      expect($?.exitstatus).to eq(0)
+      expect($CHILD_STATUS.exitstatus).to eq(0)
     end
 
     it "keeps html file around" do
@@ -44,14 +46,14 @@ describe Kitabu::Exporter::HTML do
     end
 
     it "copies fonts" do
-      expect(root.join('output/fonts/OpenSans-CondBold.ttf')).to be_file
+      expect(root.join("output/fonts/OpenSans-CondBold.ttf")).to be_file
     end
 
     it "exports css files" do
-      expect(root.join('output/styles/epub.css')).to be_file
-      expect(root.join('output/styles/html.css')).to be_file
-      expect(root.join('output/styles/pdf.css')).to be_file
-      expect(root.join('output/styles/print.css')).to be_file
+      expect(root.join("output/styles/epub.css")).to be_file
+      expect(root.join("output/styles/html.css")).to be_file
+      expect(root.join("output/styles/pdf.css")).to be_file
+      expect(root.join("output/styles/print.css")).to be_file
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   class Exporter
     class HTML < Base
@@ -21,7 +23,7 @@ module Kitabu
         end
 
         true
-      rescue Exception => error
+      rescue StandardError => error
         handle_error(error)
         false
       end
@@ -33,28 +35,27 @@ module Kitabu
       # Return all chapters wrapped in a <tt>div.chapter</tt> tag.
       #
       def content
-        String.new.tap do |content|
+        "".tap do |content|
           source_list.each_chapter do |files|
             content << %[<div class="chapter">#{render_chapter(files)}</div>]
           end
         end
       end
 
-      private
       # Render +file+ considering its extension.
       #
-      def render_file(file)
-        if format(file) == :erb
-          content = render_template(file, config)
-        else
-          content = File.read(file)
-        end
+      private def render_file(file)
+        content = if format(file) == :erb
+                    render_template(file, config)
+                  else
+                    File.read(file)
+                  end
 
         Kitabu::Markdown.render(content)
       end
 
-      def format(file)
-        if File.extname(file) == '.erb'
+      private def format(file)
+        if File.extname(file) == ".erb"
           :erb
         else
           :markdown
@@ -63,15 +64,15 @@ module Kitabu
 
       # Parse layout file, making available all configuration entries.
       #
-      def parse_layout(html)
+      private def parse_layout(html)
         toc = TOC::HTML.generate(html)
-        content = Footnotes::HTML.process(toc.content).html.css('body').first.inner_html
+        content = Footnotes::HTML.process(toc.content).html.css("body").first.inner_html
 
         locals = config.merge({
-          content: content,
-          toc: toc.to_html,
-          changelog: render_changelog
-        })
+                                content: content,
+                                toc: toc.to_html,
+                                changelog: render_changelog
+                              })
 
         render_template(root_dir.join("templates/html/layout.erb"), locals)
       end
@@ -79,15 +80,15 @@ module Kitabu
       # Render changelog file.
       # This file can be used to inform any book change.
       #
-      def render_changelog
+      private def render_changelog
         changelog = Dir[root_dir.join("text/CHANGELOG.*")].first
         render_file(changelog) if changelog
       end
 
       # Render all +files+ from a given chapter.
       #
-      def render_chapter(files)
-        String.new.tap do |chapter|
+      private def render_chapter(files)
+        "".tap do |chapter|
           files.each do |file|
             chapter << render_file(file) << "\n\n"
           end
@@ -96,19 +97,19 @@ module Kitabu
 
       # Copy images
       #
-      def copy_images!
+      private def copy_images!
         copy_directory("images", "output/images")
       end
 
       # Copy font files
       #
-      def copy_fonts!
+      private def copy_fonts!
         copy_directory("fonts", "output/fonts")
       end
 
       # Export all root stylesheets.
       #
-      def export_stylesheets!
+      private def export_stylesheets!
         Exporter::CSS.new(root_dir).export
       end
     end

@@ -1,14 +1,16 @@
+# frozen_string_literal: false
+
 module Kitabu
   module Helpers
     def highlight_theme(name = theme)
       html = '<style type="text/css">'
-      html << Rouge::Theme.find(name).render(scope: '.highlight')
-      html << '</style>'
+      html << Rouge::Theme.find(name).render(scope: ".highlight")
+      html << "</style>"
       html
     end
 
-    def image_tag(path, attributes = {})
-      html = %[<img src="images/#{path}" />]
+    def image_tag(path, _attributes = {})
+      %[<img src="images/#{path}" />]
     end
 
     def escape_html(content)
@@ -17,13 +19,14 @@ module Kitabu
 
     def note(class_name = :info, &block)
       content = block_content(block)
-      output << '<div class="note %s">' % escape_html(class_name)
+      output << format('<div class="note %s">', escape_html(class_name))
       output << markdown(content)
-      output << '</div>'
+      output << "</div>"
     end
 
     def block_content(block)
-      output, @_output = @_output.dup, ''
+      output = @_output.dup
+      @_output = ""
       content = block.call
       @_output = output
       content
@@ -37,7 +40,7 @@ module Kitabu
     def deindent(content)
       content = content.to_s
       indent = (content.scan(/^[ \t]*(?=\S)/) || []).size
-      content.gsub(/^[ \t]{#{indent}}/, '')
+      content.gsub(/^[ \t]{#{indent}}/, "")
     end
 
     def output

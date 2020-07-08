@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Kitabu
   module TOC
     class HTML
@@ -10,7 +12,7 @@ module Kitabu
       attr_reader :attrs # :nodoc:
       attr_accessor :content # :nodoc:
 
-      # Traverse every title and add a +id+ attribute.
+      # Traverse every title and add an +id+ attribute.
       # Return the modified content.
       #
       def self.normalize(content)
@@ -67,7 +69,7 @@ module Kitabu
       # Return the table of contents in HTML format.
       #
       def to_html
-        String.new.tap do |html|
+        "".tap do |html|
           toc.each do |options|
             html << %[
               <div class="level#{options[:level]} #{options[:permalink]}">

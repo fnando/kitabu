@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require "spec_helper"
 
 describe Kitabu::Stats do
@@ -6,9 +8,9 @@ describe Kitabu::Stats do
   let(:content) { "" }
   subject(:stats) { Kitabu::Stats.new(root_dir) }
 
-  before {
+  before do
     allow(stats).to receive_message_chain(:content).and_return(content)
-  }
+  end
 
   context "getting content" do
     it "generates content" do
@@ -49,13 +51,13 @@ describe Kitabu::Stats do
   end
 
   context "external links counting" do
-    let(:content) {
+    let(:content) do
       <<-HTML
         <a href="http://example.org">example.org</a>
         <a href="http://subdomain.example.org">subdomain.example.org</a>
         <a href="#some-anchor">anchor</a>
       HTML
-    }
+    end
 
     it { expect(stats.links).to eql(2) }
   end

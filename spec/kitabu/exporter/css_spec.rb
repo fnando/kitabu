@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: false
+
+require "spec_helper"
 
 describe Kitabu::Exporter::CSS do
   let(:root) { SPECDIR.join("support/mybook") }

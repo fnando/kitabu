@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   class Exporter
@@ -17,7 +17,11 @@ module Kitabu
 
       def create_html_file(target, html, class_name)
         html.css("html").first.set_attribute "class", class_name
-        html.css("link[name=stylesheet]").first.set_attribute "href", "styles/#{class_name}.css"
+        html
+          .css("link[name=stylesheet]")
+          .first
+          .set_attribute "href", "styles/#{class_name}.css"
+
         File.open(target, "w") {|f| f << html.to_html }
       end
 

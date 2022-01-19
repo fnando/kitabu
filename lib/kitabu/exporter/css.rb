@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   class Exporter
@@ -16,7 +16,8 @@ module Kitabu
 
         files.each do |file|
           _, file_name, syntax = *File.basename(file).match(/(.*?)\.(.*?)$/)
-          engine = Sass::Engine.new(File.read(file), options.merge(syntax: syntax.to_sym))
+          engine = Sass::Engine.new(File.read(file),
+                                    options.merge(syntax: syntax.to_sym))
           target = root_dir.join("output/styles", "#{file_name}.css")
           FileUtils.mkdir_p(File.dirname(target))
           File.open(target, "w") {|io| io << engine.render }

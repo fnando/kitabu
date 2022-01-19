@@ -1,17 +1,18 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   class Exporter
     class Epub < Base
       def sections
-        @sections ||= html.css("div.chapter").each_with_index.map do |chapter, index|
-          OpenStruct.new({
-                           index: index,
-                           filename: "section_#{index}.html",
-                           filepath: tmp_dir.join("section_#{index}.html").to_s,
-                           html: Nokogiri::HTML(chapter.inner_html)
-                         })
-        end
+        @sections ||=
+          html.css("div.chapter").each_with_index.map do |chapter, index|
+            OpenStruct.new(
+              index: index,
+              filename: "section_#{index}.html",
+              filepath: tmp_dir.join("section_#{index}.html").to_s,
+              html: Nokogiri::HTML(chapter.inner_html)
+            )
+          end
       end
 
       def epub
@@ -56,7 +57,8 @@ module Kitabu
         epub.publisher    config[:publisher]
         epub.date         config[:published_at]
         epub.uid          config[:uid]
-        epub.identifier   config[:identifier][:id], scheme: config[:identifier][:type]
+        epub.identifier   config[:identifier][:id],
+                          scheme: config[:identifier][:type]
         epub.cover_page   cover_image if cover_image && File.exist?(cover_image)
       end
 
@@ -102,7 +104,9 @@ module Kitabu
           # Save file to disk.
           #
           File.open(section.filepath, "w") do |file|
-            body = section.html.css("body").to_xhtml.gsub(%r{<body>(.*?)</body>}m, "\\1")
+            body = section.html.css("body").to_xhtml.gsub(
+              %r{<body>(.*?)</body>}m, "\\1"
+            )
             file << render_chapter(body)
           end
         end
@@ -122,7 +126,9 @@ module Kitabu
       end
 
       def cover_image
-        path = Dir[root_dir.join("templates/epub/cover.{jpg,png,gif}").to_s].first
+        path =
+          Dir[root_dir.join("templates/epub/cover.{jpg,png,gif}").to_s].first
+
         return path if path && File.exist?(path)
       end
 

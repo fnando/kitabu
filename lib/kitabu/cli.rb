@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   class Cli < Thor
@@ -10,7 +10,15 @@ module Kitabu
     end
 
     def initialize(args = [], options = {}, config = {})
-      raise Error, "The e-Book path is required. For details run: kitabu help new" if (config[:current_task] || config[:current_command]).name == "new" && args.empty?
+      has_no_args = (
+        config[:current_task] ||
+        config[:current_command]
+      ).name == "new" && args.empty?
+
+      if has_no_args
+        raise Error,
+              "The e-Book path is required. For details run: kitabu help new"
+      end
 
       super
     end
@@ -24,11 +32,17 @@ module Kitabu
     end
 
     desc "export [OPTIONS]", "Export e-book"
-    method_option :only, type: :string, desc: "Can be one of: #{FORMATS.join(', ')}"
-    method_option :open, type: :boolean, desc: "Automatically open PDF (Preview.app for Mac OS X and xdg-open for Linux)"
+    method_option :only, type: :string,
+                         desc: "Can be one of: #{FORMATS.join(', ')}"
+    method_option :open, type: :boolean,
+                         desc: "Automatically open PDF (Preview.app for " \
+                               "Mac OS X and xdg-open for Linux)"
 
     def export
-      raise Error, "The --only option need to be one of: #{FORMATS.join(', ')}" if options[:only] && !FORMATS.include?(options[:only])
+      if options[:only] && !FORMATS.include?(options[:only])
+        raise Error,
+              "The --only option need to be one of: #{FORMATS.join(', ')}"
+      end
 
       inside_ebook!
 
@@ -65,7 +79,14 @@ module Kitabu
       result.each do |info|
         text = color(info[:name], :blue)
         text << "\n" << info[:description]
-        text << "\n" << (info[:installed] ? color("Installed.", :green) : color("Not installed.", :red))
+        text << "\n" << (if info[:installed]
+                           color("Installed.",
+                                 :green)
+                         else
+                           color(
+                             "Not installed.", :red
+                           )
+                         end)
         text << "\n"
 
         say(text)
@@ -109,7 +130,10 @@ module Kitabu
 
     no_commands do
       def inside_ebook!
-        raise Error, "You have to run this command from inside an e-book directory." unless File.exist?(config_path)
+        return if File.exist?(config_path)
+
+        raise Error,
+              "You have to run this command from inside an e-book directory."
       end
 
       def config

@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Matchers
   def have_tag(selector, options = {}, &block)
@@ -62,12 +62,16 @@ module Matchers
 
     def failure_message
       explanation = actual_count ? "but found #{actual_count}" : "but did not"
-      "expected\n#{doc}\nto have #{failure_count_phrase} #{failure_selector_phrase}, #{explanation}"
+
+      "expected\n#{doc}\nto have #{failure_count_phrase} " \
+        "#{failure_selector_phrase}, #{explanation}"
     end
 
     def failure_message_when_negated
       explanation = actual_count ? "but found #{actual_count}" : "but did"
-      "expected\n#{doc}\nnot to have #{failure_count_phrase} #{failure_selector_phrase}, #{explanation}"
+
+      "expected\n#{doc}\nnot to have " \
+        "#{failure_count_phrase} #{failure_selector_phrase}, #{explanation}"
     end
 
     private def filter_on_inner_text(elements)
@@ -101,8 +105,12 @@ module Matchers
         "#{options[:count]} elements matching"
       elsif options[:minimum] || options[:maximum]
         count_explanations = []
-        count_explanations << "at least #{options[:minimum]}" if options[:minimum]
-        count_explanations << "at most #{options[:maximum]}" if options[:maximum]
+        if options[:minimum]
+          count_explanations << "at least #{options[:minimum]}"
+        end
+        if options[:maximum]
+          count_explanations << "at most #{options[:maximum]}"
+        end
         "#{count_explanations.join(' and ')} elements matching"
       else
         "an element matching"
@@ -111,7 +119,9 @@ module Matchers
 
     private def failure_selector_phrase
       phrase = selector.inspect
-      phrase << (options[:text] ? " with inner text #{options[:text].inspect}" : "")
+      phrase << (
+        options[:text] ? " with inner text #{options[:text].inspect}" : ""
+      )
     end
   end
 end

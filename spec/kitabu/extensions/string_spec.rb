@@ -1,4 +1,6 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
+
+# rubocop:disable Layout/LineLength
 
 require "spec_helper"
 
@@ -7,7 +9,7 @@ describe String do
     it "normalizes strings" do
       {
         "This IS a Tripped out title!!.!1  (well/ not really)" => "this-is-a-tripped-out-title-1-well-not-really",
-        '////// meph1sto r0x ! \\\\\\' => "meph1sto-r0x",
+        "////// meph1sto r0x ! \\\\\\" => "meph1sto-r0x",
         "āčēģīķļņū" => "acegiklnu",
         "中文測試 chinese text" => "chinese-text",
         'some-)()()-ExtRa!/// .data==?>    to \/\/test' => "some-extra-data-to-test",
@@ -20,3 +22,5 @@ describe String do
     end
   end
 end
+
+# rubocop:enable Layout/LineLength

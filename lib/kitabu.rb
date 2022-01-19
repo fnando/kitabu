@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 require "active_support/all"
 require "digest/md5"
@@ -16,8 +16,6 @@ require "thor"
 require "thor/group"
 require "yaml"
 require "cgi"
-require "erb"
-require "open3"
 
 require "redcarpet"
 require "rouge"
@@ -32,7 +30,7 @@ Encoding.default_internal = "utf-8"
 Encoding.default_external = "utf-8"
 
 module Kitabu
-  ROOT = Pathname.new(File.dirname(__FILE__) + "/..")
+  ROOT = Pathname.new("#{File.dirname(__FILE__)}/..")
 
   require "kitabu/extensions/string"
   require "kitabu/extensions/rouge"
@@ -64,7 +62,9 @@ module Kitabu
     root_dir ||= Pathname.new(Dir.pwd)
     path = root_dir.join("config/kitabu.yml")
 
-    raise "Invalid Kitabu directory; couldn't found config/kitabu.yml file." unless File.file?(path)
+    unless File.file?(path)
+      raise "Invalid Kitabu directory; couldn't find config/kitabu.yml file."
+    end
 
     content = File.read(path)
     erb = ERB.new(content).result

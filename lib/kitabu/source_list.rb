@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   class SourceList
@@ -14,8 +14,7 @@ module Kitabu
     #
     EXTENSIONS = %w[md erb].freeze
 
-    attr_reader :root_dir
-    attr_reader :source
+    attr_reader :root_dir, :source
 
     def initialize(root_dir)
       @root_dir = root_dir
@@ -60,14 +59,18 @@ module Kitabu
     # Check if path is a valid directory.
     #
     def valid_directory?(entry)
-      File.directory?(source.join(entry)) && !IGNORE_DIR.include?(File.basename(entry))
+      File.directory?(source.join(entry)) &&
+        !IGNORE_DIR.include?(File.basename(entry))
     end
 
     # Check if path is a valid file.
     #
     def valid_file?(entry)
-      ext = File.extname(entry).gsub(/\./, "").downcase
-      File.file?(source.join(entry)) && EXTENSIONS.include?(ext) && entry !~ IGNORE_FILES
+      ext = File.extname(entry).delete(".").downcase
+
+      File.file?(source.join(entry)) &&
+        EXTENSIONS.include?(ext) &&
+        entry !~ IGNORE_FILES
     end
   end
 end

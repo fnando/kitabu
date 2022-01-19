@@ -32,7 +32,7 @@ module Kitabu
       content
     end
 
-    def markdown(content, deindent_content = true)
+    def markdown(content, deindent_content: true)
       content = deindent(content) if deindent_content
       Markdown.render(content)
     end

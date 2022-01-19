@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   module Footnotes
@@ -42,7 +42,9 @@ module Kitabu
       end
 
       def process_ref_elements(chapter, current_index)
-        chapter.css("sup[id=fnref#{current_index}]").each_with_index do |sup, index|
+        selector = "sup[id=fnref#{current_index}]"
+
+        chapter.css(selector).each_with_index do |sup, index|
           if index.zero?
             sup.set_attribute "id", "fnref#{footnote_index}"
           else

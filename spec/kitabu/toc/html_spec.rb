@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 require "spec_helper"
 
@@ -8,7 +8,7 @@ describe Kitabu::TOC::HTML do
   end
 
   def input
-    <<-HTML.force_encoding("utf-8")
+    (+<<-HTML).force_encoding("utf-8")
       <h1>Item 1</h1>
       <h2>Item 1.2</h2>
       <h3>Item 1.1.3</h3>
@@ -35,13 +35,17 @@ describe Kitabu::TOC::HTML do
     expect(html).to have_tag("div.level2.item-1-2", regexp("Item 1.2"))
     expect(html).to have_tag("div.level3.item-1-1-3", regexp("Item 1.1.3"))
     expect(html).to have_tag("div.level4.item-1-1-1-4", regexp("Item 1.1.1.4"))
-    expect(html).to have_tag("div.level5.item-1-1-1-1-5", regexp("Item 1.1.1.1.5"))
-    expect(html).to have_tag("div.level6.item-1-1-1-1-1-6", regexp("Item 1.1.1.1.1.6"))
+    expect(html).to have_tag("div.level5.item-1-1-1-1-5",
+                             regexp("Item 1.1.1.1.5"))
+    expect(html).to have_tag("div.level6.item-1-1-1-1-1-6",
+                             regexp("Item 1.1.1.1.1.6"))
 
     expect(html).to have_tag("div.level2.item-2-1", regexp("Item 2.1"))
-    expect(html).to have_tag("div.level2.item-2-1-again", regexp("Item 2.1 again"))
+    expect(html).to have_tag("div.level2.item-2-1-again",
+                             regexp("Item 2.1 again"))
 
-    expect(html).to have_tag("div.level2.internacionalizacao", regexp("Internacionalização"))
+    expect(html).to have_tag("div.level2.internacionalizacao",
+                             regexp("Internacionalização"))
   end
 
   it "adds id attribute to content" do
@@ -50,11 +54,13 @@ describe Kitabu::TOC::HTML do
     expect(content).to have_tag("h3#item-1-1-3", regexp("Item 1.1.3"))
     expect(content).to have_tag("h4#item-1-1-1-4", regexp("Item 1.1.1.4"))
     expect(content).to have_tag("h5#item-1-1-1-1-5", regexp("Item 1.1.1.1.5"))
-    expect(content).to have_tag("h6#item-1-1-1-1-1-6", regexp("Item 1.1.1.1.1.6"))
+    expect(content).to have_tag("h6#item-1-1-1-1-1-6",
+                                regexp("Item 1.1.1.1.1.6"))
 
     expect(content).to have_tag("h2#item-2-1", regexp("Item 2.1"))
     expect(content).to have_tag("h2#item-2-1-again", regexp("Item 2.1 again"))
 
-    expect(content).to have_tag("h2#internacionalizacao", regexp("Internacionalização"))
+    expect(content).to have_tag("h2#internacionalizacao",
+                                regexp("Internacionalização"))
   end
 end

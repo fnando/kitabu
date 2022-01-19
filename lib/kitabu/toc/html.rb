@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   module TOC
@@ -8,9 +8,8 @@ module Kitabu
       attr_reader :toc
 
       private_class_method :new
-      attr_reader :buffer # :nodoc:
-      attr_reader :attrs # :nodoc:
-      attr_accessor :content # :nodoc:
+      attr_reader :buffer, :attrs
+      attr_accessor :content
 
       # Traverse every title and add an +id+ attribute.
       # Return the modified content.
@@ -25,7 +24,9 @@ module Kitabu
           counter[permalink] ||= 0
           counter[permalink] += 1
 
-          permalink = "#{permalink}-#{counter[permalink]}" if counter[permalink] > 1
+          if counter[permalink] > 1
+            permalink = "#{permalink}-#{counter[permalink]}"
+          end
 
           tag.set_attribute("id", permalink)
         end
@@ -69,8 +70,8 @@ module Kitabu
       # Return the table of contents in HTML format.
       #
       def to_html
-        "".tap do |html|
-          toc.each do |options|
+        buffer =
+          toc.each_with_object([]) do |options, html|
             html << %[
               <div class="level#{options[:level]} #{options[:permalink]}">
                 <a href="##{options[:permalink]}">
@@ -79,7 +80,8 @@ module Kitabu
               </div>
             ]
           end
-        end
+
+        buffer.join
       end
     end
   end

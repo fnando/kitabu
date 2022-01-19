@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   class Exporter
@@ -35,11 +35,13 @@ module Kitabu
       # Return all chapters wrapped in a <tt>div.chapter</tt> tag.
       #
       def content
-        "".tap do |content|
+        buffer = [].tap do |content|
           source_list.each_chapter do |files|
             content << %[<div class="chapter">#{render_chapter(files)}</div>]
           end
         end
+
+        buffer.join
       end
 
       # Render +file+ considering its extension.
@@ -66,13 +68,14 @@ module Kitabu
       #
       private def parse_layout(html)
         toc = TOC::HTML.generate(html)
-        content = Footnotes::HTML.process(toc.content).html.css("body").first.inner_html
+        content =
+          Footnotes::HTML.process(toc.content).html.css("body").first.inner_html
 
-        locals = config.merge({
-                                content: content,
-                                toc: toc.to_html,
-                                changelog: render_changelog
-                              })
+        locals = config.merge(
+          content: content,
+          toc: toc.to_html,
+          changelog: render_changelog
+        )
 
         render_template(root_dir.join("templates/html/layout.erb"), locals)
       end
@@ -88,11 +91,13 @@ module Kitabu
       # Render all +files+ from a given chapter.
       #
       private def render_chapter(files)
-        "".tap do |chapter|
+        buffer = [].tap do |chapter|
           files.each do |file|
             chapter << render_file(file) << "\n\n"
           end
         end
+
+        buffer.join
       end
 
       # Copy images

@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   # The Kitabu::Generator class will create a new book structure.
@@ -13,7 +13,7 @@ module Kitabu
     desc "Generate a new e-Book structure"
 
     def self.source_root
-      File.dirname(__FILE__) + "/../../templates"
+      "#{File.dirname(__FILE__)}/../../templates"
     end
 
     def copy_templates
@@ -71,7 +71,9 @@ module Kitabu
       # Defaults to <tt>John Doe</tt>.
       #
       def full_name
-        name = `finger $USER 2> /dev/null | grep Login | colrm 1 46 2> /dev/null`.chomp
+        name =
+          `finger $USER 2> /dev/null | grep Login | colrm 1 46 2> /dev/null`
+          .chomp
         name.present? ? name.squish : "John Doe"
       end
     end

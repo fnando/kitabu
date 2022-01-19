@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   class Exporter
@@ -41,7 +41,8 @@ module Kitabu
       def render_template(file, locals = {})
         context = OpenStruct.new(locals).extend(Helpers)
         data = context.instance_eval { binding }
-        ERB.new(File.read(file), trim_mode: "%<>", eoutvar: "@_output").result(data)
+        ERB.new(File.read(file), trim_mode: "%<>",
+                                 eoutvar: "@_output").result(data)
       end
 
       def spawn_command(command)

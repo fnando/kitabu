@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 require "simplecov"
 SimpleCov.start
@@ -11,7 +11,7 @@ require "pathname"
 SPECDIR = Pathname.new(File.dirname(__FILE__))
 TMPDIR = SPECDIR.join("tmp")
 
-Dir[File.dirname(__FILE__) + "/support/**/*.rb"].sort.each {|r| require r }
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each {|r| require r }
 
 # Disable the bundle install command.
 # TODO: Figure out the best way of doing it so.

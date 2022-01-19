@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   class Exporter
@@ -7,8 +7,7 @@ module Kitabu
       exporter.export!
     end
 
-    attr_accessor :root_dir
-    attr_accessor :options
+    attr_accessor :root_dir, :options
 
     def initialize(root_dir, options)
       @root_dir = root_dir
@@ -44,10 +43,12 @@ module Kitabu
         if options[:open] && export_pdf
           filepath = root_dir.join("output/#{File.basename(root_dir)}.pdf")
 
-          if RUBY_PLATFORM =~ /darwin/
+          case RUBY_PLATFORM
+          when /darwin/
             IO.popen("open -a Preview.app '#{filepath}'").close
-          elsif RUBY_PLATFORM =~ /linux/
-            Process.detach(Process.spawn("xdg-open '#{filepath}'", out: "/dev/null"))
+          when /linux/
+            Process.detach(Process.spawn("xdg-open '#{filepath}'",
+                                         out: "/dev/null"))
           end
         end
 
@@ -58,7 +59,11 @@ module Kitabu
         )
       else
         color = :red
-        message = options[:auto] ? "could not be exported!" : "** e-book couldn't be exported"
+        message = if options[:auto]
+                    "could not be exported!"
+                  else
+                    "** e-book couldn't be exported"
+                  end
       end
 
       ui.say message, color

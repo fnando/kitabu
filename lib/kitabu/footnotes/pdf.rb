@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   module Footnotes
@@ -32,7 +32,10 @@ module Kitabu
         footnote.css("[rev=footnote]").map(&:remove)
 
         # Create an element for storing the footnote description
-        description = Nokogiri::XML::Node.new("span", Nokogiri::HTML::DocumentFragment.parse(""))
+        description = Nokogiri::XML::Node.new(
+          "span",
+          Nokogiri::HTML::DocumentFragment.parse("")
+        )
         description.set_attribute "class", "footnote"
         description.inner_html = footnote.css("p").map(&:inner_html).join("\n")
 

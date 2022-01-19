@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 module Kitabu
   module TOC
@@ -25,7 +25,7 @@ module Kitabu
         end
 
         def emit(node)
-          listener.tag(node) if node.name =~ /h[1-6]/
+          listener.tag(node) if /h[1-6]/.match?(node.name)
         end
       end
     end

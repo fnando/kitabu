@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 $LOAD_PATH.push File.expand_path("lib", __dir__)
 require "kitabu/version"
@@ -16,10 +16,14 @@ Gem::Specification.new do |s|
                             "supports EPUB, Mobi, Text and HTML generation."
   s.description           = s.summary
   s.license               = "MIT"
+  s.required_ruby_version = ">= 2.7"
+  s.metadata = {"rubygems_mfa_required" => "true"}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map {|f| File.basename(f) }
+  s.executables   = `git ls-files -- bin/*`.split("\n").map do |f|
+    File.basename(f)
+  end
   s.require_paths = ["lib"]
 
   s.add_dependency "activesupport"

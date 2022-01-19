@@ -67,8 +67,9 @@ module Kitabu
       }
 
       result << {
-        description: "KindleGen: Converts ePub e-books into .mobi files.",
-        installed: Kitabu::Dependency.kindlegen?
+        description: "Calibre's ebook-convert: Converts ePub e-books into " \
+                     ".mobi files.",
+        installed: Kitabu::Dependency.calibre?
       }
 
       result << {

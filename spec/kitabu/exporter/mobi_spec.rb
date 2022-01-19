@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe Kitabu::Exporter::Mobi, kindlegen: Kitabu::Dependency.kindlegen? do
+describe Kitabu::Exporter::Mobi, calibre: Kitabu::Dependency.calibre? do
   it "generates mobi" do
     root = SPECDIR.join("support/mybook")
 

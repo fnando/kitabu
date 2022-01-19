@@ -4,8 +4,12 @@ module Kitabu
   class Exporter
     class Mobi < Base
       def export
-        spawn_command ["kindlegen", epub_file.to_s]
+        spawn_command ["ebook-convert", epub_file.to_s, mobi_file.to_s]
         true
+      end
+
+      def mobi_file
+        root_dir.join("output/#{name}.mobi")
       end
 
       def epub_file

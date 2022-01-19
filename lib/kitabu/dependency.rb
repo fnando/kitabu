@@ -2,8 +2,8 @@
 
 module Kitabu
   class Dependency
-    def self.kindlegen?
-      @kindlegen ||= `which kindlegen` && $CHILD_STATUS.success?
+    def self.calibre?
+      @calibre ||= `which ebook-convert` && $CHILD_STATUS.success?
     end
 
     def self.prince?

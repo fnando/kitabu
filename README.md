@@ -38,7 +38,7 @@ dependencies.
     Prince XML: Converts HTML files into PDF files.
     Installed.
 
-    KindleGen: Converts ePub e-books into .mobi files.
+    Calibre's ebook-convert: Converts ePub e-books into .mobi files.
     Installed.
 
     html2text: Converts HTML documents into plain text.
@@ -158,9 +158,7 @@ something like this:
 
 ```html
 <div class="note info">
-  <p>
-    Make sure you try .erb files!
-  </p>
+  <p>Make sure you try .erb files!</p>
 </div>
 ```
 
@@ -240,13 +238,10 @@ Finally, to use this font, do something like this:
 
 ## Legal Notes
 
-- KindleGen: [license](http://www.amazon.com/gp/feature.html?docId=1000599251).
 - PrinceXML: [license](http://www.princexml.com/license/)
 
 Alternatives:
 
-- If you're planning to to sell your e-book, consider using
-  [Calibre](http://calibre-ebook.com/) to convert from `.epub` to `.mobi`.
 - If you're not planning to buy PrinceXML, consider using
   [DocRaptor](http://docraptor.com). Here's how you can easily do it:
 

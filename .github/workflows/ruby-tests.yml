@@ -24,13 +24,10 @@ jobs:
           - Gemfile
 
     steps:
-      - name: Install calibre
-        run: sudo apt install -y calibre
+      - name: Install deps
+        run: sudo apt install -y calibre gdebi html2text
 
-      - name: Install gdebi
-        run: sudo apt install -y gdebi
-
-      - name: Install prince xml
+      - name: Install princexml
         run: |
           wget https://www.princexml.com/download/prince_14.2-1_ubuntu20.04_amd64.deb
           sudo gdebi prince_14.2-1_ubuntu20.04_amd64.deb

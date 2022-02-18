@@ -13,5 +13,13 @@ module Kitabu
     def self.html2text?
       @html2text ||= `which html2text` && $CHILD_STATUS.success?
     end
+
+    def self.linux?
+      RUBY_PLATFORM.include?("linux")
+    end
+
+    def self.macos?
+      RUBY_PLATFORM.include?("darwin")
+    end
   end
 end

@@ -33,7 +33,7 @@ module Kitabu
       exported << HTML.export(root_dir)
       exported << PDF.export(root_dir) if export_pdf && Dependency.prince?
       exported << Epub.export(root_dir) if export_epub
-      exported << Mobi.export(root_dir) if export_mobi && Dependency.kindlegen?
+      exported << Mobi.export(root_dir) if export_mobi && Dependency.calibre?
       exported << Txt.export(root_dir) if export_txt && Dependency.html2text?
 
       if exported.all?

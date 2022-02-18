@@ -17,7 +17,7 @@ module Kitabu
     end
 
     def words
-      @words ||= text.split(" ").size
+      @words ||= text.split.size
     end
 
     def chapters

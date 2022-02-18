@@ -11,12 +11,12 @@ describe Kitabu::Exporter::HTML do
     let(:html) { File.read(file) }
     before { format.export }
 
-    it "generates valid markup", osx: RUBY_PLATFORM.include?("darwin") do
+    it "generates valid markup", osx: Kitabu::Dependency.macos? do
       `./vendor/bin/tidy5_osx '#{file}' 2>&1 > /dev/null`
       expect($CHILD_STATUS.exitstatus).to eq(0)
     end
 
-    it "generates valid markup", linux: RUBY_PLATFORM.include?("linux") do
+    it "generates valid markup", linux: Kitabu::Dependency.linux? do
       `./vendor/bin/tidy5_linux '#{file}' 2>&1 > /dev/null`
       expect($CHILD_STATUS.exitstatus).to eq(0)
     end

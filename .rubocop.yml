@@ -12,3 +12,6 @@ AllCops:
 
 Style/OpenStructUse:
   Enabled: false
+
+Performance/MethodObjectAsBlock:
+  Enabled: false

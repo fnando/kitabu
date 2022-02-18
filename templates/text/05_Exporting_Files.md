@@ -44,7 +44,7 @@ sample file for you. All you have to do is running `bundle exec guard`.
 
 ```
 $ bundle exec guard
-20:38:10 - INFO - Guard is now watching at '/Users/fnando/Projects/kitabu/examples/kitabu'
+20:38:10 - INFO - Guard is now watching at 'kitabu/examples/kitabu'
 ** e-book has been exported
 ```
 

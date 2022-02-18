@@ -27,14 +27,12 @@ module Kitabu
       export_pdf = [nil, "pdf"].include?(options[:only])
       export_epub = [nil, "mobi", "epub"].include?(options[:only])
       export_mobi = [nil, "mobi"].include?(options[:only])
-      export_txt = [nil, "txt"].include?(options[:only])
 
       exported = []
       exported << HTML.export(root_dir)
       exported << PDF.export(root_dir) if export_pdf && Dependency.prince?
       exported << Epub.export(root_dir) if export_epub
       exported << Mobi.export(root_dir) if export_mobi && Dependency.calibre?
-      exported << Txt.export(root_dir) if export_txt && Dependency.html2text?
 
       if exported.all?
         color = :green

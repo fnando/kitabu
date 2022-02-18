@@ -18,7 +18,6 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each {|r| require r }
 p [
   :filter_env,
   {
-    html2text: Kitabu::Dependency.html2text?,
     calibre: Kitabu::Dependency.calibre?,
     prince: Kitabu::Dependency.prince?,
     macos: Kitabu::Dependency.macos?,
@@ -40,7 +39,6 @@ RSpec.configure do |config|
   config.include(Matchers)
 
   config.filter_run_excluding(
-    html2text: false,
     calibre: false,
     prince: false,
     osx: false,

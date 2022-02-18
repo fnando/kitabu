@@ -46,7 +46,6 @@ module Kitabu
   require "kitabu/exporter/epub"
   require "kitabu/exporter/mobi"
   require "kitabu/exporter/pdf"
-  require "kitabu/exporter/txt"
   require "kitabu/exporter/css"
   require "kitabu/footnotes/base"
   require "kitabu/footnotes/html"

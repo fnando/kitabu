@@ -19,7 +19,7 @@ module Kitabu
 
     def note(class_name = :info, &block)
       content = block_content(block)
-      output << format('<div class="note %s">', escape_html(class_name))
+      output << ('<div class="note %s">' % escape_html(class_name)) # rubocop:disable Style/FormatString
       output << markdown(content)
       output << "</div>"
     end

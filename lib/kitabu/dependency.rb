@@ -10,10 +10,6 @@ module Kitabu
       @prince ||= `which prince` && $CHILD_STATUS.success?
     end
 
-    def self.html2text?
-      @html2text ||= `which html2text` && $CHILD_STATUS.success?
-    end
-
     def self.linux?
       RUBY_PLATFORM.include?("linux")
     end

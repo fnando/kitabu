@@ -46,18 +46,18 @@ module Kitabu
 
       # Render +file+ considering its extension.
       #
-      private def render_file(file)
-        content = if format(file) == :erb
-                    render_template(file, config)
+      private def render_file(file_path)
+        content = if file_format(file_path) == :erb
+                    render_template(file_path, config)
                   else
-                    File.read(file)
+                    File.read(file_path)
                   end
 
         Kitabu::Markdown.render(content)
       end
 
-      private def format(file)
-        if File.extname(file) == ".erb"
+      private def file_format(file_path)
+        if File.extname(file_path) == ".erb"
           :erb
         else
           :markdown

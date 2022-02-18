@@ -42,9 +42,6 @@ dependencies.
     Calibre's ebook-convert: Converts ePub e-books into .mobi files.
     Installed.
 
-    html2text: Converts HTML documents into plain text.
-    Not installed.
-
 There are no hard requirements here; just make sure you cleared the correct
 dependency based on the formats you want to export to.
 

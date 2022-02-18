@@ -2,7 +2,7 @@
 
 module Kitabu
   class Cli < Thor
-    FORMATS = %w[pdf html epub mobi txt].freeze
+    FORMATS = %w[pdf html epub mobi].freeze
     check_unknown_options!
 
     def self.exit_on_failure?
@@ -70,11 +70,6 @@ module Kitabu
         description: "Calibre's ebook-convert: Converts ePub e-books into " \
                      ".mobi files.",
         installed: Kitabu::Dependency.calibre?
-      }
-
-      result << {
-        description: "html2text: Converts HTML documents into plain text.",
-        installed: Kitabu::Dependency.html2text?
       }
 
       result.each do |info|

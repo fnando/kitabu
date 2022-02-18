@@ -19,12 +19,18 @@ describe Kitabu::TOC::HTML do
       <h2>Item 2.1</h2>
       <h2>Item 2.1 again</h2>
       <h2>Internacionalização</h2>
+      <h2>Title</h2>
+      <h2>Title</h2>
     HTML
   end
 
   let(:toc) { described_class.generate(input) }
   let(:html) { toc.to_html }
   let(:content) { toc.content }
+
+  it "returns hash" do
+    expect(toc.to_hash.keys).to eq(%i[content html toc])
+  end
 
   it "has no body tag" do
     expect(content).not_to match(/<body>/)
@@ -62,5 +68,8 @@ describe Kitabu::TOC::HTML do
 
     expect(content).to have_tag("h2#internacionalizacao",
                                 regexp("Internacionalização"))
+
+    expect(content).to have_tag("h2#title", regexp("Title"))
+    expect(content).to have_tag("h2#title-2", regexp("Title"))
   end
 end

@@ -97,11 +97,11 @@ The generated structure is actually a good example. So make sure you try it!
 ![Kitabu - Sample Book](https://github.com/fnando/kitabu/raw/main/attachments/cover.png)
 
 There's a generated sample available on the
-[attachments directory](https://github.com/fnando/kitabu/tree/master/attachments)
-• [PDF](https://github.com/fnando/kitabu/raw/master/attachments/kitabu.pdf) /
-[EPUB](https://github.com/fnando/kitabu/raw/master/attachments/kitabu.epub) /
-[MOBI](https://github.com/fnando/kitabu/raw/master/attachments/kitabu.mobi) /
-[HTML](https://github.com/fnando/kitabu/raw/master/attachments/browser-version.png).
+[attachments directory](https://github.com/fnando/kitabu/tree/main/attachments)
+• [PDF](https://github.com/fnando/kitabu/raw/main/attachments/kitabu.pdf) /
+[EPUB](https://github.com/fnando/kitabu/raw/main/attachments/kitabu.epub) /
+[MOBI](https://github.com/fnando/kitabu/raw/main/attachments/kitabu.mobi) /
+[HTML](https://github.com/fnando/kitabu/raw/main/attachments/browser-version.png).
 
 Now it's time to write your e-book. All your book content will be placed on the
 text directory. Kitabu requires you to separate your book into chapters. A
@@ -169,7 +169,7 @@ The `note` helper is built-in and can accept a different note type.
 ```
 
 You can see available helpers on
-<https://github.com/fnando/kitabu/blob/master/lib/kitabu/markdown.rb>.
+<https://github.com/fnando/kitabu/blob/main/lib/kitabu/markdown.rb>.
 
 ### Syntax Highlighting
 

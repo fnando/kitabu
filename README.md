@@ -7,7 +7,7 @@
 
 Kitabu is a framework for creating e-books from Markdown using Ruby. Using
 Prince PDF generator, you'll be able to get high quality PDFs. Also supports
-EPUB, Mobi, Text and HTML generation.
+EPUB, Mobi, and HTML generation.
 
 While Prince is too expensive (495USD for a single user license), the free
 version available at <http://www.princexml.com/download> generates a PDF with a
@@ -21,12 +21,12 @@ starting at \$15/mo.
 - Write using Markdown
 - Book layout support
 - Syntax highlight
-- Generate HTML, PDF, e-Pub, Mobi and Text files
+- Generate HTML, PDF, e-Pub, and Mobi
 - Table of Contents automatically generated from chapter titles
 
 ## Installation
 
-To install Kitabu, you'll need a working Ruby 2.0+ installation. If you're cool
+To install Kitabu, you'll need a working Ruby 2.7+ installation. If you're cool
 with it, just run the following command to install it.
 
     gem install kitabu

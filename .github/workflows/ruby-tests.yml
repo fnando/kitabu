@@ -24,13 +24,17 @@ jobs:
           - Gemfile
 
     steps:
+      - name: Install calibre
+        run: sudo apt install -y calibre
+
       - uses: actions/checkout@v1
 
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: >
-            ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles(matrix.gemfile) }}
+            ${{ runner.os }}-${{ matrix.ruby }}-gems-${{
+            hashFiles(matrix.gemfile) }}
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1

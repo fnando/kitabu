@@ -4,15 +4,7 @@ module Kitabu
   class Syntax
     class Highlight
       def self.apply(code, language)
-        if Dependency.pygments_rb?
-          pygments(code, language)
-        else
-          coderay(code, language)
-        end
-      end
-
-      def self.pygments(code, language)
-        Pygments.highlight(code, lexer: language, options: {encoding: "utf-8"})
+        coderay(code, language)
       end
 
       def self.coderay(code, language)

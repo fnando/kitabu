@@ -27,6 +27,9 @@ jobs:
       - name: Install calibre
         run: sudo apt install -y calibre
 
+      - name: Install gdebi
+        run: sudo apt install -y gdebi
+
       - uses: actions/checkout@v1
 
       - uses: actions/cache@v2

@@ -36,7 +36,7 @@ module Kitabu
 
       if exported.all?
         color = :green
-        message = options[:auto] ? "exported!" : "** e-book has been exported"
+        message = options[:auto] ? "exported!" : "=> e-book has been exported"
 
         if options[:open] && export_pdf
           filepath = root_dir.join("output/#{File.basename(root_dir)}.pdf")
@@ -54,7 +54,7 @@ module Kitabu
         message = if options[:auto]
                     "could not be exported!"
                   else
-                    "** e-book couldn't be exported"
+                    "=> e-book couldn't be exported"
                   end
       end
 

@@ -73,16 +73,15 @@ module Kitabu
       }
 
       result.each do |info|
+        state = if info[:installed]
+                  color("Installed.", :green)
+                else
+                  color("Not installed.", :red)
+                end
+
         text = color(info[:name], :blue)
         text << "\n" << info[:description]
-        text << "\n" << (if info[:installed]
-                           color("Installed.",
-                                 :green)
-                         else
-                           color(
-                             "Not installed.", :red
-                           )
-                         end)
+        text << "\n" << state
         text << "\n"
 
         say(text)

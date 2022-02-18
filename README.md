@@ -85,8 +85,8 @@ This command creates a directory `mybook` with the following structure:
     └── text
         ├── 01_Getting_Started.md
         ├── 02_Creating_Chapters.md
-        ├── 03_Syntax_Highlighting.erb
-        ├── 04_Dynamic_Content.erb
+        ├── 03_Syntax_Highlighting.md.erb
+        ├── 04_Dynamic_Content.md.erb
         └── 05_Exporting_Files.md
 
 The `config/kitabu.yml` file holds some information about your book; so you'll
@@ -142,21 +142,21 @@ To print the TOC, you need to print a variable called `toc`, using the eRb tag.
 
 ### Using ERB
 
-You can also have `.erb` files. You can mix Markdown and HTML, like the
+You can also have `.md.erb` files. You can mix Markdown and HTML, like the
 following:
 
     ## This the chapter title
 
     <% note do %>
-      Make sure you try .erb files!
+      Make sure you try .md.erb files!
     <% end %>
 
-The above content must be placed in a `.erb` file. The generated content will be
-something like this:
+The above content must be placed in a `.md.erb` file. The generated content will
+be something like this:
 
 ```html
 <div class="note info">
-  <p>Make sure you try .erb files!</p>
+  <p>Make sure you try .md.erb files!</p>
 </div>
 ```
 

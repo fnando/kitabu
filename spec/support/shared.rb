@@ -34,8 +34,8 @@ shared_examples_for "e-book" do
   it "copies sample texts" do
     expect(mybook.join("text/01_Getting_Started.md")).to be_file
     expect(mybook.join("text/02_Creating_Chapters.md")).to be_file
-    expect(mybook.join("text/03_Syntax_Highlighting.erb")).to be_file
-    expect(mybook.join("text/04_Dynamic_Content.erb")).to be_file
+    expect(mybook.join("text/03_Syntax_Highlighting.md.erb")).to be_file
+    expect(mybook.join("text/04_Dynamic_Content.md.erb")).to be_file
     expect(mybook.join("text/05_Exporting_Files.md")).to be_file
   end
 

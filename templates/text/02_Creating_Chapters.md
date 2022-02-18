@@ -1,8 +1,13 @@
 ## Creating Chapters
 
-You can create chapters by having multiple files or directories. They're alphabetically sorted, so make sure you use a prefixed file name like  `01_Introduction.md` as the file name.
+You can create chapters by having multiple files or directories. They're
+alphabetically sorted, so make sure you use a prefixed file name like
+`01_Introduction.md` as the file name.
 
-If you're going to write a long book, make sure you use the directory organization. This way you can have smaller text files, which will be easier to read and change as you go. A file structure suggestion for a book about [Ruby on Rails](http://guides.rubyonrails.com) would be:
+If you're going to write a long book, make sure you use the directory
+organization. This way you can have smaller text files, which will be easier to
+read and change as you go. A file structure suggestion for a book about
+[Ruby on Rails](http://guides.rubyonrails.com) would be:
 
 ```text
 getting-started-with-rails
@@ -19,4 +24,5 @@ getting-started-with-rails
     └── ...
 ```
 
-Notice that the file name does not need to be readable, but it will make your life easier.
+Notice that the file name does not need to be readable, but it will make your
+life easier.

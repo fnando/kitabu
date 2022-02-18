@@ -49,12 +49,6 @@ module Kitabu
                                          out: "/dev/null"))
           end
         end
-
-        Notifier.notify(
-          image: Kitabu::ROOT.join("templates/ebook.png").to_s,
-          title: "Kitabu",
-          message: "Your \"#{config[:title]}\" e-book has been exported!"
-        )
       else
         color = :red
         message = if options[:auto]

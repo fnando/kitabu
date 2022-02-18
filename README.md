@@ -1,8 +1,9 @@
 # kitabu
 
-[![Build Status](https://travis-ci.org/fnando/kitabu.svg)](https://travis-ci.org/fnando/kitabu)
-[![Code Climate](https://codeclimate.com/github/fnando/kitabu/badges/gpa.svg)](https://codeclimate.com/github/fnando/kitabu)
-[![Test Coverage](https://codeclimate.com/github/fnando/kitabu/badges/coverage.svg)](https://codeclimate.com/github/fnando/kitabu)
+[![Tests](https://github.com/fnando/kitabu/workflows/ruby-tests/badge.svg)](https://github.com/fnando/kitabu)
+[![Gem](https://img.shields.io/gem/v/kitabu.svg)](https://rubygems.org/gems/kitabu)
+[![Gem](https://img.shields.io/gem/dt/kitabu.svg)](https://rubygems.org/gems/kitabu)
+[![MIT License](https://img.shields.io/:License-MIT-blue.svg)](https://tldrlegal.com/license/mit-license)
 
 Kitabu is a framework for creating e-books from Markdown using Ruby. Using
 Prince PDF generator, you'll be able to get high quality PDFs. Also supports
@@ -251,25 +252,25 @@ curl -H "Content-Type:application/json" -d'{"user_credentials":"YOUR_CREDENTIALS
 
 ## Maintainer
 
-- [Nando Vieira](https://nandovieira.com)
+- [Nando Vieira](https://github.com/fnando)
+
+## Contributors
+
+- https://github.com/fnando/kitabu/contributors
+
+## Contributing
+
+For more details about how to contribute, please read
+https://github.com/fnando/kitabu/blob/main/CONTRIBUTING.md.
 
 ## License
 
-(The MIT License)
+The gem is available as open source under the terms of the
+[MIT License](https://opensource.org/licenses/MIT). A copy of the license can be
+found at https://github.com/fnando/kitabu/blob/main/LICENSE.md.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the 'Software'), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
+## Code of Conduct
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Everyone interacting in the kitabu project's codebases, issue trackers, chat
+rooms and mailing lists is expected to follow the
+[code of conduct](https://github.com/fnando/kitabu/blob/main/CODE_OF_CONDUCT.md).

@@ -35,7 +35,7 @@ jobs:
           wget https://www.princexml.com/download/prince_14.2-1_ubuntu20.04_amd64.deb
           sudo gdebi prince_14.2-1_ubuntu20.04_amd64.deb
 
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2.4.0
 
       - uses: actions/cache@v2
         with:

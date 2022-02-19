@@ -76,12 +76,12 @@ This command creates a directory `mybook` with the following structure:
     │   ├── html
     │   │   └── layout.erb
     │   └── styles
-    │       ├── epub.scss
+    │       ├── epub.css
     │       ├── files
-    │       │   └── _normalize.scss
-    │       ├── html.scss
-    │       ├── pdf.scss
-    │       └── print.scss
+    │       │   └── _normalize.css
+    │       ├── html.css
+    │       ├── pdf.css
+    │       └── print.css
     └── text
         ├── 01_Getting_Started.md
         ├── 02_Creating_Chapters.md
@@ -212,12 +212,12 @@ You can use custom fonts for your PDF. Just add them to the `fonts` directory
 (you can create this directory on your book's root directory if it doesn't
 exist).
 
-Then, on `templates/styles/pdf.scss` you can add the `@font-face` declaration.
+Then, on `templates/styles/pdf.css` you can add the `@font-face` declaration.
 
 ```css
 @font-face {
   font-family: "Open Sans Condensed Bold";
-  src: url("../fonts/OpenSans-CondBold.ttf");
+  src: url("../../fonts/OpenSans-CondBold.ttf");
 }
 ```
 

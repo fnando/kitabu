@@ -45,10 +45,10 @@ shared_examples_for "e-book" do
 
   it "copies stylesheets" do
     expect(mybook.join("templates/styles")).to be_directory
-    expect(mybook.join("templates/styles/epub.scss")).to be_file
-    expect(mybook.join("templates/styles/print.scss")).to be_file
-    expect(mybook.join("templates/styles/pdf.scss")).to be_file
-    expect(mybook.join("templates/styles/html.scss")).to be_file
+    expect(mybook.join("templates/styles/epub.css")).to be_file
+    expect(mybook.join("templates/styles/print.css")).to be_file
+    expect(mybook.join("templates/styles/pdf.css")).to be_file
+    expect(mybook.join("templates/styles/html.css")).to be_file
   end
 
   it "copies Gemfile" do

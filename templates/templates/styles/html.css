@@ -1,7 +1,9 @@
-@import './files/normalize';
+@import "./files/normalize.css";
 
-$cover-color: #5091b1;
-$link-color: $cover-color;
+:root {
+  --cover-color: #5091b1;
+  --link-color: var(--cover-color);
+}
 
 html {
   background: #eee;
@@ -17,17 +19,17 @@ body {
 }
 
 a {
-  color: $link-color;
+  color: var(--link-color);
 }
 
 p code,
 li code {
-  color: #3F9C55;
+  color: #3f9c55;
 }
 
-// Format cover page.
+/* Format cover page. */
 .frontcover {
-  background: $cover-color;
+  background: var(--cover-color);
   color: #fff;
   padding: 50px;
   margin: -50px -50px 50px -50px;
@@ -41,7 +43,7 @@ li code {
 .frontcover .description {
   width: 45%;
   margin: 20px auto;
-  color: rgba(#fff, .7);
+  color: rgba(#fff, 0.7);
 }
 
 .frontcover .authors {
@@ -50,9 +52,9 @@ li code {
   font-size: 24px;
 }
 
-// Define asterism.
+/* Define asterism. */
 .chapter + .chapter:before {
-  content: '\2234';
+  content: "\2234";
   display: block;
   text-align: center;
   font-size: 24px;
@@ -73,7 +75,7 @@ li code {
   padding-right: 15px;
 }
 
-// Table of contents
+/* Table of contents */
 .toc {
   padding-bottom: 50px;
   margin-bottom: 50px;
@@ -90,11 +92,11 @@ li code {
 }
 
 .chapter h2:before {
-  content: 'Chapter ' counter(chapter);
+  content: "Chapter " counter(chapter);
   display: block;
   text-transform: uppercase;
   font-weight: normal;
-  color: #DB0209;
+  color: #db0209;
   font-size: 14px;
 }
 
@@ -102,7 +104,7 @@ li code {
   margin-top: 50px;
 }
 
-// Footnotes
+/* Footnotes */
 .footnotes {
   margin-top: 50px;
   padding-top: 25px;
@@ -113,7 +115,7 @@ li code {
   display: none;
 }
 
-// Notes
+/* Notes */
 .note {
   font-size: 13px;
   float: right;
@@ -124,7 +126,7 @@ li code {
 }
 
 .note:before {
-  content: '!';
+  content: "!";
   display: inline-block;
   font-size: 25px;
   width: 10px;
@@ -149,7 +151,7 @@ li code {
   color: #fff;
 }
 
-// Format lexers list
+/* Format lexers list */
 .lexers-list {
   margin: 0;
   padding: 0;
@@ -170,7 +172,7 @@ li code {
   margin-top: 15px;
 }
 
-// Format imprint
+/* Format imprint */
 .imprint {
   margin-top: 50px;
   padding-top: 50px;
@@ -186,7 +188,7 @@ li code {
   margin-bottom: 10px;
 }
 
-// Table of contents
+/* Table of contents */
 .table-of-contents {
   padding-bottom: 50px;
   margin-bottom: 50px;
@@ -208,7 +210,7 @@ li code {
 }
 
 .table-of-contents .level2:before {
-  content: 'Chapter ' counter(toc-level2);
+  content: "Chapter " counter(toc-level2);
   font-size: 13px;
   text-transform: uppercase;
   font-weight: bold;
@@ -230,7 +232,7 @@ li code {
   break-inside: avoid-column;
 }
 
-// Go top
+/* Go top */
 .go-top {
   font-size: 50px;
   text-decoration: none;
@@ -239,14 +241,14 @@ li code {
   right: 25px;
   width: 60px;
   display: inline-block;
-  background: rgba(#000, .2);
+  background: rgba(#000, 0.2);
   text-align: center;
   border-radius: 10px;
   line-height: 1;
-  color: rgba(#fff, .4);
+  color: rgba(#fff, 0.4);
   padding-top: 10px;
+}
 
-  &:hover {
-    color: #fff;
-  }
+.go-top:hover {
+  color: #fff;
 }

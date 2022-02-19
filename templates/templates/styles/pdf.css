@@ -1,10 +1,12 @@
-@import './files/normalize';
+@import "./files/normalize.css";
 
-$frontcover-color: #5091b1;
-$page-height: 22.86cm;
-$page-height: 19.05cm;
-
-$frontcover-padding: 50px;
+:root {
+  --frontcover-color: #5091b1;
+  --frontcover-darker-color: #40748e;
+  --frontcover-padding: 50px;
+  --page-height: 22.86cm;
+  --page-height: 19.05cm;
+}
 
 @page {
   size: 19.05cm 22.86cm portrait;
@@ -36,8 +38,8 @@ $frontcover-padding: 50px;
 
 @page frontcover {
   margin: 0;
-  background: $frontcover-color;
-  border-left: 50px solid darken($frontcover-color, 10%);
+  background: var(--frontcover-color);
+  border-left: 50px solid var(--frontcover-darker-color);
 }
 
 @page chapter {
@@ -47,7 +49,7 @@ $frontcover-padding: 50px;
   @footnotes {
     border-top: thin solid #777;
     margin-top: 1em;
-    padding-top: .5em;
+    padding-top: 0.5em;
   }
 }
 
@@ -69,14 +71,14 @@ body {
 }
 
 a {
-  color: $frontcover-color;
+  color: var(--frontcover-color);
 }
 
 .go-top {
   display: none;
 }
 
-// White page
+/* White page */
 .white-page {
   page: white;
   page-break-before: always;
@@ -84,7 +86,7 @@ a {
 }
 
 .white-page:before {
-  content: 'This page intentionally left blank';
+  content: "This page intentionally left blank";
   text-transform: uppercase;
   position: absolute;
   left: 0;
@@ -94,10 +96,10 @@ a {
   transform: translatey(-50%);
 }
 
-// Style frontcover
+/* Style frontcover */
 .frontcover {
   page: frontcover;
-  padding: $frontcover-padding;
+  padding: var(--frontcover-padding);
   padding-left: 0;
   text-align: center;
   font-family: sans-serif;
@@ -108,7 +110,7 @@ a {
 }
 
 .frontcover .logo {
-  background: url('../images/kitabu-word.svg') no-repeat center bottom;
+  background: url("../images/kitabu-word.svg") no-repeat center bottom;
   height: 150px;
   margin-bottom: 35px;
 }
@@ -121,13 +123,13 @@ a {
   display: inline-block;
   width: 400px;
   font-size: 20px;
-  color: rgba(#fff, .7);
+  color: rgba(#fff, 0.7);
 }
 
 .frontcover .description:after {
-  content: '';
+  content: "";
   display: block;
-  background: url('../images/kitabu-icon.svg') no-repeat center bottom;
+  background: url("../images/kitabu-icon.svg") no-repeat center bottom;
   background-size: 200px;
   height: 300px;
   margin-top: 50px;
@@ -135,18 +137,18 @@ a {
 
 .frontcover .authors {
   font-size: 24px;
-  padding: $frontcover-padding;
+  padding: var(--frontcover-padding);
   font-weight: bold;
   margin-top: 30px;
-  color: rgba(#000, .4);
+  color: rgba(#000, 0.4);
   text-transform: uppercase;
 }
 
 .frontcover .authors:before {
-  content: 'By ';
+  content: "By ";
 }
 
-// Style chapter
+/* Style chapter */
 .chapters {
   counter-reset: chapter;
 }
@@ -160,9 +162,9 @@ a {
 .chapter > h2 {
   font-family: sans-serif;
   margin: -100px -100px 75px -100px;
-  background: $frontcover-color;
+  background: var(--frontcover-color);
   padding: 100px;
-  color: rgba(#fff, .6);
+  color: rgba(#fff, 0.6);
   font-size: 40px;
 }
 
@@ -171,14 +173,14 @@ a {
 }
 
 .chapter > h2:before {
-  content: 'Chapter ' counter(chapter);
+  content: "Chapter " counter(chapter);
   display: block;
   font-size: 18px;
   text-transform: uppercase;
   color: #fff;
 }
 
-// Code highlighting
+/* Code highlighting */
 p code,
 li code {
   font-size: 12px;
@@ -199,7 +201,7 @@ li code {
   padding-right: 15px;
 }
 
-// Format lexers list
+/* Format lexers list */
 .lexers-list {
   margin: 0;
   padding: 0;
@@ -220,7 +222,7 @@ li code {
   margin-top: 15px;
 }
 
-// Table of contents
+/* Table of contents */
 .table-of-contents {
   page: chapter;
   font-family: sans-serif;
@@ -229,9 +231,9 @@ li code {
 .table-of-contents > h2 {
   font-family: sans-serif;
   margin: -100px -100px 75px -100px;
-  background: $frontcover-color;
+  background: var(--frontcover-color);
   padding: 100px;
-  color: rgba(#fff, .6);
+  color: rgba(#fff, 0.6);
   font-size: 40px;
 }
 
@@ -239,10 +241,10 @@ li code {
   text-decoration: none;
 }
 
-.table-of-contents {
-  .level4 { display: none; }
-  .level5 { display: none; }
-  .level6 { display: none; }
+.table-of-contents .level4,
+.table-of-contents .level5,
+.table-of-contents .level6 {
+  display: none;
 }
 
 .table-of-contents * + .level2 {
@@ -256,13 +258,13 @@ li code {
   font-size: 20px;
   position: relative;
   padding-left: 25px;
+}
 
-  &:before {
-    content: target-counter(attr(href), page) " ";
-    position: absolute;
-    left: 0;
-    transform: translatex(-100%);
-  }
+.table-of-contents .level2 a:before {
+  content: target-counter(attr(href), page) " ";
+  position: absolute;
+  left: 0;
+  transform: translatex(-100%);
 }
 
 .table-of-contents .level3 {
@@ -276,21 +278,21 @@ li code {
 .table-of-contents .level3 a {
   position: relative;
   color: #777;
-
-  &:after {
-    content: leader('.') target-counter(attr(href), page) " ";
-    cursor: default;
-  }
 }
 
-// Footnotes
+.table-of-contents .level3 a:after {
+  content: leader(".") target-counter(attr(href), page) " ";
+  cursor: default;
+}
+
+/* Footnotes */
 .footnote {
   display: prince-footnote;
   footnote-style-position: inside;
   position: footnote;
 }
 
-// Notes
+/* Notes */
 .note {
   font-size: 13px;
   float: right;
@@ -301,7 +303,7 @@ li code {
 }
 
 .note:before {
-  content: '!';
+  content: "!";
   display: inline-block;
   font-size: 25px;
   width: 10px;

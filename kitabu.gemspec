@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version               = Kitabu::Version::STRING
   s.platform              = Gem::Platform::RUBY
   s.authors               = ["Nando Vieira"]
-  s.email                 = ["fnando.vieira@gmail.com"]
+  s.email                 = ["me@fnando.com"]
   s.homepage              = "http://rubygems.org/gems/kitabu"
   s.summary               = "A framework for creating e-books from Markdown " \
                             "using Ruby. Using the Prince PDF generator, " \

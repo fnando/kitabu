@@ -229,6 +229,30 @@ Finally, to use this font, do something like this:
 }
 ```
 
+### Configuring Markdown
+
+Kitabu uses [Redcarpet](https://github.com/vmg/redcarpet) as the Markdown
+engine. You can override the default processor by setting
+`Kitabu::Markdown.processor`. This can be done by adding something like the
+following to `config/helper.rb`:
+
+```ruby
+Kitabu::Markdown.processor = Redcarpet::Markdown.new(
+  Kitabu::Markdown::Renderer.new(hard_wrap: false, safe_links_only: true),
+  tables: true,
+  footnotes: true,
+  space_after_headers: true,
+  superscript: true,
+  highlight: true,
+  strikethrough: true,
+  autolink: true,
+  fenced_code_blocks: true,
+  no_intra_emphasis: true
+)
+```
+
+The above options are Kitabu's defaults.
+
 ## References
 
 - Markdown: <http://daringfireball.net/projects/markdown/syntax>

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Add accessor methods `Kitabu::Markdown.default_renderer_options` and
+  `Kitabu::Markdown.default_markdown_options`.
+- Set Redcarpet's `hard_wrap` to `false`.
+
 ## v3.0.0
 
 - Drop Sass support; the `styles` directory will now be copied to the `output`

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v3.0.2
 
 - Fix `styles` directory copying.
 

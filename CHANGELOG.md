@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fix `styles` directory copying.
+
 ## v3.0.1
 
 - Add accessor methods `Kitabu::Markdown.default_renderer_options` and

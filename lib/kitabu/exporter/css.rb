@@ -8,7 +8,7 @@ module Kitabu
       def export
         FileUtils.cp_r(
           root_dir.join("templates/styles").to_s,
-          root_dir.join("output/styles").to_s
+          root_dir.join("output").to_s
         )
       end
     end

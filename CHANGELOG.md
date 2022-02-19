@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v3.0.1
 
 - Add accessor methods `Kitabu::Markdown.default_renderer_options` and
   `Kitabu::Markdown.default_markdown_options`.

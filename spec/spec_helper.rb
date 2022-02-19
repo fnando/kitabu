@@ -46,7 +46,7 @@ RSpec.configure do |config|
   )
 
   cleaner = proc do
-    [TMPDIR].each do |i|
+    [TMPDIR, SPECDIR.join("support/mybook/output")].each do |i|
       FileUtils.rm_rf(i) if File.exist?(i)
     end
 

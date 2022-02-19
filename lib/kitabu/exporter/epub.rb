@@ -24,6 +24,7 @@ module Kitabu
       end
 
       def export
+        super
         copy_styles!
         copy_images!
         set_metadata!

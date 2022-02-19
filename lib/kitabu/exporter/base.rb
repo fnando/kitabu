@@ -20,6 +20,10 @@ module Kitabu
         @source = root_dir.join("text")
       end
 
+      def export
+        FileUtils.mkdir_p(root_dir.join("output"))
+      end
+
       def source_list
         @source_list ||= SourceList.new(root_dir)
       end

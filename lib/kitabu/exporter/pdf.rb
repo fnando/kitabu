@@ -4,6 +4,7 @@ module Kitabu
   class Exporter
     class PDF < Base
       def export
+        super
         apply_footnotes!
         spawn_command ["prince", html_for_pdf.to_s, "-o", pdf_file.to_s]
         spawn_command ["prince", html_for_print.to_s, "-o", print_file.to_s]

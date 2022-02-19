@@ -14,6 +14,7 @@ module Kitabu
       # to <tt>output/book_name.html</tt>.
       #
       def export
+        super
         copy_images!
         copy_fonts!
         export_stylesheets!

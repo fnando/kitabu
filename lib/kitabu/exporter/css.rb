@@ -6,6 +6,8 @@ module Kitabu
       attr_reader :root_dir
 
       def export
+        super
+
         FileUtils.cp_r(
           root_dir.join("templates/styles").to_s,
           root_dir.join("output").to_s

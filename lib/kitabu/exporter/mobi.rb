@@ -4,6 +4,7 @@ module Kitabu
   class Exporter
     class Mobi < Base
       def export
+        super
         spawn_command ["ebook-convert", epub_file.to_s, mobi_file.to_s]
         true
       end

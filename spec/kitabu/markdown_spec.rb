@@ -24,6 +24,17 @@ describe Kitabu::Markdown do
     expect(html).to include('<span class="k">echo</span>')
   end
 
+  it "enables line numbers" do
+    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
+    ```ruby?line_numbers=true
+    class User
+    end
+    ```
+    TEXT
+
+    expect(html).to include(%[<table class="rouge-table">])
+  end
+
   it "does not raise with unknown lexers" do
     expect do
       Kitabu::Markdown.render <<-TEXT.strip_heredoc

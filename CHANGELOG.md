@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fix Rouge options keys; symbols are required.
+
 ## v3.0.2
 
 - Fix `styles` directory copying.

@@ -4,10 +4,8 @@ This guide is designed for beginners who want to get started with Kitabu from
 scratch. However, to get the most out of it, you need to have some prerequisites
 installed:
 
-- The [Ruby](http://ruby-lang.org) interpreter version 2.0.0 or greater.
-- The [PrinceXML](http://princexml.com) converter version 9.0 or greater.
-- The [KindleGen](http://www.amazon.com/gp/feature.html?docId=1000765211)
-  converter.
+- The [Ruby](http://ruby-lang.org) interpreter version 2.7 or newer.
+- The [PrinceXML](http://princexml.com) converter version 14.0 or newer.
 
 ### Installing Ruby
 
@@ -29,16 +27,10 @@ user costs 495USD. If you don't like the price tag, consider using
 To install PrinceXML, go to the website and download the correct version for
 your platform; you can choose from Mac OSX, to Linux and Windows.
 
-### Installing KindleGen
+### Installing Calibre
 
-KindleGen is the command-line tool that allows you to convert e-pubs into
-`.mobi` files. You can't sell these files, though.[^1] So if that's the case,
-consider using [Calibre](http://calibre-ebook.com/) for this task.[^2]
+[Calibre](http://calibre-ebook.com/) is a e-book manager that, among other
+features, allows converting ePub files into .mobi files.
 
-If you're running [Homebrew](http://brew.sh) on the Mac OSX, you can install it
-with `brew install kindlegen`. Go to
-[KindleGen's website](http://www.amazon.com/gp/feature.html?docId=1000765211)
-and download the appropriate installer otherwise.
-
-[^1]: You can, but that would be a violation of Amazon's terms of use.
-[^2]: Calibre is not perfect, but does a good job.
+To install Calibre, go to the website and download the correct version for your
+platform; you can choose from Mac OSX, to Linux and Windows.

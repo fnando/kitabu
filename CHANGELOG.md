@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v3.0.3
 
 - Fix Rouge options keys; symbols are required.
 

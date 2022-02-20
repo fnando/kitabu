@@ -4,7 +4,7 @@ module Kitabu
   module Version
     MAJOR = 3
     MINOR = 0
-    PATCH = 2
+    PATCH = 3
     STRING = "#{MAJOR}.#{MINOR}.#{PATCH}"
   end
 end

@@ -24,6 +24,9 @@ jobs:
           - Gemfile
 
     steps:
+      - name: Update deps
+        run: sudo apt update -y
+    
       - name: Install deps
         run: sudo apt install -y calibre gdebi
 

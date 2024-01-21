@@ -6,7 +6,8 @@ module Kitabu
       include Redcarpet::Render::SmartyPants
       include Rouge::Plugins::Redcarpet
 
-      ALERT_MARK = /^\[!(?<type>NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]$/
+      # Be more flexible than github and support any arbitrary name.
+      ALERT_MARK = /^\[!(?<type>[A-Z]+)\]$/
 
       # Support alert boxes just like github.
       # https://github.com/orgs/community/discussions/16925
@@ -20,15 +21,18 @@ module Kitabu
 
         element.remove
 
+        type = matches[:type].downcase
+        type = "info" if type == "note"
+
         title = I18n.t(
-          matches[:type],
-          scope: :alerts,
-          default: matches[:type].titleize
+          type,
+          scope: :notes,
+          default: type.titleize
         )
 
         <<~HTML.strip_heredoc
-          <div class="alert alert--#{matches[:type].downcase}">
-            <p class="alert--title">#{title}</p>
+          <div class="note #{type}">
+            <p class="note--title">#{title}</p>
             #{html.css('body').inner_html}
           </div>
         HTML

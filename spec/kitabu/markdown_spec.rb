@@ -53,10 +53,24 @@ describe Kitabu::Markdown do
     TEXT
 
     html = Nokogiri::HTML(html)
-    selector = "div.alert.alert--note > .alert--title"
+    selector = "div.note.info > .note--title"
 
-    expect(html.css(selector).text).to eql("Note")
+    expect(html.css(selector).text).to eql("Info")
     expect(html.css("#{selector} + p").text).to eql("This is just a note")
+  end
+
+  it "renders arbitrary alert boxes using block quotes" do
+    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
+    > [!ALERT]
+    >
+    > This is just an alert
+    TEXT
+
+    html = Nokogiri::HTML(html)
+    selector = "div.note.alert > .note--title"
+
+    expect(html.css(selector).text).to eql("Alert")
+    expect(html.css("#{selector} + p").text).to eql("This is just an alert")
   end
 
   it "renders regular block quotes" do
@@ -66,7 +80,7 @@ describe Kitabu::Markdown do
 
     html = Nokogiri::HTML(html)
 
-    expect(html.css(".alert").count).to eql(0)
+    expect(html.css(".note").count).to eql(0)
     expect(html.css("blockquote").text.chomp).to eql("This is just a quote")
   end
 end

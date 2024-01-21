@@ -19,14 +19,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ["2.7", "3.0", "3.1"]
+        ruby: ["3.2", "3.3"]
         gemfile:
           - Gemfile
 
     steps:
       - name: Update deps
         run: sudo apt update -y
-    
+
       - name: Install deps
         run: sudo apt install -y calibre gdebi
 

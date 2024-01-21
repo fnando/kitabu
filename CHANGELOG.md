@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.0.4
+
+- Add support for
+  [Github's alert syntax](https://github.com/orgs/community/discussions/16925).
+  Kitabu's implementation supports any arbitrary name, so you can use anything
+  (e.g. `[!ALERT]`).
+
 ## v3.0.3
 
 - Fix Rouge options keys; symbols are required.

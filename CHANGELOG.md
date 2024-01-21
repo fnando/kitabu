@@ -1,6 +1,11 @@
 # Changelog
 
-## v3.0.4
+## unreleased
+
+- Add `before_markdown_render` and `after_markdown_render` hooks, allowing
+  content manipulation.
+
+## v3.1.0
 
 - Add support for
   [Github's alert syntax](https://github.com/orgs/community/discussions/16925).

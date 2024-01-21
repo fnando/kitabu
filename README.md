@@ -26,7 +26,7 @@ starting at \$15/mo.
 
 ## Installation
 
-To install Kitabu, you'll need a working Ruby 2.7+ installation. If you're cool
+To install Kitabu, you'll need a working Ruby 3.2+ installation. If you're cool
 with it, just run the following command to install it.
 
     gem install kitabu

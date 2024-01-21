@@ -44,4 +44,29 @@ describe Kitabu::Markdown do
       TEXT
     end.not_to raise_error
   end
+
+  it "renders alert boxes using block quotes" do
+    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
+    > [!NOTE]
+    >
+    > This is just a note
+    TEXT
+
+    html = Nokogiri::HTML(html)
+    selector = "div.alert.alert--note > .alert--title"
+
+    expect(html.css(selector).text).to eql("Note")
+    expect(html.css("#{selector} + p").text).to eql("This is just a note")
+  end
+
+  it "renders regular block quotes" do
+    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
+    > This is just a quote
+    TEXT
+
+    html = Nokogiri::HTML(html)
+
+    expect(html.css(".alert").count).to eql(0)
+    expect(html.css("blockquote").text.chomp).to eql("This is just a quote")
+  end
 end

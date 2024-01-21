@@ -5,6 +5,34 @@ module Kitabu
     class Renderer < Redcarpet::Render::HTML
       include Redcarpet::Render::SmartyPants
       include Rouge::Plugins::Redcarpet
+
+      ALERT_MARK = /^\[!(?<type>NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]$/
+
+      # Support alert boxes just like github.
+      # https://github.com/orgs/community/discussions/16925
+      def block_quote(quote)
+        html = Nokogiri::HTML(quote)
+        element = html.css("body > :first-child").first
+
+        matches = element.text.match(ALERT_MARK)
+
+        return "<blockquote>#{quote}</blockquote>" unless matches
+
+        element.remove
+
+        title = I18n.t(
+          matches[:type],
+          scope: :alerts,
+          default: matches[:type].titleize
+        )
+
+        <<~HTML.strip_heredoc
+          <div class="alert alert--#{matches[:type].downcase}">
+            <p class="alert--title">#{title}</p>
+            #{html.css('body').inner_html}
+          </div>
+        HTML
+      end
     end
 
     class << self

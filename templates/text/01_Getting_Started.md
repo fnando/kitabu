@@ -4,7 +4,7 @@ This guide is designed for beginners who want to get started with Kitabu from
 scratch. However, to get the most out of it, you need to have some prerequisites
 installed:
 
-- The [Ruby](http://ruby-lang.org) interpreter version 2.7 or newer.
+- The [Ruby](http://ruby-lang.org) interpreter version 3.2 or newer.
 - The [PrinceXML](http://princexml.com) converter version 14.0 or newer.
 
 ### Installing Ruby

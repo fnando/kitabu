@@ -10,7 +10,7 @@ module Kitabu
       end
 
       def to_html
-        data = OpenStruct.new(navigation: navigation).instance_eval { binding }
+        data = OpenStruct.new(navigation:).instance_eval { binding }
         ERB.new(template).result(data)
       end
 

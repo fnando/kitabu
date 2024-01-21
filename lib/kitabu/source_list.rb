@@ -8,7 +8,7 @@ module Kitabu
 
     # Files that should be skipped.
     #
-    IGNORE_FILES = /^(CHANGELOG|TOC)\..*?$/.freeze
+    IGNORE_FILES = /^(CHANGELOG|TOC)\..*?$/
 
     # List of recognized extensions.
     #
@@ -37,7 +37,7 @@ module Kitabu
       if File.file?(entry)
         [entry]
       else
-        Dir["#{entry}/**/*.{#{EXTENSIONS.join(',')}}"].sort
+        Dir["#{entry}/**/*.{#{EXTENSIONS.join(',')}}"]
       end
     end
 

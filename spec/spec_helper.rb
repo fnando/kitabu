@@ -13,7 +13,7 @@ require "pathname"
 SPECDIR = Pathname.new(File.dirname(__FILE__))
 TMPDIR = SPECDIR.join("tmp")
 
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each {|r| require r }
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|r| require r }
 
 p [
   :filter_env,
@@ -47,7 +47,7 @@ RSpec.configure do |config|
 
   cleaner = proc do
     [TMPDIR, SPECDIR.join("support/mybook/output")].each do |i|
-      FileUtils.rm_rf(i) if File.exist?(i)
+      FileUtils.rm_rf(i)
     end
 
     Dir.chdir File.expand_path("..", __dir__)

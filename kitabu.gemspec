@@ -16,11 +16,10 @@ Gem::Specification.new do |s|
                             "supports EPUB, Mobi, Text and HTML generation."
   s.description           = s.summary
   s.license               = "MIT"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.2"
   s.metadata = {"rubygems_mfa_required" => "true"}
 
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map do |f|
     File.basename(f)
   end

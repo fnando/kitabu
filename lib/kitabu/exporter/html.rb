@@ -73,7 +73,7 @@ module Kitabu
           Footnotes::HTML.process(toc.content).html.css("body").first.inner_html
 
         locals = config.merge(
-          content: content,
+          content:,
           toc: toc.to_html,
           changelog: render_changelog
         )

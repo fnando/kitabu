@@ -7,7 +7,7 @@ module Kitabu
         @sections ||=
           html.css("div.chapter").each_with_index.map do |chapter, index|
             OpenStruct.new(
-              index: index,
+              index:,
               filename: "section_#{index}.html",
               filepath: tmp_dir.join("section_#{index}.html").to_s,
               html: Nokogiri::HTML(chapter.inner_html)
@@ -114,7 +114,7 @@ module Kitabu
       end
 
       def render_chapter(content)
-        locals = config.merge(content: content)
+        locals = config.merge(content:)
         render_template(template_path, locals)
       end
 
@@ -130,7 +130,7 @@ module Kitabu
         path =
           Dir[root_dir.join("templates/epub/cover.{jpg,png,gif}").to_s].first
 
-        return path if path && File.exist?(path)
+        path if path && File.exist?(path)
       end
 
       def navigation

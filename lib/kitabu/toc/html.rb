@@ -61,9 +61,9 @@ module Kitabu
       #
       def to_hash
         {
-          content: content,
+          content:,
           html: to_html,
-          toc: toc
+          toc:
         }
       end
 

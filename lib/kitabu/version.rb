@@ -5,6 +5,6 @@ module Kitabu
     MAJOR = 3
     MINOR = 0
     PATCH = 3
-    STRING = "#{MAJOR}.#{MINOR}.#{PATCH}"
+    STRING = "#{MAJOR}.#{MINOR}.#{PATCH}".freeze
   end
 end

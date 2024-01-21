@@ -31,7 +31,7 @@ module Matchers
 
       if input.respond_to?(:body)
         engine.parse(input.body.to_s)
-      elsif Nokogiri::XML::Element == input
+      elsif input == Nokogiri::XML::Element
         input
       else
         engine.parse(input.to_s)

@@ -56,4 +56,5 @@ RSpec.configure do |config|
   config.before(&cleaner)
   config.after(&cleaner)
   config.before { FileUtils.mkdir_p(TMPDIR) }
+  config.before { Kitabu.hooks.clear }
 end

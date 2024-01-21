@@ -184,7 +184,7 @@ To highlight code, use fenced code blocks.
 
 You can even provide options:
 
-    ```php?start_inline=1&line_numbers=1
+    ```php?start_line=1&line_numbers=1
     echo "Hello World";
     ```
 
@@ -205,6 +205,24 @@ The following Redcarpet options are enabled:
 - `strikethrough`
 - `superscript`
 - `tables`
+
+### Hooks
+
+There are a few hooks that allows manipulating the content. You can use
+`before_markdown_render` and `after_markdown_render`. You can add such hooks to
+your `config/helpers.rb` file.
+
+```ruby
+Kitabu.add_hook(:before_markdown_render) do |markdown|
+  # manipulate content and return it.
+  markdown
+end
+
+Kitabu.add_hook(:after_markdown_render) do |html|
+  # manipulate content and return it.
+  html
+end
+```
 
 ### Using custom fonts
 

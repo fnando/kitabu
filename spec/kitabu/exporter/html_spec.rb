@@ -6,6 +6,27 @@ describe Kitabu::Exporter::HTML do
   let(:root) { SPECDIR.join("support/mybook") }
   let(:format) { described_class.new(root) }
 
+  context "hooks" do
+    let(:file) { SPECDIR.join("support/mybook/output/mybook.html") }
+    let(:html) { File.read(file) }
+
+    it "calls before markdown render hook" do
+      index = 0
+
+      Kitabu.add_hook(:after_markdown_render) do |_content|
+        index += 1
+        "<p>after #{index}</p>"
+      end
+
+      format.export
+
+      expect(html).to have_tag("p", "after 1")
+      expect(html).to have_tag("p", "after 2")
+      expect(html).to have_tag("p", "after 3")
+      expect(html).to have_tag("p", "after 4")
+    end
+  end
+
   context "when generating HTML" do
     let(:file) { SPECDIR.join("support/mybook/output/mybook.html") }
     let(:html) { File.read(file) }

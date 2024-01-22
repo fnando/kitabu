@@ -4,6 +4,7 @@
 
 - Add `before_markdown_render` and `after_markdown_render` hooks, allowing
   content manipulation.
+- Add link anchor on each title.
 
 ## v3.1.0
 

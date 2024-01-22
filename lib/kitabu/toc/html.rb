@@ -29,6 +29,8 @@ module Kitabu
           end
 
           tag.set_attribute("id", permalink)
+          tag["tabindex"] = "-1"
+          tag.prepend_child %[<a class="anchor" href="##{permalink}" aria-hidden="true" tabindex="-1"></a>]
         end
 
         html.css("body").first.inner_html

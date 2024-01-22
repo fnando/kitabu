@@ -72,4 +72,8 @@ describe Kitabu::TOC::HTML do
     expect(content).to have_tag("h2#title", regexp("Title"))
     expect(content).to have_tag("h2#title-2", regexp("Title"))
   end
+
+  it "adds content link" do
+    expect(content).to have_tag("h1#item-1 > a[href='#item-1'][tabindex='-1']")
+  end
 end

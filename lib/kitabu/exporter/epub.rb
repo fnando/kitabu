@@ -6,11 +6,13 @@ module Kitabu
       def sections
         @sections ||=
           html.css("div.chapter").each_with_index.map do |chapter, index|
+            html = Nokogiri::HTML(chapter.inner_html)
+
             OpenStruct.new(
               index:,
               filename: "section_#{index}.html",
               filepath: tmp_dir.join("section_#{index}.html").to_s,
-              html: Nokogiri::HTML(chapter.inner_html)
+              html:
             )
           end
       end
@@ -25,13 +27,20 @@ module Kitabu
 
       def export
         super
+
         copy_styles!
         copy_images!
+        File.open(root_dir.join("output/epub/cover.html"), "w") do |io|
+          io << render_template(
+            root_dir.join("templates/epub/cover.erb"),
+            config
+          )
+        end
         set_metadata!
         write_sections!
         write_toc!
 
-        epub.files    sections.map(&:filepath) + assets
+        epub.files sections.map(&:filepath) + assets
         epub.nav      navigation
         epub.toc_page toc_path
 
@@ -44,7 +53,8 @@ module Kitabu
       end
 
       def copy_styles!
-        copy_directory("output/styles", "output/epub/styles")
+        copy_files("output/styles/epub.css", "output/epub/styles")
+        copy_files("output/styles/files/*.css", "output/epub/styles")
       end
 
       def copy_images!
@@ -60,6 +70,10 @@ module Kitabu
         epub.uid          config[:uid]
         epub.identifier   config[:identifier][:id],
                           scheme: config[:identifier][:type]
+
+        # epubchecker complains when assigning an image directly,
+        # but if we don't, then Apple Books doesn't render the cover.
+        # Need to investigate some more.
         epub.cover_page   cover_image if cover_image && File.exist?(cover_image)
       end
 
@@ -91,6 +105,22 @@ module Kitabu
             link.set_attribute("href", links.fetch(href, href))
           end
 
+          # Normalize <ol>
+          #
+          section.html.css("ol[start]").each do |node|
+            node.remove_attribute("start")
+          end
+
+          # Remove anchors (only useful for html exports).
+          #
+          section.html.css("a.anchor").each(&:remove)
+
+          # Remove tabindex (only useful for html exports).
+          #
+          section.html.css("[tabindex]").each do |node|
+            node.remove_attribute("tabindex")
+          end
+
           # Replace all srcs.
           #
           section.html.css("[src]").each do |element|
@@ -120,26 +150,53 @@ module Kitabu
 
       def assets
         @assets ||= begin
-          assets = Dir[root_dir.join("templates/epub/*.css")]
+          assets = Dir[root_dir.join("output/epub/styles/**/*.css")]
           assets += Dir[root_dir.join("images/**/*.{jpg,png,gif}")]
           assets
         end
       end
 
       def cover_image
-        path =
-          Dir[root_dir.join("templates/epub/cover.{jpg,png,gif}").to_s].first
+        path = Dir[root_dir.join("output/epub/images/cover.{jpg,png,gif}").to_s]
+               .first
 
         path if path && File.exist?(path)
       end
 
       def navigation
-        sections.map do |section|
-          {
-            label: section.html.css(":first-child").text,
-            content: section.filename
-          }
+        klass = Struct.new(:level, :data, :parent, keyword_init: true)
+
+        root = klass.new(level: 1, data: {nav: []})
+        current = root
+
+        sections.each do |section|
+          section.html.css("h2, h3, h4, h5, h6").each do |node|
+            label = CGI.escape_html(node.text.strip)
+            level = node.name[1].to_i
+
+            data = {
+              label:,
+              content: "#{section.filename}##{node.attributes['id']}",
+              nav: []
+            }
+
+            if level > current.level
+              current = klass.new(level:, data:, parent: current)
+            elsif level == current.level
+              current = klass.new(level:, data:, parent: current.parent)
+            else
+              while current.parent && current.parent.level >= level
+                current = current.parent
+              end
+
+              current = klass.new(level:, data:, parent: current.parent)
+            end
+
+            current.parent.data[:nav] << data
+          end
         end
+
+        root.data[:nav]
       end
 
       def template_path

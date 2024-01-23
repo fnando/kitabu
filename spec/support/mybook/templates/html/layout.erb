@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="html">
+<html class="html" lang="<%= language %>">
   <head>
     <title><%= title %></title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -9,6 +9,14 @@
     <meta name="keywords" content="<%= keywords %>" />
     <meta name="date" content="<%= published_at %>" />
     <%= highlight_theme('github') %>
+
+    <style type="text/css">
+      :root {
+        --accent-color: <%= accent_color %>;
+      }
+
+      <%= css_translations %>
+    </style>
   </head>
   <body>
     <div class="frontcover container">

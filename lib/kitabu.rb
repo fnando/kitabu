@@ -30,6 +30,7 @@ module Kitabu
 
   require "kitabu/extensions/string"
   require "kitabu/extensions/rouge"
+  require "kitabu/extensions/eeepub"
   require "kitabu/errors"
   require "kitabu/version"
   require "kitabu/generator"

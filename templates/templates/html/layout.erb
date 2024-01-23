@@ -1,14 +1,21 @@
 <!doctype html>
-<html class="html">
+<html lang="<%= language %>">
   <head>
     <title><%= title %></title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <link name="stylesheet" rel="stylesheet" type="text/css" href="styles/html.css" />
+    <link rel="stylesheet" type="text/css" href="styles/html.css" />
     <meta name="author" content="<%= authors.join(', ') %>" />
     <meta name="subject" content="<%= subject %>" />
     <meta name="keywords" content="<%= keywords %>" />
     <meta name="date" content="<%= published_at %>" />
     <%= highlight_theme %>
+    <style type="text/css">
+      :root {
+        --accent-color: <%= accent_color %>;
+      }
+
+      <%= css_translations %>
+    </style>
   </head>
 
   <body>
@@ -23,7 +30,7 @@
     <div class="white-page"></div>
 
     <div class="table-of-contents">
-      <h2 class="no-toc">Contents</h2>
+      <h2 class="no-toc"><%= I18n.t(:content) %></h2>
       <div id="toc">
         <%= toc %>
       </div>

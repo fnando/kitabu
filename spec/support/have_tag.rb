@@ -78,7 +78,7 @@ module Matchers
       elements.select do |el|
         next(el.inner_text =~ options[:text]) if options[:text].is_a?(Regexp)
 
-        el.inner_text == options[:text]
+        el.inner_text.strip == options[:text]
       end
     end
 

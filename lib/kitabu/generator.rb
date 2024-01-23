@@ -35,6 +35,10 @@ module Kitabu
       template "config.erb", "config/kitabu.yml"
     end
 
+    def copy_i18n_file
+      copy_file "en.yml", "config/locales/en.yml"
+    end
+
     def copy_helper_file
       copy_file "helper.rb", "config/helper.rb"
     end

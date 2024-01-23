@@ -5,6 +5,8 @@
 - Add `before_markdown_render` and `after_markdown_render` hooks, allowing
   content manipulation.
 - Add link anchor on each title.
+- Improve epub final file (better table of contents, less epubcheck errors, CSS
+  localization, and more).
 
 ## v3.1.0
 

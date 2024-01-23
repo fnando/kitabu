@@ -1,3 +1,4 @@
+---
 # The book's title. Will be used everywhere!
 title: "Testing Kitabu"
 
@@ -22,13 +23,15 @@ publisher: "John Doe"
 published_at: "2010-12-19"
 
 # Some book description.
-subject: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+subject:
+  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua."
 
 # Some keywords that identify this book.
 keywords: "demo, book, pdf, epub, kitabu, textile, html, markdown"
 
 # Some unique identification. Works great with your domain
-# like `http://yourbook.example.com`.
+# like `yourbook.example.com`.
 uid: "MFXx9nj7uz"
 
 # Your book identification like ISBN or ISSN.

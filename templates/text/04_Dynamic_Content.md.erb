@@ -15,28 +15,6 @@ created a helper that looks like this:
 To use it, I just needed to add `<%%= lexers_list %>` to my text file. This
 allows you to create anything you need!
 
-Kitabu comes with some built-in helpers, such as `note`. With this helper, you
-can create a note that generates a HTML structure, so you can easily style it.
-The syntax for using the `note` helper is `note(type, &block)`.
-
-```erb
-<%% note do %>
-  Some text that will be parsed as Markdown.
-<%% end %>
-```
-
-By default, this will generate a `<div class="note info">` tag, but you can use
-anything you want.
-
-```erb
-<%% note :warning do %>
-  Some text that will be parsed as Markdown.
-<%% end %>
-```
-
-[Check out the source](https://github.com/fnando/kitabu/blob/cleanup/lib/kitabu/helpers.rb)
-for a sample on how to create block helpers like `note`.
-
 ### Escaping ERb code
 
 If you want to write a book about Rails, you're likely to use lots of ERb tags.

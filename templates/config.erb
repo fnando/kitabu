@@ -1,3 +1,4 @@
+---
 # The book's title. Will be used everywhere!
 title: "Kitabu"
 
@@ -28,12 +29,12 @@ subject: "This guide will help you understand how all of the pieces fit together
 keywords: "kitabu, e-book, calibre, epub, mobi, pdf, prince"
 
 # Some unique identification. Works great with your domain
-# like `http://yourbook.example.com`.
+# like `yourbook.example.com`.
 uid: "<%= @uid %>"
 
 # Your book identification like ISBN or ISSN.
 identifier:
-  id: "http://yourbook.example.com"
+  id: "https://yourbook.example.com"
   type: "URL" # can be ISBN, ISSN or URL
 
 # This book authors.
@@ -42,3 +43,7 @@ authors:
 
 # Syntax highlight theme. Can be any of supported by Rouge.
 theme: github
+
+# Accent color. This will be set as a CSS variable, so you can use it on all
+# CSS files like `color: var(--accent-color)`.
+accent_color: "#5091b1"

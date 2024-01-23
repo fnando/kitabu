@@ -32,12 +32,11 @@ module Kitabu
     end
 
     desc "export [OPTIONS]", "Export e-book"
-    method_option :only, type: :string,
-                         desc: "Can be one of: #{FORMATS.join(', ')}"
-    method_option :open, type: :boolean,
-                         desc: "Automatically open PDF (Preview.app for " \
-                               "Mac OS X and xdg-open for Linux)"
-
+    option :only, type: :string,
+                  desc: "Can be one of: #{FORMATS.join(', ')}"
+    option :open, type: :boolean,
+                  desc: "Automatically open PDF (Preview.app for " \
+                        "Mac OS X and xdg-open for Linux)"
     def export
       if options[:only] && !FORMATS.include?(options[:only])
         raise Error,

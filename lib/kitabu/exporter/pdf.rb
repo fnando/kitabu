@@ -17,9 +17,9 @@ module Kitabu
       end
 
       def create_html_file(target, html, class_name)
-        html.css("html").first.set_attribute "class", class_name
+        html.css("body").first.set_attribute "class", class_name
         html
-          .css("link[name=stylesheet]")
+          .css("link[rel=stylesheet]")
           .first
           .set_attribute "href", "styles/#{class_name}.css"
 

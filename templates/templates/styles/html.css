@@ -30,6 +30,11 @@ li code {
   font-size: 13px;
 }
 
+.two-columns {
+  columns: 2;
+  gap: 50px;
+}
+
 /* Format cover page. */
 .frontcover {
   background: var(--cover-color);
@@ -125,33 +130,68 @@ div.highlight pre {
   float: right;
   overflow: hidden;
   position: relative;
-  padding-left: 50px;
+  padding: 10px 20px 10px 50px;
   margin: 30px 0;
+  border-left: 5px solid transparent;
 }
 
-.note:before {
+.note--title:before {
   content: "!";
   display: inline-block;
-  font-size: 25px;
+  font-weight: bold;
   width: 10px;
   height: 10px;
-  padding: 15px;
-  line-height: 15px;
+  padding: 5px;
+  line-height: 1;
   text-align: center;
-  border-radius: 50%;
-  border-bottom-right-radius: 0;
-  position: absolute;
-  top: 5px;
-  left: 0;
+  border-radius: 3px;
+  margin-left: -30px;
+  margin-right: 10px;
 }
 
-.note.info:before {
+.note--title {
+  font-weight: bold;
+}
+
+.note.info {
+  border-left-color: #f5be28;
+  background: rgba(245, 190, 40, 0.1);
+}
+
+.note.info .note--title {
+  color: #8a6b18;
+}
+
+.note.info .note--title:before {
   background: #f5be28;
   color: #fff;
 }
 
-.note.warning:before {
+.note.warning {
+  border-left-color: #e42e24;
+  background: rgba(228, 46, 36, 0.1);
+}
+
+.note.warning .note--title {
+  color: #e42e24;
+}
+
+.note.warning .note--title:before {
   background: #e42e24;
+  color: #fff;
+}
+
+.note.tip {
+  border-left-color: #2242d3;
+  background: rgba(34, 66, 211, 0.1);
+}
+
+.note.tip .note--title {
+  color: #2242d3;
+}
+
+.note.tip .note--title:before {
+  background: #2242d3;
   color: #fff;
 }
 
@@ -159,8 +199,6 @@ div.highlight pre {
 .lexers {
   margin: 0;
   padding: 0;
-  columns: 2;
-  gap: 50px;
 }
 
 .lexers li {
@@ -199,41 +237,72 @@ div.highlight pre {
   border-bottom: 1px solid #eee;
 }
 
-.table-of-contents .level2 {
-  counter-increment: toc-level2;
-  counter-reset: toc-level3;
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.table-of-contents .level2 a {
-  text-decoration: none;
-  color: #000;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.table-of-contents .level2:before {
-  content: var(--chapter-text) " " counter(toc-level2);
-  font-size: 13px;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: #aaa;
-  display: block;
-}
-
-.table-of-contents .level2 ~ .level2 {
-  margin-top: 40px;
-}
-
 #toc {
-  -webkit-columns: 2;
-  columns: 2;
+  line-height: 1.8;
 }
 
-#toc > div {
-  -webkit-column-break-inside: avoid;
+#toc a {
+  text-decoration: none;
+}
+
+#toc a:hover {
+  text-decoration: underline;
+}
+
+#toc .level1 > li:before {
+  content: counter(item) !important;
+  font-weight: bold;
+  color: inherit;
+}
+
+#toc .level1 > li {
   break-inside: avoid-column;
+}
+
+#toc .level1 > li > a {
+  font-weight: bold;
+  color: #222;
+  text-transform: uppercase;
+}
+
+#toc li li a {
+  color: #888;
+}
+
+#toc > ol {
+  columns: 2;
+  gap: 50px;
+}
+
+#toc ol {
+  list-style-type: none;
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+}
+
+#toc ol > li {
+  display: table;
+  counter-increment: item;
+}
+
+#toc li + li {
+  margin-top: 20px;
+}
+
+#toc ol > li:before {
+  content: counters(item, ".") ". ";
+  display: table-cell;
+  padding-right: 0.6em;
+  color: #888;
+}
+
+#toc ol > li ol > li {
+  margin: 0;
+}
+
+#toc li ol > li:before {
+  content: counters(item, ".") " ";
 }
 
 /* Go top */
@@ -255,4 +324,13 @@ div.highlight pre {
 
 .go-top:hover {
   color: #fff;
+}
+
+/* Changelog */
+.changelog:before {
+  content: "\2234";
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  padding: 50px 0;
 }

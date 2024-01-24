@@ -4,7 +4,6 @@ require "active_support/all"
 require "digest/md5"
 require "eeepub"
 require "erb"
-require "logger"
 require "nokogiri"
 require "open3"
 require "optparse"
@@ -49,7 +48,6 @@ module Kitabu
   require "kitabu/footnotes/pdf"
   require "kitabu/hook"
   require "kitabu/toc/html"
-  require "kitabu/toc/html/stream"
   require "kitabu/toc/epub"
   require "kitabu/dependency"
   require "kitabu/stats"
@@ -89,9 +87,5 @@ module Kitabu
     content = File.read(path)
     erb = ERB.new(content).result
     YAML.safe_load(erb).with_indifferent_access
-  end
-
-  def self.logger
-    @logger ||= Logger.new(File.open("/tmp/kitabu.log", "a"))
   end
 end

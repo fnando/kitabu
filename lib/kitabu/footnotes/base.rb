@@ -3,11 +3,8 @@
 module Kitabu
   module Footnotes
     class Base
-      # Set the content that will be modified.
-      attr_accessor :content
-
       # Set the Nokogiri html object.
-      attr_accessor :html
+      attr_reader :html
 
       # Set the footnote index.
       attr_reader :footnote_index
@@ -15,15 +12,13 @@ module Kitabu
       # Process content, fixing footnotes numbering.
       # Returns a string representing the new markup.
       #
-      def self.process(content)
-        footnotes = new(content)
-        footnotes.process
-        footnotes
+      def self.process(html)
+        new(html).process
+        html
       end
 
-      def initialize(content)
-        @content = content
-        @html = Nokogiri::HTML(content)
+      def initialize(html)
+        @html = html
         @footnote_index = 1
       end
 

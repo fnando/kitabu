@@ -1,0 +1,13 @@
+---
+en:
+  table_of_contents: Table of Contents
+  content: Content
+  left_blank: This page intentionally left blank
+  chapter: Chapter
+
+  notes:
+    warning: Warning!
+    note: Just so you know…
+    tip: Here’s a tip!
+    caution: Caution!
+    important: Important!

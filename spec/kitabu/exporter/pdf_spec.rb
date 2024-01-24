@@ -11,8 +11,8 @@ describe Kitabu::Exporter::PDF, prince: Kitabu::Dependency.prince? do
   end
 
   it "creates html with css identifier" do
-    expect(root.join("output/mybook.pdf.html").read).to have_tag("html.pdf")
-    expect(root.join("output/mybook.print.html").read).to have_tag("html.print")
+    expect(root.join("output/mybook.pdf.html").read).to have_tag("body.pdf")
+    expect(root.join("output/mybook.print.html").read).to have_tag("body.print")
   end
 
   it "sets stylesheet for print pdf" do

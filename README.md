@@ -147,29 +147,20 @@ following:
 
     ## This the chapter title
 
-    <% note do %>
-      Make sure you try .md.erb files!
-    <% end %>
+    <%= image_tag "myimage.png" %>
 
 The above content must be placed in a `.md.erb` file. The generated content will
 be something like this:
 
 ```html
-<div class="note info">
-  <p>Make sure you try .md.erb files!</p>
-</div>
+<img src="images/myimage.png" />
 ```
 
-The `note` helper is built-in and can accept a different note type.
-
-```erb
-<% note :warning do %>
-  Make sure you write valid ERB code.
-<% end %>
-```
+You book's helpers can be added to `config/helper.rb`, as this file is loaded
+automatically by kitabu.
 
 You can see available helpers on
-<https://github.com/fnando/kitabu/blob/main/lib/kitabu/markdown.rb>.
+<https://github.com/fnando/kitabu/blob/main/lib/kitabu/helpers.rb>.
 
 ### Syntax Highlighting
 

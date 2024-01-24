@@ -1,8 +1,7 @@
 @import "./files/normalize.css";
 
 :root {
-  --frontcover-color: #5091b1;
-  --frontcover-darker-color: #40748e;
+  --frontcover-color: var(--accent-color);
   --frontcover-padding: 50px;
   --page-height: 22.86cm;
   --page-height: 19.05cm;
@@ -39,7 +38,6 @@
 @page frontcover {
   margin: 0;
   background: var(--frontcover-color);
-  border-left: 50px solid var(--frontcover-darker-color);
 }
 
 @page chapter {
@@ -86,7 +84,7 @@ a {
 }
 
 .white-page:before {
-  content: "This page intentionally left blank";
+  content: var(--left-blank-text);
   text-transform: uppercase;
   position: absolute;
   left: 0;
@@ -173,7 +171,7 @@ a {
 }
 
 .chapter > h2:before {
-  content: "Chapter " counter(chapter);
+  content: var(--chapter-text) " " counter(chapter);
   display: block;
   font-size: 18px;
   text-transform: uppercase;
@@ -202,23 +200,23 @@ li code {
 }
 
 /* Format lexers list */
-.lexers-list {
+.lexers {
   margin: 0;
   padding: 0;
   columns: 2;
   list-style: none;
+  gap: 50px;
 }
 
-.lexers-list li {
-  -webkit-column-break-inside: avoid;
+.lexers li {
   break-inside: avoid-column;
 }
 
-.lexers-list span {
+.lexers span {
   font-size: 13px;
 }
 
-.lexers-list li + li {
+.lexers li + li {
   margin-top: 15px;
 }
 

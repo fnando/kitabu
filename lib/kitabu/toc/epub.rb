@@ -10,8 +10,28 @@ module Kitabu
       end
 
       def to_html
-        data = OpenStruct.new(navigation:).instance_eval { binding }
+        data = OpenStruct
+               .new(navigation:, helpers: self)
+               .instance_eval { binding }
         ERB.new(template).result(data)
+      end
+
+      def render_navigation(nav)
+        return if nav.empty?
+
+        html = []
+        html << "<ol>"
+
+        nav.each do |item|
+          html << "<li>"
+          html << %[<a href="#{item[:content]}">#{item[:label]}</a>]
+          html << render_navigation(item[:nav]) if item[:nav].any?
+          html << "</li>"
+        end
+
+        html << "</ol>"
+
+        html.join
       end
 
       def template
@@ -23,17 +43,11 @@ module Kitabu
               <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
               <link rel="stylesheet" type="text/css" href="epub.css"/>
               <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-              <title>Table of Contents</title>
+              <title><%= I18n.t(:table_of_contents, default: "Table of Contents") %></title>
             </head>
             <body>
               <div id="toc">
-                <ul>
-                  <% navigation.each do |nav| %>
-                    <li>
-                      <a href="<%= nav[:content] %>"><%= nav[:label] %></a>
-                    </li>
-                  <% end %>
-                </ul>
+                <%= helpers.render_navigation(navigation) %>
               </div>
             </body>
           </html>

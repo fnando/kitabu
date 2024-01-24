@@ -12,6 +12,11 @@ module Kitabu
       attr_accessor :source
 
       def self.export(root_dir)
+        I18n.backend.eager_load!
+        I18n.load_path += Dir[
+          root_dir.join("config/locales/**/*.{yml,rb}").to_s
+        ]
+
         new(root_dir).export
       end
 
@@ -65,6 +70,15 @@ module Kitabu
       def handle_error(error)
         ui.say "#{error.class}: #{error.message}", :red
         ui.say error.backtrace.join("\n"), :white
+      end
+
+      def copy_files(source, target)
+        target = root_dir.join(target)
+        FileUtils.mkdir_p root_dir.join(target)
+
+        Dir[root_dir.join(source)].each do |path|
+          FileUtils.cp path, target
+        end
       end
 
       def copy_directory(source, target)

@@ -2,6 +2,25 @@
 
 module Kitabu
   module Helpers
+    def css_translations
+      backend = I18n.backend.translations
+
+      translations =
+        backend.each_with_object([]) do |(lang, dict), buffer|
+          buffer << ":root[lang='#{lang}'] {"
+
+          dict.each do |key, value|
+            next unless value.is_a?(String) && value.lines.count == 1
+
+            buffer << "--#{key.to_s.tr('_', '-')}-text: #{value.inspect};"
+          end
+
+          buffer << "}"
+        end
+
+      translations.join("\n")
+    end
+
     def highlight_theme(name = theme)
       html = '<style type="text/css">'
       html << Rouge::Theme.find(name).render(scope: ".highlight")
@@ -19,7 +38,20 @@ module Kitabu
 
     def note(class_name = :info, &block)
       content = block_content(block)
-      output << ('<div class="note %s">' % escape_html(class_name)) # rubocop:disable Style/FormatString
+      type = class_name.to_s
+      title = I18n.t(
+        type,
+        scope: :notes,
+        default: type.titleize
+      )
+      output << format(
+        '<div class="note %{type}">',
+        type: escape_html(class_name)
+      )
+      output << format(
+        '<p class="note--title">%{title}</p>',
+        title: escape_html(title)
+      )
       output << markdown(content)
       output << "</div>"
     end

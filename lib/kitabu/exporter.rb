@@ -34,9 +34,11 @@ module Kitabu
       exported << Epub.export(root_dir) if export_epub
       exported << Mobi.export(root_dir) if export_mobi && Dependency.calibre?
 
+      time = Time.now.strftime("%Y-%m-%dT%H:%M:%S")
+
       if exported.all?
         color = :green
-        message = options[:auto] ? "exported!" : "=> e-book has been exported"
+        message = "[#{time}] e-book has been exported"
 
         if options[:open] && export_pdf
           filepath = root_dir.join("output/#{File.basename(root_dir)}.pdf")
@@ -51,11 +53,7 @@ module Kitabu
         end
       else
         color = :red
-        message = if options[:auto]
-                    "could not be exported!"
-                  else
-                    "=> e-book couldn't be exported"
-                  end
+        message = "[#{time}] => e-book couldn't be exported"
       end
 
       ui.say message, color

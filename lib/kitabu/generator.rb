@@ -30,7 +30,7 @@ module Kitabu
 
     def copy_config_file
       @name = full_name
-      @uid = Digest::MD5.hexdigest("#{Time.now}--#{rand}")
+      @uid = SecureRandom.uuid
       @year = Date.today.year
       template "config.erb", "config/kitabu.yml"
     end

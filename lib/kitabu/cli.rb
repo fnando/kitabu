@@ -93,18 +93,34 @@ module Kitabu
       inside_ebook!
 
       html = Kitabu::Exporter::HTML.new(root_dir).content
-      toc = Kitabu::TOC::HTML.generate(html)
+      toc = Kitabu::TOC::HTML.generate(Nokogiri::HTML(html))
 
-      toc.toc.each do |options|
-        level = options[:level] - 1
-        title = " #{options[:text]}: "
-        permalink = "##{options[:permalink]}"
+      renderer = lambda do |hierarchy, level = 1|
+        hierarchy.each do |entry|
+          title = " #{entry[:label]}: "
+          permalink = "##{entry[:content]}"
 
-        text = "*" * level
-        text << color(title, :blue)
-        text << color(permalink, :yellow)
-        say(text)
+          text = "*" * level
+          text << color(title, :blue)
+          text << color(permalink, :yellow)
+          say(text)
+
+          renderer.call(entry[:hierarchy], level + 1) if entry[:hierarchy].any?
+        end
       end
+
+      renderer.call(toc.hierarchy)
+
+      # toc.hierarchy.each do |options|
+      #   level = options[:level] - 1
+      #   title = " #{options[:text]}: "
+      #   permalink = "##{options[:permalink]}"
+
+      #   text = "*" * level
+      #   text << color(title, :blue)
+      #   text << color(permalink, :yellow)
+      #   say(text)
+      # end
     end
 
     desc "stats", "Display some stats about your e-book"

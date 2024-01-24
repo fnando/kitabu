@@ -2,7 +2,7 @@
 
 require "active_support/all"
 require "digest/md5"
-require "eeepub"
+require "epub"
 require "erb"
 require "nokogiri"
 require "open3"
@@ -29,7 +29,6 @@ module Kitabu
 
   require "kitabu/extensions/string"
   require "kitabu/extensions/rouge"
-  require "kitabu/extensions/eeepub"
   require "kitabu/errors"
   require "kitabu/version"
   require "kitabu/generator"

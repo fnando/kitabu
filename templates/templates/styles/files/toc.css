@@ -1,0 +1,68 @@
+/* Table of contents */
+#toc {
+  line-height: 1.8;
+}
+
+#toc a {
+  text-decoration: none;
+}
+
+#toc a:hover {
+  text-decoration: underline;
+}
+
+#toc .level1 > li:before {
+  content: counter(item) !important;
+  font-weight: bold;
+  color: inherit;
+}
+
+#toc .level1 > li {
+  break-inside: avoid-column;
+}
+
+#toc .level1 > li > a {
+  font-weight: bold;
+  color: #222;
+  text-transform: uppercase;
+}
+
+#toc li li a {
+  color: #888;
+}
+
+#toc > ol {
+  columns: 2;
+  gap: 50px;
+}
+
+#toc ol {
+  list-style-type: none;
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+}
+
+#toc ol > li {
+  display: table;
+  counter-increment: item;
+}
+
+#toc li + li {
+  margin-top: 20px;
+}
+
+#toc ol > li:before {
+  content: counters(item, ".") ". ";
+  display: table-cell;
+  padding-right: 0.6em;
+  color: #888;
+}
+
+#toc ol > li ol > li {
+  margin: 0;
+}
+
+#toc li ol > li:before {
+  content: counters(item, ".") " ";
+}

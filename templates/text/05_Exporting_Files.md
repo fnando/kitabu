@@ -50,9 +50,11 @@ $ bundle exec guard
 
 ### Exporting PDF with DocRaptor
 
-After exporting your files (you can use `--only pdf` for this), upload files to
-somewhere public, possibly your [Dropbox](http://dropbox.com) account. You can
-even use curl; since the command is quite long, you can view it at
-<https://gist.github.com/fnando/de555a08e7aab14a661a>.
+After exporting your files, upload the `output` directory somewhere and make it
+available to the internet. Then you can even use curl to generate the pdf.
+
+The command is fairly long, so I won't try to paste it here. You can see the
+full command on the
+[README of this project](https://github.com/fnando/kitabu#exporting-pdfs-with-docraptor).
 
 [^1]: Depend on Prince and Calibre being available on your `$PATH`.

@@ -8,7 +8,7 @@ shared_examples_for "e-book" do
   end
 
   it "creates images directory" do
-    expect(mybook.join("images")).to be_directory
+    expect(mybook.join("images/cover.png")).to be_file
   end
 
   it "creates text directory" do
@@ -61,7 +61,6 @@ shared_examples_for "e-book" do
 
   it "copies epub template files" do
     expect(mybook.join("templates/epub/cover.erb")).to be_file
-    expect(mybook.join("templates/epub/cover.png")).to be_file
     expect(mybook.join("templates/epub/page.erb")).to be_file
   end
 end

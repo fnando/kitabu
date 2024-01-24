@@ -2,6 +2,9 @@
 # The book's title. Will be used everywhere!
 title: "Kitabu"
 
+# The book's subtitle. Optional.
+subtitle: "Everything you need to know to get started!"
+
 # The book's language.
 language: en
 
@@ -28,22 +31,32 @@ subject: "This guide will help you understand how all of the pieces fit together
 # Some keywords that identify this book.
 keywords: "kitabu, e-book, calibre, epub, mobi, pdf, prince"
 
-# Some unique identification. Works great with your domain
-# like `yourbook.example.com`.
-uid: "<%= @uid %>"
+# Your book's unique id. Must be a uuidv4 string.
+id: <%= @uid %>
 
-# Your book identification like ISBN or ISSN.
-identifier:
-  id: "https://yourbook.example.com"
-  type: "URL" # can be ISBN, ISSN or URL
+# The epub's identifier schemes. Must be a list of URN strings.
+#
+# URNs look like:
+#
+# - UUID: `urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809`
+# - ISBN: `urn:isbn:9780000000001`
+# - DOI: `doi:10.1016/j.iheduc.2008.03.001`
+# - JDCN: `915869090000000000DD`
+#
+# http://idpf.github.io/epub-registries/identifiers/identifiers.html
+#
+identifiers: []
 
-# This book authors.
-authors:
+# This book's authors.
+creators:
   - "<%= @name %>"
+
+# This book's contributors.
+contributors: []
 
 # Syntax highlight theme. Can be any of supported by Rouge.
 theme: github
 
 # Accent color. This will be set as a CSS variable, so you can use it on all
 # CSS files like `color: var(--accent-color)`.
-accent_color: "#5091b1"
+accent_color: "#0089F0"

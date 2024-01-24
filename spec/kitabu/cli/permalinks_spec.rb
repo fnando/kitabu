@@ -4,12 +4,23 @@ require "spec_helper"
 
 describe Kitabu::Cli do
   context "while running permalinks" do
-    it "recognizes command" do
-      Dir.chdir SPECDIR.join("support/mybook")
+    before { Dir.chdir SPECDIR.join("support/mybook") }
 
+    it "recognizes command" do
       expect do
         capture(:stdout) { Kitabu::Cli.start(["permalinks"]) }
       end.to_not raise_error
+    end
+
+    it "outputs permalinks" do
+      stdout = capture(:stdout) { Kitabu::Cli.start(["permalinks"]) }
+      expected =
+        "* Markdown: #markdown\n" \
+        "* ERB: #erb\n" \
+        "* Some Chapter: #some-chapter\n" \
+        "** Simple > Complex: #simple-complex\n"
+
+      expect(stdout).to eql(expected)
     end
   end
 end

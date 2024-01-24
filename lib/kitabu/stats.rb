@@ -29,7 +29,7 @@ module Kitabu
     end
 
     def footnotes
-      @footnotes ||= html.css("p.footnote").size
+      @footnotes ||= html.css(".footnotes li").size
     end
 
     def links

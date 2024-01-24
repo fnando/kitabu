@@ -50,7 +50,11 @@ module Kitabu
       attr_accessor :default_markdown_options
     end
 
-    self.default_renderer_options = {hard_wrap: false, safe_links_only: true}
+    # We can't use `safe_links_only` because otherwise images with relative path
+    # won't be rendered.
+    #
+    # https://github.com/vmg/redcarpet/issues/554
+    self.default_renderer_options = {hard_wrap: false, safe_links_only: false}
 
     self.default_markdown_options = {
       tables: true,

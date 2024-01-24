@@ -6,12 +6,20 @@ module Kitabu
       def export
         super
         apply_footnotes!
-        spawn_command ["prince", html_for_pdf.to_s, "-o", pdf_file.to_s]
-        spawn_command ["prince", html_for_print.to_s, "-o", print_file.to_s]
+        args = Shellwords.split(ENV.fetch("PRINCEOPT", ""))
+
+        spawn_command(
+          ["prince", *args, html_for_pdf.to_s, "-o", pdf_file.to_s]
+        )
+
+        spawn_command(
+          ["prince", *args, html_for_print.to_s, "-o", print_file.to_s]
+        )
       end
 
       def apply_footnotes!
-        html = Footnotes::PDF.process(html_file.read).html
+        html = Nokogiri::HTML(html_file.read)
+        html = Footnotes::PDF.process(html)
         create_html_file(html_for_print, html, "print")
         create_html_file(html_for_pdf, html, "pdf")
       end

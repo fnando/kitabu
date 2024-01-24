@@ -9,71 +9,80 @@ describe Kitabu::TOC::HTML do
 
   def input
     (+<<-HTML).force_encoding("utf-8")
-      <h1>Item 1</h1>
-      <h2>Item 1.2</h2>
-      <h3>Item 1.1.3</h3>
-      <h4>Item 1.1.1.4</h4>
-      <h5>Item 1.1.1.1.5</h5>
-      <h6>Item 1.1.1.1.1.6</h6>
+      <h2>Item 1</h2>
+      <h3>Item 1.1</h3>
+      <h4>Item 1.1.1</h4>
+      <h5>Item 1.1.1.1</h5>
+      <h6>Item 1.1.1.1.1</h6>
 
-      <h2>Item 2.1</h2>
-      <h2>Item 2.1 again</h2>
+      <h2>Item 2</h2>
+      <h3>Item 2.1</h3>
+      <h4>Item 2.1.1</h4>
+      <h4>Item 2.1.2</h4>
+
+      <h2>Item 3</h2>
       <h2>Internacionalização</h2>
+
+      <!-- Duplicated titles -->
       <h2>Title</h2>
       <h2>Title</h2>
     HTML
   end
 
-  let(:toc) { described_class.generate(input) }
-  let(:html) { toc.to_html }
-  let(:content) { toc.content }
-
-  it "returns hash" do
-    expect(toc.to_hash.keys).to eq(%i[content html toc])
-  end
-
-  it "has no body tag" do
-    expect(content).not_to match(/<body>/)
-  end
+  let(:result) { described_class.generate(Nokogiri::HTML(input)) }
+  let(:toc) { Nokogiri::HTML(result.toc) }
+  let(:html) { result.html }
 
   it "generates toc" do
-    expect(html).to have_tag("div.level1.item-1", regexp("Item 1"))
-    expect(html).to have_tag("div.level2.item-1-2", regexp("Item 1.2"))
-    expect(html).to have_tag("div.level3.item-1-1-3", regexp("Item 1.1.3"))
-    expect(html).to have_tag("div.level4.item-1-1-1-4", regexp("Item 1.1.1.4"))
-    expect(html).to have_tag("div.level5.item-1-1-1-1-5",
-                             regexp("Item 1.1.1.1.5"))
-    expect(html).to have_tag("div.level6.item-1-1-1-1-1-6",
-                             regexp("Item 1.1.1.1.1.6"))
+    paths = {
+      "ol.level1>li:nth-child(1)>a" => "Item 1",
+      "ol.level1>li:nth-child(1) ol.level2 > li:nth-child(1)>a" => "Item 1.1",
+      "ol.level1>li:nth-child(1) ol.level2 ol.level3 > li:nth-child(1)>a" => "Item 1.1.1",
+      "ol.level1>li:nth-child(1) ol.level2 ol.level3 ol.level4 > li:nth-child(1)>a" => "Item 1.1.1.1",
+      "ol.level1>li:nth-child(1) ol.level2 ol.level3 ol.level4 ol.level5 > li:nth-child(1)>a" => "Item 1.1.1.1.1",
 
-    expect(html).to have_tag("div.level2.item-2-1", regexp("Item 2.1"))
-    expect(html).to have_tag("div.level2.item-2-1-again",
-                             regexp("Item 2.1 again"))
+      "ol.level1>li:nth-child(2)>a" => "Item 2",
+      "ol.level1>li:nth-child(2) ol.level2 > li:nth-child(1)>a" => "Item 2.1",
+      "ol.level1>li:nth-child(2) ol.level2 ol.level3 > li:nth-child(1)>a" => "Item 2.1.1",
 
-    expect(html).to have_tag("div.level2.internacionalizacao",
-                             regexp("Internacionalização"))
+      "ol.level1>li:nth-child(3)>a" => "Item 3",
+      "ol.level1>li:nth-child(4)>a[href='#internacionalizacao']" => "Internacionalização",
+      "ol.level1>li:nth-child(5)>a[href='#title']" => "Title",
+      "ol.level1>li:nth-child(6)>a[href='#title-2']" => "Title"
+
+    }
+
+    paths.each do |path, text|
+      expect(toc).to have_tag(path, text)
+    end
   end
 
-  it "adds id attribute to content" do
-    expect(content).to have_tag("h1#item-1", regexp("Item 1"))
-    expect(content).to have_tag("h2#item-1-2", regexp("Item 1.2"))
-    expect(content).to have_tag("h3#item-1-1-3", regexp("Item 1.1.3"))
-    expect(content).to have_tag("h4#item-1-1-1-4", regexp("Item 1.1.1.4"))
-    expect(content).to have_tag("h5#item-1-1-1-1-5", regexp("Item 1.1.1.1.5"))
-    expect(content).to have_tag("h6#item-1-1-1-1-1-6",
-                                regexp("Item 1.1.1.1.1.6"))
+  it "adds ids to original titles" do
+    paths = {
+      "h2#item-1" => "Item 1",
+      "h3#item-1-1" => "Item 1.1",
+      "h4#item-1-1-1" => "Item 1.1.1",
+      "h5#item-1-1-1-1" => "Item 1.1.1.1",
+      "h6#item-1-1-1-1-1" => "Item 1.1.1.1.1",
 
-    expect(content).to have_tag("h2#item-2-1", regexp("Item 2.1"))
-    expect(content).to have_tag("h2#item-2-1-again", regexp("Item 2.1 again"))
+      "h2#item-2" => "Item 2",
+      "h3#item-2-1" => "Item 2.1",
+      "h4#item-2-1-1" => "Item 2.1.1",
+      "h4#item-2-1-2" => "Item 2.1.2",
 
-    expect(content).to have_tag("h2#internacionalizacao",
-                                regexp("Internacionalização"))
+      "h2#item-3" => "Item 3",
+      "h2#internacionalizacao" => "Internacionalização",
+      "h2#title" => "Title",
+      "h2#title-2" => "Title"
 
-    expect(content).to have_tag("h2#title", regexp("Title"))
-    expect(content).to have_tag("h2#title-2", regexp("Title"))
+    }
+
+    paths.each do |path, text|
+      expect(html).to have_tag(path, text)
+    end
   end
 
   it "adds content link" do
-    expect(content).to have_tag("h1#item-1 > a[href='#item-1'][tabindex='-1']")
+    expect(html).to have_tag("h2#item-1 > a[href='#item-1'][tabindex='-1']")
   end
 end

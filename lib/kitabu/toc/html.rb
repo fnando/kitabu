@@ -18,7 +18,7 @@ module Kitabu
         counter = {}
         html = Nokogiri::HTML.parse(content)
         html.search("h1, h2, h3, h4, h5, h6").each do |tag|
-          title = tag.inner_text
+          title = tag.inner_text.strip
           permalink = title.to_permalink
 
           counter[permalink] ||= 0
@@ -54,7 +54,7 @@ module Kitabu
       def tag(node) # :nodoc:
         toc << {
           level: node.name.gsub(/[^\d]/, "").to_i,
-          text: node.text,
+          text: node.text.strip,
           permalink: node["id"]
         }
       end

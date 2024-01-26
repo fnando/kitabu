@@ -275,6 +275,7 @@ curl -H "Content-Type:application/json" -d'{"user_credentials":"YOUR_CREDENTIALS
 
 - Markdown: <http://daringfireball.net/projects/markdown/syntax>
 - Markdown PHP: <https://michelf.ca/projects/php-markdown/extra/>
+- Some PrinceXML tips by the creator himself: <https://css4.pub>
 
 ## Legal Notes
 

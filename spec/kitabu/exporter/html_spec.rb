@@ -47,15 +47,16 @@ describe Kitabu::Exporter::HTML do
     end
 
     it "has several chapters" do
-      expect(html).to have_tag("div.chapter", 3)
+      expect(html).to have_tag("section.chapter", 3)
     end
 
     it "uses config file" do
-      expect(html).to have_tag("div.imprint p", "Copyright (C) 2010 John Doe.")
+      expect(html).to have_tag("section.imprint p",
+                               "Copyright (C) 2010 John Doe.")
     end
 
     it "renders changelog" do
-      expect(html).to have_tag("div.changelog h2", "Revisions")
+      expect(html).to have_tag("section.changelog h2", "Revisions")
     end
 
     it "renders erb" do

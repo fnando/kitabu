@@ -8,78 +8,26 @@ module Kitabu
       Result = Struct.new(:toc, :html, :hierarchy, keyword_init: true)
 
       def self.generate(html)
-        toc = new(html)
+        html = normalize(html)
+        file = Tempfile.new("kitabu")
+        file.write(html.to_s)
+        file.close
 
-        Result.new(toc: toc.to_html, html: toc.html, hierarchy: toc.hierarchy)
+        toc = ::Epub::Navigation.extract_html(
+          [file.path],
+          root_dir: File.dirname(file.path)
+        )
+
+        toc_html = Nokogiri::HTML(toc).css("nav").first
+        toc_html.remove_attribute "epub:type"
+        toc = toc_html.to_s
+
+        Result.new(toc:, html:)
+      ensure
+        file.unlink
       end
 
-      def initialize(html)
-        @html = normalize(html)
-      end
-
-      def hierarchy
-        klass = Struct.new(:level, :data, :parent, keyword_init: true)
-
-        root = klass.new(level: 1, data: {hierarchy: []})
-        current = root
-
-        html.css("h2, h3, h4, h5, h6").each do |node|
-          label = node.text.strip
-          level = node.name[1].to_i
-
-          data = {
-            label:,
-            content: node.attributes["id"].to_s,
-            hierarchy: []
-          }
-
-          if level > current.level
-            current = klass.new(level:, data:, parent: current)
-          elsif level == current.level
-            current = klass.new(level:, data:, parent: current.parent)
-          else
-            while current.parent && current.parent.level >= level
-              current = current.parent
-            end
-
-            current = klass.new(level:, data:, parent: current.parent)
-          end
-
-          current.parent.data[:hierarchy] << data
-        end
-
-        root.data[:hierarchy]
-      end
-
-      def to_html
-        render_hierarchy(hierarchy)
-      end
-
-      def render_hierarchy(hierarchy, level = 1)
-        return if hierarchy.empty?
-
-        html = []
-        html << %[<ol class="level#{level}">]
-
-        hierarchy.each do |item|
-          label = CGI.escape_html(item[:label])
-
-          html << "<li>"
-          html << %[<a href="##{item[:content]}">#{label}</a>]
-
-          if item[:hierarchy].any?
-            html << render_hierarchy(item[:hierarchy], level + 1)
-          end
-
-          html << "</li>"
-        end
-
-        html << "</ol>"
-
-        html.join
-      end
-
-      private def normalize(html)
+      def self.normalize(html)
         counter = {}
 
         html.search("h1, h2, h3, h4, h5, h6").each do |tag|

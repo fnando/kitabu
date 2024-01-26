@@ -92,24 +92,29 @@ module Kitabu
     def permalinks
       inside_ebook!
 
-      html = Kitabu::Exporter::HTML.new(root_dir).content
-      toc = Kitabu::TOC::HTML.generate(Nokogiri::HTML(html))
+      exporter = Kitabu::Exporter::HTML.new(root_dir)
+      exporter.export
+      navigation = ::Epub::Navigation.extract(
+        [root_dir.join("output/#{exporter.name}.html")],
+        root_dir: root_dir.join("output")
+      )
 
-      renderer = lambda do |hierarchy, level = 1|
+      renderer = lambda do |hierarchy, level = 0|
         hierarchy.each do |entry|
-          title = " #{entry[:label]}: "
-          permalink = "##{entry[:content]}"
+          title = " #{entry.title}: "
 
-          text = "*" * level
-          text << color(title, :blue)
-          text << color(permalink, :yellow)
-          say(text)
+          if entry.link != "#"
+            text = "*" * level
+            text << color(title, :blue)
+            text << color(entry.link, :yellow)
+            say(text)
+          end
 
-          renderer.call(entry[:hierarchy], level + 1) if entry[:hierarchy].any?
+          renderer.call(entry.navigation, level + 1) if entry.navigation.any?
         end
       end
 
-      renderer.call(toc.hierarchy)
+      renderer.call(navigation)
 
       # toc.hierarchy.each do |options|
       #   level = options[:level] - 1

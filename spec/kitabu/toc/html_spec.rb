@@ -34,27 +34,50 @@ describe Kitabu::TOC::HTML do
   let(:html) { result.html }
 
   it "generates toc" do
-    paths = {
-      "ol.level1>li:nth-child(1)>a" => "Item 1",
-      "ol.level1>li:nth-child(1) ol.level2 > li:nth-child(1)>a" => "Item 1.1",
-      "ol.level1>li:nth-child(1) ol.level2 ol.level3 > li:nth-child(1)>a" => "Item 1.1.1",
-      "ol.level1>li:nth-child(1) ol.level2 ol.level3 ol.level4 > li:nth-child(1)>a" => "Item 1.1.1.1",
-      "ol.level1>li:nth-child(1) ol.level2 ol.level3 ol.level4 ol.level5 > li:nth-child(1)>a" => "Item 1.1.1.1.1",
+    expected = <<~HTML
+      <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+      <html><body><nav>
+        <ol>
+      <li>
+      <a href="#item-1">Item 1</a><ol><li>
+      <a href="#item-1-1">Item 1.1</a><ol><li>
+      <a href="#item-1-1-1">Item 1.1.1</a><ol><li>
+      <a href="#item-1-1-1-1">Item 1.1.1.1</a><ol><li>
+      <a href="#item-1-1-1-1-1">Item 1.1.1.1.1</a>
+      </li></ol>
+      </li></ol>
+      </li></ol>
+      </li></ol>
+      </li>
+      <li>
+      <a href="#item-2">Item 2</a><ol><li>
+      <a href="#item-2-1">Item 2.1</a><ol>
+      <li>
+      <a href="#item-2-1-1">Item 2.1.1</a>
+      </li>
+      <li>
+      <a href="#item-2-1-2">Item 2.1.2</a>
+      </li>
+      </ol>
+      </li></ol>
+      </li>
+      <li>
+      <a href="#item-3">Item 3</a>
+      </li>
+      <li>
+      <a href="#internacionalizacao">Internacionalização</a>
+      </li>
+      <li>
+      <a href="#title">Title</a>
+      </li>
+      <li>
+      <a href="#title-2">Title</a>
+      </li>
+      </ol>
+      </nav></body></html>
+    HTML
 
-      "ol.level1>li:nth-child(2)>a" => "Item 2",
-      "ol.level1>li:nth-child(2) ol.level2 > li:nth-child(1)>a" => "Item 2.1",
-      "ol.level1>li:nth-child(2) ol.level2 ol.level3 > li:nth-child(1)>a" => "Item 2.1.1",
-
-      "ol.level1>li:nth-child(3)>a" => "Item 3",
-      "ol.level1>li:nth-child(4)>a[href='#internacionalizacao']" => "Internacionalização",
-      "ol.level1>li:nth-child(5)>a[href='#title']" => "Title",
-      "ol.level1>li:nth-child(6)>a[href='#title-2']" => "Title"
-
-    }
-
-    paths.each do |path, text|
-      expect(toc).to have_tag(path, text)
-    end
+    expect(expected).to eql(toc.to_s)
   end
 
   it "adds ids to original titles" do

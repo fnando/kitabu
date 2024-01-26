@@ -19,39 +19,39 @@
     </style>
   </head>
   <body>
-    <div class="frontcover container">
+    <section class="frontcover container">
       <div>
         <%= image_tag "logo.gif" %>
         <h1><%= title %></h1>
         <p class="description"><%= subject %></p>
         <p class="creators"><%= creators.to_sentence %></p>
       </div>
-    </div>
+    </section>
 
-    <div class="table-of-contents">
+    <section class="table-of-contents">
       <h2><%= I18n.t(:contents, default: "Contents") %></h2>
       <div id="toc">
         <%= toc %>
       </div>
-    </div>
+    </section>
 
     <div id="chapters">
       <%= content %>
     </div>
 
     <% if changelog %>
-      <div class="changelog section">
+      <section class="changelog section">
         <%= changelog %>
-      </div>
+      </section>
     <% end %>
 
-    <div class="imprint section">
+    <section class="imprint section">
       <div>
         <h2><%= I18n.t(:imprint, default: "Imprint") %></h2>
         <h3><%= title %></h3>
         <p><%= creators.to_sentence %></p>
         <p><%= copyright %></p>
       </div>
-    </div>
+    </section>
   </body>
 </html>

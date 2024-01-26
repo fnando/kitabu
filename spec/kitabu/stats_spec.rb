@@ -48,7 +48,7 @@ describe Kitabu::Stats do
   end
 
   context "footnotes counting" do
-    let(:content) { "<p class='footnote'/>" * 10 }
+    let(:content) { "<div class='footnotes'>#{'<li></li>' * 10}</div>" }
     it { expect(stats.footnotes).to eql(10) }
   end
 

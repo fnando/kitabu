@@ -23,7 +23,7 @@ module Kitabu
     # This method is just a helper example.
     # Feel free to remove it once you get rid of the sample output.
     def lexers_list
-      buffer = [%[<ul class="lexers">]]
+      buffer = [%[<ul class="lexers two-columns">]]
 
       Rouge::Lexers.constants.each do |const|
         lexer = Rouge::Lexers.const_get(const)

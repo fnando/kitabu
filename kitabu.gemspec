@@ -26,14 +26,13 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "activesupport"
-  s.add_dependency "eeepub-with-cover-support"
+  s.add_dependency "epub-rb"
   s.add_dependency "i18n"
   s.add_dependency "nokogiri"
   s.add_dependency "redcarpet"
   s.add_dependency "rouge"
   s.add_dependency "rubyzip"
   s.add_dependency "thor"
-  s.add_dependency "zip-zip"
 
   s.add_development_dependency "pry-meta"
   s.add_development_dependency "rake"

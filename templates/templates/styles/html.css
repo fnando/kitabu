@@ -1,4 +1,6 @@
 @import "./files/normalize.css";
+@import "./files/notes.css";
+@import "./files/toc.css";
 
 :root {
   --cover-color: var(--accent-color);
@@ -30,6 +32,11 @@ li code {
   font-size: 13px;
 }
 
+.two-columns {
+  columns: 2;
+  gap: 50px;
+}
+
 /* Format cover page. */
 .frontcover {
   background: var(--cover-color);
@@ -49,7 +56,7 @@ li code {
   color: rgba(#fff, 0.7);
 }
 
-.frontcover .authors {
+.frontcover .creators {
   font-weight: thin;
   text-transform: uppercase;
   font-size: 24px;
@@ -119,48 +126,15 @@ div.highlight pre {
   display: none;
 }
 
-/* Notes */
-.note {
-  font-size: 13px;
-  float: right;
-  overflow: hidden;
-  position: relative;
-  padding-left: 50px;
-  margin: 30px 0;
-}
-
-.note:before {
-  content: "!";
-  display: inline-block;
-  font-size: 25px;
-  width: 10px;
-  height: 10px;
-  padding: 15px;
-  line-height: 15px;
-  text-align: center;
-  border-radius: 50%;
-  border-bottom-right-radius: 0;
-  position: absolute;
-  top: 5px;
-  left: 0;
-}
-
-.note.info:before {
-  background: #f5be28;
-  color: #fff;
-}
-
-.note.warning:before {
-  background: #e42e24;
-  color: #fff;
+/* Logo */
+.logo img {
+  max-width: 350px;
 }
 
 /* Format lexers list */
 .lexers {
   margin: 0;
   padding: 0;
-  columns: 2;
-  gap: 50px;
 }
 
 .lexers li {
@@ -192,67 +166,38 @@ div.highlight pre {
   margin-bottom: 10px;
 }
 
-/* Table of contents */
+/* Go top */
+.go-top {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  text-decoration: none;
+  display: inline-block;
+  text-indent: -9999px;
+  background: url(../images/up.svg) no-repeat center center;
+  background-size: cover;
+  width: 60px;
+  height: 60px;
+  opacity: 0.25;
+  transition: 0.5s opacity;
+}
+
+.go-top:hover {
+  opacity: 0.4;
+}
+
+/* Changelog */
+.changelog:before {
+  content: "\2234";
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  padding: 50px 0;
+}
+
+/* Table of contents  */
 .table-of-contents {
   padding-bottom: 50px;
   margin-bottom: 50px;
   border-bottom: 1px solid #eee;
-}
-
-.table-of-contents .level2 {
-  counter-increment: toc-level2;
-  counter-reset: toc-level3;
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.table-of-contents .level2 a {
-  text-decoration: none;
-  color: #000;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.table-of-contents .level2:before {
-  content: var(--chapter-text) " " counter(toc-level2);
-  font-size: 13px;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: #aaa;
-  display: block;
-}
-
-.table-of-contents .level2 ~ .level2 {
-  margin-top: 40px;
-}
-
-#toc {
-  -webkit-columns: 2;
-  columns: 2;
-}
-
-#toc > div {
-  -webkit-column-break-inside: avoid;
-  break-inside: avoid-column;
-}
-
-/* Go top */
-.go-top {
-  font-size: 50px;
-  text-decoration: none;
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 60px;
-  display: inline-block;
-  background: rgba(#000, 0.2);
-  text-align: center;
-  border-radius: 10px;
-  line-height: 1;
-  color: rgba(#fff, 0.4);
-  padding-top: 10px;
-}
-
-.go-top:hover {
-  color: #fff;
 }

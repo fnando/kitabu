@@ -3,22 +3,87 @@
 module Kitabu
   module TOC
     class HTML
-      # Return the table of contents in hash format.
-      #
-      attr_reader :toc
+      attr_reader :html
 
-      private_class_method :new
-      attr_reader :buffer, :attrs
-      attr_accessor :content
+      Result = Struct.new(:toc, :html, :hierarchy, keyword_init: true)
 
-      # Traverse every title and add an +id+ attribute.
-      # Return the modified content.
-      #
-      def self.normalize(content)
+      def self.generate(html)
+        toc = new(html)
+
+        Result.new(toc: toc.to_html, html: toc.html, hierarchy: toc.hierarchy)
+      end
+
+      def initialize(html)
+        @html = normalize(html)
+      end
+
+      def hierarchy
+        klass = Struct.new(:level, :data, :parent, keyword_init: true)
+
+        root = klass.new(level: 1, data: {hierarchy: []})
+        current = root
+
+        html.css("h2, h3, h4, h5, h6").each do |node|
+          label = node.text.strip
+          level = node.name[1].to_i
+
+          data = {
+            label:,
+            content: node.attributes["id"].to_s,
+            hierarchy: []
+          }
+
+          if level > current.level
+            current = klass.new(level:, data:, parent: current)
+          elsif level == current.level
+            current = klass.new(level:, data:, parent: current.parent)
+          else
+            while current.parent && current.parent.level >= level
+              current = current.parent
+            end
+
+            current = klass.new(level:, data:, parent: current.parent)
+          end
+
+          current.parent.data[:hierarchy] << data
+        end
+
+        root.data[:hierarchy]
+      end
+
+      def to_html
+        render_hierarchy(hierarchy)
+      end
+
+      def render_hierarchy(hierarchy, level = 1)
+        return if hierarchy.empty?
+
+        html = []
+        html << %[<ol class="level#{level}">]
+
+        hierarchy.each do |item|
+          label = CGI.escape_html(item[:label])
+
+          html << "<li>"
+          html << %[<a href="##{item[:content]}">#{label}</a>]
+
+          if item[:hierarchy].any?
+            html << render_hierarchy(item[:hierarchy], level + 1)
+          end
+
+          html << "</li>"
+        end
+
+        html << "</ol>"
+
+        html.join
+      end
+
+      private def normalize(html)
         counter = {}
-        html = Nokogiri::HTML.parse(content)
+
         html.search("h1, h2, h3, h4, h5, h6").each do |tag|
-          title = tag.inner_text
+          title = tag.inner_text.strip
           permalink = title.to_permalink
 
           counter[permalink] ||= 0
@@ -30,60 +95,11 @@ module Kitabu
 
           tag.set_attribute("id", permalink)
           tag["tabindex"] = "-1"
+
           tag.prepend_child %[<a class="anchor" href="##{permalink}" aria-hidden="true" tabindex="-1"></a>] # rubocop:disable Style/LineLength
         end
 
-        html.css("body").first.inner_html
-      end
-
-      # Traverse every title normalizing its content as a permalink.
-      #
-      def self.generate(content)
-        content = normalize(content)
-        listener = new
-        listener.content = content
-        Stream.new(content, listener).parse
-        listener
-      end
-
-      def initialize # :nodoc:
-        @toc = []
-        @counters = {}
-      end
-
-      def tag(node) # :nodoc:
-        toc << {
-          level: node.name.gsub(/[^\d]/, "").to_i,
-          text: node.text,
-          permalink: node["id"]
-        }
-      end
-
-      # Return a hash with all normalized attributes.
-      #
-      def to_hash
-        {
-          content:,
-          html: to_html,
-          toc:
-        }
-      end
-
-      # Return the table of contents in HTML format.
-      #
-      def to_html
-        buffer =
-          toc.each_with_object([]) do |options, html|
-            html << %[
-              <div class="level#{options[:level]} #{options[:permalink]}">
-                <a href="##{options[:permalink]}">
-                  <span>#{CGI.escape_html(options[:text])}</span>
-                </a>
-              </div>
-            ]
-          end
-
-        buffer.join
+        html
       end
     end
   end

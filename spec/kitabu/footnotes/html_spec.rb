@@ -27,16 +27,11 @@ describe Kitabu::Footnotes::HTML do
   end
 
   let(:html) do
-    Kitabu::Footnotes::HTML.process(content).html
+    Kitabu::Footnotes::HTML.process(Nokogiri::HTML(content))
   end
 
   let(:chapter1) { html.css(".chapter:first-of-type").first }
   let(:chapter2) { html.css(".chapter:last-of-type").first }
-
-  it "sets starting index" do
-    expect(chapter1).to have_tag('.footnotes ol[start="1"]')
-    expect(chapter2).to have_tag('.footnotes ol[start="3"]')
-  end
 
   it "sets footnotes id" do
     html.css(".footnotes li").to_enum(:each).with_index(1) do |footnote, index|

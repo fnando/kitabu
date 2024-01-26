@@ -11,9 +11,6 @@ module Kitabu
         footnotes = chapter.css(".footnotes").first
         return unless footnotes
 
-        list = footnotes.css("ol").first
-        list.set_attribute "start", footnote_index
-
         chapter.css(".footnotes li").each do |footnote|
           process_footnote(chapter, footnote)
           increment_footnote_index!

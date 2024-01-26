@@ -33,7 +33,7 @@ class User
 end
 ```
 
-> [!NOTE]
+> [!TIP]
 >
 > If you're using Sublime Text, make sure you install the
 > [Markdown Extended](https://packagecontrol.io/packages/Markdown%20Extended)
@@ -64,6 +64,15 @@ class User
   end
 end
 ```
+
+You can select the theme by using the configuration `theme` on your
+`config/kitabu.yml`. The available themes are:
+
+<ul class="two-columns">
+  <% Rouge::Theme.registry.each_key do |theme| %>
+    <li><%= theme %></li>
+  <% end %>
+</ul>
 
 ### Lexers
 

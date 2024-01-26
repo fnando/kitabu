@@ -4,7 +4,7 @@
     <title><%= title %></title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link name="stylesheet" rel="stylesheet" type="text/css" href="styles/html.css" />
-    <meta name="author" content="<%= authors.join(', ') %>" />
+    <meta name="author" content="<%= creators.join(', ') %>" />
     <meta name="subject" content="<%= subject %>" />
     <meta name="keywords" content="<%= keywords %>" />
     <meta name="date" content="<%= published_at %>" />
@@ -21,14 +21,15 @@
   <body>
     <div class="frontcover container">
       <div>
+        <%= image_tag "logo.gif" %>
         <h1><%= title %></h1>
         <p class="description"><%= subject %></p>
-        <p class="authors"><%= authors.to_sentence %></p>
+        <p class="creators"><%= creators.to_sentence %></p>
       </div>
     </div>
 
     <div class="table-of-contents">
-      <h2 class="no-toc">Content</h2>
+      <h2><%= I18n.t(:contents, default: "Contents") %></h2>
       <div id="toc">
         <%= toc %>
       </div>
@@ -39,15 +40,16 @@
     </div>
 
     <% if changelog %>
-      <div class="container changelog">
+      <div class="changelog section">
         <%= changelog %>
       </div>
     <% end %>
 
-    <div class="imprint container">
+    <div class="imprint section">
       <div>
-        <h2><%= title %></h2>
-        <p><%= authors.to_sentence %></p>
+        <h2><%= I18n.t(:imprint, default: "Imprint") %></h2>
+        <h3><%= title %></h3>
+        <p><%= creators.to_sentence %></p>
         <p><%= copyright %></p>
       </div>
     </div>

@@ -1,0 +1,70 @@
+/* Notes */
+.note {
+  font-size: 13px;
+  float: right;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  margin: 30px 0;
+  border-left: 5px solid transparent;
+}
+
+.note--title:before {
+  content: "!";
+  display: inline-block;
+  font-weight: bold;
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  line-height: 1;
+  text-align: center;
+  border-radius: 3px;
+  margin-left: -30px;
+  margin-right: 10px;
+}
+
+.note--title {
+  font-weight: bold;
+}
+
+.note.info {
+  border-left-color: #f5be28;
+  background: rgba(245, 190, 40, 0.1);
+}
+
+.note.info .note--title {
+  color: #8a6b18;
+}
+
+.note.info .note--title:before {
+  background: #f5be28;
+  color: #fff;
+}
+
+.note.warning {
+  border-left-color: #e42e24;
+  background: rgba(228, 46, 36, 0.1);
+}
+
+.note.warning .note--title {
+  color: #e42e24;
+}
+
+.note.warning .note--title:before {
+  background: #e42e24;
+  color: #fff;
+}
+
+.note.tip {
+  border-left-color: #2242d3;
+  background: rgba(34, 66, 211, 0.1);
+}
+
+.note.tip .note--title {
+  color: #2242d3;
+}
+
+.note.tip .note--title:before {
+  background: #2242d3;
+  color: #fff;
+}

@@ -1,17 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC
-	  "-//W3C//DTD XHTML 1.1//EN"
-	  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%= language %>" lang="<%= language %>">
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="<%= language %>" lang="<%= language %>">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="calibre:cover" content="true"/>
     <title><%= title %></title>
-    <link rel="stylesheet" type="text/css" href="epub.css" />
-    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-  </head>
+    <style type="text/css">
+      @page {
+        padding: 0pt; margin:0pt
+      }
 
-  <body class="epub">
-    <div>
-      <h1><%= title %></h1>
-    </div>
+      body {
+        text-align: center;
+        padding:0;
+        margin: 0;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <%= image_tag "cover.png" %>
   </body>
 </html>

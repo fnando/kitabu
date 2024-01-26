@@ -29,7 +29,7 @@ module Kitabu
     end
 
     def image_tag(path, _attributes = {})
-      %[<img src="images/#{path}" />]
+      %[<img alt="" src="images/#{path}" />]
     end
 
     def escape_html(content)

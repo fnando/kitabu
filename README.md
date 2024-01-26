@@ -21,7 +21,7 @@ starting at \$15/mo.
 - Write using Markdown
 - Book layout support
 - Syntax highlight
-- Generate HTML, PDF, e-Pub, and Mobi
+- Generate HTML, PDF, e-Pub (version 3.3), and Mobi
 - Table of Contents automatically generated from chapter titles
 
 ## Installation
@@ -262,6 +262,15 @@ Kitabu::Markdown.processor = Redcarpet::Markdown.new(
 
 The above options are Kitabu's defaults.
 
+### Exporting PDFs using DocRaptor
+
+If you're not planning to buy PrinceXML, consider using
+[DocRaptor](http://docraptor.com). Here's how you can easily do it:
+
+```bash
+curl -H "Content-Type:application/json" -d'{"user_credentials":"YOUR_CREDENTIALS_HERE", "doc":{"name":"kitabu.pdf", "document_type":"pdf", "test":"false", "document_url":"https://example.com/output/kitabu.pdf.html"}}' http://docraptor.com/docs > kitabu.pdf
+```
+
 ## References
 
 - Markdown: <http://daringfireball.net/projects/markdown/syntax>
@@ -270,15 +279,6 @@ The above options are Kitabu's defaults.
 ## Legal Notes
 
 - PrinceXML: [license](http://www.princexml.com/license/)
-
-Alternatives:
-
-- If you're not planning to buy PrinceXML, consider using
-  [DocRaptor](http://docraptor.com). Here's how you can easily do it:
-
-```bash
-curl -H "Content-Type:application/json" -d'{"user_credentials":"YOUR_CREDENTIALS_HERE", "doc":{"name":"kitabu.pdf", "document_type":"pdf", "test":"false", "document_url":"https://dl.dropboxusercontent.com/u/123456789/output/kitabu.pdf.html"}}' http://docraptor.com/docs > kitabu.pdf
-```
 
 ## Maintainer
 

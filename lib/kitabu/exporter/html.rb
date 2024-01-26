@@ -29,16 +29,16 @@ module Kitabu
         false
       end
 
-      def reset_footnote_index!
-        self.class.footnote_index = 1
-      end
-
-      # Return all chapters wrapped in a <tt>div.chapter</tt> tag.
+      # Return all chapters wrapped in a <tt>section.chapter.section</tt> tag.
       #
       def content
         buffer = [].tap do |content|
           source_list.each_chapter do |files|
-            content << %[<div class="chapter">#{render_chapter(files)}</div>]
+            content << <<~ERB
+              <section class="chapter section">
+                #{render_chapter(files)}
+              </section>
+            ERB
           end
         end
 
@@ -69,14 +69,15 @@ module Kitabu
 
       # Parse layout file, making available all configuration entries.
       #
-      private def parse_layout(html)
+      private def parse_layout(content)
+        html = Nokogiri::HTML(content)
+        html = Footnotes::HTML.process(html)
         toc = TOC::HTML.generate(html)
-        content =
-          Footnotes::HTML.process(toc.content).html.css("body").first.inner_html
+        html = toc.html
 
         locals = config.merge(
-          content:,
-          toc: toc.to_html,
+          content: html.css("body").first.inner_html,
+          toc: toc.toc,
           changelog: render_changelog
         )
 

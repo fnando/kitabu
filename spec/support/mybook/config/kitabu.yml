@@ -2,6 +2,9 @@
 # The book's title. Will be used everywhere!
 title: "Testing Kitabu"
 
+# The book's subtitle. Optional.
+subtitle: ""
+
 # The book's language.
 language: "pt-BR"
 
@@ -35,14 +38,19 @@ keywords: "demo, book, pdf, epub, kitabu, textile, html, markdown"
 uid: "MFXx9nj7uz"
 
 # Your book identification like ISBN or ISSN.
-identifier:
-  id: "http://kitabu.example.com.br"
-  type: "URL" # can be ISBN, ISSN or URL
+identifiers: []
 
 # This book's authors.
-authors:
+creators:
   - "John Doe"
   - "Mary Doe"
 
-# The base URL from your source code.
-base_url: http://example.com
+# This book's contributors.
+contributors: []
+
+# Syntax highlight theme. Can be any of supported by Rouge.
+theme: github
+
+# Accent color. This will be set as a CSS variable, so you can use it on all
+# CSS files like `color: var(--accent-color)`.
+accent_color: "#5091b1"

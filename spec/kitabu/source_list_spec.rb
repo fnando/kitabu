@@ -28,11 +28,6 @@ describe Kitabu::SourceList do
       expect(relative).not_to include("_00_Introduction.md")
     end
 
-    it "skips other files" do
-      expect(relative).not_to include("CHANGELOG.md")
-      expect(relative).not_to include("TOC.md")
-    end
-
     it "returns only first-level entries" do
       expect(relative).not_to include("03_With_Directory/Some_Chapter.md")
     end
@@ -41,7 +36,8 @@ describe Kitabu::SourceList do
       expect(relative.first).to eq("01_Markdown_Chapter.md")
       expect(relative.second).to eq("02_ERB_Chapter.md.erb")
       expect(relative.third).to eq("03_With_Directory")
-      expect(relative.fourth).to be_nil
+      expect(relative.fourth).to eq("04_CHANGELOG.md")
+      expect(relative.fifth).to be_nil
     end
   end
 end

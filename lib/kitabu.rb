@@ -50,6 +50,8 @@ module Kitabu
   require "kitabu/dependency"
   require "kitabu/stats"
   require "kitabu/helpers"
+  require "kitabu/front_matter"
+  require "kitabu/context"
 
   # Hook up and run custom code before certain actions. Existing hooks:
   #

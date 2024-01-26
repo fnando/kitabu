@@ -18,7 +18,9 @@ describe Kitabu::Cli do
         "* Markdown: #markdown\n" \
         "* ERB: #erb\n" \
         "* Some Chapter: #some-chapter\n" \
-        "** Simple > Complex: #simple-complex\n"
+        "** Simple > Complex: #simple-complex\n" \
+        "* Revisions: #revisions\n" \
+        "** Version 1: #version-1\n"
 
       expect(stdout).to eql(expected)
     end

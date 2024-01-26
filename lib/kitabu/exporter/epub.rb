@@ -74,7 +74,7 @@ module Kitabu
       def write_toc!
         root_dir.join(toc_path).open("w") do |io|
           io << render_template(
-            root_dir.join("templates/epub/toc.erb"),
+            root_dir.join("templates/epub/toc.erb").read,
             config.merge(
               navigation: ::Epub::Navigation.extract_html(
                 tmp_dir.glob("**/*.{xhtml,html}"),
@@ -88,7 +88,7 @@ module Kitabu
       def write_cover!
         root_dir.join(cover_path).open("w") do |io|
           io << render_template(
-            root_dir.join("templates/epub/cover.erb"),
+            root_dir.join("templates/epub/cover.erb").read,
             config
           )
         end
@@ -120,7 +120,7 @@ module Kitabu
             page_title = section.html.css("h2").first.text.strip
             locals = config.merge(content:, page_title:)
 
-            file << render_template(template_path, locals)
+            file << render_template(File.read(template_path), locals)
           end
         end
       end

@@ -152,8 +152,8 @@ a {
   content: "By ";
 }
 
-/* Style chapter */
-.chapters {
+/* Chapter */
+.sections {
   counter-reset: chapter;
 }
 

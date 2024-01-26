@@ -15,16 +15,25 @@ relevant files.
 ```
 $ tree output
 output
+├── fonts
 ├── images
-│   ├── kitabu.png
-│   └── kitabu.svg
-├── kitabu.epub
-├── kitabu.html
-├── kitabu.mobi
-├── kitabu.pdf
-├── kitabu.print.pdf
+│   ├── cover.png
+│   ├── kitabu.svg
+│   ├── markdown.svg
+│   └── up.svg
+├── sample.epub
+├── sample.html
+├── sample.mobi
+├── sample.pdf
+├── sample.pdf.html
+├── sample.print.html
+├── sample.print.pdf
 └── styles
     ├── epub.css
+    ├── files
+    │   ├── normalize.css
+    │   ├── notes.css
+    │   └── toc.css
     ├── html.css
     ├── pdf.css
     └── print.css
@@ -35,7 +44,7 @@ pretty fast. If you want to generate a specific format faster, provide the
 `--only` flag.
 
 ```
-$ kitabu export --only pdf
+$ kitabu export --only html
 ```
 
 You can also automatically generate files when something changes. You can use

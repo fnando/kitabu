@@ -31,20 +31,14 @@
 
     <section class="table-of-contents">
       <h2><%= I18n.t(:contents) %></h2>
-      <div id="toc">
+      <div id="toc" class="two-columns">
         <%= toc %>
       </div>
     </section>
 
-    <div id="chapters">
+    <div class="sections">
       <%= content %>
     </div>
-
-    <% if changelog %>
-      <section class="changelog section">
-        <%= changelog %>
-      </section>
-    <% end %>
 
     <section class="white-page"></section>
 

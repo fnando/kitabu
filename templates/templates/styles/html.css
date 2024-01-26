@@ -94,8 +94,8 @@ div.highlight pre {
 }
 
 /* Define chapter numbering  */
-.chapters {
-  counter-reset: chapter 1;
+.sections {
+  counter-reset: chapter 0;
 }
 
 .chapter {

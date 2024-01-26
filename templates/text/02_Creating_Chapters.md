@@ -26,3 +26,10 @@ getting-started-with-rails
 
 Notice that the file name does not need to be readable, but it will make your
 life easier.
+
+> [!TIP]
+>
+> Take a look at this Wikipedia article about book design. It shows all the
+> possible names for sections of a book, which can help you with naming.
+>
+> <https://en.wikipedia.org/wiki/Book_design>

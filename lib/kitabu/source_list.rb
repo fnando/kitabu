@@ -8,7 +8,7 @@ module Kitabu
 
     # Files that should be skipped.
     #
-    IGNORE_FILES = /^(CHANGELOG|TOC)\..*?$/
+    IGNORE_FILES = /^[_.]/
 
     # List of recognized extensions.
     #
@@ -21,19 +21,19 @@ module Kitabu
       @source = root_dir.join("text")
     end
 
-    def each_chapter(&block)
-      files_grouped_by_chapter.each(&block)
+    def each_section(&block)
+      files_grouped_by_section.each(&block)
     end
 
-    def files_grouped_by_chapter
+    def files_grouped_by_section
       entries.each_with_object([]) do |entry, buffer|
-        files = chapter_files(entry)
+        files = section_files(entry)
         buffer << files unless files.empty?
       end
     end
 
-    def chapter_files(entry)
-      # Chapters can be files outside a directory.
+    def section_files(entry)
+      # Section can be files outside a directory.
       if File.file?(entry)
         [entry]
       else

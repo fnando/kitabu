@@ -42,16 +42,23 @@ module Kitabu
       def export
         super
 
-        copy_styles!
-        copy_images!
+        copy_assets
 
         write_sections!
         write_cover!
         write_toc!
 
+        ignore_files = [
+          tmp_dir.join("assets/styles/html.css"),
+          tmp_dir.join("assets/styles/print.css"),
+          tmp_dir.join("assets/styles/pdf.css")
+        ].map(&:to_s)
+
         epub.files += [tmp_dir.join("cover.html"), tmp_dir.join("toc.html")]
         epub.files += tmp_dir.glob("**/*").select do |entry|
-          !epub.files.include?(entry) && entry.file?
+          !epub.files.include?(entry) &&
+            entry.file? &&
+            !ignore_files.include?(entry.to_s)
         end
 
         epub.save(epub_path)
@@ -62,13 +69,8 @@ module Kitabu
         false
       end
 
-      def copy_styles!
-        copy_files("output/styles/epub.css", "output/epub/styles")
-        copy_files("output/styles/files/*.css", "output/epub/styles")
-      end
-
-      def copy_images!
-        copy_directory("output/images", "output/epub/images")
+      def copy_assets
+        copy_directory("output/assets", "output/epub/assets")
       end
 
       def write_toc!

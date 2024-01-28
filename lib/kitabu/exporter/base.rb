@@ -2,6 +2,16 @@
 
 module Kitabu
   class Exporter
+    def self.load_translations(root_dir:)
+      I18n.load_path += Dir[
+        File.expand_path(File.join(__dir__, "../../../templates/en.yml")),
+        root_dir.join("config/locales/**/*.{yml,rb}").to_s
+      ]
+
+      I18n.backend.reload!
+      I18n.backend.eager_load!
+    end
+
     class Base
       # The e-book directory.
       #
@@ -12,11 +22,7 @@ module Kitabu
       attr_accessor :source
 
       def self.export(root_dir)
-        I18n.backend.eager_load!
-        I18n.load_path += Dir[
-          root_dir.join("config/locales/**/*.{yml,rb}").to_s
-        ]
-
+        Exporter.load_translations(root_dir:)
         new(root_dir).export
       end
 

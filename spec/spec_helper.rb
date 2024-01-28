@@ -46,7 +46,10 @@ RSpec.configure do |config|
   )
 
   cleaner = proc do
-    [TMPDIR, SPECDIR.join("support/mybook/output")].each do |i|
+    [
+      TMPDIR
+      # SPECDIR.join("support/mybook/output")
+    ].each do |i|
       FileUtils.rm_rf(i)
     end
 

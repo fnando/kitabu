@@ -4,7 +4,7 @@ This guide is designed for beginners who want to get started with Kitabu from
 scratch. Kitabu uses Ruby to generate e-books in different formats by using
 [Markdown](https://en.wikipedia.org/wiki/Markdown).
 
-![Markdown Logo](images/markdown.svg)
+![Markdown Logo](assets/images/markdown.svg)
 
 But before doing it so, you need to have some things installed:
 

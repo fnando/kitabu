@@ -67,15 +67,15 @@ describe Kitabu::Exporter::HTML do
       expect(html).to have_tag("div.note.info > p", "This is a note!")
     end
 
-    it "copies fonts" do
-      expect(root.join("output/fonts/OpenSans-CondBold.ttf")).to be_file
-    end
-
-    it "exports css files" do
-      expect(root.join("output/styles/epub.css")).to be_file
-      expect(root.join("output/styles/html.css")).to be_file
-      expect(root.join("output/styles/pdf.css")).to be_file
-      expect(root.join("output/styles/print.css")).to be_file
+    it "copies assets" do
+      expect(root.join("output/assets/images/cover.png")).to be_file
+      expect(root.join("output/assets/images/logo.gif")).to be_file
+      expect(root.join("output/assets/fonts/OpenSans-CondBold.ttf")).to be_file
+      expect(root.join("output/assets/styles/epub.css")).to be_file
+      expect(root.join("output/assets/styles/html.css")).to be_file
+      expect(root.join("output/assets/styles/pdf.css")).to be_file
+      expect(root.join("output/assets/styles/print.css")).to be_file
+      expect(root.join("output/assets/scripts")).to be_directory
     end
   end
 end

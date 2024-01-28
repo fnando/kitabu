@@ -1,3 +1,12 @@
 ---
 en:
+  contents: Contents
+  left_blank: This page intentionally left blank
   chapter: Chapter
+
+  notes:
+    warning: Warning!
+    note: Just so you know…
+    tip: Here’s a tip!
+    caution: Caution!
+    important: Important!

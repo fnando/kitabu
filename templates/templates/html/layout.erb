@@ -3,19 +3,11 @@
   <head>
     <title><%= title %></title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="styles/html.css" />
+    <link rel="stylesheet" type="text/css" href="assets/styles/html.css" />
     <meta name="author" content="<%= creators.join(', ') %>" />
     <meta name="subject" content="<%= subject %>" />
     <meta name="keywords" content="<%= keywords %>" />
     <meta name="date" content="<%= published_at %>" />
-    <%= highlight_theme %>
-    <style type="text/css">
-      :root {
-        --accent-color: <%= accent_color %>;
-      }
-
-      <%= css_translations %>
-    </style>
   </head>
 
   <body id="top">
@@ -29,7 +21,7 @@
 
     <section class="white-page"></section>
 
-    <section class="table-of-contents">
+    <section class="section--no-toc table-of-contents">
       <h2><%= I18n.t(:contents) %></h2>
       <div id="toc" class="two-columns">
         <%= toc %>

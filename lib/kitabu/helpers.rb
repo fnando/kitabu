@@ -2,39 +2,14 @@
 
 module Kitabu
   module Helpers
-    def css_translations
-      backend = I18n.backend.translations
-
-      translations =
-        backend.each_with_object([]) do |(lang, dict), buffer|
-          buffer << ":root[lang='#{lang}'] {"
-
-          dict.each do |key, value|
-            next unless value.is_a?(String) && value.lines.count == 1
-
-            buffer << "--#{key.to_s.tr('_', '-')}-text: #{value.inspect};"
-          end
-
-          buffer << "}"
-        end
-
-      translations.join("\n")
-    end
-
-    def highlight_theme(name = theme)
-      html = '<style type="text/css">'
-      html << Rouge::Theme.find(name).render(scope: ".highlight")
-      html << "</style>"
-      html
-    end
-
     def image_tag(path, _attributes = {})
-      %[<img alt="" src="images/#{path}" />]
+      %[<img alt="" src="assets/images/#{path}" />]
     end
 
     def escape_html(content)
       CGI.escape_html(content.to_s)
     end
+    alias h escape_html
 
     def note(class_name = :info, &block)
       content = block_content(block)

@@ -1,6 +1,8 @@
-@import "./files/normalize.css";
-@import "./files/notes.css";
-@import "./files/toc.css";
+@import "support/fonts.css";
+@import "support/normalize.css";
+@import "support/kitabu.css";
+@import "support/notes.css";
+@import "support/toc.css";
 
 :root {
   --frontcover-color: var(--accent-color);
@@ -67,7 +69,7 @@
 }
 
 body {
-  font-family: Caslon, serif;
+  font-family: serif;
   font-size: 14px;
   line-height: 1.5;
 }
@@ -152,24 +154,16 @@ a {
   content: "By ";
 }
 
-/* Chapter */
-.sections {
-  counter-reset: chapter;
-}
-
-.chapter {
-  page: chapter;
-  page-break-before: always;
-  counter-increment: chapter;
-}
-
-.chapter > h2 {
-  font-family: sans-serif;
+/* Section */
+.section > h2,
+.section--no-toc > h2 {
+  text-transform: uppercase;
+  font-family: "Open Sans Condensed";
+  font-size: 40px;
+  color: #fff;
   margin: -100px -100px 75px -100px;
   background: var(--frontcover-color);
   padding: 100px;
-  color: #fff;
-  font-size: 40px;
 
   display: flex;
   flex-direction: column;
@@ -177,6 +171,24 @@ a {
   padding: 0 100px;
   box-sizing: border-box;
   height: 285px;
+}
+
+.section--no-toc > h2:before,
+.section.changelog {
+  content: "";
+  display: block;
+  height: 28px;
+}
+
+.sections {
+  counter-reset: chapter;
+}
+
+/* Chapter  */
+.chapter {
+  page: chapter;
+  page-break-before: always;
+  counter-increment: chapter;
 }
 
 .chapter > h3 {
@@ -192,10 +204,11 @@ a {
 }
 
 /* Code highlighting */
+.highlight *,
 p code,
 li code {
   font-size: 12px;
-  font-family: Menlo, monospace;
+  font-family: monospace;
 }
 
 div.highlight {
@@ -206,10 +219,6 @@ div.highlight {
 div.highlight pre {
   margin: 0;
   padding: 0;
-}
-
-.highlight * {
-  font-family: Menlo, monospace;
 }
 
 .highlight .gutter {
@@ -241,27 +250,6 @@ div.highlight pre {
 /* Table of contents */
 .table-of-contents {
   page: chapter;
-  font-family: sans-serif;
-}
-
-.table-of-contents > h2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-family: sans-serif;
-  margin: -100px -100px 75px -100px;
-  background: var(--frontcover-color);
-  color: #fff;
-  font-size: 40px;
-  padding: 0 100px;
-  box-sizing: border-box;
-  height: 285px;
-}
-
-.table-of-contents > h2:before {
-  content: "";
-  display: block;
-  height: 28px;
 }
 
 /* Footnotes */

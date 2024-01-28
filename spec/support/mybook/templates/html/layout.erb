@@ -1,22 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="html" lang="<%= language %>">
   <head>
     <title><%= title %></title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <link name="stylesheet" rel="stylesheet" type="text/css" href="styles/html.css" />
+    <link name="stylesheet" rel="stylesheet" type="text/css" href="assets/styles/html.css" />
     <meta name="author" content="<%= creators.join(', ') %>" />
     <meta name="subject" content="<%= subject %>" />
     <meta name="keywords" content="<%= keywords %>" />
     <meta name="date" content="<%= published_at %>" />
-    <%= highlight_theme('github') %>
-
-    <style type="text/css">
-      :root {
-        --accent-color: <%= accent_color %>;
-      }
-
-      <%= css_translations %>
-    </style>
   </head>
   <body>
     <section class="frontcover container">
@@ -35,7 +26,7 @@
       </div>
     </section>
 
-    <div id="sections">
+    <div class="sections">
       <%= content %>
     </div>
 

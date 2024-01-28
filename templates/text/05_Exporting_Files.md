@@ -9,34 +9,63 @@ $ kitabu export
 ```
 
 This command will generate all supported formats[^1]. The generated files will
-be placed on your `output` directory; the following output list only the
-relevant files.
+be placed on your `output` directory.
 
 ```
-$ tree output
 output
-├── fonts
-├── images
-│   ├── cover.png
-│   ├── kitabu.svg
-│   ├── markdown.svg
-│   └── up.svg
+├── assets
+│   ├── fonts
+│   ├── images
+│   │   ├── cover.png
+│   │   ├── kitabu.svg
+│   │   ├── markdown.svg
+│   │   └── up.svg
+│   ├── scripts
+│   └── styles
+│       ├── epub.css
+│       ├── html.css
+│       ├── pdf.css
+│       ├── print.css
+│       └── support
+│           ├── kitabu.css
+│           ├── normalize.css
+│           ├── notes.css
+│           └── toc.css
+├── epub
+│   ├── assets
+│   │   ├── fonts
+│   │   ├── images
+│   │   │   ├── cover.png
+│   │   │   ├── kitabu.svg
+│   │   │   ├── markdown.svg
+│   │   │   └── up.svg
+│   │   ├── scripts
+│   │   └── styles
+│   │       ├── epub.css
+│   │       ├── html.css
+│   │       ├── pdf.css
+│   │       ├── print.css
+│   │       └── support
+│   │           ├── kitabu.css
+│   │           ├── normalize.css
+│   │           ├── notes.css
+│   │           └── toc.css
+│   ├── cover.html
+│   ├── section_0.html
+│   ├── section_1.html
+│   ├── section_2.html
+│   ├── section_3.html
+│   ├── section_4.html
+│   ├── section_5.html
+│   ├── section_6.html
+│   └── toc.html
 ├── sample.epub
 ├── sample.html
 ├── sample.mobi
 ├── sample.pdf
 ├── sample.pdf.html
 ├── sample.print.html
-├── sample.print.pdf
-└── styles
-    ├── epub.css
-    ├── files
-    │   ├── normalize.css
-    │   ├── notes.css
-    │   └── toc.css
-    ├── html.css
-    ├── pdf.css
-    └── print.css
+└── sample.print.pdf
 ```
 
 This can take a while depending on your book size, but usually the process is

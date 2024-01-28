@@ -1,6 +1,7 @@
-@import "./files/normalize.css";
-@import "./files/notes.css";
-@import "./files/toc.css";
+@import "support/normalize.css";
+@import "support/kitabu.css";
+@import "support/notes.css";
+@import "support/toc.css";
 
 :root {
   --cover-color: var(--accent-color);

@@ -1,0 +1,206 @@
+/* Fira Code, Bold */
+@font-face {
+  font-family: monospace;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/FiraCode-Bold.ttf");
+}
+
+/* Fira Code, Light */
+@font-face {
+  font-family: monospace;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/FiraCode-Light.ttf");
+}
+
+/* Fira Code, Medium */
+@font-face {
+  font-family: monospace;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/FiraCode-Medium.ttf");
+}
+
+/* Fira Code, Regular */
+@font-face {
+  font-family: monospace;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/FiraCode-Regular.ttf");
+}
+
+/* Fira Code, Retina */
+@font-face {
+  font-family: monospace;
+  font-weight: 450;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/FiraCode-Retina.ttf");
+}
+
+/* Fira Code, SemiBold */
+@font-face {
+  font-family: monospace;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/FiraCode-SemiBold.ttf");
+}
+
+/* Libertinus Serif, Bold */
+@font-face {
+  font-family: serif;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/LibertinusSerif-Bold.otf");
+}
+
+/* Libertinus Serif, Bold Italic */
+@font-face {
+  font-family: serif;
+  font-weight: bold;
+  font-style: italic;
+  font-stretch: normal;
+  src: url("../../fonts/LibertinusSerif-BoldItalic.otf");
+}
+
+/* Libertinus Serif, Italic */
+@font-face {
+  font-family: serif;
+  font-weight: normal;
+  font-style: italic;
+  font-stretch: normal;
+  src: url("../../fonts/LibertinusSerif-Italic.otf");
+}
+
+/* Libertinus Serif, Regular */
+@font-face {
+  font-family: serif;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/LibertinusSerif-Regular.otf");
+}
+
+/* Libertinus Serif, Semibold */
+@font-face {
+  font-family: serif;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/LibertinusSerif-Semibold.otf");
+}
+
+/* Libertinus Serif, Semibold Italic */
+@font-face {
+  font-family: serif;
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: normal;
+  src: url("../../fonts/LibertinusSerif-SemiboldItalic.otf");
+}
+
+/* Open Sans, Bold */
+@font-face {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-Bold.ttf");
+}
+
+/* Open Sans, Bold Italic */
+@font-face {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-BoldItalic.ttf");
+}
+
+/* Open Sans Condensed, Bold */
+@font-face {
+  font-family: "Open Sans Condensed";
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-CondBold.ttf");
+}
+
+/* Open Sans, Extrabold */
+@font-face {
+  font-family: sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-ExtraBold.ttf");
+}
+
+/* Open Sans, Extrabold Italic */
+@font-face {
+  font-family: sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-ExtraBoldItalic.ttf");
+}
+
+/* Open Sans, Italic */
+@font-face {
+  font-family: sans-serif;
+  font-weight: normal;
+  font-style: italic;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-Italic.ttf");
+}
+
+/* Open Sans, Light */
+@font-face {
+  font-family: sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-Light.ttf");
+}
+
+/* Open Sans, Light Italic */
+@font-face {
+  font-family: sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-LightItalic.ttf");
+}
+
+/* Open Sans, Regular */
+@font-face {
+  font-family: sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-Regular.ttf");
+}
+
+/* Open Sans, Semibold */
+@font-face {
+  font-family: sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-Semibold.ttf");
+}
+
+/* Open Sans, Semibold Italic */
+@font-face {
+  font-family: sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: condensed;
+  src: url("../../fonts/OpenSans-SemiboldItalic.ttf");
+}

@@ -16,12 +16,12 @@ describe Kitabu::Exporter::PDF, prince: Kitabu::Dependency.prince? do
   end
 
   it "sets stylesheet for print pdf" do
-    selector = 'link[rel=stylesheet][href="styles/print.css"]'
+    selector = 'link[rel=stylesheet][href="assets/styles/print.css"]'
     expect(root.join("output/mybook.print.html").read).to have_tag(selector)
   end
 
   it "sets stylesheet for pdf" do
-    selector = 'link[rel=stylesheet][href="styles/pdf.css"]'
+    selector = 'link[rel=stylesheet][href="assets/styles/pdf.css"]'
     expect(root.join("output/mybook.pdf.html").read).to have_tag(selector)
   end
 

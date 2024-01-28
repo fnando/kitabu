@@ -7,6 +7,7 @@ module Kitabu
         super
         apply_footnotes!
         args = Shellwords.split(ENV.fetch("PRINCEOPT", ""))
+        args += Array(config[:prince_args])
 
         spawn_command(
           ["prince", *args, html_for_pdf.to_s, "-o", pdf_file.to_s]
@@ -29,7 +30,7 @@ module Kitabu
         html
           .css("link[rel=stylesheet]")
           .first
-          .set_attribute "href", "styles/#{class_name}.css"
+          .set_attribute "href", "assets/styles/#{class_name}.css"
 
         File.open(target, "w") {|f| f << html.to_html }
       end

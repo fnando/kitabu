@@ -1,0 +1,15 @@
+@import "support/kitabu.css";
+
+.pdf {
+  background: blue;
+}
+
+h1,
+h2 {
+  font-family: "Open Sans Condensed";
+  text-transform: uppercase;
+}
+
+body {
+  font-family: "Libertinus Serif";
+}

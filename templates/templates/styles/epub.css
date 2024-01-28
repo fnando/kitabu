@@ -1,8 +1,0 @@
-@import "normalize.css";
-@import "notes.css";
-@import "toc.css";
-
-pre {
-  padding: 10px;
-  font-size: 12px;
-}

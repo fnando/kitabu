@@ -53,46 +53,51 @@ To create a new e-book, just run
 
 This command creates a directory `mybook` with the following structure:
 
-    .
-    ├── Gemfile
-    ├── Gemfile.lock
-    ├── Guardfile
-    ├── config
-    │   ├── helper.rb
-    │   ├── kitabu.yml
-    │   └── locales
-    │       └── en.yml
-    ├── fonts
-    ├── images
-    │   ├── cover.png
-    │   ├── kitabu.svg
-    │   ├── markdown.svg
-    │   └── up.svg
-    ├── templates
-    │   ├── epub
-    │   │   ├── cover.erb
-    │   │   ├── page.erb
-    │   │   └── toc.erb
-    │   ├── html
-    │   │   └── layout.erb
-    │   └── styles
-    │       ├── epub.css
-    │       ├── files
-    │       │   ├── normalize.css
-    │       │   ├── notes.css
-    │       │   └── toc.css
-    │       ├── html.css
-    │       ├── pdf.css
-    │       └── print.css
-    └── text
-        ├── 01_Getting_Started.md
-        ├── 02_Creating_Chapters.md
-        ├── 03_Syntax_Highlighting.md.erb
-        ├── 04_Dynamic_Content.md.erb
-        ├── 05_Exporting_Files.md
-        └── 06_Changelog.md
+```
+.
+├── Gemfile
+├── Gemfile.lock
+├── Guardfile
+├── assets
+│   ├── fonts
+│   ├── images
+│   │   ├── cover.png
+│   │   ├── kitabu.svg
+│   │   ├── markdown.svg
+│   │   └── up.svg
+│   ├── scripts
+│   └── styles
+│       ├── epub.css
+│       ├── html.css
+│       ├── pdf.css
+│       ├── print.css
+│       └── support
+│           ├── kitabu.css
+│           ├── normalize.css
+│           ├── notes.css
+│           └── toc.css
+├── config
+│   ├── helpers.rb
+│   ├── kitabu.yml
+│   └── locales
+│       └── en.yml
+├── templates
+│   ├── epub
+│   │   ├── cover.erb
+│   │   ├── page.erb
+│   │   └── toc.erb
+│   └── html
+│       └── layout.erb
+└── text
+    ├── 01_Getting_Started.md
+    ├── 02_Creating_Chapters.md
+    ├── 03_Syntax_Highlighting.md.erb
+    ├── 04_Dynamic_Content.md.erb
+    ├── 05_Exporting_Files.md
+    └── 06_Changelog.md
 
-    11 directories, 27 files
+13 directories, 28 files
+```
 
 The `config/kitabu.yml` file holds some information about your book; so you'll
 always change it.
@@ -193,7 +198,7 @@ be something like this:
 <img src="images/myimage.png" />
 ```
 
-You book's helpers can be added to `config/helper.rb`, as this file is loaded
+You book's helpers can be added to `config/helpers.rb`, as this file is loaded
 automatically by kitabu.
 
 You can see available helpers on
@@ -254,11 +259,12 @@ end
 
 ### Using custom fonts
 
-You can use custom fonts for your PDF. Just add them to the `fonts` directory
+You can use custom fonts on your ebooks. Just add them to the `fonts` directory
 (you can create this directory on your book's root directory if it doesn't
 exist).
 
-Then, on `templates/styles/pdf.css` you can add the `@font-face` declaration.
+Then, on `assets/styles/support/fonts.css` you can add the `@font-face`
+declaration.
 
 ```css
 @font-face {
@@ -275,12 +281,46 @@ Finally, to use this font, do something like this:
 }
 ```
 
+Instead of doing the above manually, you can also use Prince's `--scanfonts`
+option.
+
+```console
+$ prince --scanfonts assets/fonts/* > assets/styles/support/fonts.css
+```
+
+Just remember to replace the generated path to be something like `../../fonts`
+instead.
+
+> [!TIP]
+>
+> In most cases, it's easier to redefine `sans-serif`, `serif` and `monospace`
+> fonts. To know more about how to do this, read Prince's
+> [Redefining the generic font families](https://www.princexml.com/doc/styling/#redefining-the-generic-font-families)
+> documentation.
+
+If you're unsure if fonts are actually being used on PDF files, use the
+environment variable `PRINCEOPT` to disable system fonts.
+
+```console
+$ PRINCEOPT='--no-system-fonts --debug --log output/prince.log' kitabu export --only pdf
+=> e-book couldn't be exported
+
+$ tail -n10 output/prince.log
+Sat Jan 27 18:39:10 2024: debug: font request: Caslon, serif
+Sat Jan 27 18:39:10 2024: warning: Ensure fonts are available on the system or load them via a @font-face rule.
+Sat Jan 27 18:39:10 2024: warning: For more information see:
+Sat Jan 27 18:39:10 2024: warning: https://www.princexml.com/doc/help-install/#missing-glyphs-or-fonts
+Sat Jan 27 18:39:10 2024: internal error: Unable to find any available fonts.
+Sat Jan 27 18:39:10 2024: finished: failure
+Sat Jan 27 18:39:10 2024: ---- end
+```
+
 ### Configuring Markdown
 
 Kitabu uses [Redcarpet](https://github.com/vmg/redcarpet) as the Markdown
 engine. You can override the default processor by setting
 `Kitabu::Markdown.processor`. This can be done by adding something like the
-following to `config/helper.rb`:
+following to `config/helpers.rb`:
 
 ```ruby
 Kitabu::Markdown.processor = Redcarpet::Markdown.new(

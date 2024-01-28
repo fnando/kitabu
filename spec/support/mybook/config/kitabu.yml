@@ -49,8 +49,8 @@ creators:
 contributors: []
 
 # Syntax highlight theme. Can be any of supported by Rouge.
-theme: github
+syntax_highlight_theme: github
 
 # Accent color. This will be set as a CSS variable, so you can use it on all
 # CSS files like `color: var(--accent-color)`.
-accent_color: "#5091b1"
+css_accent_color: "#5091b1"

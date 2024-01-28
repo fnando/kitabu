@@ -8,9 +8,8 @@ module Kitabu
       #
       def export
         super
-        copy_images!
-        copy_fonts!
-        export_stylesheets!
+        copy_assets
+        export_kitabu_css
 
         File.open(root_dir.join("output/#{name}.html"), "w") do |file|
           file << render_layout
@@ -97,22 +96,17 @@ module Kitabu
         buffer.join
       end
 
-      # Copy images
+      # Copy assets
       #
-      private def copy_images!
-        copy_directory("images", "output/images")
+      private def copy_assets
+        copy_directory("assets", "output/assets")
       end
 
-      # Copy font files
+      # Export css with utilities for syntax highlighting, translations, and
+      # accent color.
       #
-      private def copy_fonts!
-        copy_directory("fonts", "output/fonts")
-      end
-
-      # Export all root stylesheets.
-      #
-      private def export_stylesheets!
-        Exporter::CSS.new(root_dir).export
+      private def export_kitabu_css
+        CSS.create_file(config:, root_dir:)
       end
     end
   end

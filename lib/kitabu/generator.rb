@@ -16,16 +16,12 @@ module Kitabu
       "#{File.dirname(__FILE__)}/../../templates"
     end
 
+    def copy_i18n_file
+      copy_file "en.yml", "config/locales/en.yml"
+    end
+
     def copy_templates
       directory "templates", "templates"
-    end
-
-    def copy_sample_texts
-      directory "text", "text"
-    end
-
-    def copy_images
-      directory "images", "images"
     end
 
     def copy_config_file
@@ -35,29 +31,34 @@ module Kitabu
       template "config.erb", "config/kitabu.yml"
     end
 
-    def copy_i18n_file
-      copy_file "en.yml", "config/locales/en.yml"
+    def copy_assets
+      directory "assets", "assets"
+
+      Exporter.load_translations(root_dir:)
+
+      CSS.create_file(
+        root_dir:,
+        config: YAML.load_file(root_dir.join("config/kitabu.yml"))
+                    .with_indifferent_access
+      )
+    end
+
+    def copy_texts
+      directory "text", "text"
     end
 
     def copy_helper_file
-      copy_file "helper.rb", "config/helper.rb"
+      copy_file "helpers.rb", "config/helpers.rb"
     end
 
     def copy_gemfile
       copy_file "Gemfile"
     end
 
-    def create_directories
-      empty_directory "output"
-      empty_directory "fonts"
-    end
-
     def create_git_files
       create_file ".gitignore" do
         "/output"
       end
-
-      create_file "fonts/.keep"
     end
 
     def copy_guardfile
@@ -71,6 +72,12 @@ module Kitabu
     end
 
     no_commands do
+      # The root directory
+      #
+      def root_dir
+        @root_dir ||= Pathname.new(destination_root)
+      end
+
       # Retrieve user's name using finger.
       # Defaults to <tt>John Doe</tt>.
       #

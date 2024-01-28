@@ -19,7 +19,7 @@ module Kitabu
     end
 
     def export!
-      helper = root_dir.join("config/helper.rb")
+      helper = root_dir.join("config/helpers.rb")
       load(helper) if helper.exist?
 
       FileUtils.rm_rf root_dir.join("output").to_s

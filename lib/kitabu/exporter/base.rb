@@ -2,11 +2,16 @@
 
 module Kitabu
   class Exporter
+    def self.default_i18n_load_path
+      @default_i18n_load_path ||= I18n.load_path.dup.freeze
+    end
+
     def self.load_translations(root_dir:)
-      I18n.load_path += Dir[
-        File.expand_path(File.join(__dir__, "../../../templates/en.yml")),
-        root_dir.join("config/locales/**/*.{yml,rb}").to_s
-      ]
+      paths = default_i18n_load_path.dup
+      paths += Dir[root_dir.join("config/locales/**/*.{yml,rb}").to_s]
+      paths << File.expand_path(File.join(__dir__, "../../../templates/en.yml"))
+
+      I18n.load_path = paths
 
       I18n.backend.reload!
       I18n.backend.eager_load!

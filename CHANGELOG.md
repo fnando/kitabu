@@ -7,6 +7,7 @@
 - Add link anchor on each title.
 - Improve epub final file (better table of contents, less epubcheck errors, CSS
   localization, and more).
+- Add support for frontmatter on `.md` and `.md.erb` files.
 
 ## v3.1.0
 

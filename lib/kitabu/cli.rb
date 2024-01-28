@@ -115,17 +115,6 @@ module Kitabu
       end
 
       renderer.call(navigation)
-
-      # toc.hierarchy.each do |options|
-      #   level = options[:level] - 1
-      #   title = " #{options[:text]}: "
-      #   permalink = "##{options[:permalink]}"
-
-      #   text = "*" * level
-      #   text << color(title, :blue)
-      #   text << color(permalink, :yellow)
-      #   say(text)
-      # end
     end
 
     desc "stats", "Display some stats about your e-book"

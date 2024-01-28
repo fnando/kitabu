@@ -3,15 +3,8 @@
 module Kitabu
   class Exporter
     class HTML < Base
-      class << self
-        # The footnote index control. We have to manipulate footnotes
-        # because each chapter starts from 1, so we have duplicated references.
-        #
-        attr_accessor :footnote_index
-      end
-
       # Parse all files and save the parsed content
-      # to <tt>output/book_name.html</tt>.
+      # to `output/book_name.html`.
       #
       def export
         super
@@ -20,7 +13,7 @@ module Kitabu
         export_stylesheets!
 
         File.open(root_dir.join("output/#{name}.html"), "w") do |file|
-          file << parse_layout(content)
+          file << render_layout
         end
 
         true
@@ -29,14 +22,20 @@ module Kitabu
         false
       end
 
-      # Return all chapters wrapped in a <tt>section.chapter.section</tt> tag.
+      # Return all sections wrapped in a `section` tag.
       #
       def content
         buffer = [].tap do |content|
-          source_list.each_chapter do |files|
+          source_list.each_section do |files|
+            # To retrieve the section identifier, only the first file's matter
+            # must be retrieved, because all section files will be merged into
+            # one big html file.
+            matter = FrontMatter.parse(File.read(files.first))
+            matter.meta["section"] ||= "chapter"
+
             content << <<~ERB
-              <section class="chapter section">
-                #{render_chapter(files)}
+              <section class="#{matter.meta['section']} section">
+                #{render_section(files, matter.meta)}
               </section>
             ERB
           end
@@ -45,13 +44,16 @@ module Kitabu
         buffer.join
       end
 
-      # Render +file+ considering its extension.
+      # Render `file` considering its extension.
       #
-      private def render_file(file_path)
+      private def render_file(file_path, meta)
+        matter = FrontMatter.parse(File.read(file_path))
+        meta = meta.merge(matter.meta)
+
         content = if file_format(file_path) == :erb
-                    render_template(file_path, config)
+                    render_template(matter.content, config.merge(meta:))
                   else
-                    File.read(file_path)
+                    matter.content
                   end
 
         content = Kitabu.run_hooks(:before_markdown_render, content)
@@ -69,7 +71,7 @@ module Kitabu
 
       # Parse layout file, making available all configuration entries.
       #
-      private def parse_layout(content)
+      private def render_layout
         html = Nokogiri::HTML(content)
         html = Footnotes::HTML.process(html)
         toc = TOC::HTML.generate(html)
@@ -77,27 +79,18 @@ module Kitabu
 
         locals = config.merge(
           content: html.css("body").first.inner_html,
-          toc: toc.toc,
-          changelog: render_changelog
+          toc: toc.toc
         )
 
-        render_template(root_dir.join("templates/html/layout.erb"), locals)
+        render_template(root_dir.join("templates/html/layout.erb").read, locals)
       end
 
-      # Render changelog file.
-      # This file can be used to inform any book change.
+      # Render all `files` from a given section.
       #
-      private def render_changelog
-        changelog = Dir[root_dir.join("text/CHANGELOG.*")].first
-        render_file(changelog) if changelog
-      end
-
-      # Render all +files+ from a given chapter.
-      #
-      private def render_chapter(files)
-        buffer = [].tap do |chapter|
+      private def render_section(files, meta)
+        buffer = [].tap do |section|
           files.each do |file|
-            chapter << render_file(file) << "\n\n"
+            section << render_file(file, meta) << "\n\n"
           end
         end
 

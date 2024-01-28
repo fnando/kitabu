@@ -59,26 +59,28 @@ This command creates a directory `mybook` with the following structure:
     ├── Guardfile
     ├── config
     │   ├── helper.rb
-    │   └── kitabu.yml
+    │   ├── kitabu.yml
+    │   └── locales
+    │       └── en.yml
+    ├── fonts
     ├── images
-    │   ├── kitabu-icon.png
-    │   ├── kitabu-icon.svg
-    │   ├── kitabu-word.png
-    │   ├── kitabu-word.svg
-    │   ├── kitabu.png
-    │   └── kitabu.svg
-    ├── output
+    │   ├── cover.png
+    │   ├── kitabu.svg
+    │   ├── markdown.svg
+    │   └── up.svg
     ├── templates
     │   ├── epub
     │   │   ├── cover.erb
-    │   │   ├── cover.png
-    │   │   └── page.erb
+    │   │   ├── page.erb
+    │   │   └── toc.erb
     │   ├── html
     │   │   └── layout.erb
     │   └── styles
     │       ├── epub.css
     │       ├── files
-    │       │   └── _normalize.css
+    │       │   ├── normalize.css
+    │       │   ├── notes.css
+    │       │   └── toc.css
     │       ├── html.css
     │       ├── pdf.css
     │       └── print.css
@@ -87,7 +89,10 @@ This command creates a directory `mybook` with the following structure:
         ├── 02_Creating_Chapters.md
         ├── 03_Syntax_Highlighting.md.erb
         ├── 04_Dynamic_Content.md.erb
-        └── 05_Exporting_Files.md
+        ├── 05_Exporting_Files.md
+        └── 06_Changelog.md
+
+    11 directories, 27 files
 
 The `config/kitabu.yml` file holds some information about your book; so you'll
 always change it.
@@ -139,6 +144,38 @@ tag is discarded because it's meant to be the book title.
 To print the TOC, you need to print a variable called `toc`, using the eRb tag.
 
     <%= toc %>
+
+#### Frontmatter
+
+Markdown files (and their `.md.erb` counterparts) support frontmatter, a section
+that can inject variables to the page. Notice that the contents inside the `---`
+delimiters must be valid YAML annotation and only basic types can be used
+(booleans, numbers, strings, nils and hashes/arrays with these same types).
+
+Right now there's only one special value called `section`, which defines the
+class section when generating files. This allows you to have files inside your
+`text` directory that doesn't necessarily should have styling like regular
+chapters. For instance, this is how you can define a changelog section:
+
+```markdown
+---
+section: changelog
+---
+
+## Changelog
+
+### Jan 26, 2024
+
+- Initial release
+```
+
+> [!NOTE]
+>
+> Notice that `section` will be retrieved from the first file, even if you have
+> multiple files defining a section with a directory.
+
+This meta data will be inject on your template using the variable `meta`. If you
+have other variables, you could print them as `<%= meta["varname"] %>`.
 
 ### Using ERB
 

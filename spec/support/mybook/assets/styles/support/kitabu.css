@@ -1,3 +1,8 @@
+.emoji {
+  font-family: "Noto Color Emoji";
+}
+
+
 :root {
   --accent-color: #5091b1;
 }

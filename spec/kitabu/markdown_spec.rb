@@ -83,4 +83,18 @@ describe Kitabu::Markdown do
     expect(html.css(".note").count).to eql(0)
     expect(html.css("blockquote").text.chomp).to eql("This is just a quote")
   end
+
+  it "calls before render hook" do
+    Kitabu::Markdown.add_hook(:before_render, &:upcase)
+
+    expect(Kitabu::Markdown.render("Hello")).to eql("<p>HELLO</p>\n")
+  end
+
+  it "calls after render hook" do
+    Kitabu::Markdown.add_hook(:after_render) do |content|
+      content.gsub("<p>Hello</p>", "<em>BYE</em>")
+    end
+
+    expect(Kitabu::Markdown.render("Hello")).to eql("<em>BYE</em>\n")
+  end
 end

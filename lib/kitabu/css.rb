@@ -4,11 +4,13 @@ module Kitabu
   class CSS
     def self.create_file(root_dir:, config:)
       buffer = StringIO.new
+      buffer << emoji
+      buffer << "\n\n"
       buffer << accent_color(config:)
       buffer << "\n\n"
       buffer << syntax_highlight(config:)
       buffer << "\n\n"
-      buffer << translations(config:)
+      buffer << translations
 
       support_dir = root_dir.join("assets/styles/support")
 
@@ -34,7 +36,7 @@ module Kitabu
       ).render(scope: ".highlight")
     end
 
-    def self.translations(config:)
+    def self.translations
       backend = I18n.backend.translations
 
       translations =
@@ -51,6 +53,14 @@ module Kitabu
         end
 
       translations.join("\n")
+    end
+
+    def self.emoji
+      <<~CSS
+        .emoji {
+          font-family: "Noto Color Emoji";
+        }
+      CSS
     end
   end
 end

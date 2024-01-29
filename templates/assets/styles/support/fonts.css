@@ -204,3 +204,12 @@
   font-stretch: condensed;
   src: url("../../fonts/OpenSans-SemiboldItalic.ttf");
 }
+
+/* Noto Color Emoji, Regular */
+@font-face {
+  font-family: "Noto Color Emoji";
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  src: url("../../fonts/NotoColorEmoji-Regular.ttf");
+}

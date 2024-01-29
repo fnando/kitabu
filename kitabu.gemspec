@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rouge"
   s.add_dependency "rubyzip"
   s.add_dependency "thor"
+  s.add_dependency "unicode-emoji"
 
   s.add_development_dependency "pry-meta"
   s.add_development_dependency "rake"

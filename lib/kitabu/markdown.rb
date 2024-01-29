@@ -73,7 +73,41 @@ module Kitabu
     self.processor = Redcarpet::Markdown.new(renderer, default_markdown_options)
 
     def self.render(text)
-      processor.render(text)
+      text = run_hooks(:before_render, text)
+      run_hooks(:after_render, processor.render(text))
     end
+
+    # Hook up and run custom code before certain actions. Existing hooks:
+    #
+    # * before_render
+    # * after_render
+    #
+    # To add a new hook:
+    #
+    #   Kitabu::Markdown.add_hook(:before_render) do |content|
+    #     content
+    #   end
+    #
+    def self.hooks
+      @hooks ||= Hash.new {|h, k| h[k] = [] }
+    end
+
+    def self.add_hook(name, &block)
+      hooks[name.to_sym] << block
+    end
+
+    def self.run_hooks(name, arg)
+      hooks[name.to_sym].reduce(arg) {|buffer, hook| hook.call(buffer) }
+    end
+
+    def self.setup_default_hooks
+      add_hook(:after_render) do |content|
+        content.gsub(Unicode::Emoji::REGEX) do |emoji|
+          %[<span class="emoji">#{emoji}</span>]
+        end
+      end
+    end
+
+    setup_default_hooks
   end
 end

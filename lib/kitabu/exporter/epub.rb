@@ -113,8 +113,6 @@ module Kitabu
           # Save file to disk.
           #
           File.open(section.filepath, "w") do |file|
-            section.html = Kitabu.run_hooks(:process_epub_section, section.html)
-
             content = section.html.css("body").to_xhtml.gsub(
               %r{<body>(.*?)</body>}m, "\\1"
             )

@@ -12,6 +12,7 @@ require "ostruct"
 require "pathname"
 require "thor"
 require "thor/group"
+require "unicode/emoji"
 require "yaml"
 require "cgi"
 
@@ -52,29 +53,6 @@ module Kitabu
   require "kitabu/helpers"
   require "kitabu/front_matter"
   require "kitabu/context"
-
-  # Hook up and run custom code before certain actions. Existing hooks:
-  #
-  # * before_markdown_render
-  # * after_markdown_render
-  #
-  # To add a new hook:
-  #
-  #   Kitabu.add_hook(:before_markdown_render) do |content|
-  #     content
-  #   end
-  #
-  def self.hooks
-    @hooks ||= Hash.new {|h, k| h[k] = [] }
-  end
-
-  def self.add_hook(name, &block)
-    hooks[name.to_sym] << block
-  end
-
-  def self.run_hooks(name, arg)
-    hooks[name.to_sym].reduce(arg) {|buffer, hook| hook.call(buffer) }
-  end
 
   def self.config(root_dir = nil)
     root_dir ||= Pathname.new(Dir.pwd)

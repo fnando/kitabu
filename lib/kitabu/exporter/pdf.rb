@@ -19,7 +19,7 @@ module Kitabu
       end
 
       def apply_footnotes!
-        html = Nokogiri::HTML(html_file.read)
+        html = Nokogiri::HTML5(html_file.read)
         html = Footnotes::PDF.process(html)
         create_html_file(html_for_print, html, "print")
         create_html_file(html_for_pdf, html, "pdf")

@@ -9,7 +9,7 @@ module Kitabu
       def sections
         @sections ||=
           html.css(SECTION_SELECTOR).each_with_index.map do |chapter, index|
-            html = Nokogiri::HTML(chapter.inner_html)
+            html = Nokogiri::HTML5.fragment(chapter.inner_html)
 
             OpenStruct.new(
               index:,
@@ -113,9 +113,7 @@ module Kitabu
           # Save file to disk.
           #
           File.open(section.filepath, "w") do |file|
-            content = section.html.css("body").to_xhtml.gsub(
-              %r{<body>(.*?)</body>}m, "\\1"
-            )
+            content = section.html.to_xhtml
 
             page_title = section.html.css("h2").first.text.strip
             locals = config.merge(content:, page_title:)

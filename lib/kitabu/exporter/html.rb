@@ -69,13 +69,13 @@ module Kitabu
       # Parse layout file, making available all configuration entries.
       #
       private def render_layout
-        html = Nokogiri::HTML(content)
+        html = Nokogiri::HTML5.fragment(content)
         html = Footnotes::HTML.process(html)
         toc = TOC::HTML.generate(html)
         html = toc.html
 
         locals = config.merge(
-          content: html.css("body").first.inner_html,
+          content: html.to_html,
           toc: toc.toc
         )
 

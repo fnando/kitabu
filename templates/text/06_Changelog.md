@@ -2,8 +2,8 @@
 section: changelog
 ---
 
-## Changelog
+# Changelog
 
-### Not published yet
+## Not published yet
 
 - Initial version

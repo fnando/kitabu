@@ -1,4 +1,4 @@
-## Creating Chapters
+# Creating Chapters
 
 You can create chapters by having multiple files or directories. They're
 alphabetically sorted, so make sure you use a prefixed file name like

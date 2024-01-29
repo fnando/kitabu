@@ -1,4 +1,4 @@
-## Getting Started
+# Getting Started
 
 Hey! 👋
 
@@ -13,7 +13,7 @@ But before doing it so, you need to have some things installed:
 - The [Ruby](http://ruby-lang.org) interpreter version 3.2 or newer.
 - The [PrinceXML](http://princexml.com) converter version 14.0 or newer.
 
-### Installing Ruby
+## Installing Ruby
 
 To install Ruby, consider using [RVM](http://rvm.io) or
 [rbenv](http://rbenv.org), both available for Mac OSX and Linux distros. If
@@ -21,7 +21,7 @@ you're running a Windows, well, I can't help you. I don't even know if Kitabu
 runs over Windows boxes, so if you find any bugs, make sure you
 [let me know](http://github.com/fnando/kitabu/issues).
 
-### Installing PrinceXML
+## Installing PrinceXML
 
 [PrinceXML](http://princexml.com) is the best HTML to PDF converter available.
 You can use advanced CSS features to style your book in any way you want. But
@@ -33,7 +33,7 @@ user costs 495USD. If you don't like the price tag, consider using
 To install PrinceXML, go to the website and download the correct version for
 your platform; you can choose from Mac OSX, to Linux and Windows.
 
-### Installing Calibre
+## Installing Calibre
 
 [Calibre](http://calibre-ebook.com/) is a e-book manager that, among other
 features, allows converting ePub files into .mobi files.

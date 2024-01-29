@@ -11,6 +11,7 @@
 - Add support for frontmatter on `.md` and `.md.erb` files.
 - Wrap emoji with `span.emoji` and use a font for emojis so it renders the same
   in any system.
+- Update all templates to use h1 as the root heading.
 
 ## v3.1.0
 

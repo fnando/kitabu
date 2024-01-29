@@ -115,7 +115,7 @@ module Kitabu
           File.open(section.filepath, "w") do |file|
             content = section.html.to_xhtml
 
-            page_title = section.html.css("h2").first.text.strip
+            page_title = section.html.css("h1, h2").first&.text.to_s.strip
             locals = config.merge(content:, page_title:)
 
             file << render_template(File.read(template_path), locals)

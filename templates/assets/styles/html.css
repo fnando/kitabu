@@ -72,7 +72,7 @@ li code {
   padding: 50px 0;
 }
 
-.chapter > h2 {
+.chapter > h1 {
   margin-top: 0;
 }
 
@@ -103,7 +103,7 @@ div.highlight pre {
   counter-increment: chapter;
 }
 
-.chapter h2:before {
+.chapter h1:before {
   content: var(--chapter-text) " " counter(chapter);
   display: block;
   text-transform: uppercase;

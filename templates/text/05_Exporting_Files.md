@@ -1,4 +1,4 @@
-## Exporting Files
+# Exporting Files
 
 You can generate files as you go. Just execute `kitabu export` from your book's
 root directory.
@@ -86,7 +86,7 @@ $ bundle exec guard
 ** e-book has been exported
 ```
 
-### Exporting PDF with DocRaptor
+## Exporting PDF with DocRaptor
 
 After exporting your files, upload the `output` directory somewhere and make it
 available to the internet. Then you can even use curl to generate the pdf.

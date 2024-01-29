@@ -143,10 +143,8 @@ You'll want to see your progress eventually; it's time for you to generate the
 book PDF. Just run the command `kitabu export` and your book will be created on
 the `output` directory.
 
-Kitabu can generate a Table of Contents (TOC) based on your h2-h6 tags. The h1
-tag is discarded because it's meant to be the book title.
-
-To print the TOC, you need to print a variable called `toc`, using the eRb tag.
+Kitabu can generate a Table of Contents (TOC) based on your h1-h6 tags. To print
+the TOC, you need to print a variable called `toc`, using the eRb tag.
 
     <%= toc %>
 
@@ -276,7 +274,7 @@ declaration.
 Finally, to use this font, do something like this:
 
 ```css
-.chapter > h2 {
+.chapter > h1 {
   font-family: "Open Sans Condensed Bold";
 }
 ```

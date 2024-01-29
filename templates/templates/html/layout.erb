@@ -22,7 +22,7 @@
     <section class="white-page"></section>
 
     <section class="section--no-toc table-of-contents">
-      <h2><%= I18n.t(:contents) %></h2>
+      <h1><%= I18n.t(:contents) %></h1>
       <div id="toc" class="two-columns">
         <%= toc %>
       </div>
@@ -36,8 +36,8 @@
 
     <section class="imprint section">
       <div>
-        <h2><%= I18n.t(:imprint, default: "Imprint") %></h2>
-        <h3><%= title %></h3>
+        <h1><%= I18n.t(:imprint, default: "Imprint") %></h1>
+        <h2><%= title %></h2>
         <p class="description"><%= subject %></p>
         <p class="creators"><%= creators.to_sentence %></p>
         <p class="copyright"><%= copyright %></p>

@@ -155,8 +155,8 @@ a {
 }
 
 /* Section */
-.section > h2,
-.section--no-toc > h2 {
+.section > h1,
+.section--no-toc > h1 {
   text-transform: uppercase;
   font-family: "Open Sans Condensed";
   font-size: 40px;
@@ -173,7 +173,7 @@ a {
   height: 285px;
 }
 
-.section--no-toc > h2:before,
+.section--no-toc > h1:before,
 .section.changelog {
   content: "";
   display: block;
@@ -191,11 +191,11 @@ a {
   counter-increment: chapter;
 }
 
-.chapter > h3 {
+.chapter > h2 {
   margin-top: 40px;
 }
 
-.chapter > h2:before {
+.chapter > h1:before {
   content: var(--chapter-text) " " counter(chapter);
   display: block;
   font-size: 16px;

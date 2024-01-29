@@ -55,9 +55,7 @@ module Kitabu
                     matter.content
                   end
 
-        content = Kitabu.run_hooks(:before_markdown_render, content)
-        content = Kitabu::Markdown.render(content)
-        Kitabu.run_hooks(:after_markdown_render, content)
+        Kitabu::Markdown.render(content)
       end
 
       private def file_format(file_path)

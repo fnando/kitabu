@@ -47,8 +47,8 @@ RSpec.configure do |config|
 
   cleaner = proc do
     [
-      TMPDIR
-      # SPECDIR.join("support/mybook/output")
+      TMPDIR,
+      SPECDIR.join("support/mybook/output")
     ].each do |i|
       FileUtils.rm_rf(i)
     end
@@ -59,5 +59,9 @@ RSpec.configure do |config|
   config.before(&cleaner)
   config.after(&cleaner)
   config.before { FileUtils.mkdir_p(TMPDIR) }
-  config.before { Kitabu.hooks.clear }
+
+  config.before do
+    Kitabu::Markdown.hooks.clear
+    Kitabu::Markdown.setup_default_hooks
+  end
 end

@@ -2,12 +2,15 @@
 
 ## unreleased
 
-- Add `before_markdown_render` and `after_markdown_render` hooks, allowing
-  content manipulation.
-- Add link anchor on each title.
+- Add `before_render` and `after_render` hooks, allowing content manipulation.
+  Use `Kitabu::Markdown.add_hook(event, &block)`.
+- Add link anchor on each title, so you can display an anchor link on HTML
+  pages.
 - Improve epub final file (better table of contents, less epubcheck errors, CSS
   localization, and more).
 - Add support for frontmatter on `.md` and `.md.erb` files.
+- Wrap emoji with `span.emoji` and use a font for emojis so it renders the same
+  in any system.
 
 ## v3.1.0
 

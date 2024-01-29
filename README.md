@@ -242,18 +242,18 @@ The following Redcarpet options are enabled:
 ### Hooks
 
 There are a few hooks that allows manipulating the content. You can use
-`before_markdown_render` and `after_markdown_render`. You can add such hooks to
-your `config/helpers.rb` file.
+`before_render` and `after_render` to process the Markdown content. You can add
+such hooks to your `config/helpers.rb` file.
 
 ```ruby
-Kitabu.add_hook(:before_markdown_render) do |markdown|
+Kitabu::Markdown.add_hook(:before_render) do |content|
   # manipulate content and return it.
-  markdown
+  content
 end
 
-Kitabu.add_hook(:after_markdown_render) do |html|
+Kitabu::Markdown.add_hook(:after_render) do |content|
   # manipulate content and return it.
-  html
+  content
 end
 ```
 

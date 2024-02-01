@@ -12,8 +12,8 @@ module Kitabu
       # Support alert boxes just like github.
       # https://github.com/orgs/community/discussions/16925
       def block_quote(quote)
-        html = Nokogiri::HTML(quote)
-        element = html.css("body > :first-child").first
+        html = Nokogiri::HTML.fragment(quote)
+        element = html.children.first
 
         matches = element.text.match(ALERT_MARK)
 
@@ -33,8 +33,32 @@ module Kitabu
         <<~HTML.strip_heredoc
           <div class="note #{type}">
             <p class="note--title">#{title}</p>
-            #{html.css('body').inner_html}
+            #{html}
           </div>
+        HTML
+      end
+
+      def table_cell(content, alignment, header)
+        tag = header ? "th" : "td"
+
+        html = Nokogiri::HTML.fragment("<#{tag}></#{tag}>")
+        node = html.children.first
+        node.append_class("align-#{alignment}") if alignment
+        node.content = content
+
+        html.to_s
+      end
+
+      def table(header, body)
+        <<~HTML
+          <table class="table">
+            <thead>
+              #{header}
+            </thead>
+            <tbody>
+              #{body}
+            </tbody>
+          </table>
         HTML
       end
     end

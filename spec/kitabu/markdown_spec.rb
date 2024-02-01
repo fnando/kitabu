@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe Kitabu::Markdown do
   it "enables fenced code blocks" do
-    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
+    html = Kitabu::Markdown.render <<~TEXT
       ```ruby
       class User
       end
@@ -15,21 +15,21 @@ describe Kitabu::Markdown do
   end
 
   it "enables options" do
-    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
-    ```php?start_inline=true
-    echo 'Hello';
-    ```
+    html = Kitabu::Markdown.render <<~TEXT
+      ```php?start_inline=true
+      echo 'Hello';
+      ```
     TEXT
 
     expect(html).to include('<span class="k">echo</span>')
   end
 
   it "enables line numbers" do
-    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
-    ```ruby?line_numbers=true
-    class User
-    end
-    ```
+    html = Kitabu::Markdown.render <<~TEXT
+      ```ruby?line_numbers=true
+      class User
+      end
+      ```
     TEXT
 
     expect(html).to include(%[<table class="rouge-table">])
@@ -37,19 +37,19 @@ describe Kitabu::Markdown do
 
   it "does not raise with unknown lexers" do
     expect do
-      Kitabu::Markdown.render <<-TEXT.strip_heredoc
-      ```terminal
-      Text plain.
-      ```
+      Kitabu::Markdown.render <<~TEXT
+        ```terminal
+        Text plain.
+        ```
       TEXT
     end.not_to raise_error
   end
 
   it "renders alert boxes using block quotes" do
-    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
-    > [!NOTE]
-    >
-    > This is just a note
+    html = Kitabu::Markdown.render <<~TEXT
+      > [!NOTE]
+      >
+      > This is just a note
     TEXT
 
     html = Nokogiri::HTML(html)
@@ -60,10 +60,10 @@ describe Kitabu::Markdown do
   end
 
   it "renders arbitrary alert boxes using block quotes" do
-    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
-    > [!ALERT]
-    >
-    > This is just an alert
+    html = Kitabu::Markdown.render <<~TEXT
+      > [!ALERT]
+      >
+      > This is just an alert
     TEXT
 
     html = Nokogiri::HTML(html)
@@ -74,8 +74,8 @@ describe Kitabu::Markdown do
   end
 
   it "renders regular block quotes" do
-    html = Kitabu::Markdown.render <<-TEXT.strip_heredoc
-    > This is just a quote
+    html = Kitabu::Markdown.render <<~TEXT
+      > This is just a quote
     TEXT
 
     html = Nokogiri::HTML(html)
@@ -96,5 +96,26 @@ describe Kitabu::Markdown do
     end
 
     expect(Kitabu::Markdown.render("Hello")).to eql("<em>BYE</em>\n")
+  end
+
+  it "replaces inline style of table alignment" do
+    html = Kitabu::Markdown.render <<~TEXT
+      | Month     | Savings  | Type     | Note |
+      | :-------- | -------: | :-------:| -----|
+      | January   | $250     | Positive | N/A  |
+    TEXT
+
+    html = Nokogiri::HTML(html)
+
+    expect(html).to have_tag("table.table")
+    expect(html).to have_tag("table>thead>tr>th.align-left", "Month")
+    expect(html).to have_tag("table>thead>tr>th.align-right", "Savings")
+    expect(html).to have_tag("table>thead>tr>th.align-center", "Type")
+    expect(html).to have_tag("table>thead>tr>th:not([class*='align'])", "Note")
+
+    expect(html).to have_tag("table>tbody>tr>td.align-left", "January")
+    expect(html).to have_tag("table>tbody>tr>td.align-right", "$250")
+    expect(html).to have_tag("table>tbody>tr>td.align-center", "Positive")
+    expect(html).to have_tag("table>tbody>tr>td:not([class*='align'])", "N/A")
   end
 end

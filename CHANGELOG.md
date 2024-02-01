@@ -12,6 +12,7 @@
 - Wrap emoji with `span.emoji` and use a font for emojis so it renders the same
   in any system.
 - Update all templates to use h1 as the root heading.
+- Remove inline alignment from tables.
 
 ## v3.1.0
 

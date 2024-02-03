@@ -61,6 +61,28 @@ module Kitabu
           </table>
         HTML
       end
+
+      def image(src, title, alt)
+        html = Nokogiri::HTML.fragment("<img />")
+        img = html.css("img").first
+        img.set_attribute(:src, src)
+        img.set_attribute(:srcset, "#{src} 2x")
+        img.set_attribute(:alt, alt)
+        img.set_attribute(:title, title) if title
+
+        return html.to_s unless title
+
+        html = Nokogiri::HTML.fragment <<~HTML
+          <figure>
+            #{img}
+            <figcaption></figcaption>
+          </figure>
+        HTML
+
+        html.css("figcaption").first.content = title
+
+        html.to_s
+      end
     end
 
     class << self

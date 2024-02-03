@@ -13,6 +13,7 @@
   in any system.
 - Update all templates to use h1 as the root heading.
 - Remove inline alignment from tables.
+- Render `<figure>` for images with title.
 
 ## v3.1.0
 

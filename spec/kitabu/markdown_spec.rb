@@ -118,4 +118,29 @@ describe Kitabu::Markdown do
     expect(html).to have_tag("table>tbody>tr>td.align-center", "Positive")
     expect(html).to have_tag("table>tbody>tr>td:not([class*='align'])", "N/A")
   end
+
+  it "replaces images with titles with figure" do
+    html = Kitabu::Markdown.render <<~TEXT
+      ![ALT](image.png "TITLE")
+    TEXT
+
+    html = Nokogiri::HTML(html)
+
+    selector = "figure>img[src='image.png'][srcset='image.png 2x']" \
+               "[alt='ALT'][title='TITLE']+figcaption"
+
+    expect(html).to have_tag(selector, "TITLE")
+  end
+
+  it "keeps images without titles as it is" do
+    html = Kitabu::Markdown.render <<~TEXT
+      ![This is the alt](image.png)
+    TEXT
+
+    html = Nokogiri::HTML(html)
+
+    expect(html).to have_tag("img[alt='This is the alt']")
+    expect(html).not_to have_tag("figure")
+    expect(html).not_to have_tag("figcaption")
+  end
 end

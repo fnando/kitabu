@@ -7,7 +7,7 @@ module Kitabu
       include Rouge::Plugins::Redcarpet
 
       # Be more flexible than github and support any arbitrary name.
-      ALERT_MARK = /^\[!(?<type>[A-Z]+)\]$/
+      ALERT_MARK = /^\[!(?<type>[A-Z]+)\](?<title>.*?)?$/
 
       # Support alert boxes just like github.
       # https://github.com/orgs/community/discussions/16925
@@ -22,20 +22,23 @@ module Kitabu
         element.remove
 
         type = matches[:type].downcase
-        type = "info" if type == "note"
 
-        title = I18n.t(
-          type,
-          scope: :notes,
-          default: type.titleize
-        )
+        title = matches[:title].strip
 
-        <<~HTML.strip_heredoc
-          <div class="note #{type}">
-            <p class="note--title">#{title}</p>
+        if title == ""
+          title = I18n.t(type, scope: :notes, default: type.titleize)
+        end
+
+        html = Nokogiri::HTML.fragment <<~HTML.strip_heredoc
+          <div class="alert-message #{type}">
+            <p class="alert-message--title"></p>
             #{html}
           </div>
         HTML
+
+        html.css(".alert-message--title").first.content = title
+
+        html.to_s
       end
 
       def table_cell(content, alignment, header)

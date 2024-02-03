@@ -45,29 +45,43 @@ describe Kitabu::Markdown do
     end.not_to raise_error
   end
 
-  it "renders alert boxes using block quotes" do
+  it "renders alert message using block quotes" do
     html = Kitabu::Markdown.render <<~TEXT
       > [!NOTE]
       >
       > This is just a note
     TEXT
 
-    html = Nokogiri::HTML(html)
-    selector = "div.note.info > .note--title"
+    html = Nokogiri::HTML.fragment(html)
+    selector = "div.alert-message.note > .alert-message--title"
 
-    expect(html.css(selector).text).to eql("Info")
+    expect(html.css(selector).text).to eql("Just so you know…")
     expect(html.css("#{selector} + p").text).to eql("This is just a note")
   end
 
-  it "renders arbitrary alert boxes using block quotes" do
+  it "renders alert message using custom title" do
+    html = Kitabu::Markdown.render <<~TEXT
+      > [!NOTE] And remember…
+      >
+      > This is just a note
+    TEXT
+
+    html = Nokogiri::HTML.fragment(html)
+    selector = "div.alert-message.note > .alert-message--title"
+
+    expect(html.css(selector).text).to eql("And remember…")
+    expect(html.css("#{selector} + p").text).to eql("This is just a note")
+  end
+
+  it "renders arbitrary alert message using block quotes" do
     html = Kitabu::Markdown.render <<~TEXT
       > [!ALERT]
       >
       > This is just an alert
     TEXT
 
-    html = Nokogiri::HTML(html)
-    selector = "div.note.alert > .note--title"
+    html = Nokogiri::HTML.fragment(html)
+    selector = "div.alert-message.alert > .alert-message--title"
 
     expect(html.css(selector).text).to eql("Alert")
     expect(html.css("#{selector} + p").text).to eql("This is just an alert")
@@ -78,7 +92,7 @@ describe Kitabu::Markdown do
       > This is just a quote
     TEXT
 
-    html = Nokogiri::HTML(html)
+    html = Nokogiri::HTML.fragment(html)
 
     expect(html.css(".note").count).to eql(0)
     expect(html.css("blockquote").text.chomp).to eql("This is just a quote")
@@ -105,7 +119,7 @@ describe Kitabu::Markdown do
       | January   | $250     | Positive | N/A  |
     TEXT
 
-    html = Nokogiri::HTML(html)
+    html = Nokogiri::HTML.fragment(html)
 
     expect(html).to have_tag("table.table")
     expect(html).to have_tag("table>thead>tr>th.align-left", "Month")
@@ -124,7 +138,7 @@ describe Kitabu::Markdown do
       ![ALT](image.png "TITLE")
     TEXT
 
-    html = Nokogiri::HTML(html)
+    html = Nokogiri::HTML.fragment(html)
 
     selector = "figure>img[src='image.png'][srcset='image.png 2x']" \
                "[alt='ALT'][title='TITLE']+figcaption"
@@ -137,7 +151,7 @@ describe Kitabu::Markdown do
       ![This is the alt](image.png)
     TEXT
 
-    html = Nokogiri::HTML(html)
+    html = Nokogiri::HTML.fragment(html)
 
     expect(html).to have_tag("img[alt='This is the alt']")
     expect(html).not_to have_tag("figure")

@@ -8,28 +8,26 @@ describe Kitabu::TOC::HTML do
   end
 
   def input
-    (+<<-HTML).force_encoding("utf-8")
-      <h2>Item 1</h2>
-      <h3>Item 1.1</h3>
-      <h4>Item 1.1.1</h4>
-      <h5>Item 1.1.1.1</h5>
-      <h6>Item 1.1.1.1.1</h6>
+    html = Kitabu::Markdown.render <<~MARKDOWN
+      ## Item 1
+      ### Item 1.1
+      #### Item 1.1.1
+      ##### Item 1.1.1.1
+      ###### Item 1.1.1.1.1
+      ## Item 2
+      ### Item 2.1
+      #### Item 2.1.1
+      #### Item 2.1.2
+      ## Item 3
+      ## Internacionalização
+      ## Title
+      ## Title
+    MARKDOWN
 
-      <h2>Item 2</h2>
-      <h3>Item 2.1</h3>
-      <h4>Item 2.1.1</h4>
-      <h4>Item 2.1.2</h4>
-
-      <h2>Item 3</h2>
-      <h2>Internacionalização</h2>
-
-      <!-- Duplicated titles -->
-      <h2>Title</h2>
-      <h2>Title</h2>
-    HTML
+    html.to_s
   end
 
-  let(:result) { described_class.generate(Nokogiri::HTML(input)) }
+  let(:result) { described_class.generate(input) }
   let(:toc) { Nokogiri::HTML(result.toc) }
   let(:html) { result.html }
 

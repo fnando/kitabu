@@ -5,9 +5,12 @@
 require "spec_helper"
 
 describe String do
+  using Kitabu::Extensions
+
   describe "#to_permalink" do
     it "normalizes strings" do
       {
+        "Simple > Complex" => "simple-complex",
         "This IS a Tripped out title!!.!1  (well/ not really)" => "this-is-a-tripped-out-title-1-well-not-really",
         "////// meph1sto r0x ! \\\\\\" => "meph1sto-r0x",
         "āčēģīķļņū" => "acegiklnu",

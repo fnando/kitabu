@@ -61,7 +61,9 @@ RSpec.configure do |config|
   config.before { FileUtils.mkdir_p(TMPDIR) }
 
   config.before do
+    I18n.load_path = Dir["#{__dir__}/../lib/kitabu/locales/*.yml"]
     Kitabu::Markdown.hooks.clear
     Kitabu::Markdown.setup_default_hooks
+    Kitabu::Markdown.processor.renderer.heading_counter.clear
   end
 end

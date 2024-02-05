@@ -2,12 +2,45 @@
 
 module Kitabu
   module Markdown
+    # N.B.: Redcarpet pass down escaped HTML. There's no need to escape the
+    # content and we can just interpolate it.
     class Renderer < Redcarpet::Render::HTML
       include Redcarpet::Render::SmartyPants
       include Rouge::Plugins::Redcarpet
+      using Extensions
 
       # Be more flexible than github and support any arbitrary name.
       ALERT_MARK = /^\[!(?<type>[A-Z]+)\](?<title>.*?)?$/
+
+      HEADING_ID = /^(?<text>.*?)(?: {#(?<id>.*?)})?$/
+
+      def escape(text)
+        Nokogiri::HTML.fragment(text).text
+      end
+
+      def heading_counter
+        @heading_counter ||= Hash.new {|h, k| h[k] = 0 }
+      end
+
+      def header(text, level)
+        matches = text.strip.match(HEADING_ID)
+        title = matches[:text].strip
+        html = Nokogiri::HTML.fragment("<h#{level}>#{title}</h#{level}>")
+        heading = html.first_element_child
+        title = heading.text
+
+        id = matches[:id]
+        id ||= title.to_permalink
+
+        heading_counter[id] += 1
+        id = "#{id}-#{heading_counter[id]}" if heading_counter[id] > 1
+
+        heading.add_child %[<a class="anchor" href="##{id}" aria-hidden="true" tabindex="-1"></a>] # rubocop:disable Style/LineLength
+        heading.set_attribute :tabindex, "-1"
+        heading.set_attribute(:id, id)
+
+        heading.to_s
+      end
 
       # Support alert boxes just like github.
       # https://github.com/orgs/community/discussions/16925
@@ -26,7 +59,7 @@ module Kitabu
         title = matches[:title].strip
 
         if title == ""
-          title = I18n.t(type, scope: :notes, default: type.titleize)
+          title = I18n.t(type, scope: :alerts, default: type.titleize)
         end
 
         html = Nokogiri::HTML.fragment <<~HTML.strip_heredoc
@@ -44,10 +77,9 @@ module Kitabu
       def table_cell(content, alignment, header)
         tag = header ? "th" : "td"
 
-        html = Nokogiri::HTML.fragment("<#{tag}></#{tag}>")
+        html = Nokogiri::HTML.fragment("<#{tag}>#{content}</#{tag}>")
         node = html.children.first
         node.append_class("align-#{alignment}") if alignment
-        node.content = content
 
         html.to_s
       end

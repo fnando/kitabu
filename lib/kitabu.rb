@@ -54,6 +54,8 @@ module Kitabu
   require "kitabu/front_matter"
   require "kitabu/context"
 
+  I18n.load_path += Dir[File.join(__dir__, "kitabu/locales/*.yml")]
+
   def self.config(root_dir = nil)
     root_dir ||= Pathname.new(Dir.pwd)
     path = root_dir.join("config/kitabu.yml")

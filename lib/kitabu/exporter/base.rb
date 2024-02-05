@@ -7,11 +7,9 @@ module Kitabu
     end
 
     def self.load_translations(root_dir:)
-      paths = default_i18n_load_path.dup
-      paths += Dir[root_dir.join("config/locales/**/*.{yml,rb}").to_s]
-      paths << File.expand_path(File.join(__dir__, "../../../templates/en.yml"))
-
-      I18n.load_path = paths
+      I18n.load_path += Dir[root_dir.join("config/locales/**/*.{yml,rb}").to_s]
+      I18n.load_path << File.expand_path(File.join(__dir__,
+                                                   "../../../templates/en.yml"))
 
       I18n.backend.reload!
       I18n.backend.eager_load!

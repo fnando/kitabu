@@ -157,4 +157,30 @@ describe Kitabu::Markdown do
     expect(html).not_to have_tag("figure")
     expect(html).not_to have_tag("figcaption")
   end
+
+  it "sets automatic ids when defining headers" do
+    html = Kitabu::Markdown.render <<~TEXT
+      # My header
+
+      ## My header
+
+      ### My header {#my-custom-id}
+    TEXT
+
+    html = Nokogiri::HTML.fragment(html)
+
+    expect(html).to have_tag("h1#my-header", "My header")
+    expect(html).to have_tag("h2#my-header-2", "My header")
+    expect(html).to have_tag("h3#my-custom-id", "My header")
+  end
+
+  it "sets custom ids when defining headers" do
+    html = Kitabu::Markdown.render <<~TEXT
+      # My header {#header}
+    TEXT
+
+    html = Nokogiri::HTML.fragment(html)
+
+    expect(html).to have_tag("h1#header", "My header")
+  end
 end

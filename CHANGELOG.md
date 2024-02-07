@@ -14,6 +14,7 @@
 - Update all templates to use h1 as the root heading.
 - Remove inline alignment from tables.
 - Render `<figure>` for images with title.
+- Render abbreviations with (e.g. `*[CSS]: Cascading Style Sheets`).
 
 ## v3.1.0
 

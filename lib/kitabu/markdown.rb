@@ -12,10 +12,80 @@ module Kitabu
       # Be more flexible than github and support any arbitrary name.
       ALERT_MARK = /^\[!(?<type>[A-Z]+)\](?<title>.*?)?$/
 
+      # Match the id portion of a header, as in `# Title {#custom-id}`.
       HEADING_ID = /^(?<text>.*?)(?: {#(?<id>.*?)})?$/
+
+      # Match abbreviation definitions like `*[CSS]: Cascading Style Sheets`.
+      ABBREVIATION_DEFINITION = /^\*\[([^\]]+)\]: (.+)$/
+
+      attr_reader :options
+
+      def abbreviations
+        @abbreviations ||= options[:abbreviations]
+      end
+
+      def preprocess(text)
+        %i[abbreviation].reduce(text) do |buffer, helper|
+          public_send(:"preprocess_with_#{helper}", buffer)
+        end
+      end
+
+      def postprocess(text)
+        %i[abbreviation].reduce(text) do |buffer, helper|
+          public_send(:"postprocess_with_#{helper}", buffer)
+        end
+      end
+
+      def within_parent?(names, parent)
+        names = names.map(&:downcase)
+
+        while parent
+          return true if names.include?(parent.name.downcase)
+
+          parent = parent.parent
+        end
+
+        false
+      end
+
+      def preprocess_with_abbreviation(text)
+        dict = text.scan(ABBREVIATION_DEFINITION)
+        abbreviations.merge!(Hash[*dict.flatten])
+        text.gsub(ABBREVIATION_DEFINITION, "")
+      end
+
+      def postprocess_with_abbreviation(text)
+        return text if abbreviations.empty?
+
+        matching = text.scan(/\b(#{abbreviations.keys.join('|')})\b/)
+                       .flatten
+                       .uniq
+        html = Nokogiri::HTML.fragment(text)
+
+        matching.each do |match|
+          selector = ".//text()[contains(., '#{match}')]"
+
+          abbr = Nokogiri::HTML.fragment("<abbr>").at_css("abbr")
+          abbr.content = match
+          abbr["title"] = abbreviations[match]
+          abbr = abbr.to_s
+
+          html.xpath(selector).each do |node|
+            next if within_parent?(%w[pre code], node.parent)
+
+            node.replace(node.to_s.gsub(/\b#{match}\b/m, abbr))
+          end
+        end
+
+        html.to_s
+      end
 
       def escape(text)
         Nokogiri::HTML.fragment(text).text
+      end
+
+      def paragraph(text)
+        %[<p>#{text}</p>\n]
       end
 
       def heading_counter
@@ -146,14 +216,15 @@ module Kitabu
       strikethrough: true,
       autolink: true,
       fenced_code_blocks: true,
-      no_intra_emphasis: true
+      no_intra_emphasis: true,
+      abbreviations: {}
     }
 
     renderer = Renderer.new(default_renderer_options)
 
     self.processor = Redcarpet::Markdown.new(renderer, default_markdown_options)
 
-    def self.render(text)
+    def self.render(text, abbreviations: {})
       text = run_hooks(:before_render, text)
       run_hooks(:after_render, processor.render(text))
     end

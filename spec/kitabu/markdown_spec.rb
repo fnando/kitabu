@@ -183,4 +183,34 @@ describe Kitabu::Markdown do
 
     expect(html).to have_tag("h1#header", "My header")
   end
+
+  it "uses abbreviations" do
+    html = Kitabu::Markdown.render <<~TEXT
+      # The simplicity of HTML
+
+      ## Styling with CSS
+
+      Let's talk about *CSS*.
+
+      ```ruby
+      class CSS
+      end
+      ```
+
+      Take a look at the `CSS` class.
+
+      *[CSS]: Cascading Style Sheets
+      *[HTML]: Hyper Text Markup Language
+    TEXT
+
+    expect(html).not_to include("*[CSS]: Cascading Style Sheets")
+    expect(html).not_to include("*[HTML]: Hyper Text Markup Language")
+    expect(Nokogiri::HTML.fragment(html).css("abbr").size).to equal(3)
+    expect(html).to have_tag("h1 > abbr[title='Hyper Text Markup Language']",
+                             "HTML")
+    expect(html).to have_tag("h2 > abbr[title='Cascading Style Sheets']", "CSS")
+    expect(html).to have_tag("em > abbr[title='Cascading Style Sheets']", "CSS")
+    expect(html).not_to have_tag("pre abbr")
+    expect(html).not_to have_tag("code abbr")
+  end
 end

@@ -118,7 +118,7 @@ module Kitabu
         html = Nokogiri::HTML.fragment(quote)
         element = html.children.first
 
-        matches = element.text.match(ALERT_MARK)
+        matches = element.text.to_s.match(ALERT_MARK) if element
 
         return "<blockquote>#{quote}</blockquote>" unless matches
 
@@ -225,6 +225,8 @@ module Kitabu
     self.processor = Redcarpet::Markdown.new(renderer, default_markdown_options)
 
     def self.render(text, abbreviations: {})
+      processor.renderer.options[:abbreviations] = abbreviations
+
       text = run_hooks(:before_render, text)
       run_hooks(:after_render, processor.render(text))
     end

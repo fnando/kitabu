@@ -8,13 +8,14 @@ module Kitabu
 
       def sections
         @sections ||=
-          html.css(SECTION_SELECTOR).each_with_index.map do |chapter, index|
+          html.css(SECTION_SELECTOR).each.with_index(1).map do |chapter, index|
             html = Nokogiri::HTML5.fragment(chapter.inner_html)
+            section_number = index.to_s.rjust(2, '0')
 
             OpenStruct.new(
               index:,
-              filename: "section_#{index}.html",
-              filepath: tmp_dir.join("section_#{index}.html").to_s,
+              filename: "section_#{section_number}.html",
+              filepath: tmp_dir.join("section_#{section_number}.html").to_s,
               html:
             )
           end
